@@ -12,10 +12,10 @@ export default function Home() {
         
         <div className="container mx-auto px-4 relative z-20">
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
               Elite Close Protection & Private Hire
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up">
+            <p className="text-xl md:text-2xl text-gray-300 mb-8">
               SIA licensed security professionals providing discreet protection and premium transport services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
