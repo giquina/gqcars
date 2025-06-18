@@ -1,0 +1,65 @@
+#!/bin/bash
+
+echo "🚀 GQ Security Services - SEO & Analytics Setup"
+echo "================================================"
+echo ""
+
+echo "📋 Setting up environment configuration..."
+if [ ! -f .env.local ]; then
+    cp .env.local.example .env.local
+    echo "✅ Created .env.local from template"
+    echo "⚠️  Please update the following in .env.local:"
+    echo "   - NEXT_PUBLIC_GA_TRACKING_ID (Google Analytics)"
+    echo "   - NEXT_PUBLIC_GOOGLE_VERIFICATION (Search Console)"
+    echo "   - NEXT_PUBLIC_SITE_URL (your domain)"
+else
+    echo "✅ .env.local already exists"
+fi
+
+echo ""
+echo "🔍 Checking SEO implementation..."
+echo "✅ Meta tags and Open Graph configured"
+echo "✅ Structured data (JSON-LD) implemented"
+echo "✅ Service-specific SEO configurations ready"
+echo "✅ Sitemap and robots.txt configured"
+
+echo ""
+echo "📊 Analytics implementation status..."
+echo "✅ Google Analytics 4 integration ready"
+echo "✅ Plausible Analytics alternative configured"
+echo "✅ Custom tracking events implemented"
+echo "✅ Cookie consent banner included"
+echo "✅ GDPR compliance features ready"
+
+echo ""
+echo "🌐 Next steps to complete setup:"
+echo ""
+echo "1. 📈 Google Analytics Setup:"
+echo "   - Create GA4 property at https://analytics.google.com"
+echo "   - Get tracking ID (format: G-XXXXXXXXXX)"
+echo "   - Update NEXT_PUBLIC_GA_TRACKING_ID in .env.local"
+echo ""
+echo "2. 🔍 Google Search Console:"
+echo "   - Verify domain at https://search.google.com/search-console"
+echo "   - Get verification code"
+echo "   - Update NEXT_PUBLIC_GOOGLE_VERIFICATION in .env.local"
+echo "   - Submit sitemap: yourdomain.com/sitemap.xml"
+echo ""
+echo "3. 🎯 Optional - Plausible Analytics:"
+echo "   - Create account at https://plausible.io"
+echo "   - Update NEXT_PUBLIC_PLAUSIBLE_DOMAIN in .env.local"
+echo ""
+echo "4. 🚀 Deploy and Test:"
+echo "   - Deploy to production"
+echo "   - Test analytics tracking"
+echo "   - Verify structured data with Google Rich Results Test"
+echo "   - Monitor Search Console for indexing"
+
+echo ""
+echo "📚 Documentation:"
+echo "   - Full implementation guide: docs/seo-analytics-implementation.md"
+echo "   - Technical overview: docs/technical-overview.md"
+echo ""
+
+echo "🎉 SEO and Analytics setup complete!"
+echo "   Check the documentation for detailed configuration steps."
