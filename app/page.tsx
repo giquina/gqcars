@@ -1,4 +1,7 @@
 import { Shield, Clock, Award, MapPin, Building2, GlassWater, Car, Star, Phone } from 'lucide-react'
+import ThreatIndicator from './components/intelligence/ThreatIndicator'
+import SmartScarcity from './components/booking/SmartScarcity'
+import SecurityConsultant from './components/ai/SecurityConsultant'
 
 export default function Home() {
   return (
@@ -32,11 +35,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* AI-Powered Intelligence Section */}
+      <section className="py-20 bg-slate-800/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              AI-Powered Security Intelligence
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Experience the future of security services with real-time threat assessment, intelligent booking, and instant expert consultation.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Real-time Threat Intelligence */}
+            <div className="lg:col-span-2">
+              <ThreatIndicator />
+            </div>
+            
+            {/* Smart Scarcity & Booking */}
+            <div className="lg:col-span-1">
+              <SmartScarcity />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Professional Security Services */}
       <section className="py-20 bg-slate-800/50">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Security Services</h2>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-slate-900/50 p-6 border-l-4 border-blue-600 hover:border-amber-500 transition-all">
               <Shield className="w-12 h-12 text-amber-500 mb-4" />
@@ -77,11 +105,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Choose GQ Security */}
       <section className="py-20 bg-gradient-to-r from-blue-600 via-slate-900 to-blue-600">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16 text-white">Why Choose GQ Security</h2>
-          
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-amber-500 mb-2">100%</div>
@@ -103,7 +130,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Technology Leadership Section */}
+      <section className="py-20 bg-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Technology Leadership
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Industry-first innovations that set new standards for security service delivery.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-slate-800/50 p-6 rounded-lg border border-amber-500/20">
+              <div className="text-2xl font-bold text-amber-500 mb-3">🤖 AI Intelligence</div>
+              <h4 className="text-lg font-semibold text-white mb-2">Smart Security Analysis</h4>
+              <p className="text-gray-400 text-sm">Advanced AI algorithms analyze threat patterns and provide real-time recommendations for optimal security deployment.</p>
+            </div>
+            
+            <div className="bg-slate-800/50 p-6 rounded-lg border border-amber-500/20">
+              <div className="text-2xl font-bold text-amber-500 mb-3">📊 Live Operations</div>
+              <h4 className="text-lg font-semibold text-white mb-2">Transparent Service</h4>
+              <p className="text-gray-400 text-sm">Real-time visibility into officer availability, response times, and service delivery metrics - unprecedented industry transparency.</p>
+            </div>
+            
+            <div className="bg-slate-800/50 p-6 rounded-lg border border-amber-500/20">
+              <div className="text-2xl font-bold text-amber-500 mb-3">⚡ Instant Response</div>
+              <h4 className="text-lg font-semibold text-white mb-2">Emergency Deployment</h4>
+              <p className="text-gray-400 text-sm">AI-powered emergency response system ensures fastest possible deployment of security personnel when it matters most.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ready to Experience Elite Security */}
       <section className="py-20 bg-slate-900">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6 text-white">Ready to Experience Elite Security?</h2>
@@ -122,6 +183,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* AI Security Consultant Chat */}
+      <SecurityConsultant />
     </>
   )
 }
