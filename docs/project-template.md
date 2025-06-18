@@ -5,7 +5,7 @@
 
 **When a user provides a project idea, use this template to create a comprehensive TaskMaster-style project plan:**
 
-### 🎯 Project Setup Framework
+## 🎯 Project Setup Framework
 
 **1. PROJECT DISCOVERY PHASE**
 ```
