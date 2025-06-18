@@ -1,7 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { Shield, Car, Building2, ChampagneGlass, Star, Calendar, Clock, User, Mail, Phone, MapPin } from 'lucide-react'
+import { Shield, Car, Building2, GlassWater, Star, Calendar, Clock, User, Mail, Phone, MapPin } from 'lucide-react'
+import LoadingSpinner from '../ui/LoadingSpinner'
+
+interface FormErrors {
+  [key: string]: string
+}
 
 interface BookingFormData {
   service: string
@@ -33,22 +38,90 @@ export default function BookingForm() {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<BookingFormData>(initialFormData)
   const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState<FormErrors>({})
+
+  const validateForm = () => {
+    const newErrors: FormErrors = {}
+
+    // Step 1 validation
+    if (step === 1 && !formData.service) {
+      newErrors.service = 'Please select a service'
+    }
+
+    // Step 2 validation
+    if (step === 2) {
+      if (!formData.date) newErrors.date = 'Date is required'
+      if (!formData.time) newErrors.time = 'Time is required'
+      if (!formData.duration) newErrors.duration = 'Duration is required'
+      if (!formData.location) newErrors.location = 'Location is required'
+      
+      // Validate date is in the future
+      const selectedDate = new Date(`${formData.date} ${formData.time}`)
+      if (selectedDate < new Date()) {
+        newErrors.date = 'Date and time must be in the future'
+      }
+    }
+
+    // Step 3 validation
+    if (step === 3) {
+      if (!formData.name) newErrors.name = 'Name is required'
+      if (!formData.email) {
+        newErrors.email = 'Email is required'
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+        newErrors.email = 'Invalid email address'
+      }
+      if (!formData.phone) {
+        newErrors.phone = 'Phone is required'
+      } else if (!/^[0-9+\-\s()]{10,}$/.test(formData.phone)) {
+        newErrors.phone = 'Invalid phone number'
+      }
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
+    // Clear error when field is changed
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[name]
+        return newErrors
+      })
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+    e.preventDefault()
     setLoading(true)
     
     try {
-      // Here you would typically send the data to your API
-      console.log('Form submitted:', formData)
-      alert('Thank you for your booking request. We will contact you shortly.')
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!result.success) {
+        throw new Error(result.message || 'Failed to submit booking')
+      }
+
+      // Reset form and show success message
       setFormData(initialFormData)
       setStep(1)
+      alert('Thank you for your booking request. We will contact you shortly.')
     } catch (error) {
       console.error('Error submitting form:', error)
       alert('There was an error submitting your request. Please try again.')
@@ -57,7 +130,11 @@ export default function BookingForm() {
     setLoading(false)
   }
 
-  const nextStep = () => setStep(prev => prev + 1)
+  const nextStep = () => {
+    if (validateForm()) {
+      setStep(prev => prev + 1)
+    }
+  }
   const prevStep = () => setStep(prev => prev - 1)
 
   return (
@@ -233,8 +310,12 @@ export default function BookingForm() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className="w-full pl-10 pr-4 py-2 bg-gq-black border border-gray-700 focus:border-gq-gold outline-none"
+                    className={`w-full pl-10 pr-4 py-2 bg-gq-black border ${errors.name ? 'border-red-500' : 'border-gray-700'} focus:border-gq-gold outline-none`}
                     required
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  
                   />
                 </div>
               </div>
@@ -249,8 +330,12 @@ export default function BookingForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your email"
-                    className="w-full pl-10 pr-4 py-2 bg-gq-black border border-gray-700 focus:border-gq-gold outline-none"
+                    className={`w-full pl-10 pr-4 py-2 bg-gq-black border ${errors.email ? 'border-red-500' : 'border-gray-700'} focus:border-gq-gold outline-none`}
                     required
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  
                   />
                 </div>
               </div>
@@ -265,8 +350,12 @@ export default function BookingForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Enter your phone number"
-                    className="w-full pl-10 pr-4 py-2 bg-gq-black border border-gray-700 focus:border-gq-gold outline-none"
+                    className={`w-full pl-10 pr-4 py-2 bg-gq-black border ${errors.phone ? 'border-red-500' : 'border-gray-700'} focus:border-gq-gold outline-none`}
                     required
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  
                   />
                 </div>
               </div>
@@ -285,7 +374,7 @@ export default function BookingForm() {
                 disabled={loading}
                 className="px-6 py-2 bg-gradient-to-r from-gq-blue to-gq-gold text-white hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                {loading ? 'Submitting...' : 'Submit Request'}
+                {loading ? <LoadingSpinner /> : 'Submit Request'}
               </button>
             </div>
           </div>
@@ -318,7 +407,7 @@ const services = [
     id: 'weddings',
     name: 'Wedding Security',
     description: 'Discreet security for your special day',
-    icon: ChampagneGlass
+    icon: GlassWater
   },
   {
     id: 'vip',

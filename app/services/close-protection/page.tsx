@@ -101,19 +101,34 @@ export default function CloseProtectionPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/contact"
+              href="/book"
               className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
             >
               Request Quote
-              <Shield className="ml-2 h-5 w-5" />
             </a>
             <a
               href="tel:+442012345678"
               className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-gq-gold border-2 border-gq-gold hover:bg-gq-gold hover:text-white transition-colors"
             >
               Call Now
-              <Clock className="ml-2 h-5 w-5" />
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-amber-500">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“The close protection team was highly professional and discreet.”</p>
+              <div className="text-amber-500 font-bold">— VIP Client</div>
+            </div>
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“We felt safe and secure at all times. Highly recommended.”</p>
+              <div className="text-amber-500 font-bold">— Event Organizer</div>
+            </div>
           </div>
         </div>
       </section>

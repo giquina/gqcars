@@ -1,4 +1,4 @@
-import { ChampagneGlass, Shield, Car, Users, Camera, Clock, MapPin, CheckCircle } from 'lucide-react'
+import { Camera, Car, GlassWater, CheckCircle, Clock, MapPin, Shield, Users } from 'lucide-react'
 import ServiceHero from '@/app/components/ui/ServiceHero'
 import Animate from '@/app/components/ui/Animate'
 
@@ -8,7 +8,7 @@ export default function WeddingSecurityPage() {
       <ServiceHero
         title="Wedding Security Services"
         description="Discreet security and luxury transport for your special day."
-        Icon={ChampagneGlass}
+        Icon={GlassWater}
         image="/images/services/wedding-hero.jpg"
       />
 
@@ -118,30 +118,43 @@ export default function WeddingSecurityPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-r from-gq-blue via-gq-black to-gq-blue">
         <div className="container mx-auto px-4 text-center">
-          <Animate type="fade">
-            <h2 className="text-3xl font-bold mb-6">Secure Your Special Day</h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Contact us to discuss your wedding security requirements and receive a personalized protection plan.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
-              >
-                Request Consultation
-                <ChampagneGlass className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                href="tel:+442012345678"
-                className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-gq-gold border-2 border-gq-gold hover:bg-gq-gold hover:text-white transition-colors"
-              >
-                Call Now
-                <Clock className="ml-2 h-5 w-5" />
-              </a>
+          <h2 className="text-3xl font-bold mb-6">Book Wedding Security</h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Ensure your special day is safe and stress-free. Get a quote for wedding security now.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/book"
+              className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
+            >
+              Request Quote
+            </a>
+            <a
+              href="tel:+442012345678"
+              className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-gq-gold border-2 border-gq-gold hover:bg-gq-gold hover:text-white transition-colors"
+            >
+              Call Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-amber-500">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“The wedding security team was attentive and professional.”</p>
+              <div className="text-amber-500 font-bold">— Bride</div>
             </div>
-          </Animate>
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“Our guests felt safe and comfortable throughout the event.”</p>
+              <div className="text-amber-500 font-bold">— Groom</div>
+            </div>
+          </div>
         </div>
       </section>
     </>

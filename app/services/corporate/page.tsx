@@ -1,4 +1,4 @@
-import { Building2, Shield, Users, ChartBar, FileCheck, Clock, CheckCircle } from 'lucide-react'
+import { Building2, BarChart, Shield, Users, CheckCircle, Clock, FileCheck } from 'lucide-react'
 import ServiceHero from '@/app/components/ui/ServiceHero'
 import Animate from '@/app/components/ui/Animate'
 
@@ -119,28 +119,41 @@ export default function CorporateSecurityPage() {
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <Animate type="fade">
-            <h2 className="text-3xl font-bold mb-6">Secure Your Business Today</h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Contact us to discuss your corporate security requirements and receive a tailored protection plan.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
-              >
-                Request Consultation
-                <Building2 className="ml-2 h-5 w-5" />
-              </a>
-              <a
-                href="tel:+442012345678"
-                className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-gq-gold border-2 border-gq-gold hover:bg-gq-gold hover:text-white transition-colors"
-              >
-                Call Now
-                <Clock className="ml-2 h-5 w-5" />
-              </a>
+          <h2 className="text-3xl font-bold mb-6">Secure Your Business Today</h2>
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Contact us to discuss your corporate security requirements and receive a tailored protection plan.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/book"
+              className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
+            >
+              Request Consultation
+            </a>
+            <a
+              href="tel:+442012345678"
+              className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-gq-gold border-2 border-gq-gold hover:bg-gq-gold hover:text-white transition-colors"
+            >
+              Call Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-amber-500">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“GQ Security provided outstanding protection for our executives.”</p>
+              <div className="text-amber-500 font-bold">— Corporate Client</div>
             </div>
-          </Animate>
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“Professional, reliable, and always available.”</p>
+              <div className="text-amber-500 font-bold">— Business Owner</div>
+            </div>
+          </div>
         </div>
       </section>
     </>
@@ -166,7 +179,7 @@ const corporateFeatures = [
   {
     title: "Risk Assessment",
     description: "Detailed security audits and threat analysis for businesses.",
-    icon: ChartBar
+    icon: BarChart
   },
   {
     title: "Compliance",

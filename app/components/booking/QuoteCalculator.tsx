@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import LoadingSpinner from '../ui/LoadingSpinner'
 import { Calculator, Shield, Car, Users, Clock } from 'lucide-react'
 
 interface QuoteCalculatorProps {
@@ -13,8 +14,12 @@ export default function QuoteCalculator({ onCalculate }: QuoteCalculatorProps) {
   const [vehicles, setVehicles] = useState(0)
   const [hours, setHours] = useState(4)
   const [total, setTotal] = useState(0)
+  const [calculating, setCalculating] = useState(false)
 
-  const calculateTotal = () => {
+  const calculateTotal = async () => {
+    setCalculating(true)
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 500))
     const baseRates = {
       'close-protection': 75, // Per hour per officer
       'private-hire': 95,    // Per hour per vehicle
@@ -30,6 +35,7 @@ export default function QuoteCalculator({ onCalculate }: QuoteCalculatorProps) {
     const newTotal = officerCost + vehicleCost
     setTotal(newTotal)
     onCalculate?.(newTotal)
+    setCalculating(false)
   }
 
   useEffect(() => {
@@ -113,7 +119,9 @@ export default function QuoteCalculator({ onCalculate }: QuoteCalculatorProps) {
         <div className="pt-6 border-t border-gray-700">
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium">Estimated Total</span>
-            <span className="text-2xl font-bold text-gq-gold">£{total}</span>
+            <span className="text-2xl font-bold text-gq-gold">
+              {calculating ? <LoadingSpinner /> : `£${total}`}
+            </span>
           </div>
           <p className="text-xs text-gray-400 mt-2">
             * This is an estimated price. Final quote may vary based on specific requirements.

@@ -101,25 +101,40 @@ export default function PrivateHirePage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-gq-blue via-gq-black to-gq-blue">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Book Your Secure Transport</h2>
+          <h2 className="text-3xl font-bold mb-6">Book Your Private Hire</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Experience the perfect blend of luxury and security with our professional chauffeur service.
+            Luxury vehicles and professional chauffeurs for every occasion. Get your quote now.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/contact"
+              href="/book"
               className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
             >
-              Book Now
-              <Car className="ml-2 h-5 w-5" />
+              Request Quote
             </a>
             <a
               href="tel:+442012345678"
               className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-gq-gold border-2 border-gq-gold hover:bg-gq-gold hover:text-white transition-colors"
             >
-              Inquire
-              <Clock className="ml-2 h-5 w-5" />
+              Call Now
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-amber-500">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“The private hire service was luxurious and punctual.”</p>
+              <div className="text-amber-500 font-bold">— Executive Client</div>
+            </div>
+            <div className="bg-slate-900 p-6 rounded-lg shadow-lg">
+              <p className="text-gray-300 mb-4">“Our VIP guests were impressed by the professionalism.”</p>
+              <div className="text-amber-500 font-bold">— Event Planner</div>
+            </div>
           </div>
         </div>
       </section>
