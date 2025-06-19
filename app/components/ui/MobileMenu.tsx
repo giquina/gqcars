@@ -1,0 +1,160 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Shield, Car, Building2, ChampagneGlass, Star, Phone, X } from 'lucide-react'
+
+interface MobileMenuProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  if (!mounted) return null
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+          />
+
+          {/* Menu */}
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+            className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gq-black border-l border-gq-accent/10 z-50"
+          >
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-gq-accent/10">
+                <span className="text-xl font-bold text-gq-gold">GQ Security</span>
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:text-gq-gold transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Navigation */}
+              <nav className="flex-1 overflow-y-auto py-4">
+                <div className="px-4 mb-6">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Services</h3>
+                  <ul className="space-y-2">
+                    {services.map((service) => (
+                      <li key={service.href}>
+                        <a
+                          href={service.href}
+                          onClick={onClose}
+                          className="flex items-center gap-3 py-2 hover:text-gq-gold transition-colors"
+                        >
+                          <service.icon className="w-5 h-5" />
+                          {service.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="px-4 mb-6">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Company</h3>
+                  <ul className="space-y-2">
+                    {company.map((item) => (
+                      <li key={item.href}>
+                        <a
+                          href={item.href}
+                          onClick={onClose}
+                          className="block py-2 hover:text-gq-gold transition-colors"
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </nav>
+
+              {/* Actions */}
+              <div className="p-4 border-t border-gq-accent/10">
+                <a
+                  href="/contact"
+                  onClick={onClose}
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-gq-blue to-gq-gold text-white font-medium hover:opacity-90 transition-opacity mb-3"
+                >
+                  Book Now
+                  <Shield className="w-5 h-5" />
+                </a>
+                <a
+                  href="tel:+442012345678"
+                  onClick={onClose}
+                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gq-gold text-gq-gold font-medium hover:bg-gq-gold hover:text-white transition-colors"
+                >
+                  Call Now
+                  <Phone className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  )
+}
+
+const services = [
+  {
+    name: 'Close Protection',
+    href: '/services/close-protection',
+    icon: Shield
+  },
+  {
+    name: 'Private Hire',
+    href: '/services/private-hire',
+    icon: Car
+  },
+  {
+    name: 'Corporate Security',
+    href: '/services/corporate',
+    icon: Building2
+  },
+  {
+    name: 'Wedding Security',
+    href: '/services/weddings',
+    icon: ChampagneGlass
+  },
+  {
+    name: 'VIP Services',
+    href: '/services/vip',
+    icon: Star
+  }
+]
+
+const company = [
+  { name: 'About Us', href: '/about' },
+  { name: 'Our Team', href: '/team' },
+  { name: 'Careers', href: '/careers' },
+  { name: 'Contact', href: '/contact' }
+]
