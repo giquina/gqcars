@@ -1,4 +1,4 @@
-import { Car, Shield, Star, MapPin, Clock, CheckCircle, Sparkles } from 'lucide-react'
+import { Car, Shield, Star, MapPin, Clock, CheckCircle, Sparkles, Building2 } from 'lucide-react'
 import ServiceHero from '@/app/components/ui/ServiceHero'
 
 export default function PrivateHirePage() {
