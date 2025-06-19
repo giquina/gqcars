@@ -10,10 +10,10 @@ export default function TaxiService() {
           <div className="flex justify-center mb-6">
             <GQCarsLogo className="w-20 h-20" />
           </div>
-          <h1 className="text-5xl font-bold mb-6">Reliable Taxi Service</h1>
+          <h1 className="text-5xl font-bold mb-6">Professional Taxi Service</h1>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Professional, safe, and comfortable taxi service across London. 
-            Book instantly or call for immediate pickup.
+            <span className="text-black font-semibold">SIA Licensed Close Protection Officers</span> providing premium taxi service across London. 
+            Not just drivers - security professionals with luxury transport experience.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
@@ -37,9 +37,9 @@ export default function TaxiService() {
       <div className="container mx-auto px-4 py-16">
         {/* Why Choose Us */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-6 text-yellow-500">Why Choose GQ Cars?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-yellow-500">Why Choose Our Security-Trained Drivers?</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            We're not just a taxi company - we're your trusted transport partner with security expertise.
+            We're not just a taxi company - we're <span className="text-yellow-500">SIA licensed security professionals</span> providing premium transport services.
           </p>
         </div>
 
@@ -47,25 +47,25 @@ export default function TaxiService() {
           <div className="text-center p-6">
             <Clock className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">24/7 Available</h3>
-            <p className="text-gray-300">Round-the-clock service, 365 days a year</p>
+            <p className="text-gray-300">Round-the-clock service with <span className="text-yellow-500">security-trained drivers</span></p>
           </div>
           
           <div className="text-center p-6">
             <Shield className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-3">Licensed & Insured</h3>
-            <p className="text-gray-300">Fully licensed drivers with comprehensive insurance</p>
+            <h3 className="text-xl font-bold mb-3">SIA Licensed CPOs</h3>
+            <p className="text-gray-300"><span className="text-yellow-500">Close Protection Officers</span> with advanced security training</p>
           </div>
           
           <div className="text-center p-6">
             <Star className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-3">5-Star Rated</h3>
-            <p className="text-gray-300">Consistently rated 5 stars by our customers</p>
+            <h3 className="text-xl font-bold mb-3">Premium Service</h3>
+            <p className="text-gray-300">Professional service combining <span className="text-yellow-500">security expertise</span> with luxury transport</p>
           </div>
           
           <div className="text-center p-6">
             <CreditCard className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-3">Cashless Payments</h3>
-            <p className="text-gray-300">Card, contactless, and mobile payments accepted</p>
+            <h3 className="text-xl font-bold mb-3">Secure Payments</h3>
+            <p className="text-gray-300">Card, contactless, and mobile payments with <span className="text-yellow-500">security protocols</span></p>
           </div>
         </div>
 

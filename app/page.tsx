@@ -18,16 +18,16 @@ export default function Home() {
               <GQCarsLogo className="w-16 h-16" />
               <div>
                 <h1 className="text-6xl md:text-8xl font-bold text-yellow-500">GQ CARS</h1>
-                <p className="text-2xl text-gray-300">Premium Transport & Security Services</p>
+                <p className="text-2xl text-gray-300">SIA Licensed • CPO Trained • Premium Transport</p>
               </div>
             </div>
             
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              Your Trusted Taxi & Private Hire Service
+              Professional Security-Trained Drivers
             </h2>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              Professional drivers, luxury vehicles, and security-trained staff. 
-              Available 24/7 across London with instant booking.
+              <span className="text-yellow-500 font-semibold">SIA Licensed Close Protection Officers</span> providing premium taxi and private hire services. 
+              We're not just drivers - we're security professionals with luxury transport experience.
             </p>
             
             <div className="flex flex-col lg:flex-row gap-6 mb-12">
@@ -51,17 +51,17 @@ export default function Home() {
               <div className="bg-black/50 p-6 rounded-xl border border-yellow-500/20">
                 <Clock className="w-12 h-12 text-yellow-500 mb-4" />
                 <h3 className="text-xl font-bold mb-2 text-white">24/7 Service</h3>
-                <p className="text-gray-300">Available round the clock for your transport needs</p>
+                <p className="text-gray-300">Available round the clock with <span className="text-yellow-500">SIA trained drivers</span></p>
               </div>
               <div className="bg-black/50 p-6 rounded-xl border border-yellow-500/20">
                 <Shield className="w-12 h-12 text-yellow-500 mb-4" />
-                <h3 className="text-xl font-bold mb-2 text-white">Security Trained</h3>
-                <p className="text-gray-300">Drivers with security background for your safety</p>
+                <h3 className="text-xl font-bold mb-2 text-white">CPO Trained Drivers</h3>
+                <p className="text-gray-300"><span className="text-yellow-500">Close Protection Officers</span> with advanced security training</p>
               </div>
               <div className="bg-black/50 p-6 rounded-xl border border-yellow-500/20">
                 <Car className="w-12 h-12 text-yellow-500 mb-4" />
-                <h3 className="text-xl font-bold mb-2 text-white">Premium Fleet</h3>
-                <p className="text-gray-300">Modern, clean, and comfortable vehicles</p>
+                <h3 className="text-xl font-bold mb-2 text-white">Premium Security Fleet</h3>
+                <p className="text-gray-300">Luxury vehicles operated by <span className="text-yellow-500">licensed security professionals</span></p>
               </div>
             </div>
           </div>

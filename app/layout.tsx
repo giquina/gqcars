@@ -27,7 +27,11 @@ export default function RootLayout({
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
                 <h3 className="text-lg font-bold text-yellow-500 mb-4">GQ Cars LTD</h3>
-                <p className="text-sm text-gray-400">Premium taxi and transport services with security-trained drivers across Watford, London, and all major airports.</p>
+                <p className="text-sm text-gray-400">Premium taxi and private hire services with <span className="text-yellow-500">SIA licensed Close Protection Officers</span> and security-trained drivers across Watford, London, and all major airports.</p>
+                <div className="mt-4 flex space-x-4 text-xs">
+                  <span className="bg-yellow-500 text-black px-2 py-1 rounded font-bold">SIA LICENSED</span>
+                  <span className="bg-blue-600 text-white px-2 py-1 rounded font-bold">CPO TRAINED</span>
+                </div>
               </div>
               <div>
                 <h4 className="text-sm font-bold text-white mb-4">Services</h4>
