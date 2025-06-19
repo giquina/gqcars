@@ -13,42 +13,57 @@ export default function Home() {
           {/* You can add a background image of cars here */}
         </div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-10 sm:py-16 lg:py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-12 sm:py-16 lg:py-20">
           <div className="max-w-4xl">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-              <GQCarsLogo className="w-12 h-12 sm:w-16 sm:h-16" />
-              <div>
-                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-yellow-500 leading-tight">GQ CARS LTD</h1>
-                <p className="text-sm sm:text-lg md:text-2xl text-gray-300">SIA Licensed • CPO Trained • Premium Transport</p>
+            {/* Better mobile logo and brand section */}
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:space-x-4 mb-8">
+              <GQCarsLogo className="w-16 h-16 sm:w-20 sm:h-20 mx-auto sm:mx-0" />
+              <div className="space-y-2">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-yellow-500 leading-tight">
+                  GQ CARS LTD
+                </h1>
+                <p className="text-base sm:text-lg md:text-2xl text-gray-300">
+                  SIA Licensed • CPO Trained • Premium Transport
+                </p>
               </div>
             </div>
             
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 text-white leading-tight">
+            {/* Better mobile-optimized main heading */}
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold mb-6 text-white leading-tight text-center sm:text-left">
               Professional Security Taxi Service with Expert Drivers
             </h2>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-4 leading-relaxed">
-              <span className="text-yellow-500 font-semibold">SIA Licensed Close Protection Officers</span> providing <span className="text-blue-400 font-semibold">premium security transport</span>. 
-              Experience professional service with intelligent features that make booking faster, smarter, and safer.
-            </p>
             
-            {/* Smart Technology Highlight */}
-            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-4 rounded-xl border border-blue-500/30 mb-8">
-              <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm">
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-blue-300">💬 Instant Support</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                  <span className="text-blue-300">⚡ Smart Quotes</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                  <span className="text-blue-300">🎤 Voice Booking</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                  <span className="text-blue-300">📍 Location Services</span>
+            {/* Better mobile paragraph formatting */}
+            <div className="text-center sm:text-left mb-6">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
+                <span className="text-yellow-500 font-semibold">SIA Licensed Close Protection Officers</span> providing{' '}
+                <span className="text-blue-400 font-semibold">premium security transport</span>.
+              </p>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mt-2">
+                Experience professional service with intelligent features that make booking faster, smarter, and safer.
+              </p>
+            </div>
+            
+            {/* Smart Technology Highlight - Better Mobile Layout */}
+            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-4 sm:p-6 rounded-xl border border-blue-500/30 mb-8">
+              <div className="text-center">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 text-xs sm:text-sm">
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-blue-300 text-center">💬 Instant Support</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                    <span className="text-blue-300 text-center">⚡ Smart Quotes</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                    <span className="text-blue-300 text-center">🎤 Voice Booking</span>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                    <span className="text-blue-300 text-center">📍 Location Services</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -56,61 +71,61 @@ export default function Home() {
             {/* Location-Based Smart Quotes */}
             <LocationBasedQuotes />
             
-            {/* Multiple Call-to-Action Options */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-12">
+            {/* Multiple Call-to-Action Options - Better Mobile Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 mb-12">
               {/* 1. Call Now (Primary) */}
               <a 
                 href="tel:07407655203" 
-                className="bg-yellow-500 hover:bg-yellow-400 text-black px-4 py-4 sm:px-6 sm:py-5 rounded-xl font-bold text-sm sm:text-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all transform hover:scale-105 group shadow-lg"
+                className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Phone className="w-4 h-4 sm:w-6 sm:h-6 group-hover:animate-pulse" />
-                <span className="text-center">CALL NOW</span>
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:animate-pulse" />
+                <span>CALL NOW</span>
               </a>
 
               {/* 2. Email Us */}
               <a 
                 href="mailto:bookings@gqcars.co.uk?subject=GQ Cars Booking Enquiry&body=Hello, I would like to enquire about your security taxi services." 
-                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-4 sm:px-6 sm:py-5 rounded-xl font-bold text-sm sm:text-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all transform hover:scale-105 group shadow-lg"
+                className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Mail className="w-4 h-4 sm:w-6 sm:h-6 group-hover:rotate-12" />
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:rotate-12" />
                 <span>EMAIL US</span>
               </a>
 
               {/* 3. WhatsApp Chat */}
               <a 
                 href="https://wa.me/447407655203?text=Hello%20GQ%20Cars!%20I%27m%20interested%20in%20your%20security%20taxi%20services." 
-                className="bg-green-600 hover:bg-green-500 text-white px-4 py-4 sm:px-6 sm:py-5 rounded-xl font-bold text-sm sm:text-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all transform hover:scale-105 group shadow-lg"
+                className="bg-green-600 hover:bg-green-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center col-span-2 sm:col-span-1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <MessageCircle className="w-4 h-4 sm:w-6 sm:h-6 group-hover:bounce" />
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:bounce" />
                 <span>WHATSAPP</span>
               </a>
 
-              {/* 4. Book Online (Secondary) */}
+              {/* 4. Book Online */}
               <a 
                 href="/book" 
-                className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-4 sm:px-6 sm:py-5 rounded-xl font-bold text-sm sm:text-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all transform hover:scale-105 group shadow-lg"
+                className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Car className="w-4 h-4 sm:w-6 sm:h-6 group-hover:translate-x-1" />
+                <Car className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:translate-x-1" />
                 <span>BOOK ONLINE</span>
               </a>
 
               {/* 5. Get Quote */}
               <a 
                 href="/quote" 
-                className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-4 sm:px-6 sm:py-5 rounded-xl font-bold text-sm sm:text-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all transform hover:scale-105 group shadow-lg"
+                className="bg-purple-600 hover:bg-purple-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Quote className="w-4 h-4 sm:w-6 sm:h-6 group-hover:rotate-180" />
+                <Quote className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:rotate-180" />
                 <span>GET QUOTE</span>
               </a>
 
               {/* 6. Schedule Trip */}
               <a 
                 href="/schedule" 
-                className="bg-orange-600 hover:bg-orange-500 text-white px-4 py-4 sm:px-6 sm:py-5 rounded-xl font-bold text-sm sm:text-lg flex items-center justify-center space-x-2 sm:space-x-3 transition-all transform hover:scale-105 group shadow-lg"
+                className="bg-orange-600 hover:bg-orange-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Calendar className="w-4 h-4 sm:w-6 sm:h-6 group-hover:scale-110" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:scale-110" />
                 <span>SCHEDULE</span>
               </a>
             </div>
@@ -123,11 +138,11 @@ export default function Home() {
                   <span className="text-yellow-500 font-bold text-sm sm:text-base">🚀 SMART TECHNOLOGY PLATFORM</span>
                   <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">
                   Advanced Security Transport with Intelligent Features
                 </h3>
-                <p className="text-gray-300 text-sm sm:text-base">
-                  Professional drivers backed by smart technology for seamless booking and superior service
+                <p className="text-gray-300 text-sm sm:text-base px-4">
+                  Professional SIA licensed drivers backed by smart technology for seamless booking and superior service
                 </p>
               </div>
 
@@ -173,8 +188,8 @@ export default function Home() {
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 text-xs">
                   <div className="text-center">
-                    <div className="text-yellow-500 font-bold text-lg">50%</div>
-                    <div className="text-gray-300">Faster Service</div>
+                    <div className="text-yellow-500 font-bold text-lg">75%</div>
+                    <div className="text-gray-300">Faster Response</div>
                   </div>
                   <div className="text-center">
                     <div className="text-yellow-500 font-bold text-lg">24/7</div>
@@ -182,11 +197,11 @@ export default function Home() {
                   </div>
                   <div className="text-center">
                     <div className="text-yellow-500 font-bold text-lg">100%</div>
-                    <div className="text-gray-300">Professional</div>
+                    <div className="text-gray-300">SIA Licensed</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-yellow-500 font-bold text-lg">0s</div>
-                    <div className="text-gray-300">Wait Time</div>
+                    <div className="text-yellow-500 font-bold text-lg">2min</div>
+                    <div className="text-gray-300">Response Time</div>
                   </div>
                 </div>
               </div>

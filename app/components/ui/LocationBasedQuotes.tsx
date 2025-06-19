@@ -89,12 +89,12 @@ export default function LocationBasedQuotes() {
 
   const generateLocationBasedQuotes = (locationData: LocationData): SmartQuote[] => {
     const baseQuotes = [
-      { dest: 'Heathrow Airport', price: '£45-65', duration: '35-50 min', desc: 'Direct route with security check time', popular: true },
-      { dest: 'Gatwick Airport', price: '£55-75', duration: '45-65 min', desc: 'Express route via M25', popular: true },
-      { dest: 'Central London', price: '£35-55', duration: '25-40 min', desc: 'Prime security transport', popular: false },
-      { dest: 'Canary Wharf', price: '£25-40', duration: '20-35 min', desc: 'Business district express', popular: false },
-      { dest: 'Stansted Airport', price: '£65-85', duration: '55-75 min', desc: 'M25 orbital route', popular: false },
-      { dest: 'King\'s Cross', price: '£30-45', duration: '25-35 min', desc: 'City center connection', popular: false }
+      { dest: 'Heathrow Airport', price: '£90-130', duration: '35-50 min', desc: 'SIA security transport with advance check', popular: true },
+      { dest: 'Gatwick Airport', price: '£110-150', duration: '45-65 min', desc: 'Premium security route via M25', popular: true },
+      { dest: 'Central London', price: '£70-110', duration: '25-40 min', desc: 'Executive security transport', popular: false },
+      { dest: 'Canary Wharf', price: '£50-80', duration: '20-35 min', desc: 'Business district security service', popular: false },
+      { dest: 'Stansted Airport', price: '£130-170', duration: '55-75 min', desc: 'Long-distance security transport', popular: false },
+      { dest: 'King\'s Cross', price: '£60-90', duration: '25-35 min', desc: 'City center security connection', popular: false }
     ]
 
     // Filter and customize based on current location

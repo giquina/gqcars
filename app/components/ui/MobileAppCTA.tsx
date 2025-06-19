@@ -75,7 +75,7 @@ export default function MobileAppCTA() {
                   </div>
                   <div>
                     <h4 className="text-xl font-semibold mb-1">Premium Security Service</h4>
-                    <p className="text-gray-300">Professional rates for SIA licensed drivers - starting from £3.50/mile</p>
+                    <p className="text-gray-300">Professional rates for SIA licensed drivers - starting from £7.00/mile</p>
                   </div>
                 </div>
                 
@@ -257,7 +257,7 @@ export default function MobileAppCTA() {
 
                 {/* Service Selection with Smart Features */}
                 <div className="p-4 space-y-3">
-                  <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 rounded-xl text-center relative overflow-hidden">
+                    <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 rounded-xl text-center relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
                     <div className="absolute bottom-0 left-0 w-12 h-12 bg-white/10 rounded-full translate-y-6 -translate-x-6"></div>
                     <div className="relative z-10">
@@ -265,7 +265,7 @@ export default function MobileAppCTA() {
                         <Car className="w-5 h-5 text-white" />
                         <span className="text-white font-bold text-sm">Premium Security Drivers</span>
                       </div>
-                      <p className="text-white/90 text-xs">From £3.50/mile • Airport transfers from £70</p>
+                      <p className="text-white/90 text-xs">From £7.00/mile • Airport transfers from £140</p>
                     </div>
                   </div>
 
