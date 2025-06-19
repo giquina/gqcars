@@ -1,0 +1,586 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Corporate Company Model
+model Company {
+  id          String   @id @default(cuid())
+  name        String
+  domain      String   @unique
+  industry    String?
+  size        CompanySize
+  address     String
+  city        String
+  country     String
+  phone       String
+  website     String?
+  vatNumber   String?
+  
+  // Corporate settings
+  settings    CompanySettings?
+  
+  // Relationships
+  users       User[]
+  departments Department[]
+  costCenters CostCenter[]
+  bookings    Booking[]
+  invoices    Invoice[]
+  policies    Policy[]
+  budgets     Budget[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("companies")
+}
+
+model CompanySettings {
+  id                    String  @id @default(cuid())
+  companyId             String  @unique
+  company               Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Approval settings
+  requireApprovalAbove  Float   @default(1000) // Amount requiring approval
+  maxBookingAmount      Float   @default(10000)
+  
+  // Budget settings
+  monthlyBudgetLimit    Float?
+  quarterlyBudgetLimit  Float?
+  yearlyBudgetLimit     Float?
+  
+  // Security settings
+  require2FA            Boolean @default(false)
+  requireVPN            Boolean @default(false)
+  allowedDomains        String[]
+  
+  // Compliance settings
+  enableSOXCompliance   Boolean @default(false)
+  enableGDPRCompliance  Boolean @default(true)
+  dataRetentionMonths   Int     @default(84) // 7 years default
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  @@map("company_settings")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  firstName         String
+  lastName          String
+  phone             String?
+  position          String?
+  avatar            String?
+  
+  // Company association
+  companyId         String
+  company           Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Department association
+  departmentId      String?
+  department        Department? @relation(fields: [departmentId], references: [id])
+  
+  // Cost center association
+  costCenterId      String?
+  costCenter        CostCenter? @relation(fields: [costCenterId], references: [id])
+  
+  // Role and permissions
+  role              UserRole  @default(EMPLOYEE)
+  permissions       Permission[]
+  
+  // Budget limits
+  monthlyLimit      Float?
+  quarterlyLimit    Float?
+  yearlyLimit       Float?
+  
+  // Authentication
+  password          String
+  emailVerified     DateTime?
+  lastLogin         DateTime?
+  
+  // Security
+  twoFactorEnabled  Boolean   @default(false)
+  twoFactorSecret   String?
+  
+  // Relationships
+  bookings          Booking[]
+  approvals         Approval[]
+  activities        UserActivity[]
+  
+  // Status
+  status            UserStatus @default(ACTIVE)
+  invitedAt         DateTime?
+  invitedBy         String?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@map("users")
+}
+
+model Department {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  
+  // Company association
+  companyId   String
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Manager
+  managerId   String?
+  
+  // Budget
+  monthlyBudget Float?
+  
+  // Relationships
+  users       User[]
+  costCenters CostCenter[]
+  bookings    Booking[]
+  budgets     Budget[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([companyId, name])
+  @@map("departments")
+}
+
+model CostCenter {
+  id            String     @id @default(cuid())
+  name          String
+  code          String
+  description   String?
+  
+  // Company association
+  companyId     String
+  company       Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Department association
+  departmentId  String?
+  department    Department? @relation(fields: [departmentId], references: [id])
+  
+  // Budget
+  monthlyBudget Float?
+  
+  // Relationships
+  users         User[]
+  bookings      Booking[]
+  budgets       Budget[]
+  
+  status        CostCenterStatus @default(ACTIVE)
+  
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  
+  @@unique([companyId, code])
+  @@map("cost_centers")
+}
+
+model Booking {
+  id              String         @id @default(cuid())
+  
+  // Company association
+  companyId       String
+  company         Company        @relation(fields: [companyId], references: [id])
+  
+  // User association
+  userId          String
+  user            User           @relation(fields: [userId], references: [id])
+  
+  // Department and cost center
+  departmentId    String?
+  department      Department?    @relation(fields: [departmentId], references: [id])
+  
+  costCenterId    String?
+  costCenter      CostCenter?    @relation(fields: [costCenterId], references: [id])
+  
+  // Booking details
+  serviceType     ServiceType
+  date            DateTime
+  time            String
+  duration        Int           // in hours
+  location        String
+  destination     String?
+  requirements    String?
+  
+  // Pricing
+  amount          Float
+  currency        String        @default("GBP")
+  vatAmount       Float?
+  totalAmount     Float
+  
+  // Status and approval
+  status          BookingStatus @default(PENDING)
+  approvalRequired Boolean      @default(false)
+  
+  // Executive protection details
+  riskLevel       RiskLevel?
+  securityLevel   SecurityLevel?
+  threatAssessment String?
+  
+  // Relationships
+  approvals       Approval[]
+  invoiceItems    InvoiceItem[]
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  @@map("bookings")
+}
+
+model Approval {
+  id          String        @id @default(cuid())
+  
+  // Booking association
+  bookingId   String
+  booking     Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  
+  // Approver
+  approverId  String
+  approver    User          @relation(fields: [approverId], references: [id])
+  
+  // Approval details
+  status      ApprovalStatus @default(PENDING)
+  comments    String?
+  approvedAt  DateTime?
+  
+  // Workflow
+  level       Int           @default(1)
+  required    Boolean       @default(true)
+  
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  @@map("approvals")
+}
+
+model Policy {
+  id          String      @id @default(cuid())
+  name        String
+  description String
+  
+  // Company association
+  companyId   String
+  company     Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Policy rules
+  rules       PolicyRule[]
+  
+  // Status
+  active      Boolean     @default(true)
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@map("policies")
+}
+
+model PolicyRule {
+  id          String      @id @default(cuid())
+  
+  // Policy association
+  policyId    String
+  policy      Policy      @relation(fields: [policyId], references: [id], onDelete: Cascade)
+  
+  // Rule details
+  type        RuleType
+  field       String      // e.g., "amount", "service_type", "time"
+  operator    String      // e.g., ">=", "==", "in"
+  value       String      // JSON encoded value
+  action      RuleAction  // APPROVE, REJECT, REQUIRE_APPROVAL
+  
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  @@map("policy_rules")
+}
+
+model Budget {
+  id            String       @id @default(cuid())
+  name          String
+  
+  // Company association
+  companyId     String
+  company       Company      @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Department association
+  departmentId  String?
+  department    Department?  @relation(fields: [departmentId], references: [id])
+  
+  // Cost center association
+  costCenterId  String?
+  costCenter    CostCenter?  @relation(fields: [costCenterId], references: [id])
+  
+  // Budget details
+  period        BudgetPeriod
+  year          Int
+  month         Int?
+  quarter       Int?
+  
+  // Amounts
+  allocated     Float
+  spent         Float        @default(0)
+  committed     Float        @default(0)
+  available     Float
+  
+  // Alerts
+  alertAt75     Boolean      @default(true)
+  alertAt90     Boolean      @default(true)
+  alertAt100    Boolean      @default(true)
+  
+  status        BudgetStatus @default(ACTIVE)
+  
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  
+  @@map("budgets")
+}
+
+model Invoice {
+  id            String        @id @default(cuid())
+  number        String        @unique
+  
+  // Company association
+  companyId     String
+  company       Company       @relation(fields: [companyId], references: [id])
+  
+  // Invoice details
+  issueDate     DateTime
+  dueDate       DateTime
+  period        String        // e.g., "2024-01"
+  
+  // Amounts
+  subtotal      Float
+  vatAmount     Float
+  totalAmount   Float
+  currency      String        @default("GBP")
+  
+  // Status
+  status        InvoiceStatus @default(DRAFT)
+  paidAt        DateTime?
+  
+  // Compliance
+  vatNumber     String?
+  referenceNumber String?
+  
+  // Relationships
+  items         InvoiceItem[]
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  
+  // Invoice association
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  
+  // Booking association
+  bookingId   String
+  booking     Booking  @relation(fields: [bookingId], references: [id])
+  
+  // Item details
+  description String
+  quantity    Int      @default(1)
+  unitPrice   Float
+  totalPrice  Float
+  vatRate     Float    @default(0.20)
+  vatAmount   Float
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("invoice_items")
+}
+
+model Permission {
+  id          String          @id @default(cuid())
+  
+  // User association
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Permission details
+  resource    PermissionResource
+  action      PermissionAction
+  granted     Boolean         @default(true)
+  
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  @@unique([userId, resource, action])
+  @@map("permissions")
+}
+
+model UserActivity {
+  id          String         @id @default(cuid())
+  
+  // User association
+  userId      String
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Activity details
+  action      ActivityType
+  resource    String?        // Resource ID
+  resourceType String?       // e.g., "booking", "user"
+  details     Json?          // Additional activity details
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt   DateTime       @default(now())
+  
+  @@map("user_activities")
+}
+
+// Enums
+enum CompanySize {
+  STARTUP
+  SMALL
+  MEDIUM
+  LARGE
+  ENTERPRISE
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  EMPLOYEE
+  VIEWER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  SUSPENDED
+}
+
+enum ServiceType {
+  CLOSE_PROTECTION
+  PRIVATE_HIRE
+  CORPORATE_TRANSPORT
+  AIRPORT_TRANSFER
+  WEDDING_SECURITY
+  VIP_SERVICE
+  EXECUTIVE_PROTECTION
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum SecurityLevel {
+  STANDARD
+  ENHANCED
+  PREMIUM
+  EXECUTIVE
+}
+
+enum CostCenterStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum BudgetPeriod {
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+enum BudgetStatus {
+  ACTIVE
+  INACTIVE
+  EXCEEDED
+  FROZEN
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum RuleType {
+  AMOUNT_LIMIT
+  SERVICE_RESTRICTION
+  TIME_RESTRICTION
+  LOCATION_RESTRICTION
+  APPROVAL_REQUIRED
+}
+
+enum RuleAction {
+  APPROVE
+  REJECT
+  REQUIRE_APPROVAL
+}
+
+enum PermissionResource {
+  BOOKINGS
+  USERS
+  DEPARTMENTS
+  COST_CENTERS
+  BUDGETS
+  INVOICES
+  POLICIES
+  REPORTS
+  SETTINGS
+}
+
+enum PermissionAction {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  APPROVE
+  EXPORT
+}
+
+enum ActivityType {
+  LOGIN
+  LOGOUT
+  BOOKING_CREATED
+  BOOKING_APPROVED
+  BOOKING_REJECTED
+  USER_INVITED
+  BUDGET_EXCEEDED
+  POLICY_VIOLATED
+  INVOICE_GENERATED
+  SETTINGS_CHANGED
+}
