@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Header from './components/navigation/Header'
 
 export const metadata: Metadata = {
   title: 'GQ Security Services | Award-Winning Close Protection & Private Hire UK',
@@ -54,9 +55,12 @@ export default function RootLayout({
       </head>
       <body className="bg-slate-900 text-white">
         {/* Skip to main content for accessibility */}
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded z-50">
           Skip to main content
         </a>
+        
+        {/* Header with Navigation */}
+        <Header />
         
         <div id="main-content">
           {children}
