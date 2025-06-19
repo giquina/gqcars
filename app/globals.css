@@ -14,3 +14,43 @@
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
 }
+
+/* Mobile Optimizations */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  /* Improved mobile button sizing */
+  .mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better mobile typography */
+  .mobile-heading {
+    line-height: 1.2;
+    word-wrap: break-word;
+  }
+  
+  /* Mobile-friendly spacing */
+  .mobile-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .mobile-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+}

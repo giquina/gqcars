@@ -20,7 +20,7 @@ export default function WhatsAppWidget() {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+          className="bg-yellow-500 hover:bg-yellow-400 text-black p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
         >
           <MessageCircle className="w-6 h-6" />
         </button>
@@ -30,9 +30,9 @@ export default function WhatsAppWidget() {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-80 bg-white rounded-lg shadow-2xl border z-50">
           {/* Header */}
-          <div className="bg-green-500 text-white p-4 rounded-t-lg flex items-center justify-between">
+          <div className="bg-yellow-500 text-black p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center">
                 <MessageCircle className="w-5 h-5" />
               </div>
               <div>
@@ -42,7 +42,7 @@ export default function WhatsAppWidget() {
             </div>
             <button 
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-gray-200"
+              className="text-black hover:text-gray-700"
             >
               <X className="w-5 h-5" />
             </button>
@@ -58,7 +58,7 @@ export default function WhatsAppWidget() {
             
             <button
               onClick={openWhatsApp}
-              className="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+              className="w-full bg-yellow-500 hover:bg-yellow-400 text-black py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Start Chat</span>

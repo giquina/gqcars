@@ -1,53 +1,53 @@
 'use client'
 
-import { Smartphone, Download, Star, Zap, Shield, Car } from 'lucide-react'
+import { Smartphone, Download, Star, Zap, Shield, Car, MapPin, Navigation, Clock, Users, Building2 } from 'lucide-react'
 
 export default function MobileAppCTA() {
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black py-20 my-20 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black py-10 sm:py-16 lg:py-20 my-10 sm:my-16 lg:my-20 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-10 left-10 w-20 h-20 border border-yellow-500 rotate-45 animate-spin-slow"></div>
-        <div className="absolute bottom-10 right-10 w-16 h-16 border border-blue-500 rotate-12 animate-bounce"></div>
-        <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-yellow-500 rotate-45 animate-pulse"></div>
-        <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-yellow-500 rounded-full animate-ping"></div>
+        <div className="absolute top-10 left-10 w-12 h-12 sm:w-20 sm:h-20 border border-yellow-500 rotate-45 animate-spin-slow"></div>
+        <div className="absolute bottom-10 right-10 w-10 h-10 sm:w-16 sm:h-16 border border-blue-500 rotate-12 animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/4 w-8 h-8 sm:w-12 sm:h-12 border border-yellow-500 rotate-45 animate-pulse"></div>
+        <div className="absolute top-1/4 right-1/4 w-6 h-6 sm:w-8 sm:h-8 bg-yellow-500 rounded-full animate-ping"></div>
       </div>
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-yellow-500/10"></div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-4 bg-black/50 px-8 py-4 rounded-2xl border border-yellow-500/30 mb-8">
-            <Smartphone className="w-12 h-12 text-yellow-500 animate-bounce" />
-            <div>
-              <h2 className="text-4xl font-bold text-white">Download Our App</h2>
-              <p className="text-yellow-500 text-lg">Book SIA Trained Drivers Instantly</p>
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <div className="inline-flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 bg-black/50 px-4 sm:px-8 py-4 rounded-2xl border border-yellow-500/30 mb-6 sm:mb-8">
+            <Smartphone className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-500 animate-bounce" />
+            <div className="text-center sm:text-left">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Download Our App</h2>
+              <p className="text-yellow-500 text-sm sm:text-lg">Book SIA Trained Drivers Instantly</p>
             </div>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Get the <span className="text-yellow-500 font-bold">GQ Cars app</span> and experience premium taxi service with 
             <span className="text-blue-400 font-bold"> security-trained professionals</span> at your fingertips.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left side - App info */}
           <div className="text-white">
-            <div className="flex items-center space-x-4 mb-8">
-              <div className="bg-yellow-500 p-3 rounded-2xl">
-                <Smartphone className="w-12 h-12 text-black" />
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-6 sm:mb-8">
+              <div className="bg-yellow-500 p-2 sm:p-3 rounded-2xl">
+                <Smartphone className="w-8 h-8 sm:w-12 sm:h-12 text-black" />
               </div>
-              <div>
-                <h2 className="text-5xl font-bold">GQ Cars App</h2>
-                <p className="text-2xl text-yellow-500 font-semibold">Professional Taxi & Private Hire</p>
-                <p className="text-lg text-gray-300">SIA Licensed • CPO Trained Drivers</p>
+              <div className="text-center sm:text-left">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">GQ Cars App</h2>
+                <p className="text-lg sm:text-xl lg:text-2xl text-yellow-500 font-semibold">Professional Taxi & Private Hire</p>
+                <p className="text-sm sm:text-lg text-gray-300">SIA Licensed • CPO Trained Drivers</p>
               </div>
             </div>
 
-            <div className="mb-10">
-              <h3 className="text-3xl font-bold mb-6 text-yellow-500">Book Your Security-Trained Driver</h3>
+            <div className="mb-6 sm:mb-10">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 text-yellow-500">Book Your Security-Trained Driver</h3>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="bg-blue-600 p-2 rounded-lg mt-1">
@@ -142,80 +142,211 @@ export default function MobileAppCTA() {
             </div>
           </div>
 
-          {/* Right side - Professional Phone Mockup */}
-          <div className="flex justify-center relative">
-            {/* Background elements */}
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
-            
-            <div className="relative">
-              {/* Phone Frame */}
-              <div className="w-80 h-[600px] bg-gray-900 rounded-[3.5rem] p-3 shadow-2xl border-4 border-gray-700">
-                <div className="w-full h-full bg-black rounded-[2.8rem] relative overflow-hidden">
-                  {/* Status Bar */}
-                  <div className="flex justify-between items-center px-6 py-4 text-white text-sm">
-                    <span>9:41</span>
-                    <span>📶 📶 🔋</span>
+          {/* Right side - Enhanced Mobile App Mockup with GPS Features */}
+          <div className="relative flex justify-center">
+            {/* Floating GPS Indicators */}
+            <div className="absolute -top-6 -left-8 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center animate-ping">
+              <div className="w-6 h-6 bg-green-600 rounded-full"></div>
+            </div>
+            <div className="absolute -top-4 -right-10 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center animate-pulse">
+              <div className="w-4 h-4 bg-blue-600 rounded-full"></div>
+            </div>
+            <div className="absolute bottom-8 -left-8 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center animate-bounce">
+              <div className="w-5 h-5 bg-yellow-600 rounded-full"></div>
+            </div>
+            <div className="absolute bottom-12 -right-6 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center animate-pulse">
+              <div className="w-3 h-3 bg-purple-600 rounded-full"></div>
+            </div>
+
+            {/* Phone Mockup */}
+            <div className="bg-black rounded-[3rem] p-3 shadow-2xl border-4 border-gray-700 relative max-w-sm mx-auto">
+              {/* Phone Screen */}
+              <div className="bg-gray-900 rounded-[2.5rem] overflow-hidden relative">
+                {/* Status Bar */}
+                <div className="bg-black px-6 py-3 flex justify-between items-center text-white text-sm">
+                  <span className="font-bold">9:41</span>
+                  <div className="flex space-x-1">
+                    <div className="w-4 h-2 bg-white rounded-sm"></div>
+                    <div className="w-4 h-2 bg-white rounded-sm"></div>
+                    <div className="w-4 h-2 bg-white rounded-sm"></div>
+                    <div className="w-6 h-2 bg-green-500 rounded-sm animate-pulse"></div>
                   </div>
-                  
-                  {/* App Content */}
-                  <div className="px-6 py-4">
-                    {/* App Header */}
-                    <div className="flex items-center space-x-3 mb-8">
-                      <div className="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center">
-                        <span className="text-black font-bold text-lg">GQ</span>
+                </div>
+
+                {/* App Header */}
+                <div className="bg-gray-800 p-4 flex items-center space-x-3 relative">
+                  <div className="w-12 h-12 bg-yellow-500 rounded-xl flex items-center justify-center">
+                    <span className="font-bold text-black text-lg">GQ</span>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold">GQ Cars</h3>
+                    <p className="text-gray-400 text-sm">Professional Taxi Service</p>
+                  </div>
+                  <div className="ml-auto">
+                    <div className="bg-red-500 text-white text-xs px-2 py-1 rounded font-bold">SIA</div>
+                  </div>
+                  {/* Live GPS indicator */}
+                  <div className="absolute top-2 right-2 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                </div>
+
+                {/* Interactive GPS Map Section */}
+                <div className="relative bg-gradient-to-br from-blue-900 via-green-800 to-blue-700 h-48 overflow-hidden">
+                  {/* Map Grid Background */}
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="grid grid-cols-10 grid-rows-10 h-full w-full">
+                      {Array.from({ length: 100 }).map((_, i) => (
+                        <div key={i} className="border border-blue-400/20"></div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Animated Route Line */}
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 192">
+                    <defs>
+                      <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#facc15" />
+                        <stop offset="50%" stopColor="#3b82f6" />
+                        <stop offset="100%" stopColor="#10b981" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M30 150 Q80 120 150 130 Q200 140 270 80"
+                      stroke="url(#routeGradient)"
+                      strokeWidth="4"
+                      fill="none"
+                      strokeDasharray="12,6"
+                      className="animate-pulse"
+                    />
+                  </svg>
+
+                  {/* Moving GPS Dots with Traffic Simulation */}
+                  <div className="absolute top-12 left-8 w-4 h-4 bg-yellow-400 rounded-full animate-pulse shadow-lg">
+                    <div className="absolute inset-0 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
+                    <div className="absolute top-5 left-1 text-white text-xs font-bold">YOU</div>
+                  </div>
+                  <div className="absolute top-20 right-12 w-3 h-3 bg-green-400 rounded-full animate-bounce">
+                    <div className="absolute top-4 left-1 text-white text-xs">🚗</div>
+                  </div>
+                  <div className="absolute bottom-16 left-12 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-12 right-8 w-3 h-3 bg-red-400 rounded-full animate-ping">
+                    <div className="absolute top-4 left-1 text-white text-xs">🚕</div>
+                  </div>
+
+                  {/* Dynamic Location Pins */}
+                  <div className="absolute top-8 left-6 text-green-400 animate-bounce">
+                    <MapPin className="w-6 h-6" />
+                    <div className="absolute -bottom-2 left-7 text-white text-xs bg-black/50 px-1 rounded">Pickup</div>
+                  </div>
+                  <div className="absolute bottom-8 right-6 text-red-400 animate-pulse">
+                    <MapPin className="w-6 h-6" />
+                    <div className="absolute -bottom-2 right-7 text-white text-xs bg-black/50 px-1 rounded">Drop</div>
+                  </div>
+
+                  {/* Live Status Badges */}
+                  <div className="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center space-x-1">
+                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <span>LIVE GPS</span>
+                  </div>
+                  <div className="absolute top-4 right-4 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                    ETA 12 min
+                  </div>
+                  <div className="absolute bottom-4 left-4 bg-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold">
+                    3 drivers nearby
+                  </div>
+                </div>
+
+                {/* Service Selection with Smart Features */}
+                <div className="p-4 space-y-3">
+                  <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-4 rounded-xl text-center relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+                    <div className="absolute bottom-0 left-0 w-12 h-12 bg-white/10 rounded-full translate-y-6 -translate-x-6"></div>
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-center space-x-2 mb-2">
+                        <Car className="w-5 h-5 text-white" />
+                        <span className="text-white font-bold text-sm">Premium Security Drivers</span>
                       </div>
-                      <div>
-                        <h3 className="text-white font-bold text-lg">GQ Cars</h3>
-                        <p className="text-gray-400 text-sm">Professional Taxi Service</p>
+                      <p className="text-white/90 text-xs">From £3.50/mile • Airport transfers from £70</p>
+                    </div>
+                  </div>
+
+                  {/* Smart Location Inputs with Auto-Detection */}
+                  <div className="space-y-2">
+                    <div className="bg-gray-800 p-3 rounded-lg flex items-center space-x-3">
+                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                      <div className="flex-1">
+                        <p className="text-red-400 text-xs font-bold">From</p>
+                        <p className="text-white text-sm flex items-center space-x-1">
+                          <Navigation className="w-3 h-3" />
+                          <span>Your Location</span>
+                          <span className="text-green-400 text-xs font-bold">(Auto-detected)</span>
+                        </p>
+                      </div>
+                      <div className="text-green-400">
+                        <MapPin className="w-4 h-4" />
                       </div>
                     </div>
-                    
-                    {/* Hero Image - Taxi/Security Car */}
-                    <div className="bg-gradient-to-r from-yellow-500 to-blue-600 rounded-2xl p-6 mb-6 text-center relative overflow-hidden">
-                      <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded-bl-lg">
-                        SIA
+                    <div className="bg-gray-700 p-3 rounded-lg flex items-center space-x-3">
+                      <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
+                      <div className="flex-1">
+                        <p className="text-blue-400 text-xs font-bold">To</p>
+                        <p className="text-white text-sm flex items-center space-x-1">
+                          <Building2 className="w-3 h-3" />
+                          <span>Enter destination</span>
+                        </p>
                       </div>
-                      <Car className="w-16 h-16 mx-auto mb-4 text-white" />
-                      <p className="text-white font-bold text-lg">Premium Security Drivers</p>
-                      <p className="text-white/90 text-sm">From £3.50/mile • Airport transfers from £70</p>
+                      <div className="text-blue-400">
+                        <MapPin className="w-4 h-4" />
+                      </div>
                     </div>
-                    
-                    {/* Booking Form */}
-                    <div className="space-y-4">
-                      <div className="bg-gray-800 p-4 rounded-xl">
-                        <p className="text-gray-400 text-sm">From</p>
-                        <p className="text-white font-semibold">📍 Your Location</p>
-                      </div>
-                      <div className="bg-gray-800 p-4 rounded-xl">
-                        <p className="text-gray-400 text-sm">To</p>
-                        <p className="text-gray-300">🏢 Enter destination</p>
-                      </div>
-                      
-                      {/* Service Options */}
-                      <div className="flex space-x-2">
-                        <div className="bg-yellow-500 text-black px-3 py-2 rounded-lg text-sm font-bold flex-1 text-center">
-                          🚖 Taxi
-                        </div>
-                        <div className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm flex-1 text-center">
-                          🛡️ Security
-                        </div>
-                      </div>
-                      
-                      <button className="w-full bg-gradient-to-r from-blue-600 to-yellow-500 text-white py-4 rounded-xl font-bold text-lg">
-                        BOOK NOW
-                      </button>
+                  </div>
+
+                  {/* Quick Action Buttons */}
+                  <div className="flex space-x-2">
+                    <button className="flex-1 bg-yellow-500 text-black text-xs font-bold py-2 px-3 rounded-lg">
+                      BOOK NOW
+                    </button>
+                    <button className="flex-1 bg-blue-600 text-white text-xs font-bold py-2 px-3 rounded-lg">
+                      GET QUOTE
+                    </button>
+                  </div>
+                </div>
+
+                {/* Smart Features Navigation */}
+                <div className="bg-gray-800 p-3 flex justify-around items-center">
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-1 animate-pulse">
+                      <MapPin className="w-4 h-4 text-white" />
                     </div>
+                    <p className="text-gray-300 text-xs">Smart GPS</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-1 animate-bounce">
+                      <Zap className="w-4 h-4 text-white" />
+                    </div>
+                    <p className="text-gray-300 text-xs">Live Quotes</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-1 animate-pulse">
+                      <Shield className="w-4 h-4 text-white" />
+                    </div>
+                    <p className="text-gray-300 text-xs">SIA Secure</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-1 animate-ping">
+                      <Users className="w-4 h-4 text-black" />
+                    </div>
+                    <p className="text-gray-300 text-xs">Live Support</p>
                   </div>
                 </div>
               </div>
-              
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 bg-green-500 p-3 rounded-full animate-bounce">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-yellow-500 p-3 rounded-full animate-pulse">
-                <Star className="w-6 h-6 text-black" />
-              </div>
+            </div>
+
+            {/* Enhanced Floating Action Indicators */}
+            <div className="absolute -bottom-6 -right-8 bg-yellow-500 p-3 rounded-full animate-bounce shadow-xl">
+              <Star className="w-6 h-6 text-black" />
+            </div>
+            <div className="absolute top-1/2 -left-12 bg-green-500 p-2 rounded-full animate-pulse shadow-xl">
+              <Shield className="w-5 h-5 text-white" />
             </div>
           </div>
         </div>

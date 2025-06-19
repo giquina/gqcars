@@ -1,0 +1,58 @@
+{
+  "name": "gq-cars-ltd",
+  "version": "1.0.0",
+  "description": "GQ Cars LTD - Professional Taxi & Private Hire with Security-Trained Drivers",
+  "mcp": {
+    "enabled": true,
+    "server": "desktop-commander",
+    "sync_targets": [
+      "cursor",
+      "github",
+      "vercel"
+    ],
+    "auto_sync": true,
+    "watch_patterns": [
+      "app/**/*.tsx",
+      "app/**/*.ts", 
+      "app/**/*.js",
+      "lib/**/*",
+      "components/**/*",
+      "styles/**/*",
+      "public/**/*"
+    ]
+  },
+  "project": {
+    "type": "nextjs",
+    "framework": "next.js",
+    "language": "typescript",
+    "database": "prisma",
+    "authentication": "next-auth",
+    "deployment": "vercel",
+    "features": [
+      "booking-system",
+      "whatsapp-widget",
+      "mobile-responsive",
+      "security-branding",
+      "admin-panel"
+    ]
+  },
+  "claude_context": {
+    "primary_brand_color": "yellow-500",
+    "phone_number": "07407655203",
+    "business_type": "security_taxi_service",
+    "last_updated": "2025-06-19T12:00:00Z",
+    "major_components": [
+      "app/page.tsx - Main landing page",
+      "app/components/ui/WhatsAppWidget.tsx - WhatsApp integration",
+      "app/components/ui/Header.tsx - Navigation header",
+      "app/layout.tsx - App layout and metadata",
+      "START-WEBSITE.bat - Development server startup"
+    ]
+  },
+  "sync_endpoints": {
+    "cursor_bridge": "http://localhost:3001/cursor-sync",
+    "desktop_claude": "mcp://desktop-commander",
+    "github_repo": "https://github.com/your-username/gq-cars-ltd",
+    "vercel_deployment": "https://gq-cars-ltd.vercel.app"
+  }
+}

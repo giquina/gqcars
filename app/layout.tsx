@@ -3,14 +3,16 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/ui/Header'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import AIBadge from './components/ui/AIBadge'
 import TFLLogo from './components/ui/TFLLogo'
 import SIALogo from './components/ui/SIALogo'
+import { NextAuthProvider } from './providers/NextAuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'GQ Cars LTD - Professional TAXI & Private Hire | SIA Licensed Drivers | Watford & London',
-  description: 'Professional TAXI and private hire services with SIA Licensed Close Protection Officers. Security-trained drivers covering Watford, Central London, and all major airports. Book now: 07407 655 203',
+  title: 'GQ Cars LTD - Professional Security Taxi Service | SIA Licensed Drivers | London & Watford',
+  description: 'Premium security taxi service with SIA Licensed Close Protection Officers. Smart booking technology, professional drivers covering London, Watford, and all major airports. Book now: 07407 655 203',
 }
 
 export default function RootLayout({
@@ -21,18 +23,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
-        <Header />
-        <WhatsAppWidget />
-        <main className="pt-16">{children}</main>
+        <NextAuthProvider>
+          <Header />
+          <AIBadge />
+          <WhatsAppWidget />
+          <main className="pt-16">{children}</main>
         <footer className="bg-black/80 border-t border-gray-800 py-12 mt-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
                 <h3 className="text-lg font-bold text-yellow-500 mb-4">GQ Cars LTD</h3>
-                <p className="text-sm text-gray-400">Premium taxi and private hire services with <span className="text-yellow-500">SIA licensed Close Protection Officers</span> and security-trained drivers across Watford, London, and all major airports.</p>
-                <div className="mt-4 flex space-x-4 text-xs">
+                <p className="text-sm text-gray-400">Premium <span className="text-blue-400">smart security taxi service</span> with <span className="text-yellow-500">SIA licensed Close Protection Officers</span>. Advanced technology meets professional security across London, Watford, and all major airports.</p>
+                <div className="mt-4 flex flex-wrap gap-2 text-xs">
                   <span className="bg-yellow-500 text-black px-2 py-1 rounded font-bold">SIA LICENSED</span>
                   <span className="bg-blue-600 text-white px-2 py-1 rounded font-bold">CPO TRAINED</span>
+                  <span className="bg-purple-600 text-white px-2 py-1 rounded font-bold">SMART TECH</span>
                 </div>
                 
                 {/* Official Licensing Logos */}
@@ -83,6 +88,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        </NextAuthProvider>
       </body>
     </html>
   )

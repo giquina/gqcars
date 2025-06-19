@@ -11,22 +11,22 @@ export default function Header() {
   return (
     <>
       <header className="fixed w-full z-50 bg-black/95 backdrop-blur-lg border-b border-gray-800">
-        <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <nav className="container mx-auto px-4 py-2 sm:py-3 flex items-center justify-between">
           {/* Mobile Menu Button - TOP LEFT - BIGGER */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <button
-              className="lg:hidden p-3 text-white hover:text-yellow-500 transition-colors bg-gray-800 rounded-lg"
+              className="lg:hidden p-2 sm:p-3 text-white hover:text-yellow-500 transition-colors bg-gray-800 rounded-lg"
               onClick={() => setIsMobileMenuOpen(true)}
             >
-              <Menu className="w-8 h-8" />
+              <Menu className="w-6 h-6 sm:w-8 sm:h-8" />
             </button>
 
             {/* Logo and Brand - AFTER HAMBURGER */}
-            <div className="flex items-center space-x-3">
-              <GQCarsLogo className="w-10 h-10" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <GQCarsLogo className="w-8 h-8 sm:w-10 sm:h-10" />
               <div>
-                <a href="/" className="text-xl font-bold tracking-wider text-yellow-500">GQ CARS LTD</a>
-                <p className="text-xs text-gray-400 hidden sm:block">SIA Licensed • CPO Trained Drivers</p>
+                <a href="/" className="text-base sm:text-xl font-bold tracking-wider text-yellow-500">GQ CARS LTD</a>
+                <p className="text-xs text-gray-400 hidden sm:block">Professional • SIA Licensed • Smart Technology</p>
               </div>
             </div>
           </div>
