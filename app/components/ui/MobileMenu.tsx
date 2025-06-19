@@ -98,21 +98,21 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </nav>
 
               {/* Actions */}
-              <div className="p-4 border-t border-gq-accent/10">
+              <div className="p-4 border-t border-gray-700">
                 <a
-                  href="/contact"
+                  href="/book"
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-gq-blue to-gq-gold text-white font-medium hover:opacity-90 transition-opacity mb-3"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-blue-600 to-yellow-500 text-white font-medium hover:opacity-90 transition-opacity mb-3 rounded"
                 >
                   Book Now
-                  <Shield className="w-5 h-5" />
+                  <Car className="w-5 h-5" />
                 </a>
                 <a
-                  href="tel:+442012345678"
+                  href="tel:07407655203"
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gq-gold text-gq-gold font-medium hover:bg-gq-gold hover:text-white transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-yellow-500 text-yellow-500 font-medium hover:bg-yellow-500 hover:text-black transition-colors rounded"
                 >
-                  Call Now
+                  Call: 07407 655 203
                   <Phone className="w-5 h-5" />
                 </a>
               </div>
@@ -126,9 +126,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
 const services = [
   {
-    name: 'Close Protection',
-    href: '/services/close-protection',
-    icon: Shield
+    name: 'Book Taxi',
+    href: '/services/taxi',
+    icon: Car
   },
   {
     name: 'Private Hire',
@@ -136,19 +136,24 @@ const services = [
     icon: Car
   },
   {
-    name: 'Corporate Security',
+    name: 'Airport Transfer',
+    href: '/services/airport',
+    icon: Building2
+  },
+  {
+    name: 'Corporate Transport',
     href: '/services/corporate',
     icon: Building2
   },
   {
-    name: 'Wedding Security',
-    href: '/services/weddings',
-    icon: Sparkles
+    name: 'Security Services',
+    href: '/services/close-protection',
+    icon: Shield
   },
   {
-    name: 'VIP Services',
-    href: '/services/vip',
-    icon: Star
+    name: 'Wedding Transport',
+    href: '/services/weddings',
+    icon: Sparkles
   }
 ]
 

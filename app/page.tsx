@@ -1,39 +1,78 @@
-import { Shield, Clock, Award, MapPin, Building2, Sparkles, Car, Star, Phone } from 'lucide-react'
+import { Shield, Clock, Award, MapPin, Building2, Sparkles, Car, Star, Phone, Plane } from 'lucide-react'
+import GQCarsLogo from './components/ui/GQCarsLogo'
+import MobileAppCTA from './components/ui/MobileAppCTA'
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center bg-slate-900">
+      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-gray-900 to-black">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-transparent z-10" />
-          <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-10" />
+          {/* You can add a background image of cars here */}
         </div>
         
-        <div className="container mx-auto px-4 relative z-20">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-              Elite Close Protection & Private Hire
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up">
-              SIA licensed security professionals providing discreet protection and premium transport services.
+        <div className="container mx-auto px-4 relative z-20 py-20">
+          <div className="max-w-4xl">
+            <div className="flex items-center space-x-4 mb-8">
+              <GQCarsLogo className="w-16 h-16" />
+              <div>
+                <h1 className="text-6xl md:text-8xl font-bold text-yellow-500">GQ CARS</h1>
+                <p className="text-2xl text-gray-300">Premium Transport & Security Services</p>
+              </div>
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+              Your Trusted Taxi & Private Hire Service
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300 mb-8">
+              Professional drivers, luxury vehicles, and security-trained staff. 
+              Available 24/7 across London with instant booking.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="/contact" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-amber-600 hover:opacity-90 transition-opacity">
-                Book Now
-                <Shield className="ml-2 h-5 w-5" />
+            
+            <div className="flex flex-col lg:flex-row gap-6 mb-12">
+              <a 
+                href="tel:07407655203" 
+                className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-6 rounded-xl font-bold text-xl flex items-center justify-center space-x-3 transition-colors group"
+              >
+                <Phone className="w-7 h-7 group-hover:animate-pulse" />
+                <span>CALL NOW: 07407 655 203</span>
               </a>
-              <a href="/services" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-amber-500 border-2 border-amber-500 hover:bg-amber-500 hover:text-white transition-colors">
-                Our Services
-                <Star className="ml-2 h-5 w-5" />
+              <a 
+                href="/book" 
+                className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-6 rounded-xl font-bold text-xl flex items-center justify-center space-x-3 transition-colors"
+              >
+                <Car className="w-7 h-7" />
+                <span>BOOK ONLINE</span>
               </a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-black/50 p-6 rounded-xl border border-yellow-500/20">
+                <Clock className="w-12 h-12 text-yellow-500 mb-4" />
+                <h3 className="text-xl font-bold mb-2 text-white">24/7 Service</h3>
+                <p className="text-gray-300">Available round the clock for your transport needs</p>
+              </div>
+              <div className="bg-black/50 p-6 rounded-xl border border-yellow-500/20">
+                <Shield className="w-12 h-12 text-yellow-500 mb-4" />
+                <h3 className="text-xl font-bold mb-2 text-white">Security Trained</h3>
+                <p className="text-gray-300">Drivers with security background for your safety</p>
+              </div>
+              <div className="bg-black/50 p-6 rounded-xl border border-yellow-500/20">
+                <Car className="w-12 h-12 text-yellow-500 mb-4" />
+                <h3 className="text-xl font-bold mb-2 text-white">Premium Fleet</h3>
+                <p className="text-gray-300">Modern, clean, and comfortable vehicles</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Mobile App CTA */}
+      <MobileAppCTA />
+
       {/* Services Grid */}
-      <section className="py-20 bg-slate-800/50">
+      <section className="py-20 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Security Services</h2>
           
