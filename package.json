@@ -5,28 +5,36 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start -p 3000",
-    "lint": "next lint"
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "create:component": "./scripts/create-component.sh",
+    "clean": "rm -rf .next node_modules",
+    "clean:start": "npm run clean && npm install && npm run dev",
+    "update": "npm update && npm run build",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "next": "^14.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
+    "lucide-react": "^0.290.0",
+    "next": "14.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.2.2",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
     "@types/node": "^20.8.7",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
-    "tailwindcss": "^3.3.5",
     "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "clsx": "^2.0.0",
-    "lucide-react": "^0.290.0",
-    "framer-motion": "^10.16.4",
-    "@radix-ui/react-slot": "^1.0.2",
-    "class-variance-authority": "^0.7.0"
-  },
-  "devDependencies": {
     "eslint": "^8.52.0",
-    "eslint-config-next": "^14.0.3"
+    "eslint-config-next": "14.0.0",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.0",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
   }
 }

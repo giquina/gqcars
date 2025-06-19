@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from './ThemeProvider'
 
 export default function MainNav() {
+  const { theme, setTheme } = useTheme()
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/50 backdrop-blur-lg border-b border-slate-800">
       <div className="container mx-auto px-4">
@@ -26,6 +29,18 @@ export default function MainNav() {
             <Link href="/book" className="bg-gradient-to-r from-blue-600 to-amber-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-amber-500/20 transform hover:scale-105 transition-all duration-300">
               Book Now
             </Link>
+            {/* Theme Toggle Button */}
+            <button
+              aria-label="Toggle dark mode"
+              className="ml-4 p-2 rounded hover:bg-slate-800 transition-colors"
+              onClick={() => {
+                const next = theme === 'dark' ? 'light' : 'dark'
+                setTheme(next)
+                if (typeof window !== 'undefined') localStorage.setItem('theme', next)
+              }}
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-blue-500" />}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
