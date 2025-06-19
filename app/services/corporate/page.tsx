@@ -1,4 +1,4 @@
-import { Building2, Shield, Users, ChartBar, FileCheck, Clock, CheckCircle } from 'lucide-react'
+import { Building2, Shield, Users, BarChart3, FileCheck, Clock, CheckCircle } from 'lucide-react'
 import ServiceHero from '@/app/components/ui/ServiceHero'
 import Animate from '@/app/components/ui/Animate'
 
@@ -166,7 +166,7 @@ const corporateFeatures = [
   {
     title: "Risk Assessment",
     description: "Detailed security audits and threat analysis for businesses.",
-    icon: ChartBar
+    icon: BarChart3
   },
   {
     title: "Compliance",
