@@ -1,4 +1,4 @@
-import { ChampagneGlass, Shield, Car, Users, Camera, Clock, MapPin, CheckCircle } from 'lucide-react'
+import { Sparkles, Shield, Car, Users, Camera, Clock, MapPin, CheckCircle } from 'lucide-react'
 import ServiceHero from '@/app/components/ui/ServiceHero'
 import Animate from '@/app/components/ui/Animate'
 
@@ -8,7 +8,7 @@ export default function WeddingSecurityPage() {
       <ServiceHero
         title="Wedding Security Services"
         description="Discreet security and luxury transport for your special day."
-        Icon={ChampagneGlass}
+        Icon={Sparkles}
         image="/images/services/wedding-hero.jpg"
       />
 
@@ -131,7 +131,7 @@ export default function WeddingSecurityPage() {
                 className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-gq-blue to-gq-gold hover:opacity-90 transition-opacity"
               >
                 Request Consultation
-                <ChampagneGlass className="ml-2 h-5 w-5" />
+                <Sparkles className="ml-2 h-5 w-5" />
               </a>
               <a
                 href="tel:+442012345678"

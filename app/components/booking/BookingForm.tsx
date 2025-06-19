@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Shield, Car, Building2, ChampagneGlass, Star, Calendar, Clock, User, Mail, Phone, MapPin } from 'lucide-react'
+import { Shield, Car, Building2, Sparkles, Star, Calendar, Clock, User, Mail, Phone, MapPin } from 'lucide-react'
 
 interface BookingFormData {
   service: string
@@ -318,7 +318,7 @@ const services = [
     id: 'weddings',
     name: 'Wedding Security',
     description: 'Discreet security for your special day',
-    icon: ChampagneGlass
+    icon: Sparkles
   },
   {
     id: 'vip',
