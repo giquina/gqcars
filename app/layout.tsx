@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/ui/Header'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import AIAssistantWidget from './components/ui/AIAssistantWidget'
+import ConversationAnalytics from './components/ui/ConversationAnalytics'
 import TFLLogo from './components/ui/TFLLogo'
 import SIALogo from './components/ui/SIALogo'
 
@@ -22,7 +24,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
         <Header />
+        
+        {/* Chat Widgets */}
         <WhatsAppWidget />
+        <AIAssistantWidget />
+        
+        {/* Analytics Dashboard */}
+        <ConversationAnalytics />
+        
         <main className="pt-16">{children}</main>
         <footer className="bg-black/80 border-t border-gray-800 py-12 mt-20">
           <div className="container mx-auto px-4">
