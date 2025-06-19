@@ -16,7 +16,20 @@
     "lucide-react": "^0.263.1",
     "next": "14.0.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "@googlemaps/google-maps-services-js": "^3.3.42",
+    "qrcode": "^1.5.3",
+    "socket.io-client": "^4.7.5",
+    "react-map-gl": "^7.1.7",
+    "mapbox-gl": "^3.0.1",
+    "use-places-autocomplete": "^4.0.1",
+    "react-google-autocomplete": "^2.7.3",
+    "react-qr-code": "^2.0.12",
+    "@types/qrcode": "^1.5.5",
+    "date-fns": "^3.0.6",
+    "react-hot-toast": "^2.4.1",
+    "zustand": "^4.4.7",
+    "axios": "^1.6.2"
   },
   "devDependencies": {
     "@types/node": "^20",
