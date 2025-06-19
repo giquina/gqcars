@@ -5,14 +5,33 @@ import { Smartphone, Download, Star, Zap, Shield, Car } from 'lucide-react'
 export default function MobileAppCTA() {
   return (
     <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black py-20 my-20 relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-20 h-20 border border-yellow-500 rotate-45"></div>
-        <div className="absolute bottom-10 right-10 w-16 h-16 border border-blue-500 rotate-12"></div>
-        <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-yellow-500 rotate-45"></div>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-10 left-10 w-20 h-20 border border-yellow-500 rotate-45 animate-spin-slow"></div>
+        <div className="absolute bottom-10 right-10 w-16 h-16 border border-blue-500 rotate-12 animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/4 w-12 h-12 border border-yellow-500 rotate-45 animate-pulse"></div>
+        <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-yellow-500 rounded-full animate-ping"></div>
       </div>
 
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-yellow-500/10"></div>
+
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-4 bg-black/50 px-8 py-4 rounded-2xl border border-yellow-500/30 mb-8">
+            <Smartphone className="w-12 h-12 text-yellow-500 animate-bounce" />
+            <div>
+              <h2 className="text-4xl font-bold text-white">Download Our App</h2>
+              <p className="text-yellow-500 text-lg">Book SIA Trained Drivers Instantly</p>
+            </div>
+          </div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Get the <span className="text-yellow-500 font-bold">GQ Cars app</span> and experience premium taxi service with 
+            <span className="text-blue-400 font-bold"> security-trained professionals</span> at your fingertips.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left side - App info */}
           <div className="text-white">
@@ -55,8 +74,18 @@ export default function MobileAppCTA() {
                     <Car className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold mb-1">Live GPS Tracking</h4>
-                    <p className="text-gray-300">Real-time tracking and secure cashless payments for your safety</p>
+                    <h4 className="text-xl font-semibold mb-1">Premium Security Service</h4>
+                    <p className="text-gray-300">Professional rates for SIA licensed drivers - starting from £3.50/mile</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <div className="bg-purple-600 p-2 rounded-lg mt-1">
+                    <Star className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-1">24/7 Premium Support</h4>
+                    <p className="text-gray-300">Dedicated support line for app users with priority booking</p>
                   </div>
                 </div>
               </div>
@@ -96,9 +125,21 @@ export default function MobileAppCTA() {
               </a>
             </div>
 
-            <p className="text-sm text-gray-400 mt-4">
+            <p className="text-sm text-gray-400 mt-6">
               * Available for iOS 12+ and Android 8+. Secure payments and real-time tracking included.
             </p>
+
+            {/* Call to Action */}
+            <div className="mt-8 p-6 bg-gradient-to-r from-yellow-500/20 to-blue-500/20 rounded-xl border border-yellow-500/30">
+              <h4 className="text-xl font-bold text-white mb-2">🎯 Why Download Our App?</h4>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="text-gray-300">✓ Faster booking than calling</div>
+                <div className="text-gray-300">✓ Live driver tracking</div>
+                <div className="text-gray-300">✓ Secure in-app payments</div>
+                <div className="text-gray-300">✓ Trip history & receipts</div>
+              </div>
+              <p className="text-yellow-500 font-semibold mt-3">Join 10,000+ satisfied customers using our app!</p>
+            </div>
           </div>
 
           {/* Right side - Professional Phone Mockup */}
@@ -130,10 +171,13 @@ export default function MobileAppCTA() {
                     </div>
                     
                     {/* Hero Image - Taxi/Security Car */}
-                    <div className="bg-gradient-to-r from-yellow-500 to-blue-600 rounded-2xl p-6 mb-6 text-center">
+                    <div className="bg-gradient-to-r from-yellow-500 to-blue-600 rounded-2xl p-6 mb-6 text-center relative overflow-hidden">
+                      <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded-bl-lg">
+                        SIA
+                      </div>
                       <Car className="w-16 h-16 mx-auto mb-4 text-white" />
-                      <p className="text-white font-semibold">SIA Licensed Drivers</p>
-                      <p className="text-white/80 text-sm">Security Trained • Professional Service</p>
+                      <p className="text-white font-bold text-lg">Premium Security Drivers</p>
+                      <p className="text-white/90 text-sm">From £3.50/mile • Airport transfers from £70</p>
                     </div>
                     
                     {/* Booking Form */}

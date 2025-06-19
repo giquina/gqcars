@@ -38,42 +38,48 @@ export default function AirportTransfers() {
             <Plane className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">Heathrow (LHR)</h3>
             <p className="text-gray-300 mb-4">All terminals • 45 mins from Central London</p>
-            <p className="text-yellow-500 font-semibold">From £45</p>
+            <p className="text-yellow-500 font-semibold text-lg">From £90</p>
+            <p className="text-xs text-gray-400">SIA trained drivers</p>
           </div>
           
           <div className="bg-gray-900 p-6 rounded-xl text-center">
             <Plane className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">Gatwick (LGW)</h3>
             <p className="text-gray-300 mb-4">North & South terminals • 1 hour from Central London</p>
-            <p className="text-yellow-500 font-semibold">From £55</p>
+            <p className="text-yellow-500 font-semibold text-lg">From £110</p>
+            <p className="text-xs text-gray-400">SIA trained drivers</p>
           </div>
           
           <div className="bg-gray-900 p-6 rounded-xl text-center">
             <Plane className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">Stansted (STN)</h3>
             <p className="text-gray-300 mb-4">Main terminal • 1 hour from Central London</p>
-            <p className="text-yellow-500 font-semibold">From £50</p>
+            <p className="text-yellow-500 font-semibold text-lg">From £100</p>
+            <p className="text-xs text-gray-400">SIA trained drivers</p>
           </div>
           
           <div className="bg-gray-900 p-6 rounded-xl text-center">
             <Plane className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">Luton (LTN)</h3>
             <p className="text-gray-300 mb-4">Main terminal • 45 mins from Central London</p>
-            <p className="text-yellow-500 font-semibold">From £40</p>
+            <p className="text-yellow-500 font-semibold text-lg">From £80</p>
+            <p className="text-xs text-gray-400">SIA trained drivers</p>
           </div>
           
           <div className="bg-gray-900 p-6 rounded-xl text-center">
             <Plane className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">London City (LCY)</h3>
             <p className="text-gray-300 mb-4">Main terminal • 30 mins from Central London</p>
-            <p className="text-yellow-500 font-semibold">From £35</p>
+            <p className="text-yellow-500 font-semibold text-lg">From £70</p>
+            <p className="text-xs text-gray-400">SIA trained drivers</p>
           </div>
           
           <div className="bg-gray-900 p-6 rounded-xl text-center">
             <Plane className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-3">Southend (SEN)</h3>
             <p className="text-gray-300 mb-4">Main terminal • 1.5 hours from Central London</p>
-            <p className="text-yellow-500 font-semibold">From £65</p>
+            <p className="text-yellow-500 font-semibold text-lg">From £130</p>
+            <p className="text-xs text-gray-400">SIA trained drivers</p>
           </div>
         </div>
 

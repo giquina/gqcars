@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/ui/Header'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import TFLLogo from './components/ui/TFLLogo'
+import SIALogo from './components/ui/SIALogo'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,6 +33,15 @@ export default function RootLayout({
                 <div className="mt-4 flex space-x-4 text-xs">
                   <span className="bg-yellow-500 text-black px-2 py-1 rounded font-bold">SIA LICENSED</span>
                   <span className="bg-blue-600 text-white px-2 py-1 rounded font-bold">CPO TRAINED</span>
+                </div>
+                
+                {/* Official Licensing Logos */}
+                <div className="mt-6">
+                  <p className="text-sm font-semibold text-white mb-3">Licensed & Regulated By:</p>
+                  <div className="flex space-x-4">
+                    <TFLLogo className="w-24 h-14" />
+                    <SIALogo className="w-24 h-14" />
+                  </div>
                 </div>
               </div>
               <div>
