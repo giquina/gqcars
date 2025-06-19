@@ -1,4 +1,4 @@
-import { Shield, Clock, Award, MapPin, Building2, ChampagneGlass, Car, Star, Phone } from 'lucide-react'
+import { Shield, Clock, Award, MapPin, Building2, Heart, Car, Star, Phone } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -127,7 +127,7 @@ export default function Home() {
             </div>
             
             <div className="bg-slate-900/50 p-6 border-l-4 border-blue-600 hover:border-amber-500 transition-all">
-              <ChampagneGlass className="w-12 h-12 text-amber-500 mb-4" />
+              <Heart className="w-12 h-12 text-amber-500 mb-4" />
               <h3 className="text-xl font-bold mb-2 text-white">Wedding Security & Luxury Transport</h3>
               <p className="text-gray-400 mb-4">Discreet protection and luxury transport for your special day, ensuring privacy and elegance throughout your celebration.</p>
               <ul className="text-sm text-gray-300 space-y-1 mb-4">
