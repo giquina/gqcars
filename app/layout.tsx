@@ -7,8 +7,8 @@ import WhatsAppWidget from './components/ui/WhatsAppWidget'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'GQ Cars LTD - Premium Taxi & Transport Services | Watford & London',
-  description: 'Professional taxi and private hire services covering Watford, Central London, and all major airports. Book now: 07407 655 203',
+  title: 'GQ Cars LTD - Professional TAXI & Private Hire | SIA Licensed Drivers | Watford & London',
+  description: 'Professional TAXI and private hire services with SIA Licensed Close Protection Officers. Security-trained drivers covering Watford, Central London, and all major airports. Book now: 07407 655 203',
 }
 
 export default function RootLayout({

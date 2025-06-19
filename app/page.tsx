@@ -23,10 +23,10 @@ export default function Home() {
             </div>
             
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              Professional Security-Trained Drivers
+              Professional TAXI & Private Hire with Security-Trained Drivers
             </h2>
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              <span className="text-yellow-500 font-semibold">SIA Licensed Close Protection Officers</span> providing premium taxi and private hire services. 
+              <span className="text-yellow-500 font-semibold">SIA Licensed Close Protection Officers</span> providing premium <span className="text-yellow-500">TAXI and private hire services</span>. 
               We're not just drivers - we're security professionals with luxury transport experience.
             </p>
             
@@ -43,7 +43,7 @@ export default function Home() {
                 className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-6 rounded-xl font-bold text-xl flex items-center justify-center space-x-3 transition-colors"
               >
                 <Car className="w-7 h-7" />
-                <span>BOOK ONLINE</span>
+                <span>BOOK TAXI ONLINE</span>
               </a>
             </div>
 
