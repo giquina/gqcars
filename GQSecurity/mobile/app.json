@@ -1,0 +1,85 @@
+{
+  "expo": {
+    "name": "GQ Cars",
+    "slug": "gq-cars-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#030712"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gqcars.mobile",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "GQ Cars needs location access to provide accurate pickup and destination services.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "GQ Cars needs location access to track your ride and provide real-time updates.",
+        "NSCameraUsageDescription": "GQ Cars needs camera access to capture profile photos and documents.",
+        "NSMicrophoneUsageDescription": "GQ Cars needs microphone access for voice commands and emergency calls.",
+        "NSFaceIDUsageDescription": "GQ Cars uses Face ID for secure authentication.",
+        "NSContactsUsageDescription": "GQ Cars needs contacts access to quickly add emergency contacts."
+      },
+      "associatedDomains": ["applinks:gqcars.com"],
+      "config": {
+        "googleMapsApiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#030712"
+      },
+      "package": "com.gqcars.mobile",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECORD_AUDIO",
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT",
+        "VIBRATE",
+        "SEND_SMS",
+        "READ_CONTACTS"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-local-authentication",
+      "expo-location",
+      "expo-notifications",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow GQ Cars to access your camera for profile photos and documents."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow GQ Cars to access your photos to save receipts and documents.",
+          "savePhotosPermission": "Allow GQ Cars to save receipts and trip photos to your gallery."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "gq-cars-mobile"
+      }
+    }
+  }
+}
