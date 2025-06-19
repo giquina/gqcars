@@ -14,3 +14,290 @@
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
 }
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Custom classes for GQ Cars */
+.gq-gold {
+  color: #EAB308;
+}
+
+.gq-blue {
+  color: #2563EB;
+}
+
+.gq-black {
+  color: #000000;
+}
+
+.bg-gq-gold {
+  background-color: #EAB308;
+}
+
+.bg-gq-blue {
+  background-color: #2563EB;
+}
+
+.bg-gq-black {
+  background-color: #000000;
+}
+
+.border-gq-gold {
+  border-color: #EAB308;
+}
+
+.border-gq-blue {
+  border-color: #2563EB;
+}
+
+.text-gq-gold {
+  color: #EAB308;
+}
+
+.text-gq-blue {
+  color: #2563EB;
+}
+
+.text-gq-black {
+  color: #000000;
+}
+
+/* Voice AI specific styles */
+.voice-listening {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #EAB308;
+  }
+  50% {
+    box-shadow: 0 0 20px #EAB308, 0 0 30px #EAB308;
+  }
+}
+
+.voice-transcription {
+  background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(234, 179, 8, 0.1));
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+/* Accessibility enhancements */
+.high-contrast {
+  filter: contrast(2) brightness(1.2);
+}
+
+.high-contrast * {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.large-text {
+  font-size: 1.2em !important;
+}
+
+.large-text * {
+  font-size: inherit !important;
+}
+
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Focus indicators for accessibility */
+.voice-assistant-focus {
+  outline: 3px solid #EAB308;
+  outline-offset: 2px;
+}
+
+/* Emergency mode styles */
+.emergency-active {
+  background: linear-gradient(45deg, #dc2626, #991b1b);
+  animation: emergency-pulse 1s infinite;
+}
+
+@keyframes emergency-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Voice waveform animation */
+.voice-waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.voice-waveform::before,
+.voice-waveform::after {
+  content: '';
+  width: 3px;
+  height: 12px;
+  background: #EAB308;
+  animation: wave 1.5s infinite ease-in-out;
+}
+
+.voice-waveform::after {
+  animation-delay: 0.1s;
+}
+
+@keyframes wave {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1.0);
+  }
+}
+
+/* Voice settings slider customization */
+.voice-slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #EAB308;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.voice-slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #EAB308;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading states for voice processing */
+.voice-processing {
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-processing::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Voice confidence indicator */
+.confidence-high {
+  color: #10b981;
+}
+
+.confidence-medium {
+  color: #f59e0b;
+}
+
+.confidence-low {
+  color: #ef4444;
+}
+
+/* Responsive voice controls */
+@media (max-width: 768px) {
+  .voice-assistant-mobile {
+    bottom: 80px; /* Above mobile navigation if present */
+    right: 16px;
+    left: auto;
+    width: auto;
+  }
+  
+  .voice-settings-mobile {
+    top: 16px;
+    right: 16px;
+    width: auto;
+  }
+  
+  .voice-accessibility-mobile {
+    top: 16px;
+    left: 16px;
+    width: auto;
+  }
+}
+
+/* Voice booking progress indicator */
+.voice-progress {
+  background: linear-gradient(90deg, #EAB308 0%, #2563EB 100%);
+  height: 4px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Voice command hints */
+.voice-hint {
+  background: rgba(37, 99, 235, 0.1);
+  border-left: 3px solid #EAB308;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* Voice status indicators */
+.voice-status-listening {
+  background: #10b981;
+}
+
+.voice-status-processing {
+  background: #f59e0b;
+}
+
+.voice-status-speaking {
+  background: #2563EB;
+}
+
+.voice-status-error {
+  background: #ef4444;
+}
+
+/* Custom scrollbar for voice transcripts */
+.voice-transcript::-webkit-scrollbar {
+  width: 4px;
+}
+
+.voice-transcript::-webkit-scrollbar-track {
+  background: rgba(75, 85, 99, 0.3);
+}
+
+.voice-transcript::-webkit-scrollbar-thumb {
+  background: #EAB308;
+  border-radius: 2px;
+}
+
+.voice-transcript::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}
