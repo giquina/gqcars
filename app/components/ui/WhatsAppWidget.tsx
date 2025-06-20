@@ -173,29 +173,34 @@ export default function WhatsAppWidget() {
   }
 
   const handleBookNow = () => {
-    addMessage(`🚗 INSTANT BOOKING AVAILABLE!
+    addMessage(`🚗 **INSTANT BOOKING**
 
-I can help you book immediately. Choose your preferred method:
+Choose your booking method:
 
-📞 CALL: Fastest option - speak directly with our team
-💬 WHATSAPP: Send details and get instant response  
-📱 QUOTE TOOL: Get pricing first, then book
+📞 **Call** - Fastest (1-2 min)
+Speak directly with our team
 
-🎉 50% OFF your first ride!`, true, [
-      { id: 'call-book', text: '📞 Call to Book (Fastest)', action: 'call' },
+💬 **WhatsApp** - Quick & Easy
+Send details, get instant response
+
+📱 **Get Quote** - See Pricing First
+Use our smart quote calculator
+
+🎉 **50% OFF** your first ride!`, true, [
+      { id: 'call-book', text: '📞 Call Now (Fastest)', action: 'call' },
       { id: 'whatsapp-book', text: '💬 WhatsApp Booking', action: 'whatsapp-booking' },
       { id: 'quote-first', text: '📱 Get Quote First', action: 'get-quote' }
     ])
   }
 
   const handleSchedule = () => {
-    addMessage(`📅 SCHEDULE YOUR RIDE
+    addMessage(`📅 **SCHEDULE YOUR RIDE**
 
-Perfect for planning ahead! I can help you:
+Perfect for planning ahead!
 
-🕘 Today: Book for later today
-📆 Future: Schedule days/weeks ahead  
-🔄 Regular: Set up recurring rides
+🕰️ **Today** - Book for later today
+📆 **Future** - Days/weeks ahead
+🔄 **Regular** - Set up recurring rides
 
 All with SIA licensed security drivers.`, true, [
       { id: 'schedule-today', text: '📞 Call to Schedule', action: 'call' },
@@ -205,20 +210,29 @@ All with SIA licensed security drivers.`, true, [
   }
 
   const handleViewServices = () => {
-    addMessage(`🛡️ OUR PROFESSIONAL SERVICES
+    addMessage(`🛡️ **GQ CARS SERVICES**
 
-All services include SIA licensed security drivers:
+All with SIA Licensed Security Drivers:
 
-🚗 Standard: £6.50/mile - Professional taxi
-⭐ Premium: £8.50/mile - Enhanced vehicles  
-👑 Executive: £10.50/mile - Luxury transport
-👥 XL Group: £7.20/mile - 5-8 passengers
+🚗 **GQ Standard** - £6.50/mile
+Professional taxi service
 
-✈️ Airport transfers from £140
-🏢 Corporate packages available`, true, [
-      { id: 'view-pricing', text: '💷 See Full Pricing', action: 'view-pricing' },
-      { id: 'airport-details', text: '✈️ Airport Transfers', action: 'airport-info' },
-      { id: 'book-service', text: '📞 Book a Service', action: 'call' }
+⭐ **GQ Premium** - £8.50/mile
+Enhanced comfort vehicles
+
+👑 **GQ Executive** - £10.50/mile
+Luxury transport service
+
+👥 **GQ XL** - £7.20/mile
+5-8 passengers, extra space
+
+✈️ **Airport Transfers** from £140
+🏢 **Corporate Packages** available
+
+🎉 **50% OFF first ride!**`, true, [
+      { id: 'book-standard', text: '🚗 Book Standard (£6.50/mile)', action: 'call' },
+      { id: 'book-executive', text: '👑 Book Executive (£10.50/mile)', action: 'call' },
+      { id: 'airport-transfer', text: '✈️ Airport Transfer (£140+)', action: 'whatsapp-booking' }
     ])
   }
 
@@ -447,21 +461,25 @@ Emergency situations we handle:
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 messages-container">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50 messages-container">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
               >
-                <div className="max-w-xs">
+                <div className="max-w-xs sm:max-w-sm">
                   <div
-                    className={`p-3 rounded-2xl ${
+                    className={`p-3 sm:p-4 rounded-2xl shadow-sm ${
                       message.isBot
-                        ? 'bg-white text-gray-800 shadow-sm'
-                        : 'bg-green-500 text-white'
+                        ? 'bg-white text-gray-800 border border-gray-100'
+                        : 'bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-medium'
                     }`}
                   >
-                    <p className="text-sm leading-relaxed whitespace-pre-line">{message.text}</p>
+                    <div className={`text-sm sm:text-base leading-relaxed whitespace-pre-line ${
+                      message.isBot ? 'text-gray-800' : 'text-black'
+                    }`}>
+                      {message.text}
+                    </div>
                   </div>
                   
                   {/* Options Buttons */}
