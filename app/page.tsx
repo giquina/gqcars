@@ -338,9 +338,9 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/2/23/Nissan_2020_logo.svg" 
+                      src="https://seeklogo.com/images/N/nissan-logo-1B0E4E39B4-seeklogo.com.png" 
                       alt="Nissan Logo"
-                      className="h-12 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex items-start justify-between mb-4">
@@ -372,7 +372,7 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <img 
-                      src="https://logos-world.net/wp-content/uploads/2020/05/BMW-Logo.png" 
+                      src="https://seeklogo.com/images/B/bmw-logo-F5E71CFAE6-seeklogo.com.png" 
                       alt="BMW Logo"
                       className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     />
@@ -410,7 +410,7 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4 mt-2">
                     <img 
-                      src="https://logos-world.net/wp-content/uploads/2021/03/Land-Rover-Logo.png" 
+                      src="https://seeklogo.com/images/L/land-rover-logo-3D6B2A4A9A-seeklogo.com.png" 
                       alt="Land Rover Logo"
                       className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     />
@@ -444,9 +444,9 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" 
+                      src="https://seeklogo.com/images/M/mercedes-benz-logo-40D111A62D-seeklogo.com.png" 
                       alt="Mercedes-Benz Logo"
-                      className="h-12 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex items-start justify-between mb-4">
