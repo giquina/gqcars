@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Star, Quote, Shield, Building2, Car, Clock, ChevronLeft, ChevronRight, Check, Crown } from 'lucide-react'
+import { Star, Quote, Shield, Building2, Car, Clock, ChevronLeft, ChevronRight, Check, Crown, Users } from 'lucide-react'
 
 const testimonials = [
   {
