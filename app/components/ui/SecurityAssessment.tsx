@@ -130,7 +130,10 @@ export default function SecurityAssessment() {
   const IconComponent = recommendation?.icon || Shield
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-6 sm:p-8 rounded-2xl border border-yellow-500/30 relative overflow-hidden shadow-2xl">
+    <div 
+      data-security-assessment
+      className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-6 sm:p-8 rounded-2xl border border-yellow-500/30 relative overflow-hidden shadow-2xl"
+    >
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-4 right-4 w-8 h-8 border border-yellow-500 rotate-45 animate-spin-slow"></div>

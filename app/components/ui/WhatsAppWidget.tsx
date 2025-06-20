@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight } from 'lucide-react'
+import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight, ExternalLink } from 'lucide-react'
 import GQCarsLogo from './GQCarsLogo'
 
 interface ChatMessage {
@@ -26,8 +26,6 @@ export default function WhatsAppWidget() {
   const [isDismissed, setIsDismissed] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
-  const [userName, setUserName] = useState('')
-  const [currentFlow, setCurrentFlow] = useState('welcome')
 
   // Show widget after 30 seconds
   useEffect(() => {
@@ -77,14 +75,14 @@ export default function WhatsAppWidget() {
   const initializeChat = () => {
     const welcomeMessage: ChatMessage = {
       id: 'welcome-1',
-      text: '👋 Hello! I\'m your GQ Cars virtual assistant. Would you like to book a secure ride with our SIA licensed drivers today?',
+      text: '👋 Hello! I\'m your GQ Cars virtual assistant. How can I help you today?',
       isBot: true,
       timestamp: new Date(),
       options: [
-        { id: 'book-now', text: '🚗 Book Now', action: 'book', icon: Car },
-        { id: 'schedule', text: '📅 Schedule Ride', action: 'schedule', icon: Calendar },
-        { id: 'services', text: '🛡️ View Services', action: 'services', icon: Shield },
-        { id: 'call', text: '📞 Call Directly', action: 'call', icon: Phone }
+        { id: 'book-now', text: '🚗 Book Now', action: 'book' },
+        { id: 'schedule', text: '📅 Schedule Ride', action: 'schedule' },
+        { id: 'services', text: '🛡️ View Services', action: 'services' },
+        { id: 'call', text: '📞 Call Directly', action: 'call' }
       ]
     }
     setMessages([welcomeMessage])
@@ -123,37 +121,28 @@ export default function WhatsAppWidget() {
           handleSchedule()
           break
         case 'services':
-          handleServices()
+          handleViewServices()
           break
         case 'call':
           handleCall()
           break
-        case 'book-standard':
-          handleBookService('Standard', '£6.50/mile')
-          break
-        case 'book-premium':
-          handleBookService('Premium', '£8.50/mile')
-          break
-        case 'book-executive':
-          handleBookService('Executive', '£10.50/mile')
-          break
-        case 'book-xl':
-          handleBookService('XL Group', '£7.20/mile')
-          break
         case 'get-quote':
           handleGetQuote()
           break
-        case 'emergency':
-          handleEmergency()
+        case 'whatsapp-booking':
+          handleWhatsAppBooking()
           break
-        case 'airport':
-          handleAirport()
+        case 'view-pricing':
+          handleViewPricing()
           break
-        case 'more-info':
-          handleMoreInfo()
+        case 'airport-info':
+          handleAirportInfo()
           break
-        case 'contact-human':
-          handleContactHuman()
+        case 'emergency-booking':
+          handleEmergencyBooking()
+          break
+        case 'security-assessment':
+          handleSecurityAssessment()
           break
         default:
           handleDefault()
@@ -162,155 +151,211 @@ export default function WhatsAppWidget() {
   }
 
   const handleBookNow = () => {
-    addMessage('Perfect! Let me help you book a ride. Which service would you prefer?', true, [
-      { id: 'standard', text: '🚗 GQ Standard (£6.50/mile)', action: 'book-standard' },
-      { id: 'premium', text: '⭐ GQ Premium (£8.50/mile)', action: 'book-premium' },
-      { id: 'executive', text: '👑 GQ Executive (£10.50/mile)', action: 'book-executive' },
-      { id: 'xl', text: '👥 GQ XL Group (£7.20/mile)', action: 'book-xl' }
+    addMessage(`🚗 INSTANT BOOKING AVAILABLE!
+
+I can help you book immediately. Choose your preferred method:
+
+📞 CALL: Fastest option - speak directly with our team
+💬 WHATSAPP: Send details and get instant response  
+📱 QUOTE TOOL: Get pricing first, then book
+
+🎉 50% OFF your first ride!`, true, [
+      { id: 'call-book', text: '📞 Call to Book (Fastest)', action: 'call' },
+      { id: 'whatsapp-book', text: '💬 WhatsApp Booking', action: 'whatsapp-booking' },
+      { id: 'quote-first', text: '📱 Get Quote First', action: 'get-quote' }
     ])
   }
 
   const handleSchedule = () => {
-    addMessage('Great! I can help you schedule a future ride. Would you like to:', true, [
-      { id: 'schedule-today', text: '📅 Schedule for Today', action: 'get-quote' },
-      { id: 'schedule-future', text: '🗓️ Schedule for Future Date', action: 'get-quote' },
-      { id: 'recurring', text: '🔄 Set Up Recurring Rides', action: 'contact-human' }
+    addMessage(`📅 SCHEDULE YOUR RIDE
+
+Perfect for planning ahead! I can help you:
+
+🕘 Today: Book for later today
+📆 Future: Schedule days/weeks ahead  
+🔄 Regular: Set up recurring rides
+
+All with SIA licensed security drivers.`, true, [
+      { id: 'schedule-today', text: '📞 Call to Schedule', action: 'call' },
+      { id: 'schedule-whatsapp', text: '💬 WhatsApp Details', action: 'whatsapp-booking' },
+      { id: 'security-check', text: '🛡️ Security Assessment', action: 'security-assessment' }
     ])
   }
 
-  const handleServices = () => {
-    addMessage('Here are our professional security transport services:', true, [
-      { id: 'executive-protection', text: '🛡️ Executive Protection', action: 'more-info' },
-      { id: 'airport-transfers', text: '✈️ Airport Transfers', action: 'airport' },
-      { id: 'wedding-security', text: '💒 Wedding Security', action: 'more-info' },
-      { id: 'corporate-transport', text: '🏢 Corporate Transport', action: 'more-info' }
+  const handleViewServices = () => {
+    addMessage(`🛡️ OUR PROFESSIONAL SERVICES
+
+All services include SIA licensed security drivers:
+
+🚗 Standard: £6.50/mile - Professional taxi
+⭐ Premium: £8.50/mile - Enhanced vehicles  
+👑 Executive: £10.50/mile - Luxury transport
+👥 XL Group: £7.20/mile - 5-8 passengers
+
+✈️ Airport transfers from £140
+🏢 Corporate packages available`, true, [
+      { id: 'view-pricing', text: '💷 See Full Pricing', action: 'view-pricing' },
+      { id: 'airport-details', text: '✈️ Airport Transfers', action: 'airport-info' },
+      { id: 'book-service', text: '📞 Book a Service', action: 'call' }
     ])
   }
 
   const handleCall = () => {
-    addMessage('Connecting you to our 24/7 emergency line. Our SIA licensed team is standing by!', true)
+    addMessage('📞 Connecting you to our 24/7 booking line...', true)
     setTimeout(() => {
-      window.open('tel:07407655203', '_self')
+      // Open phone dialer
+      window.location.href = 'tel:07407655203'
     }, 1000)
   }
 
-  const handleBookService = (service: string, price: string) => {
-    addMessage(`Excellent choice! ${service} service at ${price}. 
-
-🎉 SPECIAL OFFER: 50% OFF your first ride!
-
-To complete your booking, I'll connect you with our booking team who will:
-• Confirm your pickup location
-• Get your destination
-• Provide exact quote
-• Assign your SIA licensed driver
-
-Would you like to proceed?`, true, [
-      { id: 'proceed-whatsapp', text: '💬 Continue on WhatsApp', action: 'contact-human' },
-      { id: 'proceed-call', text: '📞 Call to Book', action: 'call' },
-      { id: 'get-quote-first', text: '💷 Get Quote First', action: 'get-quote' }
-    ])
-  }
-
   const handleGetQuote = () => {
-    addMessage('I\'ll help you get an instant quote! Please use our quote widget on the homepage, or I can connect you directly with our team for a personalized quote.', true, [
-      { id: 'use-widget', text: '📱 Use Quote Widget', action: 'close-and-scroll' },
-      { id: 'personal-quote', text: '👤 Personal Quote', action: 'contact-human' },
-      { id: 'emergency-quote', text: '🚨 Emergency Booking', action: 'emergency' }
+    addMessage(`📱 GET INSTANT QUOTE
+
+I can help you get pricing right now:
+
+🎯 Use our smart quote tool on the homepage
+📞 Call for personal quote over the phone
+💬 Send your trip details via WhatsApp
+
+All quotes include SIA security driver!`, true, [
+      { id: 'use-quote-tool', text: '📱 Use Quote Tool', action: 'security-assessment' },
+      { id: 'call-quote', text: '📞 Call for Quote', action: 'call' },
+      { id: 'whatsapp-quote', text: '💬 WhatsApp Quote', action: 'whatsapp-booking' }
     ])
   }
 
-  const handleEmergency = () => {
-    addMessage(`🚨 EMERGENCY BOOKING ACTIVATED 🚨
+  const handleWhatsAppBooking = () => {
+    addMessage('💬 Opening WhatsApp with pre-filled booking message...', true)
+    
+    const whatsappMessage = encodeURIComponent(`Hello GQ Cars! 🚗
 
-For immediate assistance with urgent security transport needs, I'm connecting you directly to our emergency response team.
+I'd like to book a ride with your SIA licensed security drivers.
 
-⏰ Response time: 5-15 minutes
-🛡️ SIA licensed driver will be dispatched
-📍 Live GPS tracking provided
+📍 Pickup: [Your location]
+📍 Drop-off: [Your destination]  
+📅 Date: [Today/Tomorrow/Date]
+🕘 Time: [Preferred time]
+👥 Passengers: [Number of people]
 
-Call now for immediate dispatch:`, true, [
-      { id: 'emergency-call', text: '🚨 CALL EMERGENCY LINE', action: 'call' },
-      { id: 'emergency-whatsapp', text: '💬 Emergency WhatsApp', action: 'contact-human' }
-    ])
-  }
-
-  const handleAirport = () => {
-    addMessage(`Airport transfers are our specialty! ✈️
-
-• Heathrow: From £140 (45-60 min)
-• Gatwick: From £170 (60-75 min)  
-• Stansted: From £190 (75-90 min)
-• Luton: From £160 (60-75 min)
-
-All include:
-🛡️ SIA licensed security driver
-📱 Flight tracking
-🚗 Meet & greet service
-💼 Luggage assistance
-
-Which airport do you need?`, true, [
-      { id: 'heathrow', text: '🛫 Heathrow', action: 'contact-human' },
-      { id: 'gatwick', text: '🛫 Gatwick', action: 'contact-human' },
-      { id: 'stansted', text: '🛫 Stansted', action: 'contact-human' },
-      { id: 'other-airport', text: '🛫 Other Airport', action: 'contact-human' }
-    ])
-  }
-
-  const handleMoreInfo = () => {
-    addMessage(`I'd love to tell you more about our professional security services! Our team can provide detailed information about:`, true, [
-      { id: 'sia-training', text: '🎓 SIA Training & Credentials', action: 'contact-human' },
-      { id: 'vehicle-fleet', text: '🚗 Vehicle Fleet & Security Features', action: 'contact-human' },
-      { id: 'pricing-packages', text: '💷 Pricing & Package Options', action: 'contact-human' },
-      { id: 'testimonials', text: '⭐ Client Testimonials', action: 'contact-human' }
-    ])
-  }
-
-  const handleContactHuman = () => {
-    const whatsappMessage = encodeURIComponent(`Hello GQ Cars! 
-
-I'm interested in your professional security transport services. I was chatting with your virtual assistant and would like to speak with a team member about:
-
-• Booking a ride with SIA licensed drivers
-• Getting a personalized quote
-• Learning more about your services
+Please provide:
+✅ Quote with 50% first-ride discount
+✅ Available driver
+✅ Estimated arrival time
 
 Thank you!`)
     
-    addMessage(`Perfect! I'm connecting you with our professional booking team on WhatsApp. They'll help you with everything you need!`, true, [
-      { id: 'open-whatsapp', text: '💬 Continue on WhatsApp', action: 'open-whatsapp' }
-    ])
-
     setTimeout(() => {
       window.open(`https://wa.me/447407655203?text=${whatsappMessage}`, '_blank')
-    }, 2000)
+    }, 1500)
+  }
+
+  const handleViewPricing = () => {
+    addMessage(`💷 TRANSPARENT PRICING
+
+🚗 GQ STANDARD - £6.50/mile
+• SIA licensed security driver
+• Professional vehicles
+• GPS tracking included
+
+⭐ GQ PREMIUM - £8.50/mile  
+• Enhanced comfort vehicles
+• Business amenities
+• Priority service
+
+👑 GQ EXECUTIVE - £10.50/mile
+• Luxury vehicles only
+• Advanced security protocols
+• Concierge-level service
+
+👥 GQ XL GROUP - £7.20/mile
+• 5-8 passenger vehicles
+• Extra luggage space
+• Group booking discounts
+
+✈️ AIRPORT TRANSFERS:
+• Heathrow: From £140
+• Gatwick: From £170
+• Stansted: From £190
+• Luton: From £160
+
+🎉 50% OFF FIRST RIDE for new customers!`, true, [
+      { id: 'book-standard', text: '📞 Book Standard Service', action: 'call' },
+      { id: 'book-executive', text: '👑 Book Executive Service', action: 'call' },
+      { id: 'airport-booking', text: '✈️ Book Airport Transfer', action: 'whatsapp-booking' }
+    ])
+  }
+
+  const handleAirportInfo = () => {
+    addMessage(`✈️ AIRPORT TRANSFER SPECIALISTS
+
+🛫 ALL LONDON AIRPORTS COVERED:
+
+Heathrow: £140 (45-60 min)
+Gatwick: £170 (60-75 min)
+Stansted: £190 (75-90 min)  
+Luton: £160 (60-75 min)
+City: £120 (30-45 min)
+
+✅ INCLUDED:
+🛡️ SIA licensed security driver
+📱 Live flight tracking
+🚗 Meet & greet service
+💼 Luggage assistance
+⏰ 1 hour FREE waiting time
+
+🎉 50% OFF first airport transfer!`, true, [
+      { id: 'book-airport', text: '📞 Book Airport Transfer', action: 'call' },
+      { id: 'whatsapp-airport', text: '💬 WhatsApp Airport Details', action: 'whatsapp-booking' },
+      { id: 'emergency-airport', text: '🚨 Emergency Airport Booking', action: 'emergency-booking' }
+    ])
+  }
+
+  const handleEmergencyBooking = () => {
+    addMessage(`🚨 EMERGENCY BOOKING ACTIVATED
+
+For URGENT transport needs:
+
+📞 CALL NOW: 07407 655 203
+⏰ Response: 5-15 minutes
+🛡️ SIA licensed driver dispatched
+📍 Live GPS tracking provided
+
+Emergency situations we handle:
+🏥 Medical appointments
+🚨 Security concerns  
+✈️ Last-minute flights
+🏢 Business emergencies`, true, [
+      { id: 'emergency-call', text: '🚨 CALL EMERGENCY LINE', action: 'call' },
+      { id: 'emergency-whatsapp', text: '💬 Emergency WhatsApp', action: 'whatsapp-booking' }
+    ])
+  }
+
+  const handleSecurityAssessment = () => {
+    addMessage('🛡️ Taking you to our Security Assessment tool...', true)
+    
+    setTimeout(() => {
+      // Close widget and scroll to assessment
+      handleMinimize()
+      setTimeout(() => {
+        const assessmentElement = document.querySelector('[data-security-assessment]') || 
+                                document.querySelector('.security-assessment') ||
+                                document.querySelector('[data-quote-widget]')
+        if (assessmentElement) {
+          assessmentElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        } else {
+          // If element not found, just scroll to top of page
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+      }, 500)
+    }, 1000)
   }
 
   const handleDefault = () => {
-    addMessage('I\'m here to help you with GQ Cars\' professional security transport services. Would you like to:', true, [
+    addMessage('I\'m here to help with GQ Cars bookings and information. What would you like to do?', true, [
       { id: 'book-ride', text: '🚗 Book a Ride', action: 'book' },
-      { id: 'get-info', text: 'ℹ️ Get Information', action: 'services' },
-      { id: 'speak-human', text: '👤 Speak to Human', action: 'contact-human' }
+      { id: 'get-info', text: '💷 Get Pricing', action: 'view-pricing' },
+      { id: 'speak-human', text: '📞 Speak to Human', action: 'call' }
     ])
-  }
-
-  const handleSpecialAction = (action: string) => {
-    switch (action) {
-      case 'close-and-scroll':
-        handleMinimize()
-        // Scroll to quote widget
-        setTimeout(() => {
-          const quoteWidget = document.querySelector('[data-quote-widget]')
-          if (quoteWidget) {
-            quoteWidget.scrollIntoView({ behavior: 'smooth' })
-          }
-        }, 500)
-        break
-      case 'open-whatsapp':
-        const whatsappMessage = encodeURIComponent(`Hello GQ Cars! I'm interested in your professional security transport services.`)
-        window.open(`https://wa.me/447407655203?text=${whatsappMessage}`, '_blank')
-        break
-    }
   }
 
   // Don't show widget if not visible yet
@@ -332,7 +377,7 @@ Thank you!`)
                 1
               </div>
             )}
-            {/* Floating Message - Better positioning */}
+            {/* Floating Message */}
             {!isMinimized && (
               <div className="absolute bottom-full right-0 mb-4 bg-yellow-500 text-black px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
                 💬 Quick booking help available!
@@ -389,13 +434,7 @@ Thank you!`)
                       {message.options.map((option) => (
                         <button
                           key={option.id}
-                          onClick={() => {
-                            if (option.action.startsWith('close-') || option.action.startsWith('open-')) {
-                              handleSpecialAction(option.action)
-                            } else {
-                              handleOptionClick(option)
-                            }
-                          }}
+                          onClick={() => handleOptionClick(option)}
                           className="w-full bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-bold py-2 px-3 rounded-lg transition-colors flex items-center justify-between group"
                         >
                           <span>{option.text}</span>
@@ -431,14 +470,14 @@ Thank you!`)
             <div className="flex space-x-2">
               <button
                 onClick={() => handleOptionClick({ id: 'quick-call', text: '📞 Call Now', action: 'call' })}
-                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
+                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
               >
                 <Phone className="w-3 h-3" />
                 <span>Call</span>
               </button>
               <button
                 onClick={() => handleOptionClick({ id: 'quick-book', text: '🚗 Book', action: 'book' })}
-                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
+                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
               >
                 <Car className="w-3 h-3" />
                 <span>Book</span>
