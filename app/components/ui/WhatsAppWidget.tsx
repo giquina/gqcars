@@ -230,9 +230,12 @@ Luxury transport service
 🏢 **Corporate Packages** available
 
 🎉 **50% OFF first ride!**`, true, [
-      { id: 'book-standard', text: '🚗 Book Standard (£6.50/mile)', action: 'call' },
-      { id: 'book-executive', text: '👑 Book Executive (£10.50/mile)', action: 'call' },
-      { id: 'airport-transfer', text: '✈️ Airport Transfer (£140+)', action: 'whatsapp-booking' }
+      { id: 'book-standard', text: '🚗 Book Standard (Nissan Leaf)', action: 'call' },
+      { id: 'book-premium', text: '⭐ Book Premium (Mercedes S)', action: 'call' },
+      { id: 'book-executive', text: '👑 Book Executive (Range Rover)', action: 'call' },
+      { id: 'book-xl', text: '🚐 Book XL (Mercedes 7-Seater)', action: 'call' },
+      { id: 'security-assessment', text: '🛡️ Security Assessment', action: 'security-assessment' },
+      { id: 'emergency-booking', text: '🚨 Emergency Booking', action: 'call' }
     ])
   }
 
