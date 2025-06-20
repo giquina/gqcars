@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Car, Building2, GlassWater, Star, Phone, X } from 'lucide-react'
+import { Shield, Car, Building2, GlassWater, Star, Phone, X, LogIn, UserPlus } from 'lucide-react'
 
 interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
+  onOpenAuth?: (mode: 'signin' | 'signup') => void
 }
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose, onOpenAuth }: MobileMenuProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -98,23 +99,49 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </nav>
 
               {/* Actions */}
-              <div className="p-4 border-t border-gq-accent/10">
-                <a
-                  href="/contact"
+              <div className="p-4 border-t border-gq-accent/10 space-y-3">
+                {/* Book Now - Fixed to use consistent gradient */}
+                <button
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-gq-blue to-gq-gold text-white font-medium hover:opacity-90 transition-opacity mb-3"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-gq-blue to-gq-gold text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
                 >
                   Book Now
                   <Shield className="w-5 h-5" />
-                </a>
+                </button>
+
+                {/* Call Button */}
                 <a
-                  href="tel:+442012345678"
+                  href="tel:07407655203"
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gq-gold text-gq-gold font-medium hover:bg-gq-gold hover:text-white transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-gq-gold text-gq-gold font-semibold rounded-lg hover:bg-gq-gold hover:text-gq-black transition-colors"
                 >
-                  Call Now
                   <Phone className="w-5 h-5" />
+                  Call: 07407 655 203
                 </a>
+
+                {/* Auth Buttons */}
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      onOpenAuth?.('signin')
+                      onClose()
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 border border-gray-600 text-gray-300 rounded-lg hover:border-gq-gold hover:text-gq-gold transition-colors"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => {
+                      onOpenAuth?.('signup')
+                      onClose()
+                    }}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-gq-blue to-gq-gold text-white rounded-lg hover:opacity-90 transition-opacity"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    Sign Up
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -126,9 +153,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
 const services = [
   {
-    name: 'Close Protection',
-    href: '/services/close-protection',
-    icon: Shield
+    name: 'Book Taxi',
+    href: '/services/taxi',
+    icon: Car
   },
   {
     name: 'Private Hire',
@@ -136,19 +163,34 @@ const services = [
     icon: Car
   },
   {
-    name: 'Corporate Security',
+    name: 'Airport Transfer',
+    href: '/services/airport',
+    icon: Shield
+  },
+  {
+    name: 'Corporate Transport',
     href: '/services/corporate',
     icon: Building2
   },
   {
-    name: 'Wedding Security',
-    href: '/services/weddings',
-    icon: GlassWater
+    name: 'Security Services',
+    href: '/services/close-protection',
+    icon: Shield
   },
   {
-    name: 'VIP Services',
-    href: '/services/vip',
+    name: 'Family Office Services',
+    href: '/services/family-office',
     icon: Star
+  },
+  {
+    name: 'Family Security',
+    href: '/services/family-protection',
+    icon: Shield
+  },
+  {
+    name: 'Wedding Transport',
+    href: '/services/weddings',
+    icon: GlassWater
   }
 ]
 

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import FAQSection from './components/ui/FAQSection'
+import EnhancedFeaturesSection from './components/ui/EnhancedFeaturesSection'
 
 export default function Home() {
   return (
@@ -140,6 +141,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Enhanced Features Section */}
+      <EnhancedFeaturesSection />
 
       {/* FAQ Section */}
       <FAQSection />
