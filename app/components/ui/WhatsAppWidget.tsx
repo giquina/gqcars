@@ -21,43 +21,39 @@ interface ChatOption {
 export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [isDismissed, setIsDismissed] = useState(false)
+  const [isMinimized, setIsMinimized] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [userName, setUserName] = useState('')
   const [currentFlow, setCurrentFlow] = useState('welcome')
 
-  // Show widget after 30 seconds, but only if not dismissed
+  // Show widget after 30 seconds
   useEffect(() => {
-    // Check if user has already dismissed the widget
-    const dismissed = localStorage.getItem('whatsapp-widget-dismissed')
-    if (dismissed) {
-      setIsDismissed(true)
-      return
-    }
-
     const timer = setTimeout(() => {
-      if (!isDismissed && !isOpen) {
-        setIsVisible(true)
-        // Auto-open after showing for 3 seconds
-        setTimeout(() => {
-          if (!isOpen && !isDismissed) {
-            setIsOpen(true)
-            initializeChat()
-          }
-        }, 3000)
-      }
+      setIsVisible(true)
+      // Auto-open after showing for 3 seconds
+      setTimeout(() => {
+        if (!isOpen && !isMinimized) {
+          setIsOpen(true)
+          initializeChat()
+        }
+      }, 3000)
     }, 30000) // 30 seconds
 
     return () => clearTimeout(timer)
-  }, [isDismissed, isOpen])
+  }, [])
 
-  const handleClose = () => {
+  const handleMinimize = () => {
     setIsOpen(false)
-    setIsVisible(false)
-    setIsDismissed(true)
-    // Remember that user dismissed the widget
-    localStorage.setItem('whatsapp-widget-dismissed', 'true')
+    setIsMinimized(true)
+  }
+
+  const handleOpen = () => {
+    setIsOpen(true)
+    setIsMinimized(false)
+    if (messages.length === 0) {
+      initializeChat()
+    }
   }
 
   const initializeChat = () => {
@@ -283,7 +279,7 @@ Thank you!`)
   const handleSpecialAction = (action: string) => {
     switch (action) {
       case 'close-and-scroll':
-        setIsOpen(false)
+        handleMinimize()
         // Scroll to quote widget
         setTimeout(() => {
           const quoteWidget = document.querySelector('[data-quote-widget]')
@@ -299,33 +295,32 @@ Thank you!`)
     }
   }
 
-  // Don't show widget if dismissed
-  if (isDismissed || !isVisible) return null
+  // Don't show widget if not visible yet
+  if (!isVisible) return null
 
   return (
     <>
       {/* Floating WhatsApp Button */}
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 animate-bounce">
+        <div className="fixed bottom-6 right-6 z-50">
           <button
-            onClick={() => {
-              setIsOpen(true)
-              if (messages.length === 0) {
-                initializeChat()
-              }
-            }}
-            className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative"
+            onClick={handleOpen}
+            className="bg-yellow-500 hover:bg-yellow-400 text-black p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative group"
           >
             <MessageCircle className="w-6 h-6" />
             {/* Notification Badge */}
-            <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
-              1
-            </div>
-            {/* Floating Message */}
-            <div className="absolute bottom-full right-0 mb-2 bg-yellow-500 text-black px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl">
-              💬 Quick booking help available!
-              <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-yellow-500"></div>
-            </div>
+            {!isMinimized && (
+              <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                1
+              </div>
+            )}
+            {/* Floating Message - Better positioning */}
+            {!isMinimized && (
+              <div className="absolute bottom-full right-0 mb-4 bg-yellow-500 text-black px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                💬 Quick booking help available!
+                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-yellow-500"></div>
+              </div>
+            )}
           </button>
         </div>
       )}
@@ -334,10 +329,10 @@ Thank you!`)
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
-                <span className="font-bold text-black text-sm">GQ</span>
+              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
+                <span className="font-bold text-yellow-500 text-sm">GQ</span>
               </div>
               <div>
                 <h3 className="font-bold text-sm">GQ Security</h3>
@@ -345,8 +340,8 @@ Thank you!`)
               </div>
             </div>
             <button
-              onClick={handleClose}
-              className="text-white hover:bg-white/20 p-1 rounded-full"
+              onClick={handleMinimize}
+              className="text-black hover:bg-black/10 p-2 rounded-full transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -418,14 +413,14 @@ Thank you!`)
             <div className="flex space-x-2">
               <button
                 onClick={() => handleOptionClick({ id: 'quick-call', text: '📞 Call Now', action: 'call' })}
-                className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
+                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
               >
                 <Phone className="w-3 h-3" />
                 <span>Call</span>
               </button>
               <button
                 onClick={() => handleOptionClick({ id: 'quick-book', text: '🚗 Book', action: 'book' })}
-                className="flex-1 bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
+                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
               >
                 <Car className="w-3 h-3" />
                 <span>Book</span>
