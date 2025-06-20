@@ -337,11 +337,7 @@ export default function Home() {
                 <div className="bg-gradient-to-br from-blue-900/60 to-blue-700/40 p-6 rounded-2xl border border-blue-500/30 hover:border-blue-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 transform hover:-translate-y-1 cursor-pointer">
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                    <img 
-                      src="https://seeklogo.com/images/N/nissan-logo-1B0E4E39B4-seeklogo.com.png" 
-                      alt="Nissan Logo"
-                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
-                    />
+                    <div className="text-white text-2xl font-bold tracking-wider">NISSAN</div>
                   </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
@@ -371,11 +367,7 @@ export default function Home() {
                 <div className="bg-gradient-to-br from-emerald-900/60 to-emerald-700/40 p-6 rounded-2xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-1 cursor-pointer">
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                    <img 
-                      src="https://seeklogo.com/images/B/bmw-logo-F5E71CFAE6-seeklogo.com.png" 
-                      alt="BMW Logo"
-                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
-                    />
+                    <div className="text-white text-2xl font-bold tracking-wider">BMW</div>
                   </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
@@ -409,11 +401,7 @@ export default function Home() {
                   </div>
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4 mt-2">
-                    <img 
-                      src="https://seeklogo.com/images/L/land-rover-logo-3D6B2A4A9A-seeklogo.com.png" 
-                      alt="Land Rover Logo"
-                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
-                    />
+                    <div className="text-white text-xl font-bold tracking-wider">LAND ROVER</div>
                   </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
@@ -443,11 +431,7 @@ export default function Home() {
                 <div className="bg-gradient-to-br from-orange-900/60 to-orange-700/40 p-6 rounded-2xl border border-orange-500/30 hover:border-orange-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/20 transform hover:-translate-y-1 cursor-pointer">
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                    <img 
-                      src="https://seeklogo.com/images/M/mercedes-benz-logo-40D111A62D-seeklogo.com.png" 
-                      alt="Mercedes-Benz Logo"
-                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
-                    />
+                    <div className="text-white text-xl font-bold tracking-wider">MERCEDES</div>
                   </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
