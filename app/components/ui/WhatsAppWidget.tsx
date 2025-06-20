@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight, ExternalLink } from 'lucide-react'
 import GQCarsLogo from './GQCarsLogo'
 
@@ -26,6 +26,7 @@ export default function WhatsAppWidget() {
   const [isDismissed, setIsDismissed] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Show widget after 30 seconds
   useEffect(() => {
@@ -72,6 +73,10 @@ export default function WhatsAppWidget() {
     }
   }
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const initializeChat = () => {
     const welcomeMessage: ChatMessage = {
       id: 'welcome-1',
@@ -86,6 +91,9 @@ export default function WhatsAppWidget() {
       ]
     }
     setMessages([welcomeMessage])
+    
+    // Auto-scroll to bottom when chat initializes
+    setTimeout(scrollToBottom, 200)
   }
 
   const addMessage = (text: string, isBot: boolean = false, options?: ChatOption[]) => {
@@ -96,11 +104,19 @@ export default function WhatsAppWidget() {
       timestamp: new Date(),
       options
     }
-    setMessages(prev => [...prev, newMessage])
+    setMessages(prev => {
+      const updated = [...prev, newMessage]
+      // Auto-scroll to bottom after message is added
+      setTimeout(scrollToBottom, 100)
+      return updated
+    })
   }
 
   const simulateTyping = (callback: () => void, delay: number = 1500) => {
     setIsTyping(true)
+    // Scroll to show typing indicator
+    setTimeout(scrollToBottom, 100)
+    
     setTimeout(() => {
       setIsTyping(false)
       callback()
@@ -411,7 +427,7 @@ Emergency situations we handle:
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 messages-container">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -463,6 +479,9 @@ Emergency situations we handle:
                 </div>
               </div>
             )}
+            
+            {/* Invisible div for auto-scrolling */}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Actions Footer */}
