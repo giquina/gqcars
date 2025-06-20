@@ -372,9 +372,9 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/5b/BMW_logo_%28gray%29.svg" 
+                      src="https://logos-world.net/wp-content/uploads/2020/05/BMW-Logo.png" 
                       alt="BMW Logo"
-                      className="h-12 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex items-start justify-between mb-4">
@@ -410,9 +410,9 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4 mt-2">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Land_Rover_logo.svg" 
+                      src="https://logos-world.net/wp-content/uploads/2021/03/Land-Rover-Logo.png" 
                       alt="Land Rover Logo"
-                      className="h-12 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                      className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex items-start justify-between mb-4">
