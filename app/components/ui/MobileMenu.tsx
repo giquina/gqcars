@@ -151,6 +151,16 @@ const services = [
     icon: Shield
   },
   {
+    name: 'Family Office Services',
+    href: '/services/family-office',
+    icon: Star
+  },
+  {
+    name: 'Family Security',
+    href: '/services/family-security',
+    icon: Shield
+  },
+  {
     name: 'Wedding Transport',
     href: '/services/weddings',
     icon: Sparkles

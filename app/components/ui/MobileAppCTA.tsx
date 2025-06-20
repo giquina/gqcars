@@ -17,32 +17,42 @@ export default function MobileAppCTA() {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-yellow-500/10"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <div className="inline-flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 bg-black/50 px-4 sm:px-8 py-4 rounded-2xl border border-yellow-500/30 mb-6 sm:mb-8">
-            <Smartphone className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-500 animate-bounce" />
-            <div className="text-center sm:text-left">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Download Our App</h2>
-              <p className="text-yellow-500 text-sm sm:text-lg">Book SIA Trained Drivers Instantly</p>
+        {/* Section Header - Better Centered */}
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="inline-flex flex-col items-center space-y-4 bg-black/50 px-8 sm:px-12 py-6 sm:py-8 rounded-3xl border border-yellow-500/30 mb-8 sm:mb-12">
+            <Smartphone className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-500 animate-bounce" />
+            <div className="text-center">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-2">
+                Download Our App
+              </h2>
+              <p className="text-yellow-500 text-base sm:text-lg lg:text-xl font-semibold">
+                Book SIA Trained Drivers Instantly
+              </p>
             </div>
           </div>
-          <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto px-4">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-4xl mx-auto px-4 leading-relaxed">
             Get the <span className="text-yellow-500 font-bold">GQ Cars app</span> and experience premium taxi service with 
             <span className="text-blue-400 font-bold"> security-trained professionals</span> at your fingertips.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          {/* Left side - App info */}
-          <div className="text-white">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 mb-6 sm:mb-8">
-              <div className="bg-yellow-500 p-2 sm:p-3 rounded-2xl">
-                <Smartphone className="w-8 h-8 sm:w-12 sm:h-12 text-black" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20 items-center">
+          {/* Left side - App info with better alignment */}
+          <div className="text-white order-2 lg:order-1">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 mb-8 sm:mb-10">
+              <div className="bg-yellow-500 p-3 sm:p-4 rounded-3xl">
+                <Smartphone className="w-10 h-10 sm:w-14 sm:h-14 text-black" />
               </div>
-              <div className="text-center sm:text-left">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">GQ Cars App</h2>
-                <p className="text-lg sm:text-xl lg:text-2xl text-yellow-500 font-semibold">Professional Taxi & Private Hire</p>
-                <p className="text-sm sm:text-lg text-gray-300">SIA Licensed • CPO Trained Drivers</p>
+              <div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2">
+                  GQ Cars App
+                </h2>
+                <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-yellow-500 font-semibold mb-2">
+                  Professional Taxi & Private Hire
+                </p>
+                <p className="text-sm sm:text-base lg:text-lg text-gray-300">
+                  SIA Licensed • CPO Trained Drivers
+                </p>
               </div>
             </div>
 
@@ -306,7 +316,7 @@ export default function MobileAppCTA() {
                       BOOK NOW
                     </button>
                     <button className="flex-1 bg-blue-600 text-white text-xs font-bold py-2 px-3 rounded-lg">
-                      GET QUOTE
+                      RESERVE RIDE
                     </button>
                   </div>
                 </div>

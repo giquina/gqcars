@@ -6,12 +6,13 @@ import WhatsAppWidget from './components/ui/WhatsAppWidget'
 import AIBadge from './components/ui/AIBadge'
 import TFLLogo from './components/ui/TFLLogo'
 import SIALogo from './components/ui/SIALogo'
+import MobileAppBanner from './components/ui/MobileAppBanner'
 import { NextAuthProvider } from './providers/NextAuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'GQ Cars LTD - Professional Security Taxi Service | SIA Licensed Drivers | London & Watford',
+  title: 'GQ Cars LTD - SIA Licensed Security Taxi Service | Professional Drivers | London & Watford',
   description: 'Premium security taxi service with SIA Licensed Close Protection Officers. Smart booking technology, professional drivers covering London, Watford, and all major airports. Book now: 07407 655 203',
 }
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Header />
           <AIBadge />
           <WhatsAppWidget />
+          <MobileAppBanner />
           <main className="pt-16">{children}</main>
         <footer className="bg-black/80 border-t border-gray-800 py-12 mt-20">
           <div className="container mx-auto px-4">

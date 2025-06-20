@@ -31,11 +31,12 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Desktop Navigation - WITH SERVICES */}
+          {/* Desktop Navigation - WITH FAMILY SERVICES */}
           <div className="hidden lg:flex items-center space-x-4 text-sm text-white">
             <a href="/services/taxi" className="hover:text-yellow-500 transition-colors px-3 py-2 border-r border-gray-600">Taxi</a>
             <a href="/services/private-hire" className="hover:text-yellow-500 transition-colors px-3 py-2 border-r border-gray-600">Private Hire</a>
             <a href="/services/close-protection" className="hover:text-yellow-500 transition-colors px-3 py-2 border-r border-gray-600">SIA Security</a>
+            <a href="/services/family-office" className="hover:text-yellow-500 transition-colors px-3 py-2 border-r border-gray-600">Family Office</a>
             <a href="/services/corporate" className="hover:text-yellow-500 transition-colors px-3 py-2 border-r border-gray-600">Corporate</a>
             <a href="/services/airport" className="hover:text-yellow-500 transition-colors px-3 py-2 border-r border-gray-600">Airports</a>
             <a href="/book" className="bg-gradient-to-r from-blue-600 to-yellow-500 text-white px-4 py-2 hover:opacity-90 transition-opacity rounded ml-4">Book</a>
