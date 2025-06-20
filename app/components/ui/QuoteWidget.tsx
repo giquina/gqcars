@@ -18,7 +18,7 @@ export default function QuoteWidget() {
     { 
       id: 'standard', 
       name: 'GQ Standard', 
-      price: 3.50, 
+      price: 6.50, 
       icon: Car, 
       color: 'blue',
       description: 'Professional taxi with SIA security driver',
@@ -30,7 +30,7 @@ export default function QuoteWidget() {
     { 
       id: 'executive', 
       name: 'GQ Executive', 
-      price: 7.50, 
+      price: 10.50, 
       icon: Crown, 
       color: 'purple',
       description: 'Premium vehicles with SIA security driver',
@@ -42,7 +42,7 @@ export default function QuoteWidget() {
     { 
       id: 'xl', 
       name: 'GQ XL', 
-      price: 5.20, 
+      price: 7.20, 
       icon: Users, 
       color: 'green',
       description: 'Large group vehicles with SIA security driver',

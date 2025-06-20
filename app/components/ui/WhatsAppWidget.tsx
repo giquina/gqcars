@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight } from 'lucide-react'
+import GQCarsLogo from './GQCarsLogo'
 
 interface ChatMessage {
   id: string
@@ -331,8 +332,8 @@ Thank you!`)
           {/* Header */}
           <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
-                <span className="font-bold text-yellow-500 text-sm">GQ</span>
+              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center p-1">
+                <GQCarsLogo className="w-8 h-8" />
               </div>
               <div>
                 <h3 className="font-bold text-sm">GQ Security</h3>

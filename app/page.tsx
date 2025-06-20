@@ -33,8 +33,8 @@ export default function Home() {
             </div>
             
             {/* Better mobile-optimized main heading with CTA */}
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-white leading-tight text-center sm:text-left">
-              PROFESSIONAL SECURITY TAXI SERVICE WITH<br />SIA LICENSED EXPERT DRIVERS
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-6 text-white leading-tight text-center sm:text-left">
+              24/7 PROFESSIONAL SECURITY TAXI & PRIVATE HIRE SERVICE<br />WITH SIA LICENSED EXPERT DRIVERS
               <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
                   href="tel:07407655203"
