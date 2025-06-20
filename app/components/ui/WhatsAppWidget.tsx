@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight, ExternalLink } from 'lucide-react'
+import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight, ExternalLink, Maximize2, Minimize2 } from 'lucide-react'
 import GQCarsLogo from './GQCarsLogo'
 
 interface ChatMessage {
@@ -23,6 +23,7 @@ export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
+  const [isMaximized, setIsMaximized] = useState(false)
   const [isDismissed, setIsDismissed] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
@@ -56,6 +57,11 @@ export default function WhatsAppWidget() {
   const handleMinimize = () => {
     setIsOpen(false)
     setIsMinimized(true)
+    setIsMaximized(false)
+  }
+
+  const handleMaximize = () => {
+    setIsMaximized(!isMaximized)
   }
 
   const handleDismiss = () => {
@@ -384,7 +390,7 @@ Emergency situations we handle:
         <div className="fixed bottom-6 right-6 z-50">
           <button
             onClick={handleOpen}
-            className="bg-yellow-500 hover:bg-yellow-400 text-black p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative group"
+            className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative group"
           >
             <MessageCircle className="w-6 h-6" />
             {/* Notification Badge */}
@@ -395,7 +401,7 @@ Emergency situations we handle:
             )}
             {/* Floating Message */}
             {!isMinimized && (
-              <div className="absolute bottom-full right-0 mb-4 bg-yellow-500 text-black px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute bottom-full right-0 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
                 💬 Quick booking help available!
                 <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-yellow-500"></div>
               </div>
@@ -406,24 +412,38 @@ Emergency situations we handle:
 
       {/* Chat Widget */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+        <div className={`fixed z-50 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden transition-all duration-300 ${
+          isMaximized 
+            ? 'inset-4 md:inset-8' 
+            : 'bottom-6 right-6 w-80 sm:w-96 h-96 sm:h-[500px]'
+        }`}>
           {/* Header */}
-          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-3 sm:p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center p-1">
-                <GQCarsLogo className="w-8 h-8" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-black rounded-full flex items-center justify-center p-1">
+                <GQCarsLogo className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div>
-                <h3 className="font-bold text-sm">GQ CARS LTD</h3>
+                <h3 className="font-bold text-sm sm:text-base">GQ CARS LTD</h3>
                 <p className="text-xs opacity-90">Typically replies instantly</p>
               </div>
             </div>
-            <button
-              onClick={handleMinimize}
-              className="text-black hover:bg-black/10 p-2 rounded-full transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={handleMaximize}
+                className="text-black hover:bg-black/10 p-2 rounded-full transition-colors"
+                title={isMaximized ? 'Minimize' : 'Maximize'}
+              >
+                {isMaximized ? <Minimize2 className="w-4 h-4 sm:w-5 sm:h-5" /> : <Maximize2 className="w-4 h-4 sm:w-5 sm:h-5" />}
+              </button>
+              <button
+                onClick={handleMinimize}
+                className="text-black hover:bg-black/10 p-2 rounded-full transition-colors"
+                title="Close"
+              >
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
@@ -451,7 +471,7 @@ Emergency situations we handle:
                         <button
                           key={option.id}
                           onClick={() => handleOptionClick(option)}
-                          className="w-full bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-bold py-2 px-3 rounded-lg transition-colors flex items-center justify-between group"
+                          className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black text-sm font-bold py-2 px-3 rounded-lg transition-all flex items-center justify-between group transform hover:scale-[1.02]"
                         >
                           <span>{option.text}</span>
                           <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -485,20 +505,20 @@ Emergency situations we handle:
           </div>
 
           {/* Quick Actions Footer */}
-          <div className="bg-white border-t border-gray-200 p-3">
+          <div className="bg-white border-t border-gray-200 p-3 flex-shrink-0">
             <div className="flex space-x-2">
               <button
                 onClick={() => handleOptionClick({ id: 'quick-call', text: '📞 Call Now', action: 'call' })}
-                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
+                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs sm:text-sm font-bold py-2 sm:py-3 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
               >
-                <Phone className="w-3 h-3" />
+                <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span>Call</span>
               </button>
               <button
                 onClick={() => handleOptionClick({ id: 'quick-book', text: '🚗 Book', action: 'book' })}
-                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
+                className="flex-1 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black text-xs sm:text-sm font-bold py-2 sm:py-3 px-3 rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-[1.02]"
               >
-                <Car className="w-3 h-3" />
+                <Car className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span>Book</span>
               </button>
             </div>
