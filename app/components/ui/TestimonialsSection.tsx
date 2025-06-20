@@ -75,6 +75,54 @@ const testimonials = [
     location: "Mayfair, London",
     verified: true,
     serviceType: "vip"
+  },
+  {
+    id: 7,
+    name: "The Pemberton Family",
+    title: "Family Office, Private Wealth Management",
+    service: "Daily Family Security Transport",
+    rating: 5,
+    image: "👨‍👩‍👧‍👦",
+    testimonial: "GQ Cars has been managing our family's transport security for 2 years. Their drivers are trained in family protection and our children feel completely safe. Professional, discrete, and completely reliable.",
+    location: "Belgravia, London",
+    verified: true,
+    serviceType: "family"
+  },
+  {
+    id: 8,
+    name: "Sheikh Abdullah Al-Rashid",
+    title: "International Business Leader",
+    service: "Luxury Shopping Security",
+    rating: 5,
+    image: "🏛️",
+    testimonial: "During our London shopping trips to Harrods and Bond Street, GQ Cars provided exceptional security. Their drivers understand luxury retail security and coordinated perfectly with store security teams.",
+    location: "Harrods & Bond Street",
+    verified: true,
+    serviceType: "retail"
+  },
+  {
+    id: 9,
+    name: "Victoria Sterling",
+    title: "Socialite & Philanthropist",
+    service: "Nightlife & Event Security",
+    rating: 5,
+    image: "💃",
+    testimonial: "For private member's clubs and charity galas, GQ Cars provides discrete security transport. Their drivers blend seamlessly into London's social scene while maintaining professional protection.",
+    location: "Mayfair Private Clubs",
+    verified: true,
+    serviceType: "lifestyle"
+  },
+  {
+    id: 10,
+    name: "Dr. Harrison Blackwell",
+    title: "Government Advisor",
+    service: "Diplomatic Security Transport",
+    rating: 5,
+    image: "🎩",
+    testimonial: "Sensitive government meetings require the highest security standards. GQ Cars' SIA licensed drivers have government clearance and understand diplomatic protocols perfectly. Essential service.",
+    location: "Westminster, London",
+    verified: true,
+    serviceType: "government"
   }
 ]
 
@@ -83,34 +131,111 @@ const caseStudies = [
     id: 1,
     title: "High-Profile Celebrity Airport Transfer",
     client: "International Recording Artist",
-    challenge: "Secure transport from Heathrow to West End hotel amid heavy media attention",
-    solution: "Deployed 2 SIA licensed CPOs, luxury vehicle with tinted windows, coordinated route planning",
-    result: "Zero security incidents, client arrived safely and on time",
+    challenge: "Secure transport from Heathrow to West End hotel amid heavy media attention and paparazzi presence",
+    solution: "Deployed 2 SIA licensed CPOs, luxury vehicle with tinted windows, coordinated route planning with decoy vehicles",
+    result: "Zero security incidents, client arrived safely and on time, media successfully managed",
     duration: "3 hours",
     team: "2 CPO drivers + security coordinator",
     category: "Celebrity Protection"
   },
   {
     id: 2,
-    title: "Corporate Executive Weekly Security",
-    client: "FTSE 100 Company CEO",
-    challenge: "Daily secure transport between residences, offices, and high-risk business meetings",
-    solution: "Dedicated SIA licensed driver, armoured executive vehicle, real-time route monitoring",
-    result: "18 months of incident-free transport, 100% on-time performance",
-    duration: "Ongoing contract",
-    team: "3 rotating CPO drivers",
-    category: "Executive Protection"
+    title: "Family Office Weekly Security Transport",
+    client: "Ultra-High-Net-Worth Family (£500M+ assets)",
+    challenge: "Coordinated daily transport for family members including children to schools, spouse to charity events, and patriarch to business meetings",
+    solution: "Dedicated fleet of 4 vehicles with SIA licensed family protection specialists, route variation protocols, child-trained CPOs",
+    result: "24 months of incident-free family transport, 100% on-time school runs, enhanced family security posture",
+    duration: "Ongoing 2-year contract",
+    team: "6 specialized family CPO drivers + security manager",
+    category: "Family Office Protection"
   },
   {
     id: 3,
+    title: "Corporate Executive Weekly Security",
+    client: "FTSE 100 Company CEO",
+    challenge: "Daily secure transport between residences, offices, and high-risk business meetings following credible threats",
+    solution: "Dedicated SIA licensed driver, executive protection vehicle with armor plating, real-time route monitoring and threat assessment",
+    result: "18 months of incident-free transport, 100% on-time performance, enhanced executive confidence",
+    duration: "Ongoing contract",
+    team: "3 rotating CPO drivers + threat analyst",
+    category: "Executive Protection"
+  },
+  {
+    id: 4,
     title: "Royal Wedding Security Transport",
     client: "High-Profile Wedding (500+ guests)",
-    challenge: "Coordinate secure transport for VIP guests including government officials",
-    solution: "Fleet of 8 security vehicles, 12 SIA licensed drivers, police liaison coordination",
-    result: "All VIPs transported safely, zero disruptions to ceremony",
+    challenge: "Coordinate secure transport for VIP guests including government officials, celebrities, and international dignitaries",
+    solution: "Fleet of 8 security vehicles, 12 SIA licensed drivers, police liaison coordination, real-time guest tracking",
+    result: "All VIPs transported safely, zero disruptions to ceremony, seamless coordination with royal protection unit",
     duration: "2 days",
-    team: "12 CPO drivers + security manager",
+    team: "12 CPO drivers + security manager + police liaison",
     category: "Event Security"
+  },
+  {
+    id: 5,
+    title: "Nightlife Security for Tech Billionaire",
+    client: "Tech Industry Entrepreneur (Recent IPO)",
+    challenge: "Discreet security transport for private member's clubs, Michelin-starred restaurants, and exclusive nightlife venues in Mayfair and Soho",
+    solution: "2 unmarked luxury vehicles, 4 SIA licensed CPOs trained in hospitality security, venue liaison coordination, emergency extraction protocols",
+    result: "6 months of incident-free nightlife protection, maintained client privacy, established venue security partnerships",
+    duration: "6 months",
+    team: "4 specialized hospitality CPO drivers + venue coordinator",
+    category: "Lifestyle Protection"
+  },
+  {
+    id: 6,
+    title: "Harrods & Bond Street Shopping Security",
+    client: "Middle Eastern Royal Family Member",
+    challenge: "Secure shopping experience across Harrods, Selfridges, and Bond Street boutiques with significant purchase values and privacy concerns",
+    solution: "3-vehicle security convoy, 6 SIA licensed CPOs, store security coordination, private shopping arrangements, secure payment processing",
+    result: "£2M+ shopping experience completed safely, zero security incidents, enhanced store relationships for future visits",
+    duration: "1 week London visit",
+    team: "6 CPO drivers + retail security coordinator + store liaisons",
+    category: "Retail Security"
+  },
+  {
+    id: 7,
+    title: "Government Diplomatic Transport",
+    client: "Foreign Ministry Official Visit",
+    challenge: "Secure transport for visiting government delegation during sensitive trade negotiations, requiring government-level security protocols",
+    solution: "Armored diplomatic vehicles, SIA licensed CPOs with government clearance, Metropolitan Police coordination, secure route planning",
+    result: "Successful 5-day diplomatic visit, all security protocols maintained, enhanced UK diplomatic relations",
+    duration: "5 days",
+    team: "8 government-cleared CPO drivers + diplomatic security manager",
+    category: "Diplomatic Security"
+  },
+  {
+    id: 8,
+    title: "Private Jet to Mansion Transfer",
+    client: "International Business Magnate",
+    challenge: "Coordinated secure transport from private jet at Farnborough Airport to £50M Kensington mansion during hostile takeover period",
+    solution: "Luxury armored vehicle, 3 SIA licensed CPOs, airport security coordination, residential security handover, media management",
+    result: "Seamless high-profile arrival, zero media exposure, successful handover to residential security team",
+    duration: "4 hours",
+    team: "3 executive CPO drivers + media liaison + residential coordinator",
+    category: "Executive Protection"
+  },
+  {
+    id: 9,
+    title: "Art Gallery & Auction House Security",
+    client: "International Art Collector",
+    challenge: "Secure transport to Sotheby's, Christie's, and private galleries for £10M+ art acquisitions with high-value item transport",
+    solution: "Specialized art transport vehicle, 4 SIA licensed CPOs with art handling training, auction house security coordination, insurance compliance",
+    result: "Successful acquisition of 12 pieces worth £15M total, zero damage or security incidents, enhanced auction house relationships",
+    duration: "2 weeks",
+    team: "4 specialized art security CPO drivers + art transport coordinator",
+    category: "Specialized Security"
+  },
+  {
+    id: 10,
+    title: "Family Vacation Security Package",
+    client: "Tech Executive Family (4 members)",
+    challenge: "2-week London vacation security including children's activities, tourist attractions, and family dining with international threat concerns",
+    solution: "2-vehicle family convoy, 4 SIA licensed family-trained CPOs, child protection specialists, tourist security planning, 24/7 availability",
+    result: "Perfect family vacation experience, children's safety maintained, all attractions visited safely, family peace of mind",
+    duration: "2 weeks",
+    team: "4 family specialist CPO drivers + child protection coordinator",
+    category: "Family Protection"
   }
 ]
 
@@ -199,8 +324,12 @@ export default function TestimonialsSection() {
                 { key: 'corporate', label: 'CORPORATE', icon: Building2 },
                 { key: 'airport', label: 'AIRPORT', icon: Car },
                 { key: 'protection', label: 'PROTECTION', icon: Shield },
+                { key: 'family', label: 'FAMILY OFFICE', icon: Users },
                 { key: 'wedding', label: 'WEDDINGS', icon: Quote },
-                { key: 'vip', label: 'VIP EVENTS', icon: Crown }
+                { key: 'vip', label: 'VIP EVENTS', icon: Crown },
+                { key: 'lifestyle', label: 'LIFESTYLE', icon: Star },
+                { key: 'retail', label: 'SHOPPING', icon: Building2 },
+                { key: 'government', label: 'DIPLOMATIC', icon: Shield }
               ].map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}

@@ -189,22 +189,22 @@ Would you like to proceed?`, true, [
   }
 
   const handleEmergency = () => {
-    addMessage('🚨 EMERGENCY BOOKING ACTIVATED 🚨
+    addMessage(`🚨 EMERGENCY BOOKING ACTIVATED 🚨
 
-For immediate assistance with urgent security transport needs, I\'m connecting you directly to our emergency response team.
+For immediate assistance with urgent security transport needs, I'm connecting you directly to our emergency response team.
 
 ⏰ Response time: 5-15 minutes
 🛡️ SIA licensed driver will be dispatched
 📍 Live GPS tracking provided
 
-Call now for immediate dispatch:', true, [
+Call now for immediate dispatch:`, true, [
       { id: 'emergency-call', text: '🚨 CALL EMERGENCY LINE', action: 'call' },
       { id: 'emergency-whatsapp', text: '💬 Emergency WhatsApp', action: 'contact-human' }
     ])
   }
 
   const handleAirport = () => {
-    addMessage('Airport transfers are our specialty! ✈️
+    addMessage(`Airport transfers are our specialty! ✈️
 
 • Heathrow: From £140 (45-60 min)
 • Gatwick: From £170 (60-75 min)  
@@ -217,7 +217,7 @@ All include:
 🚗 Meet & greet service
 💼 Luggage assistance
 
-Which airport do you need?', true, [
+Which airport do you need?`, true, [
       { id: 'heathrow', text: '🛫 Heathrow', action: 'contact-human' },
       { id: 'gatwick', text: '🛫 Gatwick', action: 'contact-human' },
       { id: 'stansted', text: '🛫 Stansted', action: 'contact-human' },
@@ -226,7 +226,7 @@ Which airport do you need?', true, [
   }
 
   const handleMoreInfo = () => {
-    addMessage('I\'d love to tell you more about our professional security services! Our team can provide detailed information about:', true, [
+    addMessage(`I'd love to tell you more about our professional security services! Our team can provide detailed information about:`, true, [
       { id: 'sia-training', text: '🎓 SIA Training & Credentials', action: 'contact-human' },
       { id: 'vehicle-fleet', text: '🚗 Vehicle Fleet & Security Features', action: 'contact-human' },
       { id: 'pricing-packages', text: '💷 Pricing & Package Options', action: 'contact-human' },
@@ -245,7 +245,7 @@ I'm interested in your professional security transport services. I was chatting 
 
 Thank you!`)
     
-    addMessage('Perfect! I\'m connecting you with our professional booking team on WhatsApp. They\'ll help you with everything you need!', true, [
+    addMessage(`Perfect! I'm connecting you with our professional booking team on WhatsApp. They'll help you with everything you need!`, true, [
       { id: 'open-whatsapp', text: '💬 Continue on WhatsApp', action: 'open-whatsapp' }
     ])
 
