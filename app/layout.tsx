@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import MainNav from './components/ui/MainNav'
 import Footer from './components/ui/Footer'
+import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import BackToTop from './components/ui/BackToTop'
 import { ThemeProvider } from './components/ui/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,6 +26,8 @@ export default function RootLayout({
           <MainNav />
           <main className="pt-16">{children}</main>
           <Footer />
+          <WhatsAppWidget />
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>

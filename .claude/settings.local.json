@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)",
+      "Bash(git remote:*)",
+      "Bash(npm run build:*)",
+      "Bash(sudo chown:*)",
+      "Bash(./fix-env.sh:*)",
+      "Bash(ls:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(rm:*)",
+      "Bash(node:*)",
+      "Bash(npm install:*)",
+      "Bash(/mnt/c/Users/Student/Desktop/gqcars-frontend/fix-env.bat)",
+      "Bash(chmod:*)",
+      "Bash(./fix-env.sh:*)",
+      "Bash(cat:*)",
+      "Bash(npm run build:*)",
+      "Bash(NODE_OPTIONS='--inspect' npm run dev)",
+      "Bash(python3:*)",
+      "Bash(pkill:*)",
+      "Bash(NODE_ENV=production npm run dev)",
+      "Bash(git push:*)",
+      "Bash(killall:*)",
+      "Bash(true)",
+      "Bash(code --list-extensions)",
+      "Bash(code:*)",
+      "Bash(cp:*)",
+      "Bash(npm run clean:start:*)",
+      "Bash(npm run update:*)",
+      "Bash(npm run start:*)"
+    ],
+    "deny": []
+  }
+}

@@ -315,8 +315,7 @@ export default function BookingForm() {
                   />
                   {errors.name && (
                     <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-                  
-                  />
+                  )}
                 </div>
               </div>
 
@@ -335,8 +334,7 @@ export default function BookingForm() {
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                  
-                  />
+                  )}
                 </div>
               </div>
 
@@ -355,8 +353,7 @@ export default function BookingForm() {
                   />
                   {errors.phone && (
                     <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-                  
-                  />
+                  )}
                 </div>
               </div>
             </div>

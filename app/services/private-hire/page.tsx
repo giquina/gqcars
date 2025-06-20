@@ -1,4 +1,4 @@
-import { Car, Shield, Star, MapPin, Clock, CheckCircle } from 'lucide-react'
+import { Car, Shield, Star, MapPin, Clock, CheckCircle, Building2, GlassWater } from 'lucide-react'
 import ServiceHero from '@/app/components/ui/ServiceHero'
 
 export default function PrivateHirePage() {
@@ -196,7 +196,7 @@ const services = [
   },
   {
     title: "Event Transportation",
-    icon: ChampagneGlass,
+    icon: GlassWater,
     description: "Luxury transport for special occasions and events.",
     features: [
       "Wedding car service",

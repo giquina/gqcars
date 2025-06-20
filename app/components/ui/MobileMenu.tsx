@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Car, Building2, ChampagneGlass, Star, Phone, X } from 'lucide-react'
+import { Shield, Car, Building2, GlassWater, Star, Phone, X } from 'lucide-react'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -143,7 +143,7 @@ const services = [
   {
     name: 'Wedding Security',
     href: '/services/weddings',
-    icon: ChampagneGlass
+    icon: GlassWater
   },
   {
     name: 'VIP Services',

@@ -1,9 +1,14 @@
+'use client'
+
 import Link from 'next/link'
-import { Sun, Moon } from 'lucide-react'
+import { Sun, Moon, ChevronDown } from 'lucide-react'
 import { useTheme } from './ThemeProvider'
+import { useState } from 'react'
 
 export default function MainNav() {
   const { theme, setTheme } = useTheme()
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
+  
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/50 backdrop-blur-lg border-b border-slate-800">
       <div className="container mx-auto px-4">
@@ -26,9 +31,44 @@ export default function MainNav() {
             <Link href="/services/corporate" className="text-gray-300 hover:text-amber-500 transition-colors">
               Corporate
             </Link>
+            
+            {/* Family Services Dropdown */}
+            <div className="relative">
+              <button
+                className="flex items-center text-gray-300 hover:text-amber-500 transition-colors"
+                onMouseEnter={() => setIsServicesOpen(true)}
+                onMouseLeave={() => setIsServicesOpen(false)}
+              >
+                Family Services
+                <ChevronDown className="w-4 h-4 ml-1" />
+              </button>
+              
+              {isServicesOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-56 bg-slate-800 rounded-lg shadow-xl border border-slate-700 py-2"
+                  onMouseEnter={() => setIsServicesOpen(true)}
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                >
+                  <Link 
+                    href="/services/family-protection" 
+                    className="block px-4 py-2 text-gray-300 hover:text-amber-500 hover:bg-slate-700 transition-colors"
+                  >
+                    Family Protection
+                  </Link>
+                  <Link 
+                    href="/services/family-office" 
+                    className="block px-4 py-2 text-gray-300 hover:text-amber-500 hover:bg-slate-700 transition-colors"
+                  >
+                    Family Office Services
+                  </Link>
+                </div>
+              )}
+            </div>
+
             <Link href="/book" className="bg-gradient-to-r from-blue-600 to-amber-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-amber-500/20 transform hover:scale-105 transition-all duration-300">
               Book Now
             </Link>
+            
             {/* Theme Toggle Button */}
             <button
               aria-label="Toggle dark mode"
