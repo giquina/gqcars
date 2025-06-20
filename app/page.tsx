@@ -335,6 +335,14 @@ export default function Home() {
               {/* Service 1: GQ Standard */}
               <Link href="/security-assessment" className="block group">
                 <div className="bg-gradient-to-br from-blue-900/60 to-blue-700/40 p-6 rounded-2xl border border-blue-500/30 hover:border-blue-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 transform hover:-translate-y-1 cursor-pointer">
+                  {/* Vehicle Image */}
+                  <div className="mb-4 overflow-hidden rounded-xl">
+                    <img 
+                      src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" 
+                      alt="Nissan Leaf EV 2023 - GQ Standard Vehicle"
+                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                       <Car className="w-6 h-6 text-white" />
@@ -344,8 +352,8 @@ export default function Home() {
                     </div>
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold mb-2 text-white group-hover:text-blue-200">GQ Standard</h3>
-                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-3">
-                    Professional taxi service with <span className="text-blue-400 font-semibold">SIA licensed security driver</span> included
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-2">
+                    <span className="text-blue-400 font-semibold">Nissan Leaf EV 2023</span> with SIA licensed security driver
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-blue-400 font-semibold text-xs sm:text-sm">
@@ -361,6 +369,14 @@ export default function Home() {
               {/* Service 2: GQ Premium */}
               <Link href="/security-assessment" className="block group">
                 <div className="bg-gradient-to-br from-emerald-900/60 to-emerald-700/40 p-6 rounded-2xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-1 cursor-pointer">
+                  {/* Vehicle Image */}
+                  <div className="mb-4 overflow-hidden rounded-xl">
+                    <img 
+                      src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                      alt="Mercedes-Benz C-Class - GQ Premium Vehicle"
+                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                       <Star className="w-6 h-6 text-white" />
@@ -370,8 +386,8 @@ export default function Home() {
                     </div>
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-emerald-200">GQ Premium</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                    Enhanced vehicles with <span className="text-emerald-400 font-semibold">SIA security driver</span> and comfort amenities
+                  <p className="text-gray-300 text-sm leading-relaxed mb-2">
+                    <span className="text-emerald-400 font-semibold">Mercedes-Benz C-Class</span> with SIA security driver and comfort amenities
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-emerald-400 font-semibold text-sm">
@@ -391,7 +407,15 @@ export default function Home() {
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-4 py-1 rounded-full text-xs font-bold">
                     MOST POPULAR
                   </div>
-                  <div className="flex items-start justify-between mb-4 mt-2">
+                  {/* Vehicle Image */}
+                  <div className="mb-4 overflow-hidden rounded-xl mt-2">
+                    <img 
+                      src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                      alt="BMW 7 Series - GQ Executive Vehicle"
+                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                       <Crown className="w-6 h-6 text-white" />
                     </div>
@@ -400,8 +424,8 @@ export default function Home() {
                     </div>
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-purple-200">GQ Executive</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                    Premium luxury vehicles with <span className="text-purple-400 font-semibold">SIA security driver</span> and business amenities
+                  <p className="text-gray-300 text-sm leading-relaxed mb-2">
+                    <span className="text-purple-400 font-semibold">BMW 7 Series / Mercedes E-Class</span> with SIA security driver and business amenities
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-purple-400 font-semibold text-sm">
@@ -417,6 +441,14 @@ export default function Home() {
               {/* Service 4: GQ XL */}
               <Link href="/services/xl" className="block group">
                 <div className="bg-gradient-to-br from-orange-900/60 to-orange-700/40 p-6 rounded-2xl border border-orange-500/30 hover:border-orange-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-orange-500/20 transform hover:-translate-y-1 cursor-pointer">
+                  {/* Vehicle Image */}
+                  <div className="mb-4 overflow-hidden rounded-xl">
+                    <img 
+                      src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" 
+                      alt="Mercedes Sprinter Passenger Van - GQ XL Vehicle"
+                      className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                       <Users className="w-6 h-6 text-white" />
@@ -426,8 +458,8 @@ export default function Home() {
                     </div>
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-orange-200">GQ XL</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                    Large group vehicles with <span className="text-orange-400 font-semibold">SIA security driver</span> for 5-8 passengers
+                  <p className="text-gray-300 text-sm leading-relaxed mb-2">
+                    <span className="text-orange-400 font-semibold">Mercedes Sprinter Van</span> with SIA security driver for 5-8 passengers
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-orange-400 font-semibold text-sm">
