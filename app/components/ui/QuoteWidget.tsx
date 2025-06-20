@@ -81,7 +81,10 @@ export default function QuoteWidget() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-4 sm:p-6 lg:p-8 rounded-2xl border border-yellow-500/30 relative overflow-hidden shadow-2xl">
+    <div 
+      data-quote-widget 
+      className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-4 sm:p-6 lg:p-8 rounded-2xl border border-yellow-500/30 relative overflow-hidden shadow-2xl"
+    >
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-4 right-4 w-6 h-6 sm:w-8 sm:h-8 border border-yellow-500 rotate-45 animate-spin-slow"></div>

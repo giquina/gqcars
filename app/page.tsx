@@ -4,6 +4,8 @@ import GQCarsLogo from './components/ui/GQCarsLogo'
 import MobileAppCTA from './components/ui/MobileAppCTA'
 import LocationBasedQuotes from './components/ui/LocationBasedQuotes'
 import QuoteWidget from './components/ui/QuoteWidget'
+import TestimonialsSection from './components/ui/TestimonialsSection'
+import WhatsAppWidget from './components/ui/WhatsAppWidget'
 
 export default function Home() {
   return (
@@ -431,6 +433,10 @@ export default function Home() {
               </Link>
 
             </div>
+            
+            {/* Testimonials Section - Strategically Placed After Services */}
+            <TestimonialsSection />
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 mb-12">
               
             </div>
@@ -531,6 +537,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* WhatsApp AI Assistant Widget */}
+      <WhatsAppWidget />
     </>
   )
 }
