@@ -6,6 +6,7 @@ import LocationBasedQuotes from './components/ui/LocationBasedQuotes'
 import QuoteWidget from './components/ui/QuoteWidget'
 import TestimonialsSection from './components/ui/TestimonialsSection'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import SecurityAssessment from './components/ui/SecurityAssessment'
 
 export default function Home() {
   return (
@@ -17,77 +18,79 @@ export default function Home() {
           {/* You can add a background image of cars here */}
         </div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-12 sm:py-16 lg:py-20">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-20 py-8 sm:py-12 lg:py-20">
           <div className="max-w-4xl">
             {/* Better mobile logo and brand section */}
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-4 sm:space-y-0 sm:flex-row sm:items-center sm:space-x-4 mb-8">
-              <GQCarsLogo className="w-16 h-16 sm:w-20 sm:h-20 mx-auto sm:mx-0" />
-              <div className="space-y-2">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-yellow-500 leading-tight">
-                  GQ CARS LTD
-                </h1>
-                <p className="text-base sm:text-lg md:text-2xl text-gray-300">
-                  SIA Licensed • CPO Trained • Premium Transport
-                </p>
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+              <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
+                <GQCarsLogo className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20" />
+                <div className="space-y-1 sm:space-y-2">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-8xl font-bold text-yellow-500 leading-tight">
+                    GQ CARS LTD
+                  </h1>
+                  <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-gray-300">
+                    SIA Licensed • CPO Trained • Premium Transport
+                  </p>
+                </div>
               </div>
             </div>
             
             {/* Better mobile-optimized main heading with CTA */}
-            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-6 text-white leading-tight text-center sm:text-left">
-              24/7 PROFESSIONAL SECURITY TAXI & PRIVATE HIRE SERVICE<br />WITH SIA LICENSED EXPERT DRIVERS
-              <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="text-center w-full">
+              <h2 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold mb-6 text-white leading-tight mx-auto max-w-3xl">
+                24/7 PROFESSIONAL SECURITY TAXI & PRIVATE HIRE<br />WITH SIA LICENSED EXPERT DRIVERS
+              </h2>
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
                 <a 
-                  href="tel:07407655203"
-                  className="inline-flex items-center space-x-3 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105 text-lg shadow-xl"
+                  href="/security-assessment"
+                  className="inline-flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all transform hover:scale-105 text-sm sm:text-lg shadow-xl"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>BOOK NOW</span>
-                  <span className="text-base">📞</span>
                 </a>
                 <a 
-                  href="/schedule"
-                  className="inline-flex items-center space-x-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 text-white font-bold py-4 px-8 rounded-xl transition-all transform hover:scale-105 text-lg shadow-xl"
+                  href="/security-assessment"
+                  className="inline-flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all transform hover:scale-105 text-sm sm:text-lg shadow-xl"
                 >
-                  <Calendar className="w-5 h-5" />
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>SCHEDULE RIDE</span>
-                  <span className="text-base">📅</span>
                 </a>
               </div>
-            </h2>
+            </div>
 
-            {/* INSTANT QUOTE WIDGET - Prominently Placed at Top */}
-            <div className="mb-12">
+            {/* INSTANT QUOTE WIDGET - Properly Spaced Below Title */}
+            <div className="mt-8 sm:mt-12 mb-8 sm:mb-12">
               <QuoteWidget />
             </div>
             
             {/* Better mobile paragraph formatting */}
-            <div className="text-center sm:text-left mb-6">
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
+            <div className="text-center sm:text-left mb-4 sm:mb-6">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed">
                 <span className="text-yellow-500 font-semibold">SIA Licensed Close Protection Officers</span> providing{' '}
                 <span className="text-blue-400 font-semibold">premium security transport</span>.
               </p>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mt-2">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-300 leading-relaxed mt-1 sm:mt-2">
                 Experience professional service with intelligent features that make booking faster, smarter, and safer.
               </p>
             </div>
             
             {/* Smart Technology Highlight - Better Mobile Layout */}
-            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-4 sm:p-6 rounded-xl border border-blue-500/30 mb-8">
+            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-3 sm:p-4 md:p-6 rounded-xl border border-blue-500/30 mb-6 sm:mb-8">
               <div className="text-center">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 text-xs sm:text-sm">
-                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-6 text-xs sm:text-sm">
+                  <div className="flex flex-col items-center justify-center space-y-1">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="text-blue-300 text-center">💬 INSTANT SUPPORT</span>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                  <div className="flex flex-col items-center justify-center space-y-1">
                     <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
                     <span className="text-blue-300 text-center">⚡ SMART QUOTES</span>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                  <div className="flex flex-col items-center justify-center space-y-1">
                     <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
                     <span className="text-blue-300 text-center">🎤 VOICE BOOKING</span>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2">
+                  <div className="flex flex-col items-center justify-center space-y-1">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
                     <span className="text-blue-300 text-center">📍 LOCATION SERVICES</span>
                   </div>
@@ -98,61 +101,66 @@ export default function Home() {
             {/* Location-Based Smart Quotes */}
             <LocationBasedQuotes />
             
+            {/* Interactive Security Assessment */}
+            <div className="mt-8 sm:mt-12 mb-8 sm:mb-12">
+              <SecurityAssessment />
+            </div>
+            
             {/* Multiple Call-to-Action Options - Better Mobile Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 mb-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12">
               {/* 1. Call Now (Primary) */}
               <a 
                 href="tel:07407655203" 
-                className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
+                className="bg-yellow-500 hover:bg-yellow-400 text-black px-2 py-2 sm:px-3 sm:py-3 lg:px-6 lg:py-5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:animate-pulse" />
+                <Phone className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 group-hover:animate-pulse" />
                 <span>CALL NOW</span>
               </a>
 
               {/* 2. Email Us */}
               <a 
                 href="mailto:bookings@gqcars.co.uk?subject=GQ Cars SECURITY Booking Enquiry&body=Hello, I would like to enquire about your PROFESSIONAL SECURITY taxi services." 
-                className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
+                className="bg-gray-700 hover:bg-gray-600 text-white px-2 py-2 sm:px-3 sm:py-3 lg:px-6 lg:py-5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:rotate-12" />
+                <Mail className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 group-hover:rotate-12" />
                 <span>EMAIL US</span>
               </a>
 
               {/* 3. WhatsApp Chat */}
               <a 
                 href="https://wa.me/447407655203?text=Hello%20GQ%20Cars!%20I%27m%20interested%20in%20your%20PROFESSIONAL%20SECURITY%20taxi%20services." 
-                className="bg-green-600 hover:bg-green-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center col-span-2 sm:col-span-1"
+                className="bg-green-600 hover:bg-green-500 text-white px-2 py-2 sm:px-3 sm:py-3 lg:px-6 lg:py-5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center col-span-2 sm:col-span-1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:bounce" />
+                <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 group-hover:bounce" />
                 <span>WHATSAPP</span>
               </a>
 
               {/* 4. Book Online */}
               <a 
-                href="/book" 
-                className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
+                href="/security-assessment" 
+                className="bg-blue-600 hover:bg-blue-500 text-white px-2 py-2 sm:px-3 sm:py-3 lg:px-6 lg:py-5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Car className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:translate-x-1" />
+                <Car className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 group-hover:translate-x-1" />
                 <span>BOOK ONLINE</span>
               </a>
 
               {/* 5. Get Quote */}
               <a 
-                href="/quote" 
-                className="bg-purple-600 hover:bg-purple-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
+                href="/security-assessment" 
+                className="bg-purple-600 hover:bg-purple-500 text-white px-2 py-2 sm:px-3 sm:py-3 lg:px-6 lg:py-5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Quote className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:rotate-180" />
+                <Quote className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 group-hover:rotate-180" />
                 <span>GET QUOTE</span>
               </a>
 
               {/* 6. Schedule Trip */}
               <a 
-                href="/schedule" 
-                className="bg-orange-600 hover:bg-orange-500 text-white px-3 py-3 sm:px-4 sm:py-4 lg:px-6 lg:py-5 rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
+                href="/security-assessment" 
+                className="bg-orange-600 hover:bg-orange-500 text-white px-2 py-2 sm:px-3 sm:py-3 lg:px-6 lg:py-5 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm lg:text-lg flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 lg:space-x-3 transition-all transform hover:scale-105 group shadow-lg text-center"
               >
-                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 group-hover:scale-110" />
+                <Calendar className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 group-hover:scale-110" />
                 <span>SCHEDULE</span>
               </a>
             </div>
@@ -322,10 +330,10 @@ export default function Home() {
             </div>
 
             {/* Enhanced Services Grid - Mobile Responsive 4-Service Layout */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12">
               
               {/* Service 1: GQ Standard */}
-              <Link href="/services/standard" className="block group">
+              <Link href="/security-assessment" className="block group">
                 <div className="bg-gradient-to-br from-blue-900/60 to-blue-700/40 p-6 rounded-2xl border border-blue-500/30 hover:border-blue-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-blue-500/20 transform hover:-translate-y-1 cursor-pointer">
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
@@ -335,12 +343,12 @@ export default function Home() {
                       <span className="text-white text-xs font-bold">STANDARD</span>
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-blue-200">GQ Standard</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
+                  <h3 className="text-lg sm:text-xl font-bold mb-2 text-white group-hover:text-blue-200">GQ Standard</h3>
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-3">
                     Professional taxi service with <span className="text-blue-400 font-semibold">SIA licensed security driver</span> included
                   </p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center text-blue-400 font-semibold text-sm">
+                    <div className="flex items-center text-blue-400 font-semibold text-xs sm:text-sm">
                       <span>From £6.50/mile</span>
                     </div>
                     <div className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold animate-pulse">
@@ -351,7 +359,7 @@ export default function Home() {
               </Link>
 
               {/* Service 2: GQ Premium */}
-              <Link href="/services/premium" className="block group">
+              <Link href="/security-assessment" className="block group">
                 <div className="bg-gradient-to-br from-emerald-900/60 to-emerald-700/40 p-6 rounded-2xl border border-emerald-500/30 hover:border-emerald-400/60 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-1 cursor-pointer">
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
@@ -448,9 +456,9 @@ export default function Home() {
       <MobileAppCTA />
 
       {/* Services Grid */}
-      <section className="py-20 bg-gray-900/50">
+      <section className="py-20 bg-gradient-to-br from-blue-900 via-gray-900 to-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Security Services</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-yellow-500">Professional Security Services</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-slate-900/50 p-6 border-l-4 border-blue-600 hover:border-amber-500 transition-all">
@@ -493,9 +501,9 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 via-slate-900 to-blue-600">
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-white">Why Choose GQ Security</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-yellow-500">Why Choose GQ CARS LTD</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
@@ -519,18 +527,18 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-slate-900">
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-black">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Experience Elite Security?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-yellow-500">Ready to Experience Elite Security?</h2>
           <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
             Contact us now to discuss your security requirements and receive a personalized quote.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+442012345678" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-amber-600 hover:opacity-90 transition-opacity">
+            <a href="tel:07407655203" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-black bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 transition-all transform hover:scale-105 rounded-xl shadow-xl">
               Call Now
               <Phone className="ml-2 h-5 w-5" />
             </a>
-            <a href="/contact" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-amber-500 border-2 border-amber-500 hover:bg-amber-500 hover:text-white transition-colors">
+            <a href="/security-assessment" className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-yellow-500 border-2 border-yellow-500 hover:bg-yellow-500 hover:text-black transition-colors rounded-xl">
               Request Quote
               <Award className="ml-2 h-5 w-5" />
             </a>

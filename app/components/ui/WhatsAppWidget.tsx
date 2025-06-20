@@ -23,6 +23,7 @@ export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
+  const [isDismissed, setIsDismissed] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [userName, setUserName] = useState('')
@@ -30,23 +31,39 @@ export default function WhatsAppWidget() {
 
   // Show widget after 30 seconds
   useEffect(() => {
+    // Check if user previously dismissed the widget
+    const dismissed = localStorage.getItem('gq-whatsapp-dismissed')
+    if (dismissed) {
+      setIsDismissed(true)
+      return
+    }
+
     const timer = setTimeout(() => {
-      setIsVisible(true)
-      // Auto-open after showing for 3 seconds
-      setTimeout(() => {
-        if (!isOpen && !isMinimized) {
-          setIsOpen(true)
-          initializeChat()
-        }
-      }, 3000)
+      if (!isDismissed) {
+        setIsVisible(true)
+        // Auto-open after showing for 3 seconds
+        setTimeout(() => {
+          if (!isOpen && !isMinimized && !isDismissed) {
+            setIsOpen(true)
+            initializeChat()
+          }
+        }, 3000)
+      }
     }, 30000) // 30 seconds
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [isDismissed])
 
   const handleMinimize = () => {
     setIsOpen(false)
     setIsMinimized(true)
+  }
+
+  const handleDismiss = () => {
+    setIsOpen(false)
+    setIsVisible(false)
+    setIsDismissed(true)
+    localStorage.setItem('gq-whatsapp-dismissed', 'true')
   }
 
   const handleOpen = () => {
@@ -336,7 +353,7 @@ Thank you!`)
                 <GQCarsLogo className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="font-bold text-sm">GQ Security</h3>
+                <h3 className="font-bold text-sm">GQ CARS LTD</h3>
                 <p className="text-xs opacity-90">Typically replies instantly</p>
               </div>
             </div>
