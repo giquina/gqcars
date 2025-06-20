@@ -372,8 +372,8 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" 
-                      alt="Mercedes-Benz Logo"
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/5b/BMW_logo_%28gray%29.svg" 
+                      alt="BMW Logo"
                       className="h-12 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
@@ -387,7 +387,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-emerald-200">GQ Premium</h3>
                   <p className="text-gray-300 text-sm leading-relaxed mb-2">
-                    <span className="text-emerald-400 font-semibold">Mercedes S-Class</span> with SIA security driver (4-5 passengers)
+                    <span className="text-emerald-400 font-semibold">BMW 5 Series</span> with SIA security driver (4-5 passengers)
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-emerald-400 font-semibold text-sm">
@@ -410,8 +410,8 @@ export default function Home() {
                   {/* Brand Logo */}
                   <div className="mb-4 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl p-4 mt-2">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/en/thumb/4/44/Land_Rover_logo.svg/1200px-Land_Rover_logo.svg.png" 
-                      alt="Range Rover Logo"
+                      src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Land_Rover_logo.svg" 
+                      alt="Land Rover Logo"
                       className="h-12 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
