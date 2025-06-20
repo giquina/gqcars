@@ -1,12 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users } from 'lucide-react'
+import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users, Calendar } from 'lucide-react'
 
 export default function QuoteWidget() {
   const [pickup, setPickup] = useState('')
   const [dropoff, setDropoff] = useState('')
   const [serviceType, setServiceType] = useState('standard')
+  const [bookingType, setBookingType] = useState('now') // 'now' or 'schedule'
+  const [selectedDate, setSelectedDate] = useState('')
+  const [selectedTime, setSelectedTime] = useState('')
   const [showQuote, setShowQuote] = useState(false)
   const [quote, setQuote] = useState(null)
   const [isCalculating, setIsCalculating] = useState(false)
@@ -289,10 +292,98 @@ export default function QuoteWidget() {
             </div>
           </div>
 
-          {/* Enhanced Calculate Button - Changed to Reserve Ride */}
+          {/* Booking Type Selector */}
+          <div>
+            <label className="block text-yellow-500 font-semibold mb-3 text-sm">
+              <Clock className="w-4 h-4 inline mr-2" />
+              When do you need the ride?
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setBookingType('now')}
+                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                  bookingType === 'now'
+                    ? 'border-green-500 bg-green-500/20 text-green-400'
+                    : 'border-gray-600 bg-gray-800/30 text-gray-300 hover:border-gray-500'
+                }`}
+              >
+                <Clock className="w-5 h-5 mx-auto mb-1" />
+                <span className="text-sm font-bold">Book Now</span>
+                <p className="text-xs opacity-75">Available in 1-20 min</p>
+              </button>
+              <button
+                onClick={() => setBookingType('schedule')}
+                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                  bookingType === 'schedule'
+                    ? 'border-blue-500 bg-blue-500/20 text-blue-400'
+                    : 'border-gray-600 bg-gray-800/30 text-gray-300 hover:border-gray-500'
+                }`}
+              >
+                <Calendar className="w-5 h-5 mx-auto mb-1" />
+                <span className="text-sm font-bold">Schedule</span>
+                <p className="text-xs opacity-75">Choose date & time</p>
+              </button>
+            </div>
+          </div>
+
+          {/* Date and Time Selection (only show when scheduling) */}
+          {bookingType === 'schedule' && (
+            <div className="space-y-4">
+              <div>
+                <label className="block text-yellow-500 font-semibold mb-2 text-sm">
+                  Select Date
+                </label>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
+                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-yellow-500 font-semibold mb-2 text-sm">
+                  Select Time
+                </label>
+                <select
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                >
+                  <option value="">Choose time</option>
+                  <option value="00:00">12:00 AM</option>
+                  <option value="01:00">1:00 AM</option>
+                  <option value="02:00">2:00 AM</option>
+                  <option value="03:00">3:00 AM</option>
+                  <option value="04:00">4:00 AM</option>
+                  <option value="05:00">5:00 AM</option>
+                  <option value="06:00">6:00 AM</option>
+                  <option value="07:00">7:00 AM</option>
+                  <option value="08:00">8:00 AM</option>
+                  <option value="09:00">9:00 AM</option>
+                  <option value="10:00">10:00 AM</option>
+                  <option value="11:00">11:00 AM</option>
+                  <option value="12:00">12:00 PM</option>
+                  <option value="13:00">1:00 PM</option>
+                  <option value="14:00">2:00 PM</option>
+                  <option value="15:00">3:00 PM</option>
+                  <option value="16:00">4:00 PM</option>
+                  <option value="17:00">5:00 PM</option>
+                  <option value="18:00">6:00 PM</option>
+                  <option value="19:00">7:00 PM</option>
+                  <option value="20:00">8:00 PM</option>
+                  <option value="21:00">9:00 PM</option>
+                  <option value="22:00">10:00 PM</option>
+                  <option value="23:00">11:00 PM</option>
+                </select>
+              </div>
+            </div>
+          )}
+
+          {/* Enhanced Calculate Button */}
           <button
             onClick={calculateQuote}
-            disabled={!pickup || !dropoff || isCalculating}
+            disabled={!pickup || !dropoff || isCalculating || (bookingType === 'schedule' && (!selectedDate || !selectedTime))}
             className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 disabled:from-gray-600 disabled:to-gray-700 text-black font-bold py-4 px-6 rounded-xl transition-all transform hover:scale-105 disabled:hover:scale-100 flex items-center justify-center space-x-2 shadow-lg text-sm sm:text-base"
           >
             {isCalculating ? (
@@ -303,7 +394,7 @@ export default function QuoteWidget() {
             ) : (
               <>
                 <Car className="w-5 h-5" />
-                <span>RESERVE RIDE</span>
+                <span>{bookingType === 'now' ? 'BOOK NOW' : 'SCHEDULE RIDE'}</span>
                 <ArrowRight className="w-5 h-5" />
               </>
             )}

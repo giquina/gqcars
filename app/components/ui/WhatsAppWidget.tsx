@@ -21,26 +21,44 @@ interface ChatOption {
 export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [isDismissed, setIsDismissed] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [userName, setUserName] = useState('')
   const [currentFlow, setCurrentFlow] = useState('welcome')
 
-  // Show widget after 30 seconds
+  // Show widget after 30 seconds, but only if not dismissed
   useEffect(() => {
+    // Check if user has already dismissed the widget
+    const dismissed = localStorage.getItem('whatsapp-widget-dismissed')
+    if (dismissed) {
+      setIsDismissed(true)
+      return
+    }
+
     const timer = setTimeout(() => {
-      setIsVisible(true)
-      // Auto-open after showing for 3 seconds
-      setTimeout(() => {
-        if (!isOpen) {
-          setIsOpen(true)
-          initializeChat()
-        }
-      }, 3000)
+      if (!isDismissed && !isOpen) {
+        setIsVisible(true)
+        // Auto-open after showing for 3 seconds
+        setTimeout(() => {
+          if (!isOpen && !isDismissed) {
+            setIsOpen(true)
+            initializeChat()
+          }
+        }, 3000)
+      }
     }, 30000) // 30 seconds
 
     return () => clearTimeout(timer)
-  }, [isOpen])
+  }, [isDismissed, isOpen])
+
+  const handleClose = () => {
+    setIsOpen(false)
+    setIsVisible(false)
+    setIsDismissed(true)
+    // Remember that user dismissed the widget
+    localStorage.setItem('whatsapp-widget-dismissed', 'true')
+  }
 
   const initializeChat = () => {
     const welcomeMessage: ChatMessage = {
@@ -275,12 +293,14 @@ Thank you!`)
         }, 500)
         break
       case 'open-whatsapp':
-        handleContactHuman()
+        const whatsappMessage = encodeURIComponent(`Hello GQ Cars! I'm interested in your professional security transport services.`)
+        window.open(`https://wa.me/447407655203?text=${whatsappMessage}`, '_blank')
         break
     }
   }
 
-  if (!isVisible) return null
+  // Don't show widget if dismissed
+  if (isDismissed || !isVisible) return null
 
   return (
     <>
@@ -325,7 +345,7 @@ Thank you!`)
               </div>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               className="text-white hover:bg-white/20 p-1 rounded-full"
             >
               <X className="w-5 h-5" />
