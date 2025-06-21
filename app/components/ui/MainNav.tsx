@@ -65,6 +65,10 @@ export default function MainNav() {
               )}
             </div>
 
+            <Link href="/security-assessment" className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-green-500/20 transform hover:scale-105 transition-all duration-300 animate-pulse">
+              Free Assessment
+            </Link>
+            
             <Link href="/book" className="bg-gradient-to-r from-blue-600 to-amber-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-amber-500/20 transform hover:scale-105 transition-all duration-300">
               Book Now
             </Link>

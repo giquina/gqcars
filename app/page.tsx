@@ -142,6 +142,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Security Assessment CTA */}
+      <section className="py-20 bg-gradient-to-r from-green-900/50 to-emerald-900/50">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 shadow-2xl">
+              <div className="flex items-center justify-center mb-6">
+                <div className="bg-green-500 text-white px-4 py-2 rounded-full font-bold text-lg animate-pulse">
+                  🛡️ FREE Security Assessment
+                </div>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Get Your Personalized Security Plan
+              </h2>
+              
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Take our 2-minute assessment and receive a tailored security recommendation from our SIA-licensed experts. Completely free, no obligation.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="flex items-center justify-center">
+                  <div className="text-green-500 font-bold text-lg mr-2">✓</div>
+                  <span className="text-gray-300">Takes only 2 minutes</span>
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="text-green-500 font-bold text-lg mr-2">✓</div>
+                  <span className="text-gray-300">Expert recommendations</span>
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="text-green-500 font-bold text-lg mr-2">✓</div>
+                  <span className="text-gray-300">Instant pricing guide</span>
+                </div>
+              </div>
+              
+              <Link href="/security-assessment" className="inline-block bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-green-700 hover:to-emerald-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                Start Free Assessment →
+              </Link>
+              
+              <p className="text-gray-400 text-sm mt-4">Used by 500+ clients • 100% confidential</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Enhanced Features Section */}
       <EnhancedFeaturesSection />
 
