@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FAQSection from './components/ui/FAQSection'
 import EnhancedFeaturesSection from './components/ui/EnhancedFeaturesSection'
+import AIAssistantWidget from './components/ui/AIAssistantWidget'
 
 export default function Home() {
   return (
@@ -147,6 +148,9 @@ export default function Home() {
 
       {/* FAQ Section */}
       <FAQSection />
+
+      {/* AI Assistant Widget */}
+      <AIAssistantWidget />
     </div>
   )
 }

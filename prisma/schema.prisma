@@ -1,0 +1,344 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String?
+  phone           String?
+  address         String?
+  memberSince     DateTime @default(now())
+  loyaltyPoints   Int      @default(0)
+  accountType     UserType @default(INDIVIDUAL)
+  profilePicture  String?
+  preferredPayment String?
+  
+  // Authentication
+  password        String?
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  
+  // Relationships
+  bookings        Booking[]
+  payments        Payment[]
+  corporateAccount CorporateAccount?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model Booking {
+  id              String      @id @default(cuid())
+  userId          String
+  serviceType     ServiceType
+  subService      String?
+  
+  // Booking Details
+  date            DateTime
+  time            String
+  duration        Int         // in hours
+  pickupLocation  String
+  dropoffLocation String?
+  requirements    String?
+  
+  // Status
+  status          BookingStatus @default(PENDING)
+  
+  // Assignment
+  driverId        String?
+  vehicleId       String?
+  
+  // Pricing
+  estimatedCost   Float?
+  finalCost       Float?
+  
+  // Tracking
+  trackingData    Json?
+  
+  // Relationships
+  user            User        @relation(fields: [userId], references: [id])
+  driver          Driver?     @relation(fields: [driverId], references: [id])
+  vehicle         Vehicle?    @relation(fields: [vehicleId], references: [id])
+  payments        Payment[]
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@map("bookings")
+}
+
+model Driver {
+  id              String   @id @default(cuid())
+  name            String
+  email           String   @unique
+  phone           String
+  licenseNumber   String   @unique
+  siaLicense      String?
+  profilePicture  String?
+  
+  // Status
+  status          DriverStatus @default(AVAILABLE)
+  currentLocation Json?
+  
+  // Experience
+  yearsExperience Int?
+  specializations String[] @default([])
+  rating          Float?   @default(5.0)
+  totalRides      Int      @default(0)
+  
+  // Documents
+  documents       Json?
+  backgroundCheck Boolean  @default(false)
+  
+  // Relationships
+  bookings        Booking[]
+  vehicles        DriverVehicle[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("drivers")
+}
+
+model Vehicle {
+  id              String   @id @default(cuid())
+  make            String
+  model           String
+  year            Int
+  color           String
+  licensePlate    String   @unique
+  vehicleType     VehicleType
+  
+  // Features
+  features        String[] @default([])
+  maxPassengers   Int      @default(4)
+  
+  // Status
+  status          VehicleStatus @default(AVAILABLE)
+  currentLocation Json?
+  mileage         Int?
+  
+  // Maintenance
+  lastService     DateTime?
+  nextService     DateTime?
+  insurance       Json?
+  
+  // Relationships
+  bookings        Booking[]
+  drivers         DriverVehicle[]
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("vehicles")
+}
+
+model DriverVehicle {
+  id        String  @id @default(cuid())
+  driverId  String
+  vehicleId String
+  isPrimary Boolean @default(false)
+  
+  driver    Driver  @relation(fields: [driverId], references: [id])
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+  
+  @@unique([driverId, vehicleId])
+  @@map("driver_vehicles")
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  userId          String
+  bookingId       String
+  
+  // Payment Details
+  amount          Float
+  currency        String        @default("GBP")
+  method          PaymentMethod @default(CARD)
+  status          PaymentStatus @default(PENDING)
+  
+  // Stripe Integration
+  stripePaymentId String?
+  stripeClientSecret String?
+  
+  // Metadata
+  metadata        Json?
+  
+  // Relationships
+  user            User          @relation(fields: [userId], references: [id])
+  booking         Booking       @relation(fields: [bookingId], references: [id])
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("payments")
+}
+
+model CorporateAccount {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  companyName     String
+  companyAddress  String
+  vatNumber       String?
+  contactPerson   String
+  
+  // Billing
+  billingAddress  String
+  paymentTerms    Int      @default(30) // days
+  creditLimit     Float?
+  
+  // Settings
+  autoApproval    Boolean  @default(false)
+  preferredDrivers String[] @default([])
+  
+  // Relationships
+  user            User     @relation(fields: [userId], references: [id])
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("corporate_accounts")
+}
+
+model LoyaltyProgram {
+  id              String   @id @default(cuid())
+  name            String
+  description     String
+  pointsPerPound  Float    @default(1.0)
+  active          Boolean  @default(true)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("loyalty_programs")
+}
+
+model Analytics {
+  id              String   @id @default(cuid())
+  eventType       String
+  eventData       Json
+  userId          String?
+  bookingId       String?
+  
+  createdAt       DateTime @default(now())
+
+  @@map("analytics")
+}
+
+// Enums
+enum UserType {
+  INDIVIDUAL
+  CORPORATE
+  VIP
+  FAMILY_OFFICE
+}
+
+enum ServiceType {
+  CLOSE_PROTECTION
+  PRIVATE_HIRE
+  CORPORATE_SECURITY
+  WEDDING_SECURITY
+  VIP_PROTECTION
+  FAMILY_PROTECTION
+  FAMILY_OFFICE
+  AIRPORT_TRANSFER
+  CHAUFFEUR
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+enum DriverStatus {
+  AVAILABLE
+  BUSY
+  OFF_DUTY
+  UNAVAILABLE
+}
+
+enum VehicleType {
+  SEDAN
+  SUV
+  VAN
+  LUXURY
+  ARMORED
+}
+
+enum VehicleStatus {
+  AVAILABLE
+  IN_USE
+  MAINTENANCE
+  OUT_OF_SERVICE
+}
+
+enum PaymentMethod {
+  CARD
+  BANK_TRANSFER
+  CORPORATE_ACCOUNT
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
