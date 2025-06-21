@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Shield, Car, Building2, GlassWater, Star, Calendar, Clock, User, Mail, Phone, MapPin } from 'lucide-react'
 import LoadingSpinner from '../ui/LoadingSpinner'
+import DateTimePicker from '../ui/DateTimePicker'
 
 interface FormErrors {
   [key: string]: string
@@ -200,36 +201,16 @@ export default function BookingForm() {
         {/* Step 2: Service Details */}
         {step === 2 && (
           <div className="space-y-6">
+            {/* Date Time Picker */}
+            <DateTimePicker
+              date={formData.date}
+              time={formData.time}
+              onDateChange={(date) => setFormData(prev => ({ ...prev, date }))}
+              onTimeChange={(time) => setFormData(prev => ({ ...prev, time }))}
+              className="mb-6"
+            />
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Date</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-2 bg-gq-black border border-gray-700 focus:border-gq-gold outline-none"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Time</label>
-                <div className="relative">
-                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-2 bg-gq-black border border-gray-700 focus:border-gq-gold outline-none"
-                    required
-                  />
-                </div>
-              </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">Duration</label>

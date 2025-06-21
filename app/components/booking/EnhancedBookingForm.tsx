@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Shield, Car, Building2, GlassWater, Star, Calendar, Clock, User, Mail, Phone, MapPin, Navigation, Send } from 'lucide-react'
+import DateTimePicker from '../ui/DateTimePicker'
 
 interface FormErrors {
   [key: string]: string
@@ -362,39 +363,17 @@ export default function EnhancedBookingForm() {
               </div>
             </div>
 
-            {/* Date & Time */}
+            {/* Date & Time Picker */}
+            <DateTimePicker
+              date={formData.date}
+              time={formData.time}
+              onDateChange={(date) => setFormData(prev => ({ ...prev, date }))}
+              onTimeChange={(time) => setFormData(prev => ({ ...prev, time }))}
+              className="mb-6"
+            />
+
+            {/* Duration */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Date</label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    min={new Date().toISOString().split('T')[0]}
-                    className="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg focus:border-amber-500 outline-none"
-                  />
-                </div>
-                {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Time</label>
-                <div className="relative">
-                  <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-600 rounded-lg focus:border-amber-500 outline-none"
-                  />
-                </div>
-                {errors.time && <p className="text-red-500 text-sm mt-1">{errors.time}</p>}
-              </div>
-
               <div>
                 <label className="block text-sm font-medium mb-2">Duration</label>
                 <select
