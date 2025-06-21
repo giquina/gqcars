@@ -2,46 +2,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FAQSection from './components/ui/FAQSection'
 import EnhancedFeaturesSection from './components/ui/EnhancedFeaturesSection'
+import DynamicHeroSection from './components/ui/DynamicHeroSection'
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative flex items-center justify-center min-h-[60vh] overflow-hidden">
-        {/* Optional video background for desktop */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-40 hidden md:block"
-        >
-          <source src="/videos/security-hero.mp4" type="video/mp4" />
-        </video>
-        {/* Fallback image for mobile or if video fails */}
-        <div className="absolute inset-0 md:hidden">
-          <Image src="/images/hero.jpg" alt="Security Team" fill className="object-cover object-center opacity-40" />
-        </div>
-        {/* Animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/30 via-blue-500/30 to-slate-900/80 animate-gradient-slow z-10" />
-        <div className="container mx-auto text-center relative z-20 py-24 px-4">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 bg-gradient-to-r from-amber-500 to-blue-500 bg-clip-text text-transparent animate-gradient">
-            Elite Security Services
-          </h1>
-          <p className="text-2xl md:text-3xl text-gray-200 mb-12 max-w-3xl mx-auto drop-shadow-lg">
-            SIA licensed professionals for close protection, luxury private hire, and corporate security. Discreet, reliable, and trusted by VIPs and businesses across the UK.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Link href="/book" className="bg-gradient-to-r from-blue-600 to-amber-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-amber-500/20 transform hover:scale-105 transition-all duration-300">
-              Request a Quote
-            </Link>
-            <a href="tel:+447407655203" className="bg-slate-800 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-blue-500/20 transform hover:scale-105 transition-all duration-300 border border-slate-700">
-              07407 655 203
-            </a>
-          </div>
-          <p className="text-gray-300 font-medium">24/7 Emergency Response Available</p>
-        </div>
-      </section>
+      {/* Enhanced Dynamic Hero Section */}
+      <DynamicHeroSection />
 
       {/* Services Grid */}
       <section className="py-20 px-4">
