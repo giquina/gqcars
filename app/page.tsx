@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FAQSection from './components/ui/FAQSection'
 import EnhancedFeaturesSection from './components/ui/EnhancedFeaturesSection'
+import CompactMobileAppSection from './components/ui/CompactMobileAppSection'
 
 export default function Home() {
   return (
@@ -144,6 +145,9 @@ export default function Home() {
 
       {/* Enhanced Features Section */}
       <EnhancedFeaturesSection />
+
+      {/* Compact Mobile App Section */}
+      <CompactMobileAppSection />
 
       {/* FAQ Section */}
       <FAQSection />
