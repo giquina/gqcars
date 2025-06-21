@@ -80,26 +80,7 @@ export default function EnhancedFeaturesSection() {
           </button>
         </div>
 
-        {/* Premium Offer Banner */}
-        <div className="mt-16 bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl p-8 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-red-600/80 to-pink-600/80" />
-          <div className="relative z-10">
-            <div className="flex justify-center items-center gap-2 mb-4">
-              <span className="text-2xl">🔥</span>
-              <span className="text-xl font-bold text-white">LIMITED TIME OFFER</span>
-              <span className="text-2xl">🔥</span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              50% OFF Your First Ride!
-            </h3>
-            <p className="text-red-100 text-lg mb-6">
-              New customers only • Use code: <span className="bg-white text-red-600 px-3 py-1 rounded-lg font-bold">FIRST50</span>
-            </p>
-            <button className="bg-white text-red-600 px-8 py-3 rounded-xl font-bold hover:bg-red-50 transition-colors">
-              CLAIM OFFER NOW
-            </button>
-          </div>
-        </div>
+
       </div>
     </div>
   )

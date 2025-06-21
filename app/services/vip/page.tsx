@@ -352,5 +352,17 @@ const vehicles = [
       "Emergency systems",
       "Executive configuration"
     ]
+  },
+  {
+    model: "Range Rover Autobiography",
+    category: "GQ Premium",
+    features: [
+      "Bespoke luxury interior",
+      "Enhanced security package",
+      "Executive rear seating",
+      "Premium sound system",
+      "Climate control zones",
+      "Privacy partition"
+    ]
   }
 ]
