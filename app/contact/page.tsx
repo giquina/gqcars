@@ -53,6 +53,49 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div className="bg-gray-900 p-8 rounded-lg">
             <h2 className="text-2xl font-bold mb-6 text-yellow-500">Send us a Message</h2>
+            <form className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                <input 
+                  type="text" 
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-white"
+                  placeholder="Your full name"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                <input 
+                  type="email" 
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-white"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Phone</label>
+                <input 
+                  type="tel" 
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-white"
+                  placeholder="Your phone number"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                <textarea 
+                  rows={4}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent text-white"
+                  placeholder="Tell us about your security transport needs..."
+                ></textarea>
+              </div>
+              
+              <button 
+                type="submit"
+                className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-6 rounded-lg transition-colors"
+              >
+                Send Message
+              </button>
             </form>
           </div>
         </div>
