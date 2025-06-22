@@ -6,7 +6,7 @@ import LocationBasedQuotes from './components/ui/LocationBasedQuotes'
 import QuoteWidget from './components/ui/QuoteWidget'
 import TestimonialsSection from './components/ui/TestimonialsSection'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
-import EnhancedSmartPlatform from './components/ui/EnhancedSmartPlatform'
+import QuickActionPlatform from './components/ui/QuickActionPlatform'
 
 export default function Home() {
   return (
@@ -447,9 +447,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Enhanced Smart Platform Section - Fixed at bottom */}
+      {/* Quick Action Platform - Fixed at bottom */}
       <div className="fixed bottom-0 left-0 right-0 z-40">
-        <EnhancedSmartPlatform />
+        <QuickActionPlatform />
       </div>
 
       {/* Mobile App CTA */}
