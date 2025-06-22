@@ -1,4 +1,4 @@
-import { Shield, Clock, Award, MapPin, Building2, Sparkles, Car, Star, Phone, Plane, Mail, MessageCircle, Calendar, Quote, Calculator, Crown, Users } from 'lucide-react'
+import { Shield, Clock, Award, MapPin, Building2, Sparkles, Car, Star, Phone, Plane, Mail, MessageCircle, Calendar, Quote, Calculator, Crown, Users, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import GQCarsLogo from './components/ui/GQCarsLogo'
 import MobileAppCTA from './components/ui/MobileAppCTA'
@@ -58,6 +58,72 @@ export default function Home() {
             {/* INSTANT QUOTE WIDGET - Prominently Placed at Top */}
             <div className="mb-12">
               <QuoteWidget />
+            </div>
+
+            {/* SECURITY ASSESSMENT CTA - Professional Integration */}
+            <div className="bg-gradient-to-br from-purple-900/60 via-blue-900/60 to-gray-900/60 p-6 sm:p-8 rounded-2xl border border-purple-500/30 mb-12 relative overflow-hidden group">
+              {/* Animated Background Elements */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-6 right-6 w-16 h-16 border border-purple-500 rotate-45 animate-spin-slow"></div>
+                <div className="absolute bottom-6 left-6 w-12 h-12 border border-yellow-500 rotate-12 animate-pulse"></div>
+                <div className="absolute top-1/2 right-12 w-6 h-6 bg-purple-500 rounded-full animate-ping"></div>
+              </div>
+              
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center space-x-3 bg-purple-600/20 border border-purple-500/50 px-6 py-3 rounded-full mb-6">
+                  <Shield className="w-6 h-6 text-purple-400 animate-pulse" />
+                  <span className="text-purple-300 font-bold text-sm sm:text-base">🛡️ PERSONALIZED SECURITY RECOMMENDATIONS</span>
+                  <Sparkles className="w-6 h-6 text-purple-400 animate-pulse" />
+                </div>
+                
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-4">
+                  Find Your Perfect Security Match
+                </h3>
+                <p className="text-gray-300 text-base sm:text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
+                  Take our <span className="text-purple-400 font-semibold">5-question security assessment</span> to get personalized transport recommendations with <span className="text-yellow-500 font-semibold">exclusive pricing</span>
+                </p>
+                
+                {/* Benefits Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+                  <div className="bg-black/30 border border-purple-500/20 rounded-xl p-4">
+                    <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <Clock className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="text-white font-bold text-sm mb-1">2 Minutes</h4>
+                    <p className="text-gray-400 text-xs">Quick & easy assessment</p>
+                  </div>
+                  
+                  <div className="bg-black/30 border border-yellow-500/20 rounded-xl p-4">
+                    <div className="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <Award className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="text-white font-bold text-sm mb-1">Personalized</h4>
+                    <p className="text-gray-400 text-xs">Tailored recommendations</p>
+                  </div>
+                  
+                  <div className="bg-black/30 border border-green-500/20 rounded-xl p-4">
+                    <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                      <Star className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="text-white font-bold text-sm mb-1">50% Off</h4>
+                    <p className="text-gray-400 text-xs">Exclusive discount included</p>
+                  </div>
+                </div>
+                
+                {/* CTA Button */}
+                <Link 
+                  href="/assessment"
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+                >
+                  <Shield className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                  Start Security Assessment
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                
+                <p className="text-gray-400 text-xs mt-3">
+                  ✨ Get instant recommendations • No personal information required • 100% free
+                </p>
+              </div>
             </div>
             
             {/* Better mobile paragraph formatting */}
