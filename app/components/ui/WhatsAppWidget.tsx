@@ -168,65 +168,63 @@ Sign up for personalized service, priority bookings, and direct specialist acces
 
   const askDiscoveryQuestions = () => {
     addMessage(
-      `Let me help you find exactly what you need! What brings you to GQ CARS Ltd today?`,
+      `I'd love to help you find the perfect solution! What best describes what you're looking for today?`,
       true,
       [
-        { id: 'need-transport', text: '🚗 I need secure transport', action: 'transport-discovery', icon: Car },
-        { id: 'need-security', text: '🛡️ I need security services', action: 'security-discovery', icon: Shield },
-        { id: 'planning-event', text: '🎉 I\'m planning an event', action: 'event-discovery', icon: Users },
-        { id: 'emergency-help', text: '🚨 This is urgent/emergency', action: 'emergency', icon: Phone },
-        { id: 'just-browsing', text: '👀 Just exploring options', action: 'show-services', icon: Star }
+        { id: 'need-transport', text: '🚗 Secure transport & transfers', action: 'transport-discovery', icon: Car },
+        { id: 'need-security', text: '🛡️ Personal or business security', action: 'security-discovery', icon: Shield },
+        { id: 'planning-event', text: '🎉 Event security & transport', action: 'event-discovery', icon: Users },
+        { id: 'just-browsing', text: '� I\'d prefer to speak with someone', action: 'request-callback', icon: Phone }
       ]
     )
   }
 
   const askRegisteredUserQuestions = (userName?: string) => {
     addMessage(
-      `Perfect! What can I help you with today, ${userName || 'there'}?`,
+      `Great to see you again, ${userName || 'there'}! How can I assist you today?`,
       true,
       [
-        { id: 'book-favorite', text: '⚡ Book my usual service', action: 'quick-book', icon: Zap },
-        { id: 'new-service', text: '🔍 Explore new services', action: 'transport-discovery', icon: Car },
-        { id: 'schedule-callback', text: '📞 Schedule a callback', action: 'request-callback', icon: Phone },
-        { id: 'emergency-vip', text: '🚨 Emergency (VIP Priority)', action: 'emergency', icon: Phone }
+        { id: 'request-callback', text: '📞 Request priority callback', action: 'request-callback', icon: Phone },
+        { id: 'browse-services', text: '🔍 Browse our services', action: 'show-services', icon: Star },
+        { id: 'new-service', text: '� Discuss specific needs', action: 'transport-discovery', icon: Car }
       ]
     )
   }
 
   const handleTransportDiscovery = () => {
     addMessage(
-      `Perfect! What type of transport do you need?`,
+      `Perfect! Our secure transport services include SIA-licensed drivers and premium vehicles. What type of journey do you need?`,
       true,
       [
-        { id: 'airport-transport', text: '✈️ Airport Transfer', action: 'service-detail', serviceId: 'airport', icon: Plane },
-        { id: 'vip-transport', text: '⭐ VIP/Luxury Transport', action: 'service-detail', serviceId: 'vip', icon: Star },
-        { id: 'not-sure-transport', text: '🤔 Not sure, show me options', action: 'show-transport-services', icon: Car }
+        { id: 'airport-transport', text: '✈️ Airport transfers (all UK airports)', action: 'service-detail', serviceId: 'airport', icon: Plane },
+        { id: 'vip-transport', text: '⭐ VIP & luxury transport', action: 'service-detail', serviceId: 'vip', icon: Star },
+        { id: 'discuss-transport', text: '💬 Discuss my specific needs', action: 'request-callback', icon: Phone }
       ]
     )
   }
 
   const handleSecurityDiscovery = () => {
     addMessage(
-      `What type of security service do you need?`,
+      `Excellent choice! All our security services use SIA-licensed professionals. Which area best fits your needs?`,
       true,
       [
-        { id: 'personal-security', text: '🛡️ Personal Protection', action: 'service-detail', serviceId: 'close-protection', icon: Shield },
-        { id: 'business-security', text: '🏢 Corporate Security', action: 'service-detail', serviceId: 'corporate', icon: Building2 },
-        { id: 'family-security', text: '🏠 Family/Estate Security', action: 'service-detail', serviceId: 'family-office', icon: Home },
-        { id: 'not-sure-security', text: '🤔 Not sure, show me options', action: 'show-security-services', icon: Shield }
+        { id: 'personal-security', text: '🛡️ Personal close protection', action: 'service-detail', serviceId: 'close-protection', icon: Shield },
+        { id: 'business-security', text: '🏢 Business & corporate security', action: 'service-detail', serviceId: 'corporate', icon: Building2 },
+        { id: 'family-security', text: '🏠 Family & estate security', action: 'service-detail', serviceId: 'family-office', icon: Home },
+        { id: 'discuss-security', text: '💬 Discuss my security requirements', action: 'request-callback', icon: Phone }
       ]
     )
   }
 
   const handleEventDiscovery = () => {
     addMessage(
-      `What type of event are you planning?`,
+      `Perfect! We provide comprehensive security and transport for all types of events. What kind of event are you planning?`,
       true,
       [
-        { id: 'wedding-event', text: '💒 Wedding', action: 'service-detail', serviceId: 'weddings', icon: Heart },
-        { id: 'corporate-event', text: '🏢 Corporate Event', action: 'service-detail', serviceId: 'corporate', icon: Building2 },
-        { id: 'vip-event', text: '⭐ VIP/Celebrity Event', action: 'service-detail', serviceId: 'vip', icon: Star },
-        { id: 'not-sure-event', text: '🤔 Not sure, show me options', action: 'show-services', icon: Users }
+        { id: 'wedding-event', text: '💒 Wedding security & transport', action: 'service-detail', serviceId: 'weddings', icon: Heart },
+        { id: 'corporate-event', text: '🏢 Corporate event security', action: 'service-detail', serviceId: 'corporate', icon: Building2 },
+        { id: 'vip-event', text: '⭐ VIP or high-profile event', action: 'service-detail', serviceId: 'vip', icon: Star },
+        { id: 'discuss-event', text: '💬 Discuss my event requirements', action: 'request-callback', icon: Phone }
       ]
     )
   }
@@ -291,12 +289,6 @@ Sign up for personalized service, priority bookings, and direct specialist acces
             break
           case 'show-services':
             showAllServices()
-            break
-          case 'quick-book':
-            showQuickBooking()
-            break
-          case 'emergency':
-            handleEmergency()
             break
           case 'quote-wizard':
             startQuoteWizard()
@@ -387,17 +379,13 @@ Please provide your preferred contact details:`,
 
   const quickContact = () => {
     addMessage(
-      `📱 **Quick Contact Options**
-
-Get in touch with GQ CARS Ltd instantly:
-
-🔥 **Fast Track Options:**`,
+      `Perfect! Here are the best ways to get in touch with our team:`,
       true,
       [
-        { id: 'signup-first', text: '⭐ Sign Up First (Recommended)', action: 'start-signup', icon: Star },
-        { id: 'whatsapp-direct', text: '💬 WhatsApp Direct', action: 'contact', icon: MessageCircle },
-        { id: 'call-now', text: '📞 Call Now', action: 'call', icon: Phone },
-        { id: 'email-us', text: '📧 Email Us', action: 'contact', metadata: 'email', icon: CreditCard }
+        { id: 'request-callback', text: '📞 Request callback', action: 'request-callback', icon: Phone },
+        { id: 'whatsapp-direct', text: '💬 WhatsApp chat', action: 'contact', icon: MessageCircle },
+        { id: 'call-now', text: '☎️ Call now', action: 'call', icon: Phone },
+        { id: 'signup-first', text: '⭐ Sign up for priority service', action: 'start-signup', icon: Star }
       ]
     )
   }
@@ -428,9 +416,9 @@ Your account has been created successfully. You now have access to:
 What would you like to do first?`,
         true,
         [
-          { id: 'browse-services', text: '🔍 Browse All Services', action: 'show-services', icon: Car },
-          { id: 'quick-booking', text: '⚡ Priority Booking', action: 'quick-book', icon: Zap },
-          { id: 'request-callback', text: '📞 Request Callback', action: 'request-callback', icon: Phone }
+          { id: 'browse-services', text: '🔍 Browse all services', action: 'show-services', icon: Car },
+          { id: 'request-callback', text: '📞 Request priority callback', action: 'request-callback', icon: Phone },
+          { id: 'discuss-needs', text: '� Discuss my specific needs', action: 'transport-discovery', icon: MessageCircle }
         ]
       )
     } else if (formType === 'callback') {
@@ -448,8 +436,8 @@ Our specialist will call you ${data.time === 'asap' ? 'within 30 minutes' : `dur
 You'll receive a confirmation SMS shortly.`,
         true,
         [
-          { id: 'browse-services', text: '🔍 Browse Services', action: 'show-services', icon: Car },
-          { id: 'contact-whatsapp', text: '💬 WhatsApp Chat', action: 'contact', icon: MessageCircle }
+          { id: 'browse-services', text: '🔍 Browse our services', action: 'show-services', icon: Car },
+          { id: 'contact-whatsapp', text: '💬 WhatsApp chat', action: 'contact', icon: MessageCircle }
         ]
       )
     }
@@ -458,26 +446,24 @@ You'll receive a confirmation SMS shortly.`,
   const showAllServices = () => {
     const services = getAllServices()
     
-         addMessage(
-       `🌟 **GQ CARS LTD Complete Service Portfolio**
+    addMessage(
+      `Here's our complete range of professional services:
 
-Professional security, luxury transport & premium events management across London & South East England.
+🛡️ All include SIA-licensed specialists
+🚗 Premium vehicles & equipment  
+📞 24/7 professional support
 
-🛡️ All services include SIA-licensed specialists
-🚗 Premium vehicle fleet available
-🎯 Tailored solutions for every need
-
-Select any service to explore:`, 
-       true, 
-       services.map(service => ({
-         id: service.id,
-         text: `${service.emoji} ${service.name} (${service.pricing.display})`,
-         action: 'service-detail',
-         serviceId: service.id,
-         icon: service.icon
-       })),
-       'options'
-     )
+Which service interests you?`, 
+      true, 
+      services.map(service => ({
+        id: service.id,
+        text: `${service.emoji} ${service.name} (${service.pricing.display})`,
+        action: 'service-detail',
+        serviceId: service.id,
+        icon: service.icon
+      })),
+      'options'
+    )
   }
 
   const showServiceDetail = (serviceId: string) => {
@@ -504,10 +490,10 @@ ${service.description}
 ${service.quickFacts.map(fact => `• ${fact}`).join('\n')}`,
         true,
         [
-          { id: 'features', text: '✨ View Features', action: 'service-features', serviceId: service.id, icon: Sparkles },
-          { id: 'pricing', text: '💷 Pricing Details', action: 'service-pricing', serviceId: service.id, icon: CreditCard },
-          { id: 'book', text: '🚗 Book Now', action: 'book-service', serviceId: service.id, icon: Car },
-          { id: 'back', text: '↩️ Back to Services', action: 'show-services', icon: ArrowLeft }
+          { id: 'features', text: '✨ View features', action: 'service-features', serviceId: service.id, icon: Sparkles },
+          { id: 'pricing', text: '💷 Pricing details', action: 'service-pricing', serviceId: service.id, icon: CreditCard },
+          { id: 'callback', text: '� Request callback', action: 'request-callback', icon: Phone },
+          { id: 'back', text: '↩️ Back to services', action: 'show-services', icon: ArrowLeft }
         ],
         'text'
       )
@@ -535,13 +521,13 @@ ${service.quickFacts.map(fact => `• ${fact}`).join('\n')}`,
 
     setTimeout(() => {
       addMessage(
-        'Would you like to proceed with booking or need more information?',
+        'How would you like to proceed?',
         true,
         [
-          { id: 'book', text: '🚗 Book This Service', action: 'book-service', serviceId: service.id, icon: Car },
-          { id: 'pricing', text: '💷 View Pricing', action: 'service-pricing', serviceId: service.id, icon: CreditCard },
-          { id: 'questions', text: '❓ Ask Questions', action: 'contact', serviceId: service.id, icon: MessageCircle },
-          { id: 'back', text: '↩️ Back to Service', action: 'service-detail', serviceId: service.id, icon: ArrowLeft }
+          { id: 'callback', text: '� Request callback to book', action: 'request-callback', icon: Phone },
+          { id: 'pricing', text: '💷 View pricing details', action: 'service-pricing', serviceId: service.id, icon: CreditCard },
+          { id: 'contact', text: '💬 Ask questions', action: 'contact', serviceId: service.id, icon: MessageCircle },
+          { id: 'back', text: '↩️ Back to service details', action: 'service-detail', serviceId: service.id, icon: ArrowLeft }
         ]
       )
     }, 1000)
@@ -568,9 +554,9 @@ Base Price: ${service.pricing.display}`
       pricingText,
       true,
       [
-        { id: 'book', text: '🚗 Book Now (50% OFF)', action: 'book-service', serviceId: service.id, icon: Car },
-        { id: 'quote', text: '📋 Get Custom Quote', action: 'contact', serviceId: service.id, icon: CreditCard },
-        { id: 'back', text: '↩️ Back to Service', action: 'service-detail', serviceId: service.id, icon: ArrowLeft }
+        { id: 'callback', text: '� Request callback to book', action: 'request-callback', icon: Phone },
+        { id: 'quote', text: '� Get custom quote', action: 'contact', serviceId: service.id, icon: MessageCircle },
+        { id: 'back', text: '↩️ Back to service details', action: 'service-detail', serviceId: service.id, icon: ArrowLeft }
       ],
       'pricing'
     )
@@ -590,35 +576,17 @@ Base Price: ${service.pricing.display}`
     )
   }
 
-  const showQuickBooking = () => {
-    const popularServices = getAllServices().slice(0, 4) // Get top 4 services
-    
-    addMessage(
-      `⚡ **Quick Booking** - Choose your service:
 
-Most popular services for immediate booking:`,
-      true,
-             popularServices.map(service => ({
-         id: service.id,
-         text: `${service.emoji} ${service.name} - ${service.pricing.display}`,
-         action: 'book-service',
-         serviceId: service.id,
-         icon: service.icon
-       }))
-    )
-  }
 
   const startQuoteWizard = () => {
     addMessage(
-      `💷 **Quote Wizard** - Let's find the perfect service for you!
-
-What type of service do you need?`,
+      `I'd be happy to help you get a personalized quote! What type of service are you interested in?`,
       true,
       [
-        { id: 'transport', text: '🚗 Transport Services', action: 'quote-category', metadata: 'transport' },
-        { id: 'security', text: '🛡️ Security Services', action: 'quote-category', metadata: 'security' },
-        { id: 'events', text: '🎉 Event Services', action: 'quote-category', metadata: 'events' },
-        { id: 'not-sure', text: '🤔 Not Sure', action: 'show-services' }
+        { id: 'transport', text: '🚗 Transport services', action: 'transport-discovery' },
+        { id: 'security', text: '🛡️ Security services', action: 'security-discovery' },
+        { id: 'events', text: '🎉 Event services', action: 'event-discovery' },
+        { id: 'callback-quote', text: '📞 Request callback for quote', action: 'request-callback', icon: Phone }
       ]
     )
   }
@@ -647,26 +615,7 @@ Ready to proceed?`,
     )
   }
 
-  const handleEmergency = () => {
-    addMessage(
-      `🚨 **EMERGENCY SERVICE ACTIVATED** 🚨
 
-For immediate security transport assistance:
-
-⏰ **Response Time:** 5-15 minutes
-🛡️ **SIA-licensed driver** will be dispatched
-📍 **Live GPS tracking** provided
-🚗 **Premium secure vehicle**
-
-**Emergency Contact:**`,
-      true,
-      [
-        { id: 'emergency-call', text: '🚨 CALL EMERGENCY LINE NOW', action: 'call', icon: Phone },
-        { id: 'emergency-whatsapp', text: '⚡ Emergency WhatsApp', action: 'contact', metadata: 'emergency' },
-        { id: 'emergency-location', text: '📍 Share Location', action: 'contact', metadata: 'location' }
-      ]
-    )
-  }
 
   const handleCall = () => {
     addMessage('📞 Connecting you to our 24/7 professional line...', true)
@@ -984,11 +933,11 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
                 <span>Call Now</span>
               </button>
               <button
-                onClick={() => handleOptionClick({ id: 'quick-book', text: '⚡ Quick Book', action: 'quick-book' })}
+                onClick={() => handleOptionClick({ id: 'request-callback', text: '📞 Request Callback', action: 'request-callback' })}
                 className="flex-1 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black text-xs font-bold py-3 px-3 rounded-xl flex items-center justify-center space-x-2 transition-all hover:scale-105"
               >
-                <Zap className="w-4 h-4" />
-                <span>Quick Book</span>
+                <Phone className="w-4 h-4" />
+                <span>Callback</span>
               </button>
             </div>
                          <div className="text-center mt-2">
