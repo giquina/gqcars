@@ -200,7 +200,7 @@ const services = [
       "Security driver",
       "Route planning",
       "Threat assessment",
-      "Emergency protocols"
+      "Crisis protocols"
     ]
   }
 ]

@@ -126,8 +126,8 @@ export default function WhatsAppWidget() {
         case 'get-quote':
           handleGetQuote()
           break
-        case 'emergency':
-          handleEmergency()
+        case 'urgent':
+          handleUrgent()
           break
         case 'airport':
           handleAirport()
@@ -171,7 +171,7 @@ export default function WhatsAppWidget() {
   }
 
   const handleCall = () => {
-    addMessage('Connecting you to our 24/7 emergency line. Our SIA licensed team is standing by!', true)
+    addMessage('Connecting you to our 24/7 support line. Our SIA licensed team is standing by!', true)
     setTimeout(() => {
       window.open('tel:07407655203', '_self')
     }, 1000)
@@ -199,22 +199,22 @@ Would you like to proceed?`, true, [
     addMessage('I\'ll help you get an instant quote! Please use our quote widget on the homepage, or I can connect you directly with our team for a personalized quote.', true, [
       { id: 'use-widget', text: '📱 Use Quote Widget', action: 'close-and-scroll' },
       { id: 'personal-quote', text: '👤 Personal Quote', action: 'contact-human' },
-      { id: 'emergency-quote', text: '🚨 Emergency Booking', action: 'emergency' }
+      { id: 'urgent-booking', text: '⚡ Urgent Booking', action: 'urgent' }
     ])
   }
 
-  const handleEmergency = () => {
-    addMessage(`🚨 EMERGENCY BOOKING ACTIVATED 🚨
+  const handleUrgent = () => {
+    addMessage(`⚡ URGENT BOOKING SERVICE ⚡
 
-For immediate assistance with urgent security transport needs, I'm connecting you directly to our emergency response team.
+For immediate assistance with urgent security transport needs, I'm connecting you directly to our professional support team.
 
 ⏰ Response time: 5-15 minutes
 🛡️ SIA licensed driver will be dispatched
 📍 Live GPS tracking provided
 
-Call now for immediate dispatch:`, true, [
-      { id: 'emergency-call', text: '🚨 CALL EMERGENCY LINE', action: 'call' },
-      { id: 'emergency-whatsapp', text: '💬 Emergency WhatsApp', action: 'contact-human' }
+Contact us now for immediate dispatch:`, true, [
+      { id: 'urgent-call', text: '� CALL NOW', action: 'call' },
+      { id: 'urgent-whatsapp', text: '💬 Urgent WhatsApp', action: 'contact-human' }
     ])
   }
 

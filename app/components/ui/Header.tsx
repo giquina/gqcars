@@ -26,7 +26,7 @@ export default function Header() {
               <GQCarsLogo className="w-8 h-8 sm:w-10 sm:h-10" />
               <div>
                 <a href="/" className="text-base sm:text-xl font-bold tracking-wider text-yellow-500">GQ CARS LTD</a>
-                <p className="text-xs text-gray-400 hidden sm:block">Professional • SIA Licensed • Smart Technology</p>
+                <p className="text-xs text-gray-400 hidden sm:block">Professional • SIA Licensed • CPO Trained • Premium Transport</p>
               </div>
             </div>
           </div>

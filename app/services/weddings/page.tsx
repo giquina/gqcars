@@ -175,8 +175,8 @@ const weddingServices = [
     icon: Camera
   },
   {
-    title: "Emergency Response",
-    description: "Rapid response team for any security or medical emergencies.",
+    title: "Rapid Response",
+    description: "Professional response team for any security or medical situations.",
     icon: Clock
   }
 ]
@@ -189,7 +189,7 @@ const packages = [
       "2 SIA licensed security officers",
       "Access control and guest list management",
       "Secure gift storage",
-      "Basic emergency response planning",
+      "Basic incident response planning",
       "6 hours of coverage"
     ]
   },
@@ -203,7 +203,7 @@ const packages = [
       "Asset protection team",
       "Media access control",
       "12 hours of coverage",
-      "Advanced emergency planning"
+      "Advanced incident planning"
     ]
   },
   {
@@ -216,7 +216,7 @@ const packages = [
       "Professional media management",
       "Comprehensive security planning",
       "24-hour coverage",
-      "Dedicated emergency response team"
+      "Dedicated professional response team"
     ]
   }
 ]

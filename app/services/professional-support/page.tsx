@@ -119,7 +119,7 @@ export default function ProfessionalSupportPage() {
                 'Comprehensive insurance and liability coverage',
                 'Discrete and professional service approach',
                 'Advanced communication systems',
-                'Emergency response protocols'
+                'Crisis response protocols'
               ].map((benefit, index) => (
                 <div key={index} className="flex items-center space-x-4 bg-gray-800/30 p-4 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-colors">
                   <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
