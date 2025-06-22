@@ -6,11 +6,27 @@ import LocationBasedQuotes from './components/ui/LocationBasedQuotes'
 import QuoteWidget from './components/ui/QuoteWidget'
 import TestimonialsSection from './components/ui/TestimonialsSection'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import InteractiveHero from './components/ui/InteractiveHero'
+import LiveNotifications from './components/ui/LiveNotifications'
+import InteractiveMap from './components/ui/InteractiveMap'
+import GameifiedBooking from './components/ui/GameifiedBooking'
+import FloatingActionButton from './components/ui/FloatingActionButton'
+import WeatherPricingWidget from './components/ui/WeatherPricingWidget'
+import InteractiveTestimonials from './components/ui/InteractiveTestimonials'
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section */}
+      {/* Interactive Hero Section */}
+      <InteractiveHero />
+
+      {/* Live Notifications */}
+      <LiveNotifications />
+
+      {/* Floating Action Button */}
+      <FloatingActionButton />
+
+      {/* Original Hero Section - Now as Secondary */}
       <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-900 via-gray-900 to-black">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-10" />
@@ -441,6 +457,38 @@ export default function Home() {
               
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Interactive Map Section */}
+      <section className="py-20 bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <InteractiveMap />
+        </div>
+      </section>
+
+      {/* Weather Pricing Widget Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-800 to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4">Smart Dynamic Pricing</h2>
+            <p className="text-gray-300 text-lg">Our intelligent system adjusts pricing based on real-time conditions</p>
+          </div>
+          <WeatherPricingWidget />
+        </div>
+      </section>
+
+      {/* Interactive Testimonials Section */}
+      <section className="py-20 bg-gray-900/50">
+        <div className="container mx-auto px-4">
+          <InteractiveTestimonials />
+        </div>
+      </section>
+
+      {/* Gamified Booking Section */}
+      <section className="py-20 bg-gradient-to-br from-purple-900/50 to-pink-900/50">
+        <div className="container mx-auto px-4">
+          <GameifiedBooking />
         </div>
       </section>
 
