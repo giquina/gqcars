@@ -84,7 +84,6 @@ export default function WhatsAppWidget() {
       setTimeout(() => {
         if (!isOpen && !isMinimized) {
           setIsOpen(true)
-          initializeChat()
         }
       }, 3000)
     }, 30000) // 30 seconds
@@ -92,20 +91,26 @@ export default function WhatsAppWidget() {
     return () => clearTimeout(timer)
   }, [])
 
+  // Initialize chat when widget opens
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      initializeChat()
+    }
+  }, [isOpen, messages.length])
+
   const handleMinimize = () => {
     setIsOpen(false)
     setIsMinimized(true)
   }
 
   const handleOpen = () => {
+    console.log('Opening widget...', { messagesLength: messages.length })
     setIsOpen(true)
     setIsMinimized(false)
-    if (messages.length === 0) {
-      initializeChat()
-    }
   }
 
   const initializeChat = () => {
+    console.log('Initializing chat...', { chatState, messages: messages.length })
     const services = getAllServices()
     const isRegistered = chatState.userProfile.isRegistered
     const userName = chatState.userProfile.name
@@ -146,6 +151,7 @@ Sign up for personalized service, priority bookings, and direct specialist acces
         { id: 'emergency', text: '🚨 Emergency', action: 'emergency', icon: Phone }
       ]
     }
+    console.log('Setting welcome message:', welcomeMessage)
     setMessages([welcomeMessage])
   }
 
@@ -704,9 +710,25 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
             </button>
           </div>
 
-          {/* Enhanced Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-gray-100">
-            {messages.map((message) => (
+                     {/* Enhanced Messages Area */}
+           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-gray-100">
+             {messages.length === 0 ? (
+               <div className="flex justify-center items-center h-full">
+                 <div className="bg-white p-4 rounded-2xl shadow-md border border-gray-100 text-center">
+                   <div className="flex items-center justify-center space-x-2 mb-3">
+                     <Sparkles className="w-4 h-4 text-yellow-500 animate-spin" />
+                     <span className="text-sm text-gray-600">Loading GQ CARS Ltd assistant...</span>
+                   </div>
+                   <button
+                     onClick={initializeChat}
+                     className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black text-xs font-bold py-2 px-3 rounded-lg transition-all"
+                   >
+                     Start Chat
+                   </button>
+                 </div>
+               </div>
+             ) : null}
+             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
