@@ -86,10 +86,10 @@ export default function LiveNotifications() {
     // Initialize with sample bookings
     setNotifications(SAMPLE_BOOKINGS)
     
-    // Start showing notifications after 10 seconds
+    // Start showing notifications after 5 seconds (more visible)
     const initialTimer = setTimeout(() => {
       showNextNotification()
-    }, 10000)
+    }, 5000)
 
     return () => clearTimeout(initialTimer)
   }, [])
@@ -111,16 +111,16 @@ export default function LiveNotifications() {
     setCurrentNotification(updatedBooking)
     setIsVisible(true)
 
-    // Hide after 8 seconds
+    // Hide after 6 seconds (more frequent)
     setTimeout(() => {
       setIsVisible(false)
       setTimeout(() => setCurrentNotification(null), 500)
-    }, 8000)
+    }, 6000)
 
-    // Schedule next notification (30-60 seconds)
+    // Schedule next notification (20-40 seconds for better visibility)
     setTimeout(() => {
       showNextNotification()
-    }, Math.random() * 30000 + 30000) // 30-60 seconds
+    }, Math.random() * 20000 + 20000) // 20-40 seconds
   }
 
   const handleClose = () => {
@@ -151,10 +151,10 @@ export default function LiveNotifications() {
   if (!currentNotification) return null
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 max-w-sm">
+    <div className="fixed bottom-6 left-6 z-50 max-w-sm">
       <div 
         className={`transform transition-all duration-500 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+          isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-full opacity-0 scale-95'
         }`}
       >
         <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
@@ -168,13 +168,13 @@ export default function LiveNotifications() {
             </button>
             
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-bounce">
                 <span className="text-xl">{currentNotification.icon}</span>
               </div>
               <div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm font-bold">🎉 Just Booked!</span>
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-bold animate-pulse">🎉 Just Booked!</span>
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
                 </div>
                 <p className="text-xs opacity-90">Someone just chose GQ Cars</p>
               </div>
@@ -189,11 +189,11 @@ export default function LiveNotifications() {
                   {currentNotification.customerName}
                 </h4>
                 <div className="flex items-center space-x-2 mb-2">
-                  <span className={`${getServiceBadgeColor(currentNotification.serviceType)} text-white text-xs font-bold px-2 py-1 rounded-full`}>
+                  <span className={`${getServiceBadgeColor(currentNotification.serviceType)} text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse`}>
                     {currentNotification.service}
                   </span>
                   {currentNotification.price && (
-                    <span className="text-green-600 font-bold text-xs">
+                    <span className="text-green-600 font-bold text-xs animate-bounce">
                       {currentNotification.price}
                     </span>
                   )}
@@ -201,8 +201,8 @@ export default function LiveNotifications() {
               </div>
               <div className="text-right">
                 <div className="flex items-center space-x-1 text-green-600 mb-1">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs font-bold">CONFIRMED</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                  <span className="text-xs font-bold animate-pulse">CONFIRMED</span>
                 </div>
               </div>
             </div>
