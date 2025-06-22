@@ -1,7 +1,76 @@
 'use client'
 
-import { useState } from 'react'
-import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users, Calendar } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users, Calendar, Search } from 'lucide-react'
+
+// Types for location suggestions
+interface LocationSuggestion {
+  name: string
+  type: string
+  postcode: string
+  fullAddress: string
+}
+
+// Types for quote results
+interface QuoteResult {
+  distance: string
+  originalPrice: string
+  discountPrice: string
+  savings: string
+  estimatedTime: number
+  serviceName: string
+}
+
+// Enhanced location suggestions with autocomplete
+const locationSuggestions: LocationSuggestion[] = [
+  // Airports
+  { name: 'Heathrow Airport', type: 'airport', postcode: 'TW6 1EW', fullAddress: 'Heathrow Airport, Hounslow TW6 1EW' },
+  { name: 'Gatwick Airport', type: 'airport', postcode: 'RH6 0NP', fullAddress: 'Gatwick Airport, Horley RH6 0NP' },
+  { name: 'Stansted Airport', type: 'airport', postcode: 'CM24 1QW', fullAddress: 'Stansted Airport, Bishop\'s Stortford CM24 1QW' },
+  { name: 'Luton Airport', type: 'airport', postcode: 'LU2 9LY', fullAddress: 'Luton Airport, Luton LU2 9LY' },
+  { name: 'London City Airport', type: 'airport', postcode: 'E16 2PX', fullAddress: 'London City Airport, London E16 2PX' },
+  
+  // Central London Areas
+  { name: 'Westminster', type: 'area', postcode: 'SW1A 1AA', fullAddress: 'Westminster, London SW1A 1AA' },
+  { name: 'Canary Wharf', type: 'business', postcode: 'E14 5AB', fullAddress: 'Canary Wharf, London E14 5AB' },
+  { name: 'The City of London', type: 'business', postcode: 'EC2V 6DN', fullAddress: 'City of London, London EC2V 6DN' },
+  { name: 'King\'s Cross', type: 'transport', postcode: 'N1C 4TB', fullAddress: 'King\'s Cross, London N1C 4TB' },
+  { name: 'Liverpool Street', type: 'transport', postcode: 'EC2M 7PN', fullAddress: 'Liverpool Street, London EC2M 7PN' },
+  { name: 'Oxford Circus', type: 'shopping', postcode: 'W1B 3AG', fullAddress: 'Oxford Circus, London W1B 3AG' },
+  { name: 'Covent Garden', type: 'entertainment', postcode: 'WC2E 8RF', fullAddress: 'Covent Garden, London WC2E 8RF' },
+  { name: 'Piccadilly Circus', type: 'entertainment', postcode: 'W1J 9HS', fullAddress: 'Piccadilly Circus, London W1J 9HS' },
+  
+  // Hotels
+  { name: 'The Shard', type: 'landmark', postcode: 'SE1 9SG', fullAddress: 'The Shard, London SE1 9SG' },
+  { name: 'Hilton London Park Lane', type: 'hotel', postcode: 'W1K 1BE', fullAddress: 'Hilton London Park Lane, 22 Park Lane, London W1K 1BE' },
+  { name: 'The Ritz London', type: 'hotel', postcode: 'W1J 9BR', fullAddress: 'The Ritz London, 150 Piccadilly, London W1J 9BR' },
+  { name: 'Claridge\'s', type: 'hotel', postcode: 'W1K 6JP', fullAddress: 'Claridge\'s, Brook Street, London W1K 6JP' },
+  
+  // Popular Areas
+  { name: 'Shoreditch', type: 'area', postcode: 'E1 6JE', fullAddress: 'Shoreditch, London E1 6JE' },
+  { name: 'Camden', type: 'area', postcode: 'NW1 7JR', fullAddress: 'Camden, London NW1 7JR' },
+  { name: 'Greenwich', type: 'area', postcode: 'SE10 9NN', fullAddress: 'Greenwich, London SE10 9NN' },
+  { name: 'Richmond', type: 'area', postcode: 'TW9 1DN', fullAddress: 'Richmond, London TW9 1DN' },
+  { name: 'Wimbledon', type: 'area', postcode: 'SW19 1DD', fullAddress: 'Wimbledon, London SW19 1DD' },
+  
+  // Business Districts
+  { name: 'Bishopsgate', type: 'business', postcode: 'EC2N 4AY', fullAddress: 'Bishopsgate, London EC2N 4AY' },
+  { name: 'Bank', type: 'business', postcode: 'EC3V 3NG', fullAddress: 'Bank, London EC3V 3NG' },
+  { name: 'Moorgate', type: 'business', postcode: 'EC2Y 9AE', fullAddress: 'Moorgate, London EC2Y 9AE' },
+]
+
+const getLocationIcon = (type: string) => {
+  switch (type) {
+    case 'airport': return '✈️'
+    case 'hotel': return '🏨'
+    case 'business': return '🏢'
+    case 'transport': return '🚉'
+    case 'shopping': return '🛍️'
+    case 'entertainment': return '🎭'
+    case 'landmark': return '🏛️'
+    default: return '📍'
+  }
+}
 
 export default function QuoteWidget() {
   const [pickup, setPickup] = useState('')
@@ -11,8 +80,19 @@ export default function QuoteWidget() {
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState('')
   const [showQuote, setShowQuote] = useState(false)
-  const [quote, setQuote] = useState(null)
+  const [quote, setQuote] = useState<QuoteResult | null>(null)
   const [isCalculating, setIsCalculating] = useState(false)
+  
+  // Autocomplete states
+  const [pickupSuggestions, setPickupSuggestions] = useState<LocationSuggestion[]>([])
+  const [dropoffSuggestions, setDropoffSuggestions] = useState<LocationSuggestion[]>([])
+  const [showPickupSuggestions, setShowPickupSuggestions] = useState(false)
+  const [showDropoffSuggestions, setShowDropoffSuggestions] = useState(false)
+  const [pickupFocused, setPickupFocused] = useState(false)
+  const [dropoffFocused, setDropoffFocused] = useState(false)
+  
+  const pickupRef = useRef<HTMLDivElement>(null)
+  const dropoffRef = useRef<HTMLDivElement>(null)
 
   const serviceTypes = [
     { 
@@ -53,6 +133,64 @@ export default function QuoteWidget() {
     }
   ]
 
+  // Enhanced search function with better matching
+  const searchLocations = (query: string) => {
+    if (!query || query.length < 2) return []
+    
+    const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 0)
+    
+    return locationSuggestions.filter(location => {
+      const searchableText = `${location.name} ${location.postcode} ${location.fullAddress}`.toLowerCase()
+      return searchTerms.every(term => searchableText.includes(term))
+    }).slice(0, 8) // Limit to 8 suggestions
+  }
+
+  // Handle pickup input changes with autocomplete
+  const handlePickupChange = (value: string) => {
+    setPickup(value)
+    const suggestions = searchLocations(value)
+    setPickupSuggestions(suggestions)
+    setShowPickupSuggestions(suggestions.length > 0 && pickupFocused)
+  }
+
+  // Handle dropoff input changes with autocomplete
+  const handleDropoffChange = (value: string) => {
+    setDropoff(value)
+    const suggestions = searchLocations(value)
+    setDropoffSuggestions(suggestions)
+    setShowDropoffSuggestions(suggestions.length > 0 && dropoffFocused)
+  }
+
+  // Handle suggestion selection
+  const selectPickupSuggestion = (suggestion: LocationSuggestion) => {
+    setPickup(suggestion.fullAddress)
+    setShowPickupSuggestions(false)
+    setPickupFocused(false)
+  }
+
+  const selectDropoffSuggestion = (suggestion: LocationSuggestion) => {
+    setDropoff(suggestion.fullAddress)
+    setShowDropoffSuggestions(false)
+    setDropoffFocused(false)
+  }
+
+  // Handle clicks outside to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (pickupRef.current && !pickupRef.current.contains(event.target as Node)) {
+        setShowPickupSuggestions(false)
+        setPickupFocused(false)
+      }
+      if (dropoffRef.current && !dropoffRef.current.contains(event.target as Node)) {
+        setShowDropoffSuggestions(false)
+        setDropoffFocused(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const calculateQuote = async () => {
     if (pickup && dropoff) {
       setIsCalculating(true)
@@ -71,7 +209,7 @@ export default function QuoteWidget() {
         discountPrice: discountPrice.toFixed(2),
         savings: (totalPrice - discountPrice).toFixed(2),
         estimatedTime: Math.round(estimatedDistance * 2.5), // Mock time estimate
-        serviceName: serviceTypes.find(s => s.id === serviceType)?.name
+        serviceName: serviceTypes.find(s => s.id === serviceType)?.name || 'GQ Standard'
       })
       setShowQuote(true)
       setIsCalculating(false)
@@ -125,8 +263,8 @@ export default function QuoteWidget() {
 
         {/* Enhanced Quote Form - Mobile Optimized */}
         <div className="space-y-3 sm:space-y-4">
-          {/* Enhanced Pickup Location - Mobile Responsive */}
-          <div className="relative">
+          {/* Enhanced Pickup Location with Autocomplete - Mobile Responsive */}
+          <div className="relative" ref={pickupRef}>
             <label className="block text-yellow-500 font-semibold mb-2 text-sm">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
@@ -137,8 +275,16 @@ export default function QuoteWidget() {
               <input
                 type="text"
                 value={pickup}
-                onChange={(e) => setPickup(e.target.value)}
-                placeholder="Enter pickup address, postcode, or landmark..."
+                onChange={(e) => handlePickupChange(e.target.value)}
+                onFocus={() => {
+                  setPickupFocused(true)
+                  if (pickup.length >= 2) {
+                    const suggestions = searchLocations(pickup)
+                    setPickupSuggestions(suggestions)
+                    setShowPickupSuggestions(suggestions.length > 0)
+                  }
+                }}
+                placeholder="Start typing address, postcode, or landmark..."
                 className="w-full bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-xl px-3 sm:px-4 py-3 sm:py-4 pl-10 sm:pl-12 text-white placeholder-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all text-sm sm:text-base"
               />
               <div className="absolute left-3 sm:left-4 top-3 sm:top-4 text-green-400">
@@ -147,11 +293,34 @@ export default function QuoteWidget() {
                 </div>
               </div>
               <button className="absolute right-2 sm:right-3 top-2.5 sm:top-3 text-gray-400 hover:text-yellow-500 transition-colors">
-                <Navigation className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
+            
+            {/* Pickup Autocomplete Suggestions */}
+            {showPickupSuggestions && pickupSuggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 z-50 bg-gray-800 border border-gray-600 rounded-xl mt-1 shadow-2xl max-h-64 overflow-y-auto">
+                {pickupSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    onClick={() => selectPickupSuggestion(suggestion)}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 transition-colors flex items-center space-x-3"
+                  >
+                    <span className="text-lg">{getLocationIcon(suggestion.type)}</span>
+                    <div className="flex-1">
+                      <div className="text-white font-medium text-sm">{suggestion.name}</div>
+                      <div className="text-gray-400 text-xs">{suggestion.fullAddress}</div>
+                    </div>
+                    <div className="text-xs text-gray-500 capitalize bg-gray-700 px-2 py-1 rounded">
+                      {suggestion.type}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+            
             <div className="mt-1 text-xs text-gray-400 flex flex-wrap gap-1">
-              <span>📍 Use current location</span>
+              <span>📍 Current location</span>
               <span>•</span>
               <span>🔍 Search landmarks</span>
               <span>•</span>
@@ -159,8 +328,8 @@ export default function QuoteWidget() {
             </div>
           </div>
 
-          {/* Enhanced Dropoff Location - Mobile Responsive */}
-          <div className="relative">
+          {/* Enhanced Dropoff Location with Autocomplete - Mobile Responsive */}
+          <div className="relative" ref={dropoffRef}>
             <label className="block text-yellow-500 font-semibold mb-2 text-sm">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-sm"></div>
@@ -171,17 +340,48 @@ export default function QuoteWidget() {
               <input
                 type="text"
                 value={dropoff}
-                onChange={(e) => setDropoff(e.target.value)}
-                placeholder="Enter destination address, postcode, or landmark..."
+                onChange={(e) => handleDropoffChange(e.target.value)}
+                onFocus={() => {
+                  setDropoffFocused(true)
+                  if (dropoff.length >= 2) {
+                    const suggestions = searchLocations(dropoff)
+                    setDropoffSuggestions(suggestions)
+                    setShowDropoffSuggestions(suggestions.length > 0)
+                  }
+                }}
+                placeholder="Start typing destination address, postcode, or landmark..."
                 className="w-full bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-xl px-3 sm:px-4 py-3 sm:py-4 pl-10 sm:pl-12 text-white placeholder-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all text-sm sm:text-base"
               />
               <div className="absolute left-3 sm:left-4 top-3 sm:top-4 text-red-400">
                 <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-sm"></div>
               </div>
               <button className="absolute right-2 sm:right-3 top-2.5 sm:top-3 text-gray-400 hover:text-yellow-500 transition-colors">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
+            
+            {/* Dropoff Autocomplete Suggestions */}
+            {showDropoffSuggestions && dropoffSuggestions.length > 0 && (
+              <div className="absolute top-full left-0 right-0 z-50 bg-gray-800 border border-gray-600 rounded-xl mt-1 shadow-2xl max-h-64 overflow-y-auto">
+                {dropoffSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    onClick={() => selectDropoffSuggestion(suggestion)}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 transition-colors flex items-center space-x-3"
+                  >
+                    <span className="text-lg">{getLocationIcon(suggestion.type)}</span>
+                    <div className="flex-1">
+                      <div className="text-white font-medium text-sm">{suggestion.name}</div>
+                      <div className="text-gray-400 text-xs">{suggestion.fullAddress}</div>
+                    </div>
+                    <div className="text-xs text-gray-500 capitalize bg-gray-700 px-2 py-1 rounded">
+                      {suggestion.type}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+            
             <div className="mt-1 text-xs text-gray-400 flex flex-wrap gap-1">
               <span>🏠 Home</span>
               <span>•</span>
@@ -193,30 +393,42 @@ export default function QuoteWidget() {
             </div>
           </div>
 
-          {/* Simplified Quick Location Shortcuts - Less Messy */}
+          {/* Quick Location Shortcuts - Enhanced */}
           <div className="bg-gray-800/30 p-3 sm:p-4 rounded-xl border border-gray-600">
             <div className="text-sm text-gray-300 mb-3 font-medium">🎯 Popular Destinations:</div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               <button 
-                onClick={() => setDropoff('Heathrow Airport, London')}
+                onClick={() => {
+                  setDropoff('Heathrow Airport, Hounslow TW6 1EW')
+                  setShowDropoffSuggestions(false)
+                }}
                 className="text-xs bg-blue-600/20 hover:bg-blue-600/30 p-2 rounded-lg text-blue-300 hover:text-white transition-colors text-center border border-blue-500/30"
               >
                 ✈️ Heathrow
               </button>
               <button 
-                onClick={() => setDropoff('Gatwick Airport, London')}
+                onClick={() => {
+                  setDropoff('Gatwick Airport, Horley RH6 0NP')
+                  setShowDropoffSuggestions(false)
+                }}
                 className="text-xs bg-blue-600/20 hover:bg-blue-600/30 p-2 rounded-lg text-blue-300 hover:text-white transition-colors text-center border border-blue-500/30"
               >
                 ✈️ Gatwick
               </button>
               <button 
-                onClick={() => setDropoff('London City Centre')}
+                onClick={() => {
+                  setDropoff('City of London, London EC2V 6DN')
+                  setShowDropoffSuggestions(false)
+                }}
                 className="text-xs bg-green-600/20 hover:bg-green-600/30 p-2 rounded-lg text-green-300 hover:text-white transition-colors text-center border border-green-500/30"
               >
                 🏙️ City Centre
               </button>
               <button 
-                onClick={() => setDropoff('Canary Wharf, London')}
+                onClick={() => {
+                  setDropoff('Canary Wharf, London E14 5AB')
+                  setShowDropoffSuggestions(false)
+                }}
                 className="text-xs bg-purple-600/20 hover:bg-purple-600/30 p-2 rounded-lg text-purple-300 hover:text-white transition-colors text-center border border-purple-500/30"
               >
                 🏢 Canary Wharf
@@ -228,6 +440,8 @@ export default function QuoteWidget() {
               </button>
             </div>
           </div>
+
+
 
           {/* Enhanced Service Type Selector - 3 Options No Scroll */}
           <div>

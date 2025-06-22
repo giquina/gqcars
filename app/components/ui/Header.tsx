@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Menu, Phone } from 'lucide-react'
 import MobileMenu from './MobileMenu'
 import GQCarsLogo from './GQCarsLogo'
+import SmartPlatformButton from './SmartPlatformButton'
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -26,7 +27,7 @@ export default function Header() {
               <GQCarsLogo className="w-8 h-8 sm:w-10 sm:h-10" />
               <div>
                 <a href="/" className="text-base sm:text-xl font-bold tracking-wider text-yellow-500">GQ CARS LTD</a>
-                <p className="text-xs text-gray-400 hidden sm:block">Professional • SIA Licensed • Smart Technology</p>
+                <p className="text-xs text-gray-400 hidden sm:block">Professional • SIA Licensed • CPO Trained • Premium Transport</p>
               </div>
             </div>
           </div>
@@ -42,8 +43,12 @@ export default function Header() {
             <a href="/book" className="bg-gradient-to-r from-blue-600 to-yellow-500 text-white px-4 py-2 hover:opacity-90 transition-opacity rounded ml-4">Book</a>
           </div>
 
-          {/* Phone Number - ALWAYS VISIBLE ON RIGHT */}
-          <div className="flex items-center">
+          {/* Smart Platform and Phone Number - ALWAYS VISIBLE ON RIGHT */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {/* Smart Platform Button */}
+            <SmartPlatformButton />
+            
+            {/* Phone Number */}
             <a 
               href="tel:07407655203" 
               className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-2 rounded font-bold text-sm flex items-center space-x-2 transition-colors"

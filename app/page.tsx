@@ -27,14 +27,16 @@ export default function Home() {
                   GQ CARS LTD
                 </h1>
                 <p className="text-base sm:text-lg md:text-2xl text-gray-300">
-                  SIA Licensed • CPO Trained • Premium Transport
+                  Professional • SIA Licensed • CPO Trained • Premium Transport
                 </p>
               </div>
             </div>
             
             {/* Better mobile-optimized main heading with CTA */}
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-6 text-white leading-tight text-center sm:text-left">
-              24/7 PROFESSIONAL SECURITY TAXI & PRIVATE HIRE SERVICE<br />WITH SIA LICENSED EXPERT DRIVERS
+              <span className="text-yellow-500">Your Personal Security Fleet</span><br />
+              SIA Licensed • CPO Trained • Premium Transport<br />
+              <span className="text-lg sm:text-xl text-gray-300">24/7 PROFESSIONAL SECURITY TAXI & PRIVATE HIRE SERVICE<br />WITH SIA LICENSED EXPERT DRIVERS</span>
               <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
                   href="tel:07407655203"
@@ -444,11 +446,82 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Enhanced Smart Platform Section - Fixed at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-purple-900/95 via-blue-900/95 to-green-900/95 backdrop-blur-lg border-t border-yellow-500/30 p-4 shadow-2xl">
+        <div className="container mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+            {/* Left side - Platform info */}
+            <div className="flex items-center space-x-3 text-center sm:text-left">
+              <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-blue-500 rounded-full flex items-center justify-center animate-pulse">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-sm sm:text-base flex items-center space-x-2">
+                  <span>🚀 SMART PLATFORM</span>
+                  <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs animate-pulse">FULLY LICENSED</span>
+                </h3>
+                <p className="text-gray-300 text-xs sm:text-sm">
+                  SIA Close Protection Licensed • TFL Private Hire Licensed • Pre-Booking Available
+                </p>
+              </div>
+            </div>
+            
+            {/* Right side - Action buttons */}
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <button 
+                onClick={() => {
+                  // This would open the Smart Platform modal - we'll trigger it via the header button for now
+                  const smartPlatformButton = document.querySelector('[data-smart-platform]') as HTMLElement
+                  smartPlatformButton?.click()
+                }}
+                className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 text-white px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all transform hover:scale-105 flex items-center space-x-2 shadow-lg border border-white/20"
+              >
+                <Shield className="w-4 h-4" />
+                <span>VIEW LICENSES</span>
+              </button>
+              
+              <a 
+                href="tel:07407655203"
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all transform hover:scale-105 flex items-center space-x-2 shadow-lg"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="hidden sm:inline">BOOK NOW</span>
+                <span className="sm:hidden">CALL</span>
+              </a>
+            </div>
+          </div>
+          
+          {/* Additional features showcase */}
+          <div className="mt-3 pt-3 border-t border-gray-600 hidden sm:block">
+            <div className="grid grid-cols-4 gap-4 text-center">
+              <div className="text-center">
+                <div className="text-yellow-500 font-bold text-lg">100%</div>
+                <div className="text-gray-300 text-xs">SIA Licensed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-blue-500 font-bold text-lg">24/7</div>
+                <div className="text-gray-300 text-xs">Available</div>
+              </div>
+              <div className="text-center">
+                <div className="text-green-500 font-bold text-lg">50%</div>
+                <div className="text-gray-300 text-xs">OFF First</div>
+              </div>
+              <div className="text-center">
+                <div className="text-purple-500 font-bold text-lg">VIP</div>
+                <div className="text-gray-300 text-xs">Service</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Mobile App CTA */}
-      <MobileAppCTA />
+      <div className="pb-24">
+        <MobileAppCTA />
+      </div>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gray-900/50">
+      <section className="py-20 pb-32 bg-gray-900/50">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Security Services</h2>
           
@@ -493,7 +566,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 via-slate-900 to-blue-600">
+      <section className="py-20 pb-32 bg-gradient-to-r from-blue-600 via-slate-900 to-blue-600">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16 text-white">Why Choose GQ Security</h2>
           
