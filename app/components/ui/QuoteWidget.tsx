@@ -11,7 +11,16 @@ export default function QuoteWidget() {
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState('')
   const [showQuote, setShowQuote] = useState(false)
-  const [quote, setQuote] = useState(null)
+  const [quote, setQuote] = useState<{
+    distance: string
+    originalPrice: string
+    discountPrice: string
+    savings: string
+    estimatedTime: string
+    serviceName: string
+    startAddress?: string
+    endAddress?: string
+  } | null>(null)
   const [isCalculating, setIsCalculating] = useState(false)
 
   const serviceTypes = [
@@ -57,22 +66,77 @@ export default function QuoteWidget() {
     if (pickup && dropoff) {
       setIsCalculating(true)
       
-      // Simulate API call delay for realism
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      const basePrice = serviceTypes.find(s => s.id === serviceType)?.price || 7.00
-      const estimatedDistance = Math.random() * 15 + 5 // Mock distance 5-20 miles
-      const totalPrice = basePrice * estimatedDistance
-      const discountPrice = totalPrice * 0.5 // 50% off first ride
-      
-      setQuote({
-        distance: estimatedDistance.toFixed(1),
-        originalPrice: totalPrice.toFixed(2),
-        discountPrice: discountPrice.toFixed(2),
-        savings: (totalPrice - discountPrice).toFixed(2),
-        estimatedTime: Math.round(estimatedDistance * 2.5), // Mock time estimate
-        serviceName: serviceTypes.find(s => s.id === serviceType)?.name
-      })
+      try {
+        console.log('Calculating route from', pickup, 'to', dropoff)
+        
+        // Call our secure backend API for route calculation
+        const response = await fetch('/api/maps/route', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json' 
+          },
+          body: JSON.stringify({ 
+            pickup: pickup.trim(), 
+            destination: dropoff.trim() 
+          }),
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Failed to calculate route')
+        }
+
+        const routeData = await response.json()
+        console.log('Route data received:', routeData)
+        
+        // Extract real distance and convert to miles if needed
+        let distanceInMiles
+        if (routeData.distance.includes('mi')) {
+          // Already in miles (e.g., "21.6 mi")
+          distanceInMiles = parseFloat(routeData.distance.replace(/[^\d.]/g, ''))
+        } else if (routeData.distance.includes('km')) {
+          // Convert from kilometers to miles
+          const distanceInKm = parseFloat(routeData.distance.replace(/[^\d.]/g, ''))
+          distanceInMiles = distanceInKm * 0.621371
+                 } else {
+           // Fallback: use distance value in meters and convert to miles
+           distanceInMiles = (routeData.distanceValue || 10000) * 0.000621371
+         }
+
+         // Calculate pricing with real distance
+         const basePrice = serviceTypes.find(s => s.id === serviceType)?.price || 7.00
+         const totalPrice = basePrice * distanceInMiles
+         const discountPrice = totalPrice * 0.5 // 50% off first ride
+         
+         setQuote({
+           distance: routeData.distance, // Use Google's formatted distance
+           originalPrice: totalPrice.toFixed(2),
+           discountPrice: discountPrice.toFixed(2),
+           savings: (totalPrice - discountPrice).toFixed(2),
+           estimatedTime: routeData.duration, // Use Google's formatted duration
+           serviceName: serviceTypes.find(s => s.id === serviceType)?.name || 'GQ Standard',
+           startAddress: routeData.startAddress,
+           endAddress: routeData.endAddress
+         })
+         
+         console.log('Quote calculated successfully:', {
+           distance: routeData.distance,
+           duration: routeData.duration,
+           price: totalPrice.toFixed(2)
+         })
+
+       } catch (error) {
+         console.error('Error calculating route:', error)
+         
+         // Show user-friendly error message
+         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+         alert(`Unable to calculate route: ${errorMessage}. Please check your addresses and try again.`)
+         
+         // Reset calculating state without showing quote
+         setIsCalculating(false)
+         return
+       }
+
       setShowQuote(true)
       setIsCalculating(false)
     }
