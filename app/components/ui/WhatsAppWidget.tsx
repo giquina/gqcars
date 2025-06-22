@@ -94,11 +94,13 @@ export default function WhatsAppWidget() {
     
     const welcomeMessage: ChatMessage = {
       id: 'welcome-1',
-      text: `👋 Hello! I'm your GQ Cars AI assistant. 
+      text: `👋 Welcome to GQ CARS LTD! 
 
-I'm here to help you find the perfect security transport solution. We offer ${services.length} specialized services with SIA-licensed drivers.
+Your premier security, transport & events specialist. We offer ${services.length} professional services with SIA-licensed drivers across London & South East England.
 
-What can I help you with today?`,
+🛡️ Security Services • 🚗 Luxury Transport • 🎉 Event Management
+
+How can I assist you today?`,
       isBot: true,
       timestamp: new Date(),
       type: 'text',
@@ -197,20 +199,26 @@ What can I help you with today?`,
   const showAllServices = () => {
     const services = getAllServices()
     
-    addMessage(
-      `Here are all our professional security transport services:
+         addMessage(
+       `🌟 **GQ CARS LTD Complete Service Portfolio**
 
-Each service includes SIA-licensed drivers and comprehensive security measures. Click on any service to learn more!`, 
-      true, 
-      services.map(service => ({
-        id: service.id,
-        text: `${service.emoji} ${service.name} (from ${service.pricing.currency}${service.pricing.from})`,
-        action: 'service-detail',
-        serviceId: service.id,
-        icon: service.icon
-      })),
-      'options'
-    )
+Professional security, luxury transport & premium events management across London & South East England.
+
+🛡️ All services include SIA-licensed specialists
+🚗 Premium vehicle fleet available
+🎯 Tailored solutions for every need
+
+Select any service to explore:`, 
+       true, 
+       services.map(service => ({
+         id: service.id,
+         text: `${service.emoji} ${service.name} (from ${service.pricing.currency}${service.pricing.from})`,
+         action: 'service-detail',
+         serviceId: service.id,
+         icon: service.icon
+       })),
+       'options'
+     )
   }
 
   const showServiceDetail = (serviceId: string) => {
@@ -411,9 +419,9 @@ For immediate security transport assistance:
   const handleContactHuman = (serviceId?: string, metadata?: string) => {
     const service = serviceId ? getServiceById(serviceId) : null
     
-    let whatsappMessage = `Hello GQ Cars! 🚗
+         let whatsappMessage = `Hello GQ CARS LTD! 🚗
 
-I'm interested in your professional security transport services.`
+I'm interested in your professional security, transport & events services.`
     
     if (service) {
       whatsappMessage += ` I was looking at your ${service.name} service and would like to learn more.`
@@ -447,26 +455,26 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
     showAllServices()
   }
 
-  const handleDefault = () => {
-    addMessage(
-      'I\'m here to help with GQ Cars\' professional security transport services. How can I assist you?',
-      true,
-      [
-        { id: 'services', text: '🔍 Browse Services', action: 'show-services' },
-        { id: 'booking', text: '🚗 Quick Booking', action: 'quick-book' },
-        { id: 'quote', text: '💷 Get Quote', action: 'quote-wizard' },
-        { id: 'human', text: '👤 Speak to Human', action: 'contact' }
-      ]
-    )
-  }
+     const handleDefault = () => {
+     addMessage(
+       'I\'m here to help with GQ CARS LTD\'s professional security, transport & events services. How can I assist you?',
+       true,
+       [
+         { id: 'services', text: '🔍 Browse Services', action: 'show-services' },
+         { id: 'booking', text: '🚗 Quick Booking', action: 'quick-book' },
+         { id: 'quote', text: '💷 Get Quote', action: 'quote-wizard' },
+         { id: 'human', text: '👤 Speak to Human', action: 'contact' }
+       ]
+     )
+   }
 
   const handleSpecialAction = (action: string, metadata?: any) => {
     switch (action) {
-      case 'open-whatsapp':
-        const message = metadata || `Hello GQ Cars! I'm interested in your professional security transport services.`
-        const encodedMessage = encodeURIComponent(message)
-        window.open(`https://wa.me/447407655203?text=${encodedMessage}`, '_blank')
-        break
+             case 'open-whatsapp':
+         const message = metadata || `Hello GQ CARS LTD! I'm interested in your professional security, transport & events services.`
+         const encodedMessage = encodeURIComponent(message)
+         window.open(`https://wa.me/447407655203?text=${encodedMessage}`, '_blank')
+         break
     }
   }
 
@@ -489,13 +497,13 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
                 AI
               </div>
             )}
-            {/* Enhanced Floating Message */}
-            {!isMinimized && (
-              <div className="absolute bottom-full right-0 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-4 py-3 rounded-xl text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:scale-105">
-                ✨ AI Assistant ready to help!
-                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-yellow-500"></div>
-              </div>
-            )}
+                         {/* Enhanced Floating Message */}
+             {!isMinimized && (
+               <div className="absolute bottom-full right-0 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-4 py-3 rounded-xl text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:scale-105">
+                 🚗 Security • Transport • Events
+                 <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-yellow-500"></div>
+               </div>
+             )}
           </button>
         </div>
       )}
@@ -511,12 +519,12 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
               </div>
               <div>
                 <h3 className="font-bold text-base flex items-center">
-                  GQ Cars AI Assistant 
+                  GQ CARS LTD
                   <Sparkles className="w-4 h-4 ml-1 animate-pulse" />
                 </h3>
                 <p className="text-xs opacity-90 flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>
-                  Online • Instant responses
+                  Security • Transport • Events • AI Assistant
                 </p>
               </div>
             </div>
@@ -648,9 +656,9 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
                 <span>Quick Book</span>
               </button>
             </div>
-            <div className="text-center mt-2">
-              <p className="text-xs text-gray-500">Powered by GQ Cars AI • SIA Licensed</p>
-            </div>
+                         <div className="text-center mt-2">
+               <p className="text-xs text-gray-500">Powered by GQ CARS LTD • SIA Licensed Specialists</p>
+             </div>
           </div>
         </div>
       )}
