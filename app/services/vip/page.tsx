@@ -198,7 +198,7 @@ const vipServices = [
   },
   {
     title: "Rapid Response",
-    description: "Emergency response and crisis management.",
+    description: "Rapid response and crisis management.",
     icon: Clock
   }
 ]
@@ -235,7 +235,7 @@ const features = [
       "Route and venue assessment",
       "Threat analysis and mitigation",
       "Privacy protection measures",
-      "Emergency extraction protocols"
+      "Secure extraction protocols"
     ]
   },
   {
@@ -256,7 +256,7 @@ const features = [
       "Access control systems",
       "VIP guest management",
       "Media management",
-      "Emergency response teams",
+      "Rapid response teams",
       "Multi-agency coordination"
     ]
   },

@@ -30,13 +30,13 @@ export default function CloseProtectionPage() {
             <div className="bg-gq-black/50 p-6 rounded-none border-l-4 border-gq-blue">
               <Medal className="w-10 h-10 text-gq-gold mb-4" />
               <h3 className="text-xl font-bold mb-2">Elite Training</h3>
-              <p className="text-gray-400">Officers trained in advanced protection techniques and emergency response.</p>
+              <p className="text-gray-400">Officers trained in advanced protection techniques and crisis management.</p>
             </div>
             
             <div className="bg-gq-black/50 p-6 rounded-none border-l-4 border-gq-blue">
               <Clock className="w-10 h-10 text-gq-gold mb-4" />
               <h3 className="text-xl font-bold mb-2">24/7 Service</h3>
-              <p className="text-gray-400">Round-the-clock protection and immediate emergency response.</p>
+              <p className="text-gray-400">Round-the-clock protection and immediate professional response.</p>
             </div>
           </div>
         </div>
@@ -150,7 +150,7 @@ const services = [
       "Advance route planning and surveillance",
       "Secure transportation coordination",
       "Risk assessment and mitigation",
-      "Emergency response protocols"
+      "Crisis response protocols"
     ]
   },
   {
@@ -159,7 +159,7 @@ const services = [
       "VIP guest protection",
       "Venue security assessment",
       "Access control management",
-      "Emergency evacuation planning",
+      "Evacuation planning",
       "Coordination with local authorities"
     ]
   },
@@ -170,7 +170,7 @@ const services = [
       "Secure hotel arrangements",
       "Local security liaison",
       "Cultural security briefings",
-      "Emergency extraction planning"
+      "Secure extraction planning"
     ]
   },
   {

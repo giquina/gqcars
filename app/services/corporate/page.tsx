@@ -188,7 +188,7 @@ const packages = [
       "Risk assessment and security audit",
       "Access control implementation",
       "Security personnel (business hours)",
-      "Basic emergency response planning",
+      "Basic incident response planning",
       "Monthly security reports"
     ]
   },

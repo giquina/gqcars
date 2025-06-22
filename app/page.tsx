@@ -390,50 +390,50 @@ export default function Home() {
                   </a>
                 </div>
 
-                {/* Emergency Banner with Countdown */}
+                {/* Professional Support Banner */}
                 <div className="relative">
-                  <div className="bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 border-2 border-red-500/50 rounded-2xl p-6 text-center relative overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-blue-600/20 border-2 border-blue-500/50 rounded-2xl p-6 text-center relative overflow-hidden">
                     {/* Animated background stripes */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent animate-pulse"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent animate-pulse"></div>
                     
                     <div className="relative z-10">
                       <div className="flex items-center justify-center space-x-3 mb-3">
                         <div className="flex space-x-1">
-                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                          <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                          <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                          <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
                         </div>
-                        <span className="text-red-400 font-bold text-xl animate-pulse">🚨 EMERGENCY RESPONSE TEAM</span>
+                        <span className="text-blue-400 font-bold text-xl animate-pulse">�️ PROFESSIONAL SUPPORT TEAM</span>
                         <div className="flex space-x-1">
-                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
-                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
-                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                          <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+                          <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
+                          <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
                         </div>
                       </div>
                       
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                         <div className="bg-black/40 rounded-lg p-3">
-                          <div className="text-red-400 font-bold text-sm">RESPONSE TIME</div>
+                          <div className="text-blue-400 font-bold text-sm">RESPONSE TIME</div>
                           <div className="text-white font-mono text-lg">1-20 MIN</div>
                         </div>
                         <div className="bg-black/40 rounded-lg p-3">
-                          <div className="text-red-400 font-bold text-sm">AVAILABILITY</div>
+                          <div className="text-blue-400 font-bold text-sm">AVAILABILITY</div>
                           <div className="text-white font-mono text-lg">24/7/365</div>
                         </div>
                         <div className="bg-black/40 rounded-lg p-3">
-                          <div className="text-red-400 font-bold text-sm">COVERAGE</div>
+                          <div className="text-blue-400 font-bold text-sm">COVERAGE</div>
                           <div className="text-white font-mono text-lg">UK WIDE</div>
                         </div>
                         <div className="bg-black/40 rounded-lg p-3">
-                          <div className="text-red-400 font-bold text-sm">TEAM STATUS</div>
+                          <div className="text-blue-400 font-bold text-sm">TEAM STATUS</div>
                           <div className="text-green-400 font-mono text-lg animate-pulse">ONLINE</div>
                         </div>
                       </div>
                       
                       <p className="text-gray-300 text-sm">
-                        <span className="text-red-400 font-semibold">Priority Line Always Open</span> • 
+                        <span className="text-blue-400 font-semibold">Professional Service Available 24/7</span> • 
                         <span className="text-yellow-400 font-semibold"> SIA Licensed Officers</span> • 
-                        <span className="text-blue-400 font-semibold"> Immediate Dispatch</span>
+                        <span className="text-purple-400 font-semibold"> Immediate Dispatch</span>
                       </p>
                     </div>
                   </div>
