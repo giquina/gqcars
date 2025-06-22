@@ -28,6 +28,18 @@ export default function QuoteWidget() {
       popular: false
     },
     { 
+      id: 'premium', 
+      name: 'GQ Premium', 
+      price: 8.50, 
+      icon: Star, 
+      color: 'emerald',
+      description: 'Enhanced vehicles with SIA security driver',
+      features: ['SIA licensed security driver', 'Comfort amenities', 'Premium service', 'Card payments'],
+      capacity: '1-4 passengers',
+      waitTime: '3-18 min',
+      popular: false
+    },
+    { 
       id: 'executive', 
       name: 'GQ Executive', 
       price: 10.50, 
@@ -44,7 +56,7 @@ export default function QuoteWidget() {
       name: 'GQ XL', 
       price: 7.20, 
       icon: Users, 
-      color: 'green',
+      color: 'orange',
       description: 'Large group vehicles with SIA security driver',
       features: ['SIA licensed security driver', '5-8 passengers', 'Extra luggage space', 'Group bookings'],
       capacity: '5-8 passengers',
@@ -229,65 +241,55 @@ export default function QuoteWidget() {
             </div>
           </div>
 
-          {/* Enhanced Service Type Selector - 3 Options No Scroll */}
+          {/* Enhanced Service Type Selector - 2x2 Grid Layout */}
           <div>
-            <label className="block text-yellow-500 font-semibold mb-3 text-sm">
+            <label className="block text-yellow-500 font-semibold mb-4 text-sm text-center">
               <Car className="w-4 h-4 inline mr-2" />
               Choose Your Service (All include SIA Licensed Security Drivers)
             </label>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {serviceTypes.map((service) => {
                 const IconComponent = service.icon
                 return (
                   <button
                     key={service.id}
                     onClick={() => setServiceType(service.id)}
-                    className={`w-full p-4 rounded-xl border-2 transition-all text-left hover:scale-[1.01] relative ${
+                    className={`p-3 sm:p-4 rounded-xl border-2 transition-all text-left hover:scale-[1.02] relative group ${
                       serviceType === service.id
                         ? `border-${service.color}-500 bg-${service.color}-500/20 shadow-lg ring-2 ring-${service.color}-500/50`
                         : 'border-gray-600 bg-gray-800/30 hover:border-gray-500 hover:bg-gray-700/30'
                     }`}
                   >
                     {service.popular && (
-                      <div className="absolute -top-2 right-4 bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold">
+                      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold animate-pulse">
                         MOST POPULAR
                       </div>
                     )}
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start space-x-3 flex-1">
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                          serviceType === service.id ? `bg-${service.color}-500` : 'bg-gray-600'
-                        }`}>
-                          <IconComponent className="w-6 h-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-white font-bold text-lg">{service.name}</span>
-                            <div className="text-right">
-                              <div className="text-white font-bold text-lg">£{service.price}</div>
-                              <div className="text-gray-400 text-xs">per mile</div>
-                            </div>
-                          </div>
-                          <div className="text-gray-300 text-sm mb-2">{service.description}</div>
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-400">{service.capacity}</span>
-                            <span className="text-gray-400">{service.waitTime}</span>
-                          </div>
-                          {serviceType === service.id && (
-                            <div className="mt-3 pt-3 border-t border-gray-600">
-                              <div className="text-sm text-gray-300">
-                                ✓ {service.features.join(' • ')}
-                              </div>
-                            </div>
-                          )}
+                    <div className="text-center">
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-all ${
+                        serviceType === service.id ? `bg-${service.color}-500` : 'bg-gray-600'
+                      }`}>
+                        <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                      </div>
+                      <h3 className="text-white font-bold text-sm sm:text-base mb-1">{service.name}</h3>
+                      <div className="text-white font-bold text-lg sm:text-xl mb-1">£{service.price}</div>
+                      <div className="text-gray-400 text-xs mb-2">per mile</div>
+                      <div className="text-gray-300 text-xs mb-2 min-h-[2.5rem] flex items-center justify-center">{service.description}</div>
+                      <div className="text-gray-400 text-xs mb-1">{service.capacity}</div>
+                      <div className="text-gray-400 text-xs">{service.waitTime}</div>
+                    </div>
+                    {serviceType === service.id && (
+                      <div className="mt-3 pt-3 border-t border-gray-600">
+                        <div className="text-xs text-gray-300 text-center">
+                          ✓ {service.features.slice(0, 2).join(' • ')}
                         </div>
                       </div>
-                    </div>
+                    )}
                   </button>
                 )
               })}
             </div>
-            <div className="mt-3 text-xs text-gray-400 text-center">
+            <div className="mt-4 text-xs text-gray-400 text-center bg-blue-600/10 border border-blue-500/30 rounded-lg py-2 px-3">
               🛡️ All services include SIA Licensed Security Drivers as standard
             </div>
           </div>
