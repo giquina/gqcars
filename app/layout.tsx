@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/ui/Header'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
-import AIBadge from './components/ui/AIBadge'
+
 import TFLLogo from './components/ui/TFLLogo'
 import SIALogo from './components/ui/SIALogo'
 import MobileAppBanner from './components/ui/MobileAppBanner'
@@ -26,7 +26,6 @@ export default function RootLayout({
       <body className={`${inter.className} bg-black text-white`}>
         <NextAuthProvider>
           <Header />
-          <AIBadge />
           <WhatsAppWidget />
           <MobileAppBanner />
           <main className="pt-16">{children}</main>
