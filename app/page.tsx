@@ -254,68 +254,188 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Enhanced Contact Information Display - Creative & Clickable */}
-            <div className="bg-gradient-to-r from-gray-900/80 to-black/80 p-6 rounded-2xl border border-yellow-500/30 mb-12 relative overflow-hidden">
+            {/* Enhanced Contact Information Display - Creative & Dynamic */}
+            <div className="bg-gradient-to-br from-gray-900/95 via-slate-900/95 to-black/95 p-8 rounded-3xl border-2 border-yellow-500/40 mb-12 relative overflow-hidden shadow-2xl">
               {/* Animated Background Elements */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-4 right-4 w-6 h-6 border border-yellow-500 rotate-45 animate-spin-slow"></div>
-                <div className="absolute bottom-4 left-4 w-4 h-4 bg-blue-500 rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-6 right-6 w-8 h-8 border-2 border-yellow-500 rotate-45 animate-spin"></div>
+                <div className="absolute bottom-6 left-6 w-6 h-6 bg-blue-500 rounded-full animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-green-500 rounded-full animate-bounce"></div>
+                <div className="absolute bottom-1/3 right-1/3 w-3 h-3 bg-purple-500 rounded-full animate-ping"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute top-8 left-8 w-2 h-2 bg-yellow-400/60 rounded-full animate-float-slow"></div>
+                <div className="absolute top-16 right-12 w-2 h-2 bg-blue-400/60 rounded-full animate-float-medium"></div>
+                <div className="absolute bottom-12 left-12 w-2 h-2 bg-green-400/60 rounded-full animate-float-fast"></div>
               </div>
               
               <div className="relative z-10">
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-yellow-500 mb-2">🚨 Need Immediate Assistance?</h3>
-                  <p className="text-gray-300 text-sm">Contact our SIA licensed security team 24/7</p>
+                {/* Header Section with Pulsing Alert */}
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center space-x-3 mb-4">
+                    <div className="relative">
+                      <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                      <div className="absolute inset-0 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                      🚨 NEED IMMEDIATE ASSISTANCE?
+                    </h3>
+                    <div className="relative">
+                      <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+                      <div className="absolute inset-0 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-300 text-lg mb-4">
+                    <span className="text-yellow-400 font-semibold">SIA Licensed Security Team</span> • Available 24/7
+                  </p>
+                  
+                  {/* Live Status Indicator */}
+                  <div className="inline-flex items-center space-x-2 bg-green-500/20 border border-green-500/50 px-6 py-3 rounded-full mb-6">
+                    <div className="relative">
+                      <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                      <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                    </div>
+                    <span className="text-green-400 font-bold text-sm animate-pulse">LIVE • AGENTS ONLINE NOW</span>
+                    <div className="text-green-400 font-mono text-sm">
+                      {new Date().toLocaleTimeString('en-GB', { hour12: false })}
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {/* Phone - Clickable */}
+                {/* Contact Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {/* Phone - Enhanced with Ripple Effect */}
                   <a 
                     href="tel:07407655203" 
-                    className="bg-green-600/20 hover:bg-green-600/30 border border-green-500/50 p-4 rounded-xl transition-all hover:scale-105 text-center group cursor-pointer"
+                    className="group relative bg-gradient-to-br from-green-600/30 via-green-500/20 to-emerald-600/30 hover:from-green-500/40 hover:via-green-400/30 hover:to-emerald-500/40 border-2 border-green-500/50 hover:border-green-400/70 p-6 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/25 cursor-pointer transform perspective-1000 hover:rotate-y-5"
                   >
-                    <div className="flex items-center justify-center mb-2">
-                      <Phone className="w-6 h-6 text-green-400 group-hover:animate-bounce" />
+                    {/* Ripple effect background */}
+                    <div className="absolute inset-0 bg-green-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-2 bg-green-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    
+                    <div className="relative z-10 text-center">
+                      <div className="flex items-center justify-center mb-4">
+                        <div className="relative">
+                          <Phone className="w-8 h-8 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+                          <div className="absolute -inset-2 border-2 border-green-400/30 rounded-full group-hover:animate-pulse"></div>
+                        </div>
+                      </div>
+                      <h4 className="text-green-400 font-bold text-lg mb-2 group-hover:text-green-300">📞 Call Now</h4>
+                      <div className="bg-black/30 rounded-lg p-3 mb-3">
+                        <p className="text-white text-xl font-bold font-mono tracking-wider">07407 655 203</p>
+                      </div>
+                      <p className="text-gray-300 text-sm group-hover:text-gray-200">⚡ Instant Connection</p>
+                      <div className="mt-2 flex items-center justify-center space-x-1">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-green-400 font-semibold">AVAILABLE NOW</span>
+                      </div>
                     </div>
-                    <h4 className="text-green-400 font-bold text-sm mb-1">📞 Call Now</h4>
-                    <p className="text-white text-lg font-bold">07407 655 203</p>
-                    <p className="text-gray-300 text-xs mt-1">Instant connection</p>
                   </a>
 
-                  {/* Email - Clickable */}
+                  {/* Email - Enhanced with Hover Animation */}
                   <a 
-                    href="mailto:bookings@gqcars.co.uk" 
-                    className="bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/50 p-4 rounded-xl transition-all hover:scale-105 text-center group cursor-pointer"
+                    href="mailto:bookings@gqcars.co.uk?subject=🚨 URGENT - Security Transport Required&body=Hello GQ Cars,%0D%0A%0D%0AI need immediate assistance with security transport.%0D%0A%0D%0ADetails:%0D%0A- Date/Time: %0D%0A- Pickup Location: %0D%0A- Destination: %0D%0A- Service Type: %0D%0A- Additional Requirements: %0D%0A%0D%0APlease contact me as soon as possible.%0D%0A%0D%0AThank you." 
+                    className="group relative bg-gradient-to-br from-blue-600/30 via-blue-500/20 to-cyan-600/30 hover:from-blue-500/40 hover:via-blue-400/30 hover:to-cyan-500/40 border-2 border-blue-500/50 hover:border-blue-400/70 p-6 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 cursor-pointer transform perspective-1000 hover:rotate-y-5"
                   >
-                    <div className="flex items-center justify-center mb-2">
-                      <Mail className="w-6 h-6 text-blue-400 group-hover:animate-bounce" />
+                    <div className="absolute inset-0 bg-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div className="relative z-10 text-center">
+                      <div className="flex items-center justify-center mb-4">
+                        <div className="relative">
+                          <Mail className="w-8 h-8 text-blue-400 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+                          <div className="absolute -inset-2 border-2 border-blue-400/30 rounded-full group-hover:animate-pulse"></div>
+                        </div>
+                      </div>
+                      <h4 className="text-blue-400 font-bold text-lg mb-2 group-hover:text-blue-300">📧 Email Us</h4>
+                      <div className="bg-black/30 rounded-lg p-3 mb-3">
+                        <p className="text-white text-sm font-bold break-all">bookings@gqcars.co.uk</p>
+                      </div>
+                      <p className="text-gray-300 text-sm group-hover:text-gray-200">📨 Quick Response</p>
+                      <div className="mt-2 flex items-center justify-center space-x-1">
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-blue-400 font-semibold">MONITORED 24/7</span>
+                      </div>
                     </div>
-                    <h4 className="text-blue-400 font-bold text-sm mb-1">📧 Email Us</h4>
-                    <p className="text-white text-sm font-bold">bookings@gqcars.co.uk</p>
-                    <p className="text-gray-300 text-xs mt-1">Quick response</p>
                   </a>
 
-                  {/* WhatsApp - Clickable */}
+                  {/* WhatsApp - Enhanced with Chat Animation */}
                   <a 
-                    href="https://wa.me/447407655203" 
+                    href="https://wa.me/447407655203?text=🚨%20URGENT%20ASSISTANCE%20NEEDED%20🚨%0A%0AHello%20GQ%20Cars%20Security%20Team!%0A%0AI%20need%20immediate%20assistance%20with%20professional%20security%20transport.%0A%0A📍%20Current%20Location:%20%0A🎯%20Destination:%20%0A⏰%20Required%20Time:%20%0A👥%20Number%20of%20Passengers:%20%0A🛡️%20Security%20Level%20Required:%20%0A%0APlease%20respond%20ASAP.%20Thank%20you!" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-yellow-600/20 hover:bg-yellow-600/30 border border-yellow-500/50 p-4 rounded-xl transition-all hover:scale-105 text-center group cursor-pointer"
+                    className="group relative bg-gradient-to-br from-yellow-600/30 via-orange-500/20 to-yellow-600/30 hover:from-yellow-500/40 hover:via-orange-400/30 hover:to-yellow-500/40 border-2 border-yellow-500/50 hover:border-yellow-400/70 p-6 rounded-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/25 cursor-pointer transform perspective-1000 hover:rotate-y-5"
                   >
-                    <div className="flex items-center justify-center mb-2">
-                      <MessageCircle className="w-6 h-6 text-yellow-400 group-hover:animate-bounce" />
+                    <div className="absolute inset-0 bg-yellow-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div className="relative z-10 text-center">
+                      <div className="flex items-center justify-center mb-4">
+                        <div className="relative">
+                          <MessageCircle className="w-8 h-8 text-yellow-400 group-hover:scale-110 group-hover:animate-bounce transition-all duration-300" />
+                          <div className="absolute -inset-2 border-2 border-yellow-400/30 rounded-full group-hover:animate-pulse"></div>
+                          {/* Chat bubble animation */}
+                          <div className="absolute -top-2 -right-2 w-3 h-3 bg-green-500 rounded-full animate-pulse group-hover:animate-bounce"></div>
+                        </div>
+                      </div>
+                      <h4 className="text-yellow-400 font-bold text-lg mb-2 group-hover:text-yellow-300">💬 WhatsApp</h4>
+                      <div className="bg-black/30 rounded-lg p-3 mb-3">
+                        <p className="text-white text-sm font-bold">Live Chat Support</p>
+                      </div>
+                      <p className="text-gray-300 text-sm group-hover:text-gray-200">🚀 Instant Response</p>
+                      <div className="mt-2 flex items-center justify-center space-x-1">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-yellow-400 font-semibold">CHAT NOW</span>
+                      </div>
                     </div>
-                    <h4 className="text-yellow-400 font-bold text-sm mb-1">💬 WhatsApp</h4>
-                    <p className="text-white text-sm font-bold">Chat with us</p>
-                    <p className="text-gray-300 text-xs mt-1">24/7 Available</p>
                   </a>
                 </div>
 
-                <div className="mt-4 text-center">
-                  <div className="inline-flex items-center space-x-2 bg-red-500/20 border border-red-500/50 px-4 py-2 rounded-full">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-red-400 font-semibold text-sm">🚨 Emergency Line Always Open</span>
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                {/* Emergency Banner with Countdown */}
+                <div className="relative">
+                  <div className="bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 border-2 border-red-500/50 rounded-2xl p-6 text-center relative overflow-hidden">
+                    {/* Animated background stripes */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent animate-pulse"></div>
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-center space-x-3 mb-3">
+                        <div className="flex space-x-1">
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                        </div>
+                        <span className="text-red-400 font-bold text-xl animate-pulse">🚨 EMERGENCY RESPONSE TEAM</span>
+                        <div className="flex space-x-1">
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
+                          <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                        <div className="bg-black/40 rounded-lg p-3">
+                          <div className="text-red-400 font-bold text-sm">RESPONSE TIME</div>
+                          <div className="text-white font-mono text-lg">1-20 MIN</div>
+                        </div>
+                        <div className="bg-black/40 rounded-lg p-3">
+                          <div className="text-red-400 font-bold text-sm">AVAILABILITY</div>
+                          <div className="text-white font-mono text-lg">24/7/365</div>
+                        </div>
+                        <div className="bg-black/40 rounded-lg p-3">
+                          <div className="text-red-400 font-bold text-sm">COVERAGE</div>
+                          <div className="text-white font-mono text-lg">UK WIDE</div>
+                        </div>
+                        <div className="bg-black/40 rounded-lg p-3">
+                          <div className="text-red-400 font-bold text-sm">TEAM STATUS</div>
+                          <div className="text-green-400 font-mono text-lg animate-pulse">ONLINE</div>
+                        </div>
+                      </div>
+                      
+                      <p className="text-gray-300 text-sm">
+                        <span className="text-red-400 font-semibold">Priority Line Always Open</span> • 
+                        <span className="text-yellow-400 font-semibold"> SIA Licensed Officers</span> • 
+                        <span className="text-blue-400 font-semibold"> Immediate Dispatch</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
