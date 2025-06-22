@@ -6,6 +6,8 @@ import LocationBasedQuotes from './components/ui/LocationBasedQuotes'
 import QuoteWidget from './components/ui/QuoteWidget'
 import TestimonialsSection from './components/ui/TestimonialsSection'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import LiveActivityDashboard from './components/ui/LiveActivityDashboard'
+import SmartCTAManager from './components/ui/SmartCTAManager'
 
 export default function Home() {
   return (
@@ -540,6 +542,12 @@ export default function Home() {
 
       {/* WhatsApp AI Assistant Widget */}
       <WhatsAppWidget />
+
+      {/* Live Activity Dashboard */}
+      <LiveActivityDashboard />
+
+      {/* Smart CTA Manager */}
+      <SmartCTAManager />
     </>
   )
 }
