@@ -15,6 +15,7 @@ export interface ServiceConfig {
     from: number
     currency: string
     unit: string
+    display: string
   }
   features: string[]
   followUpQuestions: FollowUpQuestion[]
@@ -67,7 +68,8 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
     pricing: {
       from: 70,
       currency: '£',
-      unit: 'per transfer'
+      unit: 'per transfer',
+      display: 'From £70'
     },
     features: [
       'Flight tracking and monitoring',
@@ -172,7 +174,8 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
     pricing: {
       from: 150,
       currency: '£',
-      unit: 'per day'
+      unit: 'per day',
+      display: 'From £150'
     },
     features: [
       'Executive protection services',
@@ -264,7 +267,8 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
     pricing: {
       from: 500,
       currency: '£',
-      unit: 'per day'
+      unit: 'per day',
+      display: 'From £500'
     },
     features: [
       'Personal close protection',
@@ -321,7 +325,8 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
     pricing: {
       from: 200,
       currency: '£',
-      unit: 'per day'
+      unit: 'per day',
+      display: 'From £200'
     },
     features: [
       'Venue security assessment',
@@ -378,7 +383,8 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
     pricing: {
       from: 250,
       currency: '£',
-      unit: 'per day'
+      unit: 'per day',
+      display: 'From £250'
     },
     features: [
       'SIA-licensed close protection officers',
@@ -435,7 +441,8 @@ export const SERVICES_CONFIG: ServiceConfig[] = [
     pricing: {
       from: 400,
       currency: '£',
-      unit: 'per day'
+      unit: 'per day',
+      display: 'From £400'
     },
     features: [
       'Residential security management',

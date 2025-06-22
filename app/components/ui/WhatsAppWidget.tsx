@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { 
   MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, 
   ChevronRight, Send, Sparkles, Zap, ArrowLeft, Info, CreditCard,
-  CheckCircle, Heart, Building2, Home, Users, Globe
+  CheckCircle, Heart, Building2, Home, Users, Globe, Plane
 } from 'lucide-react'
 import GQCarsLogo from './GQCarsLogo'
 import { getAllServices, getServiceById, ServiceConfig, FollowUpQuestion, FollowUpOption } from '@/lib/services-config'
@@ -151,8 +151,84 @@ Sign up for personalized service, priority bookings, and direct specialist acces
         { id: 'emergency', text: '🚨 Emergency', action: 'emergency', icon: Phone }
       ]
     }
+    // Remove options since we now ask questions automatically
+    delete welcomeMessage.options
     console.log('Setting welcome message:', welcomeMessage)
     setMessages([welcomeMessage])
+    
+    // Automatically ask discovery question after welcome
+    setTimeout(() => {
+      if (isRegistered) {
+        askRegisteredUserQuestions(userName)
+      } else {
+        askDiscoveryQuestions()
+      }
+    }, 1500)
+  }
+
+  const askDiscoveryQuestions = () => {
+    addMessage(
+      `Let me help you find exactly what you need! What brings you to GQ CARS Ltd today?`,
+      true,
+      [
+        { id: 'need-transport', text: '🚗 I need secure transport', action: 'transport-discovery', icon: Car },
+        { id: 'need-security', text: '🛡️ I need security services', action: 'security-discovery', icon: Shield },
+        { id: 'planning-event', text: '🎉 I\'m planning an event', action: 'event-discovery', icon: Users },
+        { id: 'emergency-help', text: '🚨 This is urgent/emergency', action: 'emergency', icon: Phone },
+        { id: 'just-browsing', text: '👀 Just exploring options', action: 'show-services', icon: Star }
+      ]
+    )
+  }
+
+  const askRegisteredUserQuestions = (userName?: string) => {
+    addMessage(
+      `Perfect! What can I help you with today, ${userName || 'there'}?`,
+      true,
+      [
+        { id: 'book-favorite', text: '⚡ Book my usual service', action: 'quick-book', icon: Zap },
+        { id: 'new-service', text: '🔍 Explore new services', action: 'transport-discovery', icon: Car },
+        { id: 'schedule-callback', text: '📞 Schedule a callback', action: 'request-callback', icon: Phone },
+        { id: 'emergency-vip', text: '🚨 Emergency (VIP Priority)', action: 'emergency', icon: Phone }
+      ]
+    )
+  }
+
+  const handleTransportDiscovery = () => {
+    addMessage(
+      `Perfect! What type of transport do you need?`,
+      true,
+      [
+        { id: 'airport-transport', text: '✈️ Airport Transfer', action: 'service-detail', serviceId: 'airport', icon: Plane },
+        { id: 'vip-transport', text: '⭐ VIP/Luxury Transport', action: 'service-detail', serviceId: 'vip', icon: Star },
+        { id: 'not-sure-transport', text: '🤔 Not sure, show me options', action: 'show-transport-services', icon: Car }
+      ]
+    )
+  }
+
+  const handleSecurityDiscovery = () => {
+    addMessage(
+      `What type of security service do you need?`,
+      true,
+      [
+        { id: 'personal-security', text: '🛡️ Personal Protection', action: 'service-detail', serviceId: 'close-protection', icon: Shield },
+        { id: 'business-security', text: '🏢 Corporate Security', action: 'service-detail', serviceId: 'corporate', icon: Building2 },
+        { id: 'family-security', text: '🏠 Family/Estate Security', action: 'service-detail', serviceId: 'family-office', icon: Home },
+        { id: 'not-sure-security', text: '🤔 Not sure, show me options', action: 'show-security-services', icon: Shield }
+      ]
+    )
+  }
+
+  const handleEventDiscovery = () => {
+    addMessage(
+      `What type of event are you planning?`,
+      true,
+      [
+        { id: 'wedding-event', text: '💒 Wedding', action: 'service-detail', serviceId: 'weddings', icon: Heart },
+        { id: 'corporate-event', text: '🏢 Corporate Event', action: 'service-detail', serviceId: 'corporate', icon: Building2 },
+        { id: 'vip-event', text: '⭐ VIP/Celebrity Event', action: 'service-detail', serviceId: 'vip', icon: Star },
+        { id: 'not-sure-event', text: '🤔 Not sure, show me options', action: 'show-services', icon: Users }
+      ]
+    )
   }
 
   const addMessage = (
@@ -195,6 +271,15 @@ Sign up for personalized service, priority bookings, and direct specialist acces
           // Simulate typing and respond based on action
       simulateTyping(() => {
         switch (option.action) {
+          case 'transport-discovery':
+            handleTransportDiscovery()
+            break
+          case 'security-discovery':
+            handleSecurityDiscovery()
+            break
+          case 'event-discovery':
+            handleEventDiscovery()
+            break
           case 'start-signup':
             startSignupFlow()
             break
@@ -386,7 +471,7 @@ Select any service to explore:`,
        true, 
        services.map(service => ({
          id: service.id,
-         text: `${service.emoji} ${service.name} (from ${service.pricing.currency}${service.pricing.from})`,
+         text: `${service.emoji} ${service.name} (${service.pricing.display})`,
          action: 'service-detail',
          serviceId: service.id,
          icon: service.icon
@@ -405,7 +490,7 @@ Select any service to explore:`,
 
 ${service.description}
 
-**Starting from ${service.pricing.currency}${service.pricing.from} ${service.pricing.unit}**`,
+**${service.pricing.display}**`,
       true,
       [],
       'service-card',
@@ -468,12 +553,12 @@ ${service.quickFacts.map(fact => `• ${fact}`).join('\n')}`,
 
     let pricingText = `**${service.name} Pricing:**
 
-Base Price: ${service.pricing.currency}${service.pricing.from} ${service.pricing.unit}`
+Base Price: ${service.pricing.display}`
 
     if (service.subServices && service.subServices.length > 0) {
       pricingText += '\n\n**Specific Options:**'
       service.subServices.forEach(sub => {
-        pricingText += `\n• ${sub.name}: ${sub.pricing.currency}${sub.pricing.from} ${sub.pricing.unit}`
+        pricingText += `\n• ${sub.name}: From ${sub.pricing.currency}${sub.pricing.from}`
       })
     }
 
@@ -513,13 +598,13 @@ Base Price: ${service.pricing.currency}${service.pricing.from} ${service.pricing
 
 Most popular services for immediate booking:`,
       true,
-      popularServices.map(service => ({
-        id: service.id,
-        text: `${service.emoji} ${service.name} - ${service.pricing.currency}${service.pricing.from}`,
-        action: 'book-service',
-        serviceId: service.id,
-        icon: service.icon
-      }))
+             popularServices.map(service => ({
+         id: service.id,
+         text: `${service.emoji} ${service.name} - ${service.pricing.display}`,
+         action: 'book-service',
+         serviceId: service.id,
+         icon: service.icon
+       }))
     )
   }
 
@@ -751,10 +836,10 @@ They'll help you with booking, pricing, and any questions you have. Our team typ
                         </div>
                         <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-3 rounded-lg">
                           <p className="text-sm text-gray-700 mb-2">{message.serviceData.shortDescription}</p>
-                          <div className="flex items-center text-lg font-bold text-orange-600">
-                            <CreditCard className="w-4 h-4 mr-1" />
-                            From {message.serviceData.pricing.currency}{message.serviceData.pricing.from}
-                          </div>
+                                                     <div className="flex items-center text-lg font-bold text-orange-600">
+                             <CreditCard className="w-4 h-4 mr-1" />
+                             {message.serviceData.pricing.display}
+                           </div>
                         </div>
                       </div>
                     )}
