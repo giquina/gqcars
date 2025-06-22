@@ -6,6 +6,7 @@ import LocationBasedQuotes from './components/ui/LocationBasedQuotes'
 import QuoteWidget from './components/ui/QuoteWidget'
 import TestimonialsSection from './components/ui/TestimonialsSection'
 import WhatsAppWidget from './components/ui/WhatsAppWidget'
+import LiveNotifications from './components/ui/LiveNotifications'
 
 export default function Home() {
   return (
@@ -540,6 +541,9 @@ export default function Home() {
 
       {/* WhatsApp AI Assistant Widget */}
       <WhatsAppWidget />
+      
+      {/* Live Customer Notifications */}
+      <LiveNotifications />
     </>
   )
 }
