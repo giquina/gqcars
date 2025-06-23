@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Shield, Car, Building2, Sparkles, Star, Phone, X } from 'lucide-react'
+import { Shield, Car, Building2, Sparkles, Star, Phone, X, Briefcase, Users, Heart, Plane, ChevronRight, Crown, ShoppingBag, Zap } from 'lucide-react'
+import SmartPlatformButton from './SmartPlatformButton'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -45,15 +46,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gq-black border-l border-gq-accent/10 z-50"
+            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-gray-900/95 backdrop-blur-sm border-l border-yellow-500/20 z-50"
           >
             <div className="flex flex-col h-full">
               {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-gq-accent/10">
-                <span className="text-xl font-bold text-gq-gold">GQ Security</span>
+              <div className="flex items-center justify-between p-4 border-b border-yellow-500/20">
+                <span className="text-xl font-bold text-yellow-500 uppercase tracking-wider">MENU</span>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:text-gq-gold transition-colors"
+                  className="p-2 hover:text-yellow-500 transition-colors"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -63,16 +64,19 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <nav className="flex-1 overflow-y-auto py-4">
                 <div className="px-4 mb-6">
                   <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Services</h3>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1">
                     {services.map((service) => (
                       <li key={service.href}>
                         <a
                           href={service.href}
                           onClick={onClose}
-                          className="flex items-center gap-3 py-2 hover:text-gq-gold transition-colors"
+                          className="flex flex-col gap-1 py-3 px-4 hover:bg-yellow-500/10 rounded-lg transition-colors"
                         >
-                          <service.icon className="w-5 h-5" />
-                          {service.name}
+                          <div className="flex items-center gap-3">
+                            <service.icon className="w-5 h-5 text-yellow-500" />
+                            <span className="font-semibold text-white">{service.name}</span>
+                          </div>
+                          <p className="pl-8 text-xs text-gray-400">{service.description}</p>
                         </a>
                       </li>
                     ))}
@@ -87,7 +91,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         <a
                           href={item.href}
                           onClick={onClose}
-                          className="block py-2 hover:text-gq-gold transition-colors"
+                          className="block py-2 px-4 hover:bg-yellow-500/10 rounded-lg transition-colors"
                         >
                           {item.name}
                         </a>
@@ -98,19 +102,20 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </nav>
 
               {/* Actions */}
-              <div className="p-4 border-t border-gray-700">
+              <div className="p-4 border-t border-yellow-500/20 space-y-3">
+                <SmartPlatformButton className="w-full justify-center" />
                 <a
-                  href="/book"
+                  href="/quote"
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-blue-600 to-yellow-500 text-white font-medium hover:opacity-90 transition-opacity mb-3 rounded"
+                  className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold text-base hover:opacity-90 transition-opacity rounded-lg"
                 >
-                  Book Now
+                  Enquire Now
                   <Car className="w-5 h-5" />
                 </a>
                 <a
                   href="tel:07407655203"
                   onClick={onClose}
-                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-yellow-500 text-yellow-500 font-medium hover:bg-yellow-500 hover:text-black transition-colors rounded"
+                  className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-yellow-500 text-yellow-500 font-bold text-base hover:bg-yellow-500 hover:text-black transition-colors rounded-lg"
                 >
                   Call: 07407 655 203
                   <Phone className="w-5 h-5" />
@@ -126,45 +131,65 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
 const services = [
   {
-    name: 'Book Taxi',
-    href: '/services/taxi',
-    icon: Car
+    href: "/services/private-hire",
+    label: "Private Hire & Taxi",
+    description: "Reliable, pre-booked car services with security drivers.",
+    icon: Car,
   },
   {
-    name: 'Private Hire',
-    href: '/services/private-hire',
-    icon: Car
+    href: "/services/airport",
+    label: "Airport Transfers",
+    description: "Secure, punctual transfers to all London airports.",
+    icon: Plane,
   },
   {
-    name: 'Airport Transfer',
-    href: '/services/airport',
-    icon: Building2
+    href: "/services/corporate",
+    label: "Corporate",
+    description: "Executive transport for meetings, events, and roadshows.",
+    icon: Briefcase,
   },
   {
-    name: 'Corporate Transport',
-    href: '/services/corporate',
-    icon: Building2
+    href: "/services/close-protection",
+    label: "Close Protection",
+    description: "Personal security from elite, SIA-licensed CPOs.",
+    icon: Shield,
   },
   {
-    name: 'Security Services',
-    href: '/services/close-protection',
-    icon: Shield
+    href: "/services/family-office",
+    label: "Family Office",
+    description: "Coordinated security transport for HNW families.",
+    icon: Users,
   },
   {
-    name: 'Family Office Services',
-    href: '/services/family-office',
-    icon: Star
+    href: "/services/weddings",
+    label: "Weddings",
+    description: "Elegant and secure transport for your special day.",
+    icon: Heart,
   },
   {
-    name: 'Family Security',
-    href: '/services/family-security',
-    icon: Shield
+    href: "/services/diplomatic",
+    label: "Diplomatic",
+    description: "Protocol-aware transport for government and state affairs.",
+    icon: Shield,
   },
   {
-    name: 'Wedding Transport',
-    href: '/services/weddings',
-    icon: Sparkles
-  }
+    href: "/services/vip",
+    label: "VIP & Events",
+    description: "Secure transport for galas, premieres, and major events.",
+    icon: Crown,
+  },
+  {
+    href: "/services/shopping",
+    label: "Luxury Shopping",
+    description: "Discreet driver service for your London shopping trips.",
+    icon: ShoppingBag,
+  },
+  {
+    href: "/services/lifestyle",
+    label: "Lifestyle",
+    description: "On-demand transport for your social engagements.",
+    icon: Zap,
+  },
 ]
 
 const company = [

@@ -1,34 +1,49 @@
 'use client'
 
-export default function TFLLogo({ className = "w-20 h-12" }: { className?: string }) {
+export default function TFLLogo({ className = "w-12 h-12" }: { className?: string }) {
   return (
-    <div className={`${className} flex items-center justify-center bg-white rounded p-1`}>
-      <svg viewBox="0 0 120 120" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        {/* TFL Purple circle background */}
-        <circle cx="60" cy="60" r="55" fill="#663399" stroke="#4B0082" strokeWidth="8"/>
+    <div className={`${className} flex items-center justify-center`}>
+      <svg
+        viewBox="0 0 100 100"
+        className="w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Logo elements */}
+        <defs>
+          <linearGradient id="tflRed" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#DC241F" />
+            <stop offset="100%" stopColor="#E32219" />
+          </linearGradient>
+        </defs>
         
-        {/* White inner circle */}
-        <circle cx="60" cy="60" r="42" fill="white"/>
+        {/* Circle background */}
+        <circle
+          cx="50"
+          cy="50"
+          r="48"
+          fill="url(#tflRed)"
+          stroke="#FFF"
+          strokeWidth="2"
+        />
         
-        {/* Purple inner circle */}
-        <circle cx="60" cy="60" r="28" fill="#9966CC"/>
+        {/* Bar */}
+        <rect
+          x="20"
+          y="40"
+          width="60"
+          height="20"
+          fill="#FFF"
+        />
         
-        {/* White center circle */}
-        <circle cx="60" cy="60" r="15" fill="white"/>
-        
-        {/* PRIVATE HIRE blue bar */}
-        <rect x="20" y="52" width="80" height="16" fill="#4B0082" rx="2"/>
-        
-        {/* PRIVATE HIRE text */}
-        <text x="60" y="64" textAnchor="middle" fill="white" 
-              style={{fontSize: '10px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold', letterSpacing: '1px'}}>
-          PRIVATE HIRE
-        </text>
-        
-        {/* Top text "Pre-booked only" */}
-        <text x="60" y="25" textAnchor="middle" fill="white" 
-              style={{fontSize: '8px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold'}}>
-          Pre-booked only
+        {/* TFL Letters */}
+        <text
+          x="50"
+          y="55"
+          textAnchor="middle"
+          className="fill-red-600 font-bold text-xl"
+          style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif' }}
+        >
+          TFL
         </text>
       </svg>
     </div>

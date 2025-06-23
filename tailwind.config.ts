@@ -20,6 +20,7 @@ const config: Config = {
         'float-medium': 'float 4s ease-in-out infinite',
         'float-fast': 'float 3s ease-in-out infinite',
         'rotate-y-5': 'rotateY 0.3s ease-out',
+        'bounce-slow': 'bounce 3s ease-in-out infinite',
       },
       keyframes: {
         float: {

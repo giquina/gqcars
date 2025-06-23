@@ -1,4 +1,6 @@
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+'use client';
+
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -53,10 +55,57 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div className="bg-gray-900 p-8 rounded-lg">
             <h2 className="text-2xl font-bold mb-6 text-yellow-500">Send us a Message</h2>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-500"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition-colors"
+              >
+                Send Message
+              </button>
             </form>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

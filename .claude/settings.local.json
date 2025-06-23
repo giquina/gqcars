@@ -20,7 +20,10 @@
       "Bash(npm install:*)",
       "Bash(rm:*)",
       "Bash(npx prisma generate:*)",
-      "Bash(npx prisma:*)"
+      "Bash(npx prisma:*)",
+      "Bash(lsof:*)",
+      "Bash(pkill:*)",
+      "Bash(sudo netstat:*)"
     ],
     "deny": []
   }

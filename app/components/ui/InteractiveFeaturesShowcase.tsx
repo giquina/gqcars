@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { MessageCircle, Sparkles, Mic, MapPin } from 'lucide-react';
 import React from 'react';

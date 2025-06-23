@@ -1,7 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Star, Quote, Shield, Building2, Car, Clock, ChevronLeft, ChevronRight, Check, Crown, Users } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { Star, Quote, Shield, Building2, Car, Clock, ChevronLeft, ChevronRight, Check, Crown, Users, ShoppingBag, Briefcase, Heart } from 'lucide-react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import ClassNames from 'embla-carousel-class-names'
 
 const testimonials = [
   {
@@ -14,7 +17,7 @@ const testimonials = [
     testimonial: "GQ Cars has been our exclusive transport provider for 3 years. Their SIA licensed drivers provide the security and professionalism our executives require. Never had a single issue.",
     location: "Canary Wharf, London",
     verified: true,
-    serviceType: "corporate"
+    category: "Corporate"
   },
   {
     id: 2,
@@ -26,7 +29,7 @@ const testimonials = [
     testimonial: "Fly into Heathrow monthly and GQ Cars is my go-to. Their drivers are always professional, vehicles immaculate, and the security training shows. Worth every penny.",
     location: "Heathrow Airport",
     verified: true,
-    serviceType: "airport"
+    category: "Airport"
   },
   {
     id: 3,
@@ -38,7 +41,7 @@ const testimonials = [
     testimonial: "On our wedding day, GQ Cars provided discreet security transport for our families. The SIA trained drivers were professional and kept everything smooth. Highly recommend!",
     location: "Central London",
     verified: true,
-    serviceType: "wedding"
+    category: "Weddings"
   },
   {
     id: 4,
@@ -50,7 +53,7 @@ const testimonials = [
     testimonial: "After receiving threats, I needed reliable security transport. GQ Cars' close protection officers are exceptional. Professional, discrete, and always vigilant.",
     location: "Tech City, London",
     verified: true,
-    serviceType: "protection"
+    category: "Protection"
   },
   {
     id: 5,
@@ -62,7 +65,7 @@ const testimonials = [
     testimonial: "GQ Cars manages all our family's transport needs. Their SIA licensed drivers understand discretion and security. Exceptional service for high-net-worth families.",
     location: "Kensington, London",
     verified: true,
-    serviceType: "family"
+    category: "Family Office"
   },
   {
     id: 6,
@@ -74,7 +77,7 @@ const testimonials = [
     testimonial: "We use GQ Cars for all our VIP client events. Their security-trained drivers and luxury vehicles provide the perfect combination of safety and style.",
     location: "Mayfair, London",
     verified: true,
-    serviceType: "vip"
+    category: "VIP Events"
   },
   {
     id: 7,
@@ -86,7 +89,7 @@ const testimonials = [
     testimonial: "GQ Cars has been managing our family's transport security for 2 years. Their drivers are trained in family protection and our children feel completely safe. Professional, discrete, and completely reliable.",
     location: "Belgravia, London",
     verified: true,
-    serviceType: "family"
+    category: "Family Office"
   },
   {
     id: 8,
@@ -98,7 +101,7 @@ const testimonials = [
     testimonial: "During our London shopping trips to Harrods and Bond Street, GQ Cars provided exceptional security. Their drivers understand luxury retail security and coordinated perfectly with store security teams.",
     location: "Harrods & Bond Street",
     verified: true,
-    serviceType: "retail"
+    category: "Shopping"
   },
   {
     id: 9,
@@ -110,7 +113,7 @@ const testimonials = [
     testimonial: "For private member's clubs and charity galas, GQ Cars provides discrete security transport. Their drivers blend seamlessly into London's social scene while maintaining professional protection.",
     location: "Mayfair Private Clubs",
     verified: true,
-    serviceType: "lifestyle"
+    category: "Lifestyle"
   },
   {
     id: 10,
@@ -122,7 +125,7 @@ const testimonials = [
     testimonial: "Sensitive government meetings require the highest security standards. GQ Cars' SIA licensed drivers have government clearance and understand diplomatic protocols perfectly. Essential service.",
     location: "Westminster, London",
     verified: true,
-    serviceType: "government"
+    category: "Diplomatic"
   }
 ]
 
@@ -239,294 +242,118 @@ const caseStudies = [
   }
 ]
 
+const categories = [
+  { name: 'All', icon: Star, category: 'All' },
+  { name: 'Corporate', icon: Briefcase, category: 'Corporate' },
+  { name: 'Airport', icon: Building2, category: 'Airport' },
+  { name: 'Protection', icon: Shield, category: 'Protection' },
+  { name: 'Family Office', icon: Users, category: 'Family Office' },
+  { name: 'Weddings', icon: Heart, category: 'Weddings' },
+  { name: 'VIP Events', icon: Crown, category: 'VIP Events' },
+  { name: 'Lifestyle', icon: Star, category: 'Lifestyle' },
+  { name: 'Shopping', icon: ShoppingBag, category: 'Shopping' },
+  { name: 'Diplomatic', icon: Shield, category: 'Diplomatic' },
+]
+
 export default function TestimonialsSection() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [showCaseStudies, setShowCaseStudies] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [filteredTmls, setFilteredTmls] = useState(testimonials)
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 5000 }),
+    ClassNames()
+  ])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const filteredTestimonials = selectedCategory === 'all' 
-    ? testimonials 
-    : testimonials.filter(t => t.serviceType === selectedCategory)
-
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % filteredTestimonials.length)
-  }
-
-  const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + filteredTestimonials.length) % filteredTestimonials.length)
-  }
-
+    if (selectedCategory === 'All') {
+      setFilteredTmls(testimonials)
+    } else {
+      setFilteredTmls(testimonials.filter(tml => tml.category === selectedCategory))
+    }
+    if (emblaApi) emblaApi.reInit()
+  }, [selectedCategory, emblaApi])
+  
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-black relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-40 h-40 border border-yellow-500 rotate-45 animate-spin-slow"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 border border-blue-500 rotate-12 animate-pulse"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-3 bg-black/50 px-6 py-3 rounded-full mb-6">
-            <Star className="w-6 h-6 text-yellow-500" />
-            <span className="text-yellow-500 font-bold">CLIENT TESTIMONIALS</span>
-            <Shield className="w-6 h-6 text-yellow-500" />
+    <section className="py-20 sm:py-24 bg-gradient-to-b from-black via-blue-900/20 to-black">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-block bg-gray-800/50 border border-yellow-500/30 rounded-full px-4 py-1.5 mb-4">
+            <div className="flex items-center space-x-2">
+              <Star className="w-5 h-5 text-yellow-400" />
+              <span className="font-bold text-sm text-white tracking-wide">CLIENT TESTIMONIALS</span>
+              <Shield className="w-5 h-5 text-yellow-400" />
+            </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            TRUSTED BY LONDON'S ELITE
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            See why CEOs, celebrities, and high-net-worth families choose our 
-            <span className="text-yellow-500 font-semibold"> SIA licensed security drivers</span>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-3">Trusted by London's Elite</h2>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+            See why CEOs, celebrities, and high-net-worth families choose our <span className="text-yellow-400 font-semibold">SIA licensed security drivers</span>.
           </p>
         </div>
 
-        {/* Toggle Between Testimonials and Case Studies */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-black/50 p-2 rounded-xl border border-yellow-500/30">
-            <button
-              onClick={() => setShowCaseStudies(false)}
-              className={`px-6 py-3 rounded-lg font-bold transition-all ${
-                !showCaseStudies 
-                  ? 'bg-yellow-500 text-black' 
-                  : 'text-white hover:bg-gray-700'
-              }`}
-            >
-              TESTIMONIALS
-            </button>
-            <button
-              onClick={() => setShowCaseStudies(true)}
-              className={`px-6 py-3 rounded-lg font-bold transition-all ${
-                showCaseStudies 
-                  ? 'bg-yellow-500 text-black' 
-                  : 'text-white hover:bg-gray-700'
-              }`}
-            >
-              CASE STUDIES
-            </button>
-          </div>
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 max-w-4xl mx-auto text-center">
+            <div className="p-4 bg-gray-800/30 rounded-lg">
+                <p className="text-4xl font-bold text-yellow-500">500+</p>
+                <p className="text-sm text-gray-400">Verified Reviews</p>
+            </div>
+            <div className="p-4 bg-gray-800/30 rounded-lg">
+                <p className="text-4xl font-bold text-yellow-500">98%</p>
+                <p className="text-sm text-gray-400">Client Retention</p>
+            </div>
+            <div className="p-4 bg-gray-800/30 rounded-lg">
+                <p className="text-4xl font-bold text-yellow-500">15</p>
+                <p className="text-sm text-gray-400">Years Experience</p>
+            </div>
+            <div className="p-4 bg-gray-800/30 rounded-lg">
+                <p className="text-4xl font-bold text-yellow-500">4.9★</p>
+                <p className="text-sm text-gray-400">Average Rating</p>
+            </div>
         </div>
 
-        {!showCaseStudies ? (
-          <>
-            {/* Category Filter */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {[
-                { key: 'all', label: 'ALL', icon: Star },
-                { key: 'corporate', label: 'CORPORATE', icon: Building2 },
-                { key: 'airport', label: 'AIRPORT', icon: Car },
-                { key: 'protection', label: 'PROTECTION', icon: Shield },
-                { key: 'family', label: 'FAMILY OFFICE', icon: Users },
-                { key: 'wedding', label: 'WEDDINGS', icon: Quote },
-                { key: 'vip', label: 'VIP EVENTS', icon: Crown },
-                { key: 'lifestyle', label: 'LIFESTYLE', icon: Star },
-                { key: 'retail', label: 'SHOPPING', icon: Building2 },
-                { key: 'government', label: 'DIPLOMATIC', icon: Shield }
-              ].map(({ key, label, icon: Icon }) => (
-                <button
-                  key={key}
-                  onClick={() => setSelectedCategory(key)}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-bold text-sm transition-all ${
-                    selectedCategory === key 
-                      ? 'bg-yellow-500 text-black' 
-                      : 'bg-gray-800 text-white hover:bg-gray-700'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{label}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Main Testimonial Display */}
-            <div className="relative">
-              <div className="bg-gradient-to-br from-gray-800/50 to-black/50 p-8 rounded-2xl border border-yellow-500/30 max-w-4xl mx-auto relative overflow-hidden">
-                {/* Quote Icon */}
-                <div className="absolute top-6 left-6 w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
-                  <Quote className="w-6 h-6 text-yellow-500" />
-                </div>
-
-                {/* Stars Rating */}
-                <div className="flex justify-center mb-6">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-6 h-6 text-yellow-500 fill-current" />
-                  ))}
-                </div>
-
-                {/* Testimonial Content */}
-                <div className="text-center mb-8">
-                  <blockquote className="text-xl md:text-2xl text-white italic mb-6 leading-relaxed">
-                    "{filteredTestimonials[currentTestimonial]?.testimonial}"
-                  </blockquote>
-                  
-                  <div className="flex items-center justify-center space-x-4">
-                    <div className="text-4xl">{filteredTestimonials[currentTestimonial]?.image}</div>
-                    <div className="text-left">
-                      <h4 className="text-yellow-500 font-bold text-lg flex items-center space-x-2">
-                        <span>{filteredTestimonials[currentTestimonial]?.name}</span>
-                        {filteredTestimonials[currentTestimonial]?.verified && (
-                          <Check className="w-5 h-5 text-green-400" />
-                        )}
-                      </h4>
-                      <p className="text-gray-300">{filteredTestimonials[currentTestimonial]?.title}</p>
-                      <p className="text-blue-400 text-sm">{filteredTestimonials[currentTestimonial]?.service}</p>
-                      <p className="text-gray-400 text-sm">{filteredTestimonials[currentTestimonial]?.location}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Navigation Arrows */}
-                <button
-                  onClick={prevTestimonial}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-black p-2 rounded-full hover:bg-yellow-400 transition-colors"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-black p-2 rounded-full hover:bg-yellow-400 transition-colors"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Testimonial Dots */}
-              <div className="flex justify-center space-x-2 mt-6">
-                {filteredTestimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
-                      index === currentTestimonial 
-                        ? 'bg-yellow-500 scale-125' 
-                        : 'bg-gray-600 hover:bg-gray-500'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Mini Testimonials Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-              {testimonials.slice(0, 3).map((testimonial) => (
-                <div key={testimonial.id} className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-all">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <span className="text-2xl">{testimonial.image}</span>
-                    <div>
-                      <h4 className="text-white font-bold text-sm">{testimonial.name}</h4>
-                      <p className="text-gray-400 text-xs">{testimonial.service}</p>
-                    </div>
-                    <div className="ml-auto flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 text-yellow-500 fill-current" />
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-gray-300 text-sm italic">
-                    "{testimonial.testimonial.slice(0, 100)}..."
-                  </p>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          // Case Studies Section
-          <div className="space-y-8">
-            <h3 className="text-3xl font-bold text-center text-white mb-12">
-              REAL SECURITY SUCCESS STORIES
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {caseStudies.map((study) => (
-                <div key={study.id} className="bg-gradient-to-br from-gray-800/60 to-black/60 p-6 rounded-2xl border border-yellow-500/30 hover:border-yellow-500/60 transition-all hover:transform hover:scale-105">
-                  <div className="mb-4">
-                    <div className="bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold mb-3 inline-block">
-                      {study.category}
-                    </div>
-                    <h4 className="text-xl font-bold text-white mb-2">{study.title}</h4>
-                    <p className="text-blue-400 text-sm font-semibold">Client: {study.client}</p>
-                  </div>
-
-                  <div className="space-y-4 text-sm">
-                    <div>
-                      <h5 className="text-red-400 font-bold mb-1">CHALLENGE:</h5>
-                      <p className="text-gray-300">{study.challenge}</p>
-                    </div>
-                    
-                    <div>
-                      <h5 className="text-blue-400 font-bold mb-1">SOLUTION:</h5>
-                      <p className="text-gray-300">{study.solution}</p>
-                    </div>
-                    
-                    <div>
-                      <h5 className="text-green-400 font-bold mb-1">RESULT:</h5>
-                      <p className="text-gray-300">{study.result}</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-gray-700 flex justify-between text-xs text-gray-400">
-                    <span>Duration: {study.duration}</span>
-                    <span>Team: {study.team}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Trust Indicators */}
-        <div className="mt-16 bg-gradient-to-r from-gray-900/80 to-black/80 p-8 rounded-2xl border border-yellow-500/30">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-yellow-500 font-bold text-3xl mb-2">500+</div>
-              <div className="text-gray-300 text-sm">VERIFIED REVIEWS</div>
-            </div>
-            <div>
-              <div className="text-yellow-500 font-bold text-3xl mb-2">98%</div>
-              <div className="text-gray-300 text-sm">CLIENT RETENTION</div>
-            </div>
-            <div>
-              <div className="text-yellow-500 font-bold text-3xl mb-2">15</div>
-              <div className="text-gray-300 text-sm">YEARS EXPERIENCE</div>
-            </div>
-            <div>
-              <div className="text-yellow-500 font-bold text-3xl mb-2">4.9★</div>
-              <div className="text-gray-300 text-sm">AVERAGE RATING</div>
-            </div>
-          </div>
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+          {categories.map(({ name, icon: Icon, category }) => (
+            <button
+              key={name}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-full flex items-center gap-2 transition-all duration-300 border
+                ${selectedCategory === category
+                  ? 'bg-yellow-500 text-black border-yellow-500'
+                  : 'bg-gray-800/50 text-gray-300 border-gray-700 hover:bg-gray-700/80 hover:border-gray-600'
+                }`
+              }
+            >
+              <Icon className="w-4 h-4" />
+              {name}
+            </button>
+          ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            JOIN OUR SATISFIED CLIENTS
-          </h3>
-          <p className="text-gray-300 mb-8">
-            Experience the same professional security transport that London's elite trust
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="tel:07407655203"
-              className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-4 rounded-xl transition-all transform hover:scale-105 flex items-center justify-center space-x-2"
-            >
-              <Shield className="w-5 h-5" />
-              <span>BOOK SECURITY TRANSPORT</span>
-            </a>
-            <a 
-              href="/testimonials"
-              className="bg-transparent border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black font-bold px-8 py-4 rounded-xl transition-all flex items-center justify-center space-x-2"
-            >
-              <Quote className="w-5 h-5" />
-              <span>READ ALL REVIEWS</span>
-            </a>
+        {/* Carousel */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {filteredTmls.map((tml) => (
+              <div className="flex-grow-0 flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-3 embla__slide" key={tml.id}>
+                <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 h-full flex flex-col justify-between hover:border-yellow-500/50 transition-colors duration-300">
+                  <div>
+                    <div className="flex items-center mb-4">
+                      <div className="text-3xl mr-3">{tml.image}</div>
+                      <div>
+                        <h3 className="font-bold text-white">{tml.name}</h3>
+                        <p className="text-xs text-gray-400">{tml.service}</p>
+                      </div>
+                      <div className="ml-auto flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={`w-4 h-4 ${i < tml.rating ? 'text-yellow-400' : 'text-gray-600'}`} fill="currentColor" />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-gray-300 text-sm italic">"{tml.testimonial}"</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

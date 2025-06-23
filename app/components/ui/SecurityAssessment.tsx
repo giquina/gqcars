@@ -1,200 +1,239 @@
 'use client'
 
 import { useState } from 'react'
-import { Shield, Car, PartyPopper, Briefcase, ChevronLeft, ChevronRight, Sparkles, Users, CheckCircle } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Shield, User, MapPin, History, Zap, BarChart, ChevronLeft, CheckCircle, Briefcase, Users, Plane, Heart, Crown, ShoppingBag } from 'lucide-react'
 
-// Define the structure for a question
-interface Question {
-  id: number
-  text: string
-  options: {
-    id: string
-    text: string
-    subtext: string
-    icon: React.ElementType
-  }[]
-}
+type Option = {
+  id: string;
+  text: string;
+  subtext?: string;
+  icon: React.ElementType;
+};
 
-// Define the props for your component
-interface SecurityAssessmentProps {
-  questions: Question[]
-  onComplete: (answers: Record<number, string>) => void
-}
+type Question = {
+  id: string;
+  stepTitle: string;
+  stepIcon: React.ElementType;
+  questionText: string;
+  options: Option[];
+  type: 'multiple-choice' | 'text';
+};
 
-export default function SecurityAssessment({ questions, onComplete }: SecurityAssessmentProps) {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [answers, setAnswers] = useState<Record<number, string>>({})
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
-
-  const handleAnswer = (questionId: number, optionId: string) => {
-    setSelectedOption(optionId)
-    
-    // Add a small delay for visual feedback before proceeding
-    setTimeout(() => {
-      const newAnswers = { ...answers, [questionId]: optionId }
-      setAnswers(newAnswers)
-      setSelectedOption(null)
-      
-      // Automatically move to the next question
-      if (currentStep < questions.length - 1) {
-        setCurrentStep(currentStep + 1)
-      } else {
-        onComplete(newAnswers)
-      }
-    }, 300)
+const assessmentQuestions: Question[] = [
+  {
+    id: 'service',
+    stepTitle: 'Service Requirement',
+    stepIcon: Zap,
+    questionText: 'What is the primary service you require?',
+    type: 'multiple-choice',
+    options: [
+      { id: 'protection', text: 'Personal Protection', subtext: 'High-security for an individual or group.', icon: Shield },
+      { id: 'executive', text: 'Executive Transport', subtext: 'Professional travel for business needs.', icon: Briefcase },
+      { id: 'airport', text: 'Airport Transfer', subtext: 'Secure and reliable airport transportation.', icon: Plane },
+      { id: 'event', text: 'Event Security', subtext: 'Transport for weddings or special occasions.', icon: Heart },
+    ]
+  },
+  {
+    id: 'principalProfile',
+    stepTitle: 'Principal Profile (People)',
+    stepIcon: User,
+    questionText: 'What is the public profile of the person requiring protection?',
+    type: 'multiple-choice',
+    options: [
+      { id: 'private', text: 'Private Individual', subtext: 'Low public visibility, personal travel.', icon: Users },
+      { id: 'corporate', text: 'Corporate Executive', subtext: 'C-suite, board member, business figure.', icon: Briefcase },
+      { id: 'publicFigure', text: 'Public Figure', subtext: 'Celebrity, politician, artist, or media personality.', icon: Crown },
+      { id: 'other', text: 'Other / Prefer Not to Say', subtext: 'For sensitive or unique situations.', icon: Shield },
+    ]
+  },
+  {
+    id: 'locations',
+    stepTitle: 'Journey Details (Places)',
+    stepIcon: MapPin,
+    questionText: 'Describe the primary locations for this journey.',
+    type: 'multiple-choice',
+    options: [
+      { id: 'routine', text: 'Routine & Familiar', subtext: 'e.g., Home to office, known routes.', icon: MapPin },
+      { id: 'varied', text: 'Varied Public Venues', subtext: 'e.g., Hotels, restaurants, event spaces.', icon: ShoppingBag },
+      { id: 'highRisk', text: 'High-Risk / Unfamiliar', subtext: 'e.g., Overseas, high-crime areas, sensitive meetings.', icon: Shield },
+      { id: 'secure', text: 'Secure / Private', subtext: 'e.g., FBOs, private residences, secure compounds.', icon: CheckCircle },
+    ]
+  },
+  {
+    id: 'threatHistory',
+    stepTitle: 'Threat History (History)',
+    stepIcon: History,
+    questionText: 'Has the principal ever received specific threats?',
+    type: 'multiple-choice',
+    options: [
+      { id: 'none', text: 'No Known Threats', subtext: 'No history of direct or indirect threats.', icon: CheckCircle },
+      { id: 'unwanted', text: 'Unwanted Attention', subtext: 'e.g., Paparazzi, stalkers, online harassment.', icon: Users },
+      { id: 'indirect', text: 'Indirect / Vague Threats', subtext: 'Non-specific threats have been made.', icon: Zap },
+      { id: 'direct', text: 'Yes, Direct Threats', subtext: 'A credible, specific threat has been identified.', icon: Shield },
+    ]
+  },
+  {
+    id: 'perceivedRisk',
+    stepTitle: 'Perceived Risk Level',
+    stepIcon: BarChart,
+    questionText: 'What is your perceived level of risk for this task?',
+    type: 'multiple-choice',
+    options: [
+      { id: 'low', text: 'Low', subtext: 'An attack is unlikely. General awareness needed.', icon: BarChart },
+      { id: 'moderate', text: 'Moderate', subtext: 'An attack is possible. Precautionary measures required.', icon: BarChart },
+      { id: 'substantial', text: 'Substantial', subtext: 'An attack is a strong possibility. Heightened security required.', icon: BarChart },
+      { id: 'severe', text: 'Severe / Critical', subtext: 'An attack is highly likely or expected.', icon: BarChart },
+    ]
   }
+];
+
+export function SecurityAssessment() {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const handleAnswer = (questionId: string, optionId: string) => {
+    const newAnswers = { ...answers, [questionId]: optionId };
+    setAnswers(newAnswers);
+
+    setTimeout(() => {
+      if (currentStep < assessmentQuestions.length - 1) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        setIsCompleted(true);
+      }
+    }, 300);
+  };
 
   const handleBack = () => {
-    setCurrentStep(prev => Math.max(0, prev - 1))
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+  
+  const getThreatLevel = (): { level: string, color: string, advice: string } => {
+      const scores = {
+          service: { protection: 4, executive: 2, airport: 1, event: 2 },
+          principalProfile: { private: 1, corporate: 2, publicFigure: 4, other: 3 },
+          locations: { routine: 1, varied: 2, highRisk: 4, secure: 1 },
+          threatHistory: { none: 1, unwanted: 2, indirect: 3, direct: 4 },
+          perceivedRisk: { low: 1, moderate: 2, substantial: 3, severe: 4 }
+      };
+      
+      let totalScore = 0;
+      totalScore += scores.service[answers.service as keyof typeof scores.service] || 0;
+      totalScore += scores.principalProfile[answers.principalProfile as keyof typeof scores.principalProfile] || 0;
+      totalScore += scores.locations[answers.locations as keyof typeof scores.locations] || 0;
+      totalScore += scores.threatHistory[answers.threatHistory as keyof typeof scores.threatHistory] || 0;
+      totalScore += (scores.perceivedRisk[answers.perceivedRisk as keyof typeof scores.perceivedRisk] || 0) * 2;
+
+      if (totalScore >= 16) return { level: 'Severe / Critical', color: 'text-red-500', advice: 'Requires immediate, comprehensive security planning. A specialist will contact you urgently.' };
+      if (totalScore >= 12) return { level: 'Substantial', color: 'text-orange-500', advice: 'Requires a dedicated security detail and threat mitigation plan.' };
+      if (totalScore >= 7) return { level: 'Moderate', color: 'text-yellow-500', advice: 'A professional security driver and vehicle is strongly recommended.' };
+      return { level: 'Low', color: 'text-green-500', advice: 'A professional security driver provides peace of mind and enhanced safety.' };
   }
 
-  const progressPercentage = ((currentStep + 1) / questions.length) * 100
+  const currentQuestion = assessmentQuestions[currentStep];
+  const progressPercentage = (currentStep / (assessmentQuestions.length -1)) * 100;
+
+  if (isCompleted) {
+      const finalAssessment = getThreatLevel();
+      return (
+          <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-8 sm:p-10 lg:p-12 rounded-2xl border border-yellow-500/30 w-full max-w-3xl mx-auto shadow-2xl text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Assessment Complete</h2>
+              <p className="text-gray-300 mb-6">Thank you for providing this information. Here is our preliminary assessment:</p>
+              
+              <div className="bg-black/50 p-6 rounded-xl border border-gray-700 mb-8">
+                  <p className="text-lg text-gray-400 mb-2">Initial Threat Assessment</p>
+                  <p className={`text-4xl font-extrabold ${finalAssessment.color}`}>{finalAssessment.level}</p>
+              </div>
+
+              <div className="bg-black/50 p-6 rounded-xl border border-gray-700 mb-8">
+                 <p className="text-lg text-gray-400 mb-2">Recommended Action</p>
+                 <p className="text-white text-lg">{finalAssessment.advice}</p>
+              </div>
+
+              <p className="text-gray-400 mb-6 text-sm">A member of our senior security team will contact you within 24 hours to conduct a confidential consultation and provide a detailed operational plan and quote.</p>
+              
+              <button onClick={() => { setIsCompleted(false); setCurrentStep(0); setAnswers({}) }} className="w-full bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-yellow-400 transition-colors">
+                  Start New Assessment
+              </button>
+          </div>
+      )
+  }
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-6 sm:p-8 lg:p-10 rounded-2xl border border-yellow-500/30 w-full max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-8 right-8 w-20 h-20 border border-yellow-500 rotate-45 animate-spin-slow"></div>
-        <div className="absolute bottom-8 left-8 w-16 h-16 border border-blue-500 rotate-12 animate-pulse"></div>
-        <div className="absolute top-1/2 left-8 w-8 h-8 bg-yellow-500 rounded-full animate-ping"></div>
-      </div>
-
       <div className="relative z-10">
-        {/* Header and Progress Bar */}
-        <div className="text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center justify-center space-x-3 bg-black/50 px-6 py-3 rounded-full mb-6">
-            <Shield className="w-8 h-8 text-yellow-500 animate-pulse" />
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-              Security Assessment
-            </h1>
-            <Sparkles className="w-8 h-8 text-yellow-500 animate-pulse" />
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center space-x-3 bg-black/50 px-4 py-2 rounded-full mb-4">
+            <Shield className="w-6 h-6 text-yellow-500" />
+            <h1 className="text-xl sm:text-2xl font-bold text-white">SIA-Compliant Security Assessment</h1>
           </div>
-          <p className="text-gray-300 text-base sm:text-lg px-4">
-            Answer 5 quick questions to get your <span className="text-yellow-500 font-semibold">personalized security transport recommendation</span>
-          </p>
+          <p className="text-gray-400 text-sm sm:text-base">This confidential assessment helps us understand your needs, aligning with "Know Your Client" best practices.</p>
         </div>
 
-        {/* Enhanced Progress Bar */}
-        <div className="mb-8 sm:mb-10">
-          <div className="w-full bg-gray-700 rounded-full h-3 relative overflow-hidden">
-            <div 
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 h-3 rounded-full transition-all duration-500 ease-out relative"
-              style={{ width: `${progressPercentage}%` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent animate-pulse"></div>
+        <div className="mb-8">
+            <div className="flex justify-between items-center mb-2">
+                <div className="flex items-center gap-2">
+                    <currentQuestion.stepIcon className="w-5 h-5 text-yellow-500" />
+                    <span className="text-white font-semibold">{currentQuestion.stepTitle}</span>
+                </div>
+                <span className="text-xs text-gray-400">Step {currentStep + 1} of {assessmentQuestions.length}</span>
             </div>
-          </div>
-          <div className="flex justify-between items-center mt-3">
-            <p className="text-sm text-gray-400">Question {currentStep + 1} of {questions.length}</p>
-            <p className="text-sm text-yellow-500 font-bold">{Math.round(progressPercentage)}% Complete</p>
-          </div>
-        </div>
-
-        {/* Question Section */}
-        <div className="mb-8 sm:mb-10">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center text-white mb-8 leading-tight px-4">
-            {questions[currentStep].text}
-          </h2>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-            {questions[currentStep].options.map(option => {
-              const Icon = option.icon
-              const isSelected = selectedOption === option.id
-              const isAnswered = answers[questions[currentStep].id] === option.id
-              
-              return (
-                <button
-                  key={option.id}
-                  onClick={() => handleAnswer(questions[currentStep].id, option.id)}
-                  disabled={selectedOption !== null}
-                  className={`group p-6 lg:p-8 border-2 rounded-xl transition-all duration-300 text-left flex items-start gap-4 transform hover:scale-[1.02] hover:shadow-xl relative overflow-hidden ${
-                    isSelected 
-                      ? 'border-yellow-500 bg-yellow-500/20 shadow-lg shadow-yellow-500/25' 
-                      : isAnswered
-                      ? 'border-green-500 bg-green-500/20'
-                      : 'border-gray-600 bg-gray-800/50 hover:border-yellow-500/70 hover:bg-gray-700/50'
-                  }`}
-                >
-                  {/* Animated background for selected state */}
-                  {isSelected && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 animate-pulse"></div>
-                  )}
-                  
-                  <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl flex items-center justify-center mt-1 transition-all duration-300 ${
-                    isSelected || isAnswered
-                      ? 'bg-yellow-500 scale-110' 
-                      : 'bg-gray-700 group-hover:bg-yellow-500/80'
-                  }`}>
-                    {isAnswered ? (
-                      <CheckCircle className="w-6 h-6 lg:w-7 lg:h-7 text-white" />
-                    ) : (
-                      <Icon className={`w-6 h-6 lg:w-7 lg:h-7 transition-colors duration-300 ${
-                        isSelected || isAnswered ? 'text-black' : 'text-yellow-500 group-hover:text-black'
-                      }`} />
-                    )}
-                  </div>
-                  
-                  <div className="flex-1 relative z-10">
-                    <h3 className={`font-bold text-lg lg:text-xl mb-2 transition-colors duration-300 ${
-                      isSelected || isAnswered ? 'text-yellow-400' : 'text-white group-hover:text-yellow-400'
-                    }`}>
-                      {option.text}
-                    </h3>
-                    <p className="text-sm lg:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300 leading-relaxed">
-                      {option.subtext}
-                    </p>
-                  </div>
-
-                  {/* Selection indicator */}
-                  {(isSelected || isAnswered) && (
-                    <div className="absolute top-4 right-4">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                        isAnswered ? 'bg-green-500' : 'bg-yellow-500'
-                      }`}>
-                        <CheckCircle className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-                  )}
-                </button>
-              )
-            })}
-          </div>
+            <div className="w-full bg-gray-700 rounded-full h-2">
+                <motion.div 
+                className="bg-yellow-500 h-2 rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${progressPercentage}%` }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
+                />
+            </div>
         </div>
         
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
+        <div className="min-h-[280px]">
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={currentStep}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <h2 className="text-xl sm:text-2xl font-bold text-center text-white mb-6">
+                        {currentQuestion.questionText}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {currentQuestion.options.map(option => (
+                        <button
+                            key={option.id}
+                            onClick={() => handleAnswer(currentQuestion.id, option.id)}
+                            className="group p-4 border-2 rounded-xl transition-all duration-200 text-left flex items-center gap-4 border-gray-700 bg-gray-800/50 hover:border-yellow-500 hover:bg-gray-800"
+                        >
+                            <div className="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center group-hover:bg-yellow-500 transition-colors">
+                                <option.icon className="w-5 h-5 text-yellow-500 group-hover:text-black transition-colors" />
+                            </div>
+                            <div>
+                                <h3 className="font-semibold text-white">{option.text}</h3>
+                                {option.subtext && <p className="text-sm text-gray-400">{option.subtext}</p>}
+                            </div>
+                        </button>
+                        ))}
+                    </div>
+                </motion.div>
+            </AnimatePresence>
+        </div>
+        
+        <div className="flex justify-between items-center mt-8">
           <button
             onClick={handleBack}
             disabled={currentStep === 0}
-            className="flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-105 disabled:hover:scale-100"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50 transition-colors hover:bg-gray-600"
           >
-            <ChevronLeft className="w-5 h-5" />
-            <span className="font-semibold">Back</span>
+            <ChevronLeft className="w-4 h-4" />
+            <span>Back</span>
           </button>
-
-          {/* Progress indicators */}
-          <div className="flex space-x-2">
-            {questions.map((_, index) => (
-              <div
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index <= currentStep 
-                    ? 'bg-yellow-500 scale-110' 
-                    : 'bg-gray-600'
-                }`}
-              />
-            ))}
-          </div>
-
-          <div className="w-24"></div> {/* Spacer for centering dots */}
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center space-x-2 bg-blue-600/20 border border-blue-500/50 px-4 py-2 rounded-full">
-            <Shield className="w-4 h-4 text-blue-400" />
-            <span className="text-blue-300 text-sm font-semibold">🛡️ All recommendations include SIA licensed security drivers</span>
-          </div>
         </div>
       </div>
     </div>

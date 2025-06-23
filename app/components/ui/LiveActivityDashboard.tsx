@@ -1,335 +1,286 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { 
-  MessageCircle, Phone, Calendar, MapPin, Star, Clock, 
-  Car, Shield, Zap, TrendingUp, Users, Award, 
-  ArrowRight, CheckCircle, AlertCircle, Eye,
-  Headphones, BookOpen, Gift, Target, Bell
-} from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MapPin, Clock, Star, MessageSquare, Briefcase, CheckCircle, X, RadioTower } from 'lucide-react'
+import Link from 'next/link'
+import { SERVICES_CONFIG } from '@/lib/services-config'
 
-interface LiveActivity {
-  id: string
-  type: 'booking' | 'driver' | 'review' | 'security' | 'promo' | 'milestone'
-  user: string
-  location?: string
-  service?: string
-  rating?: number
-  timestamp: Date
-  urgent?: boolean
-  cta?: {
-    text: string
-    action: string
-    variant: 'primary' | 'secondary' | 'accent'
+const names = [
+  // English
+  'James', 'Emma', 'Liam', 'Olivia', 
+  // Arabic / Muslim
+  'Mohammed', 'Fatima', 'Ahmed', 'Aisha',
+  // Brazilian / Portuguese
+  'Lucas', 'Júlia', 'Pedro', 'Sofia',
+  // Jewish
+  'David', 'Sarah', 'Noah', 'Leah',
+  // Chinese
+  'Wei', 'Li', 'Jing', 'Wang',
+  // French
+  'Louis', 'Camille', 'Jules', 'Chloé'
+];
+const locations = ['Heathrow', 'Westminster', 'Mayfair', 'The City', 'Canary Wharf', 'Soho', 'Knightsbridge'];
+const activityVerbs = ['booked', 'inquired about'];
+
+const getRandomItem = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+
+const timeSince = (date: Date) => {
+  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+  let interval = seconds / 31536000;
+  if (interval > 1) return Math.floor(interval) + "y ago";
+  interval = seconds / 2592000;
+  if (interval > 1) return Math.floor(interval) + "mo ago";
+  interval = seconds / 86400;
+  if (interval > 1) return Math.floor(interval) + "d ago";
+  interval = seconds / 3600;
+  if (interval > 1) return Math.floor(interval) + "h ago";
+  interval = seconds / 60;
+  if (interval > 1) return Math.floor(interval) + "m ago";
+  if (seconds < 10) return "just now";
+  return Math.floor(seconds) + "s ago";
+};
+
+const generateRandomActivity = (isInitial: boolean = false, existingNames: string[] = []) => {
+  let name = getRandomItem(names);
+  // Ensure the name is unique among the currently displayed activities
+  while (existingNames.includes(name)) {
+    name = getRandomItem(names);
   }
+
+  const service = getRandomItem(SERVICES_CONFIG);
+  const location = getRandomItem(locations);
+  const isReview = Math.random() > 0.65; // a bit more reviews
+  
+  const timestamp = isInitial
+    ? new Date(Date.now() - Math.random() * 8 * 60000) // 0-8 minutes ago
+    : new Date();
+
+  const activityBase = {
+    id: Date.now() + Math.random(),
+    name,
+    location,
+    href: `/services/${service.id}`,
+    timestamp
+  };
+
+  if (isReview) {
+    const rating = (Math.random() * (5.0 - 4.2) + 4.2);
+    return {
+      ...activityBase,
+      type: 'review' as const,
+      icon: <Star className="w-5 h-5 text-yellow-400" />,
+      text: `left a ${rating.toFixed(1)}-star review for ${service.name}`,
+      rating,
+    };
+  }
+  
+  const verb = getRandomItem(activityVerbs);
+  const type = verb === 'booked' ? 'booking' as const : 'inquiry' as const;
+
+  return {
+    ...activityBase,
+    type,
+    icon: type === 'booking' ? <Briefcase className="w-5 h-5 text-blue-400" /> : <MessageSquare className="w-5 h-5 text-green-400" />,
+    text: `${verb} ${service.name}`,
+  };
+};
+
+const renderStars = (rating: number) => {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 !== 0;
+  const starArray = [];
+  for (let i = 0; i < fullStars; i++) {
+    starArray.push(<Star key={`full-${i}`} className="w-4 h-4 text-yellow-400 fill-current" />);
+  }
+  if (halfStar) {
+    starArray.push(<Star key="half" className="w-4 h-4 text-yellow-400 fill-current" style={{ clipPath: 'inset(0 50% 0 0)' }} />);
+  }
+  return <div className="flex items-center">{starArray}</div>;
+};
+
+type Activity = ReturnType<typeof generateRandomActivity>;
+
+const UserAvatar = ({ name }: { name: string }) => {
+    const initial = name.charAt(0).toUpperCase();
+    const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-red-500', 'bg-indigo-500'];
+    const color = colors[name.charCodeAt(0) % colors.length];
+
+    return (
+        <div className={`w-10 h-10 rounded-full ${color} flex items-center justify-center text-white font-bold text-lg flex-shrink-0 border-2 border-white/30`}>
+            {initial}
+        </div>
+    )
 }
 
-export default function LiveActivityDashboard() {
-  const [activities, setActivities] = useState<LiveActivity[]>([
-    {
-      id: '1',
-      type: 'booking',
-      user: 'Alex',
-      service: 'VIP Event Transport',
-      location: 'Soho',
-      timestamp: new Date(Date.now() - 30000),
-      cta: { text: 'Book VIP', action: 'book-vip', variant: 'primary' }
-    },
-    {
-      id: '2',
-      type: 'driver',
-      user: 'SIA Driver Omar',
-      location: 'Wembley',
-      timestamp: new Date(Date.now() - 60000),
-      cta: { text: 'Call Omar', action: 'call-driver', variant: 'secondary' }
-    },
-    {
-      id: '3',
-      type: 'review',
-      user: 'Priya',
-      rating: 5,
-      service: 'Executive Security',
-      timestamp: new Date(Date.now() - 120000),
-      cta: { text: 'Read Reviews', action: 'view-reviews', variant: 'accent' }
-    },
-    {
-      id: '4',
-      type: 'review',
-      user: 'Samantha',
-      rating: 5,
-      service: 'Close Protection',
-      timestamp: new Date(Date.now() - 180000),
-      cta: { text: 'Get Quote', action: 'quote-protection', variant: 'primary' }
-    },
-    {
-      id: '5',
-      type: 'promo',
-      user: 'FLASH OFFER',
-      service: '50% OFF First Ride',
-      timestamp: new Date(Date.now() - 240000),
-      urgent: true,
-      cta: { text: 'Claim Now', action: 'claim-offer', variant: 'accent' }
-    },
-    {
-      id: '6',
-      type: 'milestone',
-      user: 'GQ Cars',
-      service: '1000+ Safe Rides This Month',
-      timestamp: new Date(Date.now() - 300000),
-      cta: { text: 'Join Us', action: 'book-now', variant: 'primary' }
+const LiveActivityDashboard = () => {
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
+  const [, setForceUpdate] = useState(0);
+
+  const scheduleNextActivity = () => {
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
     }
-  ])
+    
+    const randomInterval = Math.random() * (60000 - 20000) + 20000; // 20 to 60 seconds
+    
+    timeoutIdRef.current = setTimeout(() => {
+      setActivities(prev => {
+        const existingNames = prev.map(a => a.name);
+        const newActivity = generateRandomActivity(false, existingNames);
+        const updatedActivities = [newActivity, ...prev].slice(0, 3); // Max 3 items
+        return updatedActivities;
+      });
+      scheduleNextActivity();
+    }, randomInterval);
+  };
 
-  const [stats, setStats] = useState({
-    activeDrivers: 12,
-    ridesCompleted: 1247,
-    avgRating: 4.9,
-    responseTime: '2-5 min'
-  })
-
-  // Simulate real-time updates
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Add new random activity
-      const newActivities = [
-        {
-          id: Date.now().toString(),
-          type: 'booking' as const,
-          user: ['Mike', 'Sarah', 'James', 'Emma'][Math.floor(Math.random() * 4)],
-          service: ['Airport Transfer', 'Corporate Event', 'Wedding Transport', 'VIP Service'][Math.floor(Math.random() * 4)],
-          location: ['City Center', 'Heathrow', 'Canary Wharf', 'Westminster'][Math.floor(Math.random() * 4)],
-          timestamp: new Date(),
-          cta: { text: 'Book Similar', action: 'book-similar', variant: 'primary' as const }
-        }
-      ]
-      
-      setActivities(prev => [...newActivities, ...prev.slice(0, 5)])
-      
-      // Update stats slightly
-      setStats(prev => ({
-        ...prev,
-        ridesCompleted: prev.ridesCompleted + Math.floor(Math.random() * 3),
-        activeDrivers: Math.max(8, Math.min(20, prev.activeDrivers + (Math.random() > 0.5 ? 1 : -1)))
-      }))
-    }, 8000)
+    // Pre-populate with unique activities
+    const initialActivities: Activity[] = [];
+    const usedNames: string[] = [];
+    for (let i = 0; i < 3; i++) {
+        const newActivity = generateRandomActivity(true, usedNames);
+        usedNames.push(newActivity.name);
+        initialActivities.push(newActivity);
+    }
+    setActivities(initialActivities);
+    
+    scheduleNextActivity();
+    
+    // Force re-render every 30 seconds to update timestamps
+    const updateInterval = setInterval(() => {
+      setForceUpdate(prev => prev + 1);
+    }, 30000);
 
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleAction = (action: string) => {
-    switch (action) {
-      case 'call-now':
-        window.location.href = 'tel:07407655203'
-        break
-      case 'whatsapp':
-        window.open('https://wa.me/447407655203?text=Hello%20GQ%20Cars!%20I%20saw%20your%20live%20activity%20and%20want%20to%20book.', '_blank')
-        break
-      case 'book-vip':
-        window.location.href = '/services/vip'
-        break
-      case 'book-now':
-        window.location.href = '/book'
-        break
-      case 'claim-offer':
-        window.location.href = '/book?offer=FIRST50'
-        break
-      case 'get-quote':
-        window.location.href = '/quote'
-        break
-      case 'view-reviews':
-        window.location.href = '/#testimonials'
-        break
-      default:
-        window.location.href = '/book'
+    return () => {
+      if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+      clearInterval(updateInterval);
+    };
+  }, []);
+  
+  const getBorderColor = (type: Activity['type']) => {
+    switch(type) {
+      case 'booking': return 'hover:shadow-blue-500/50';
+      case 'inquiry': return 'hover:shadow-green-500/50';
+      case 'review': return 'hover:shadow-yellow-500/50';
+      default: return 'hover:shadow-gray-500/50';
     }
   }
 
-  const getActivityIcon = (type: string) => {
-    switch (type) {
-      case 'booking': return <Calendar className="w-4 h-4 text-blue-500" />
-      case 'driver': return <Car className="w-4 h-4 text-green-500" />
-      case 'review': return <Star className="w-4 h-4 text-yellow-500" />
-      case 'security': return <Shield className="w-4 h-4 text-red-500" />
-      case 'promo': return <Gift className="w-4 h-4 text-purple-500" />
-      case 'milestone': return <Award className="w-4 h-4 text-orange-500" />
-      default: return <Bell className="w-4 h-4 text-gray-500" />
+  const getGlowEffect = (type: Activity['type']) => {
+    switch(type) {
+      case 'booking': return 'shadow-[0_0_35px_-5px_theme(colors.blue.900/0.7)]';
+      case 'inquiry': return 'shadow-[0_0_35px_-5px_theme(colors.green.900/0.7)]';
+      case 'review': return 'shadow-[0_0_35px_-5px_theme(colors.yellow.800/0.7)]';
+      default: return 'shadow-[0_0_35px_-5px_theme(colors.gray.800/0.7)]';
     }
   }
 
-  const getActivityMessage = (activity: LiveActivity) => {
-    switch (activity.type) {
-      case 'booking':
-        return `${activity.user} booked ${activity.service}`
-      case 'driver':
-        return `${activity.user} is online`
-      case 'review':
-        return `${activity.user} left a review: "${activity.service === 'Executive Security' ? 'The driver was impeccable...' : 'Punctual, discreet...'}"`
-      case 'promo':
-        return activity.service
-      case 'milestone':
-        return activity.service
-      default:
-        return `${activity.user} - ${activity.service}`
-    }
+  if (isMinimized) {
+    return (
+      <div className="fixed bottom-4 left-4 z-50">
+        <motion.button
+          onClick={() => setIsMinimized(false)}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          className="w-14 h-14 bg-gradient-to-tr from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white shadow-lg"
+          whileHover={{ scale: 1.1 }}
+        >
+          <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
+          <RadioTower className="w-7 h-7" />
+        </motion.button>
+      </div>
+    )
   }
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 max-w-sm">
-      <div className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg rounded-2xl border border-gray-700/50 shadow-2xl">
-        {/* Header with Live Stats */}
-        <div className="p-4 border-b border-gray-700/50">
-          <div className="flex items-center justify-between mb-3">
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+      className="fixed bottom-4 left-4 z-50 w-full max-w-sm"
+    >
+      <div className="bg-gradient-to-tr from-black/70 via-gray-900/60 to-black/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="flex justify-between items-center p-3 border-b border-white/10 bg-black/30">
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-semibold text-sm">Live Activity</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Eye className="w-4 h-4 text-gray-400" />
-              <span className="text-gray-400 text-xs">{activities.length}</span>
-            </div>
-          </div>
-          
-          {/* Quick Stats Row */}
-          <div className="grid grid-cols-2 gap-3 text-xs">
-            <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-2 text-center">
-              <div className="text-green-400 font-bold">{stats.activeDrivers}</div>
-              <div className="text-gray-300">Online Now</div>
-            </div>
-            <div className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-2 text-center">
-              <div className="text-blue-400 font-bold">{stats.avgRating}★</div>
-              <div className="text-gray-300">Avg Rating</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Activity Feed */}
-        <div className="max-h-80 overflow-y-auto p-3 space-y-3">
-          {activities.map((activity, index) => (
-            <div 
-              key={activity.id}
-              className={`
-                flex items-start space-x-3 p-3 rounded-xl transition-all duration-300
-                ${activity.urgent ? 'bg-red-500/10 border border-red-500/30 animate-pulse' : 'bg-gray-800/50 border border-gray-700/30'}
-                ${index === 0 ? 'ring-2 ring-blue-500/30' : ''}
-                hover:bg-gray-700/50 cursor-pointer group
-              `}
-            >
-              {/* Activity Icon */}
-              <div className="flex-shrink-0 mt-1">
-                {getActivityIcon(activity.type)}
-              </div>
-              
-              {/* Activity Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <p className="text-white text-sm font-medium">
-                      {getActivityMessage(activity)}
-                    </p>
-                    {activity.location && (
-                      <div className="flex items-center space-x-1 mt-1">
-                        <MapPin className="w-3 h-3 text-gray-400" />
-                        <span className="text-gray-400 text-xs">{activity.location}</span>
-                      </div>
-                    )}
-                    {activity.rating && (
-                      <div className="flex items-center space-x-1 mt-1">
-                        {[...Array(activity.rating)].map((_, i) => (
-                          <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Timestamp */}
-                  <div className="flex items-center space-x-1 ml-2">
-                    <Clock className="w-3 h-3 text-gray-500" />
-                    <span className="text-gray-500 text-xs">
-                      {Math.floor((Date.now() - activity.timestamp.getTime()) / 60000)}m
+                <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                     </span>
-                  </div>
-                </div>
-
-                {/* CTA Button */}
-                {activity.cta && (
-                  <button
-                    onClick={() => handleAction(activity.cta!.action)}
-                    className={`
-                      mt-2 px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200
-                      flex items-center space-x-1 group-hover:scale-105
-                      ${activity.cta.variant === 'primary' ? 'bg-blue-600 text-white hover:bg-blue-500' : ''}
-                      ${activity.cta.variant === 'secondary' ? 'bg-gray-600 text-white hover:bg-gray-500' : ''}
-                      ${activity.cta.variant === 'accent' ? 'bg-yellow-500 text-black hover:bg-yellow-400' : ''}
-                    `}
-                  >
-                    <span>{activity.cta.text}</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
-                )}
-              </div>
+                <h3 className="font-bold text-white text-sm">Live Activity</h3>
             </div>
-          ))}
-        </div>
-
-        {/* Enhanced Action Bar */}
-        <div className="p-3 border-t border-gray-700/50 bg-gradient-to-r from-gray-800/50 to-gray-900/50">
-          <div className="grid grid-cols-2 gap-2 mb-3">
             <button
-              onClick={() => handleAction('call-now')}
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-bold py-2 px-3 rounded-lg transition-all transform hover:scale-105 text-xs flex items-center justify-center space-x-1"
+                onClick={() => setIsMinimized(true)}
+                className="p-1 rounded-full text-gray-400 hover:bg-white/10 hover:text-white transition-all"
+                aria-label="Minimize feed"
             >
-              <Phone className="w-3 h-3" />
-              <span>Call Now</span>
-            </button>
-            
-            <button
-              onClick={() => handleAction('whatsapp')}
-              className="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold py-2 px-3 rounded-lg transition-all transform hover:scale-105 text-xs flex items-center justify-center space-x-1"
-            >
-              <MessageCircle className="w-3 h-3" />
-              <span>WhatsApp</span>
+                <X size={18} />
             </button>
           </div>
 
-          {/* Smart Suggestions */}
-          <div className="space-y-1">
-            <button
-              onClick={() => handleAction('book-now')}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-3 rounded-lg transition-all text-xs flex items-center justify-center space-x-2"
-            >
-              <Calendar className="w-3 h-3" />
-              <span>Book Like {activities[0]?.user || 'Others'}</span>
-              <TrendingUp className="w-3 h-3" />
-            </button>
-            
-            <div className="flex space-x-1">
-              <button
-                onClick={() => handleAction('get-quote')}
-                className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-1 px-2 rounded text-xs flex items-center justify-center space-x-1"
-              >
-                <Target className="w-3 h-3" />
-                <span>Quote</span>
-              </button>
-              
-              <button
-                onClick={() => handleAction('view-reviews')}
-                className="flex-1 bg-orange-600 hover:bg-orange-500 text-white py-1 px-2 rounded text-xs flex items-center justify-center space-x-1"
-              >
-                <Star className="w-3 h-3" />
-                <span>Reviews</span>
-              </button>
+        {/* Activity List */}
+        <div className="max-h-[50vh] overflow-y-auto p-3 custom-scrollbar">
+          <AnimatePresence>
+            {activities.map((activity, index) => (
+              <Link key={activity.id} href={activity.href} passHref>
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20, scale: 0.9, transition: { duration: 0.5 } }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  className="mb-3 cursor-pointer group"
+                >
+                  <div className={`relative overflow-hidden bg-gradient-to-tr from-gray-900/80 via-black/70 to-gray-900/80 backdrop-blur-lg border border-white/10 rounded-xl p-3 shadow-xl text-white transition-all duration-300 group-hover:shadow-2xl ${getBorderColor(activity.type)}`}>
+                      <div className={`absolute -inset-24 -z-10 blur-3xl transition-opacity duration-500 ${getGlowEffect(activity.type)} ${index === 0 ? 'opacity-25' : 'opacity-0 group-hover:opacity-10'}`}></div>
+                      <div className="flex items-start space-x-4">
+                          <UserAvatar name={activity.name} />
+                          <div className="flex-1 overflow-hidden">
+                              <motion.p 
+                                key={activity.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: 0.1 }}
+                                className="font-semibold text-sm leading-tight text-gray-100"
+                              >
+                                <span className="font-bold text-white">{activity.name}</span> {activity.text}
+                              </motion.p>
+                              <div className="flex items-center justify-between text-xs text-gray-400 mt-2">
+                                <div className="flex items-center">
+                                  <MapPin className="w-3 h-3 mr-1.5" />
+                                  <span className="truncate">{activity.location}</span>
+                                </div>
+                                <div className="flex items-center">
+                                  <Clock className="w-3 h-3 mr-1.5" />
+                                  <span>{timeSince(activity.timestamp)}</span>
             </div>
           </div>
-
-          {/* Live Status Indicator */}
-          <div className="mt-2 text-center">
-            <div className="inline-flex items-center space-x-2 bg-green-500/20 border border-green-500/30 px-3 py-1 rounded-full">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-green-400 font-semibold text-xs">Response: {stats.responseTime}</span>
+                              {activity.type === 'review' && activity.rating && (
+                                <div className="mt-2 flex items-center space-x-2">
+                                  {renderStars(activity.rating)}
+                                  <span className="text-yellow-400 font-bold text-sm">{activity.rating.toFixed(1)}</span>
+                                  <CheckCircle className="w-4 h-4 text-green-400" />
+                                  <span className="text-green-400 text-xs font-semibold">Verified</span>
+                                </div>
+                              )}
+                          </div>
             </div>
           </div>
+                </motion.div>
+              </Link>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
+
+export default LiveActivityDashboard;
