@@ -11,7 +11,12 @@
       "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Add development infrastructure\n\n- Add GitHub workflows\n- Add VS Code settings\n- Add Docker configuration\n- Add documentation\n- Add testing setup\n- Add development scripts\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git rm:*)",
       "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔥 Remove deprecated files and directories\n\n- Remove old agent files\n- Remove old decisions directory\n- Remove old GQSecurity directory\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Update Claude settings\n\n- Update allowed Bash commands\n- Add new patterns for Git operations\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Update Claude settings\n\n- Update allowed Bash commands\n- Add new patterns for Git operations\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(lsof:*)",
+      "Bash(rm:*)",
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Fix client/server component issues\n\n- Move client-side logic to ClientLayout\n- Fix loading component\n- Update dependencies\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(pkill:*)",
+      "Bash(true)"
     ],
     "deny": []
   }

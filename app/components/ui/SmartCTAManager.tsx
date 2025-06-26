@@ -281,7 +281,7 @@ export default function SmartCTAManager() {
   }
 
   return (
-    <div className="fixed top-1/2 right-6 transform -translate-y-1/2 z-40 max-w-xs">
+    <section className="w-full max-w-xs mx-auto my-8">
       <div className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg rounded-2xl border border-gray-700/50 shadow-2xl">
         {/* Smart Header */}
         <div className="p-4 border-b border-gray-700/50">
@@ -377,6 +377,6 @@ export default function SmartCTAManager() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
