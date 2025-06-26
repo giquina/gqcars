@@ -20,7 +20,7 @@ interface ChatOption {
   data?: string
 }
 
-export function WhatsAppWidget() {
+export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
@@ -61,11 +61,7 @@ export function WhatsAppWidget() {
   const initializeChat = () => {
     const welcomeMessage: ChatMessage = {
       id: 'welcome-1',
-<<<<<<< Updated upstream
-      text: '👋 Hello! I\'m your GQ Cars virtual assistant. Would you like to book a secure ride with our SIA licensed drivers today?',
-=======
       text: 'Hi! How can I help you today?',
->>>>>>> Stashed changes
       isBot: true,
       timestamp: new Date(),
       options: [
@@ -356,11 +352,7 @@ Thank you!`)
 
       {/* Chat Widget */}
       {isOpen && (
-<<<<<<< Updated upstream
-        <div className="fixed bottom-6 right-6 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
-=======
         <div className="fixed bottom-6 right-6 z-50 w-[90vw] max-w-md sm:w-[28rem] sm:h-[34rem] h-[70vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
->>>>>>> Stashed changes
           {/* Header */}
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">

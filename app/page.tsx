@@ -1,22 +1,21 @@
-import React, { Suspense } from 'react';
-import Loading from './loading';
-import Header from '@/app/components/ui/Header';
-import QuoteWidget from '@/app/components/ui/QuoteWidget';
-import InteractiveHero from '@/app/components/ui/InteractiveHero';
-import SecurityAssessmentWrapper from '@/app/components/SecurityAssessmentWrapper';
-import InteractiveTestimonials from '@/app/components/ui/InteractiveTestimonials';
-import WhatsAppWidget from '@/app/components/ui/WhatsAppWidget';
-import AIAssistantWidget from '@/app/components/ui/AIAssistantWidget';
-import AIBadge from '@/app/components/ui/AIBadge';
-import MobileAppBanner from '@/app/components/ui/MobileAppBanner';
-import { CallToActionPanel } from '@/app/components/ui/CallToActionPanel';
-import FloatingActionButton from '@/app/components/ui/FloatingActionButton';
-import LiveNotifications from '@/app/components/ui/LiveNotifications';
-import InteractiveFeaturesShowcase from '@/app/components/ui/InteractiveFeaturesShowcase';
-import QuickActionPlatform from '@/app/components/ui/QuickActionPlatform';
-import LocationBasedQuotes from '@/app/components/ui/LocationBasedQuotes';
-import LiveActivityDashboard from '@/app/components/ui/LiveActivityDashboard';
-import Footer from '@/app/components/ui/Footer';
+import React from 'react';
+import Header from './components/ui/Header';
+import QuoteWidget from './components/ui/QuoteWidget';
+import { InteractiveHero } from './components/ui/InteractiveHero';
+import SecurityAssessmentWrapper from './components/SecurityAssessmentWrapper'
+import InteractiveTestimonials from './components/ui/InteractiveTestimonials';
+import WhatsAppWidget from './components/ui/WhatsAppWidget';
+import AIAssistantWidget from './components/ui/AIAssistantWidget';
+import AIBadge from './components/ui/AIBadge';
+import MobileAppBanner from './components/ui/MobileAppBanner';
+import { CallToActionPanel } from './components/ui/CallToActionPanel';
+import FloatingActionButton from './components/ui/FloatingActionButton';
+import LiveNotifications from './components/ui/LiveNotifications';
+import InteractiveFeaturesShowcase from './components/ui/InteractiveFeaturesShowcase';
+import QuickActionPlatform from './components/ui/QuickActionPlatform';
+import LocationBasedQuotes from './components/ui/LocationBasedQuotes';
+import LiveActivityDashboard from './components/ui/LiveActivityDashboard';
+import Footer from './components/ui/Footer'
 
 export default function HomePage() {
   return (

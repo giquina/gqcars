@@ -100,128 +100,27 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
 
 export default function LiveNotifications() {
   const [notifications, setNotifications] = useState<CustomerBooking[]>([])
-<<<<<<< Updated upstream
-  const [currentNotification, setCurrentNotification] = useState<CustomerBooking | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
-=======
   const [currentTime, setCurrentTime] = useState(new Date())
->>>>>>> Stashed changes
 
   useEffect(() => {
-    // Initialize with sample bookings
     setNotifications(SAMPLE_BOOKINGS)
-    
-<<<<<<< Updated upstream
-    // Start showing notifications after 5 seconds (more visible)
-    const initialTimer = setTimeout(() => {
-      showNextNotification()
-    }, 5000)
-
-    return () => clearTimeout(initialTimer)
-  }, [])
-
-  const showNextNotification = () => {
-    if (notifications.length === 0) return
-
-    // Get a random booking
-    const randomIndex = Math.floor(Math.random() * notifications.length)
-    const booking = notifications[randomIndex]
-    
-    // Update timestamp to "just now"
-    const updatedBooking = {
-      ...booking,
-      timestamp: new Date(),
-      id: `${booking.id}-${Date.now()}` // Unique ID for each show
-    }
-
-    setCurrentNotification(updatedBooking)
-    setIsVisible(true)
-
-    // Hide after 6 seconds (more frequent)
-    setTimeout(() => {
-      setIsVisible(false)
-      setTimeout(() => setCurrentNotification(null), 500)
-    }, 6000)
-
-    // Schedule next notification (20-40 seconds for better visibility)
-    setTimeout(() => {
-      showNextNotification()
-    }, Math.random() * 20000 + 20000) // 20-40 seconds
-  }
-
-  const handleClose = () => {
-    setIsVisible(false)
-    setTimeout(() => setCurrentNotification(null), 500)
-=======
     // Update current time every minute for realistic timestamps
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 60000)
-
     return () => clearInterval(timer)
   }, [])
 
   const getTimeAgo = (timestamp: Date) => {
     const diffInMinutes = Math.floor((currentTime.getTime() - timestamp.getTime()) / (1000 * 60))
-    
     if (diffInMinutes < 1) return 'Just now'
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`
     if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`
     return `${Math.floor(diffInMinutes / 1440)}d ago`
->>>>>>> Stashed changes
   }
 
   const getServiceColor = (serviceType: string) => {
     switch (serviceType) {
-<<<<<<< Updated upstream
-      case 'standard': return 'from-blue-500 to-blue-600'
-      case 'premium': return 'from-emerald-500 to-emerald-600'
-      case 'executive': return 'from-purple-500 to-purple-600'
-      case 'xl': return 'from-orange-500 to-orange-600'
-      default: return 'from-gray-500 to-gray-600'
-    }
-  }
-
-  const getServiceBadgeColor = (serviceType: string) => {
-    switch (serviceType) {
-      case 'standard': return 'bg-blue-500'
-      case 'premium': return 'bg-emerald-500'
-      case 'executive': return 'bg-purple-500'
-      case 'xl': return 'bg-orange-500'
-      default: return 'bg-gray-500'
-    }
-  }
-
-  if (!currentNotification) return null
-
-  return (
-    <div className="fixed bottom-6 left-6 z-50 max-w-sm">
-      <div 
-        className={`transform transition-all duration-500 ${
-          isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-full opacity-0 scale-95'
-        }`}
-      >
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-          {/* Header with gradient */}
-          <div className={`p-4 bg-gradient-to-r ${getServiceColor(currentNotification.serviceType)} text-white relative`}>
-            <button
-              onClick={handleClose}
-              className="absolute top-3 right-3 text-white/80 hover:text-white p-1 rounded-full hover:bg-white/20 transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-bounce">
-                <span className="text-xl">{currentNotification.icon}</span>
-              </div>
-              <div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-bold animate-pulse">🎉 Just Booked!</span>
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-                </div>
-                <p className="text-xs opacity-90">Someone just chose GQ Cars</p>
-=======
       case 'standard': return 'bg-blue-50 border-blue-200 text-blue-700'
       case 'premium': return 'bg-emerald-50 border-emerald-200 text-emerald-700'
       case 'executive': return 'bg-purple-50 border-purple-200 text-purple-700'
@@ -248,11 +147,6 @@ export default function LiveNotifications() {
     }
   }
 
-  const handleNotificationClick = (notification: CustomerBooking) => {
-    // Could open a modal or navigate to booking details
-    console.log('Notification clicked:', notification)
-  }
-
   const getCustomerInitials = (name: string) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase()
   }
@@ -273,7 +167,6 @@ export default function LiveNotifications() {
           <span>Live</span>
         </div>
       </div>
-
       {/* Notifications List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <ul className="divide-y divide-gray-100">
@@ -281,7 +174,6 @@ export default function LiveNotifications() {
             <li 
               key={n.id} 
               className="group cursor-pointer transition-all duration-200 hover:bg-gray-50 hover:shadow-sm"
-              onClick={() => handleNotificationClick(n)}
             >
               <div className="flex items-start p-4 space-x-3">
                 {/* Customer Avatar */}
@@ -290,7 +182,6 @@ export default function LiveNotifications() {
                     {getCustomerInitials(n.customerName)}
                   </div>
                 </div>
-
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between">
@@ -303,7 +194,6 @@ export default function LiveNotifications() {
                           ))}
                         </div>
                       </div>
-                      
                       <div className="flex items-center space-x-2 mb-2">
                         <span className={`text-xs font-bold px-2 py-1 rounded-full border ${getServiceColor(n.serviceType)}`}>
                           {n.service}
@@ -314,12 +204,10 @@ export default function LiveNotifications() {
                           </span>
                         )}
                       </div>
-
                       <div className="flex items-center text-xs text-gray-500 mb-2">
                         <MapPin className="w-3 h-3 mr-1" />
                         <span className="truncate">{n.location}</span>
                       </div>
-
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
                           <div className={`flex items-center space-x-1 text-xs px-2 py-1 rounded-full ${getStatusColor(n.status)}`}>
@@ -338,17 +226,14 @@ export default function LiveNotifications() {
                     </div>
                   </div>
                 </div>
-
                 {/* Service Icon */}
                 <div className="flex-shrink-0">
                   <span className="text-2xl">{n.icon}</span>
                 </div>
->>>>>>> Stashed changes
               </div>
             </li>
           ))}
         </ul>
-
         {/* Footer */}
         <div className="bg-gray-50 px-4 py-3 border-t border-gray-100">
           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -356,58 +241,6 @@ export default function LiveNotifications() {
               <Shield className="w-3 h-3 text-green-500" />
               <span>All drivers SIA licensed</span>
             </div>
-<<<<<<< Updated upstream
-          </div>
-
-          {/* Content */}
-          <div className="p-4">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex-1">
-                <h4 className="font-bold text-gray-900 text-sm mb-1">
-                  {currentNotification.customerName}
-                </h4>
-                <div className="flex items-center space-x-2 mb-2">
-                  <span className={`${getServiceBadgeColor(currentNotification.serviceType)} text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse`}>
-                    {currentNotification.service}
-                  </span>
-                  {currentNotification.price && (
-                    <span className="text-green-600 font-bold text-xs animate-bounce">
-                      {currentNotification.price}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="flex items-center space-x-1 text-green-600 mb-1">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
-                  <span className="text-xs font-bold animate-pulse">CONFIRMED</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-2 text-gray-600 mb-3">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm">{currentNotification.location}</span>
-            </div>
-
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <div className="flex items-center space-x-1">
-                <Clock className="w-3 h-3" />
-                <span>Just now</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <Star className="w-3 h-3 text-yellow-500" />
-                <span>SIA Licensed Driver</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom accent */}
-          <div className={`h-1 bg-gradient-to-r ${getServiceColor(currentNotification.serviceType)}`}></div>
-        </div>
-      </div>
-    </div>
-=======
             <div className="flex items-center space-x-1">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <span>Live updates</span>
@@ -416,6 +249,5 @@ export default function LiveNotifications() {
         </div>
       </div>
     </section>
->>>>>>> Stashed changes
   )
 }
