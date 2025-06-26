@@ -79,23 +79,19 @@ export function InteractiveHero({ children }) {
         </div>
       </div>
 
+      {/* Live Notifications - New Refined Component */}
+      <LiveNotifications />
+
+      {/* Minimal Status Indicator - Simplified and less bulky */}
+      <div className="fixed top-4 right-4 z-30 bg-black/60 backdrop-blur-sm rounded-full px-3 py-2 border border-green-500/20">
+        <div className="flex items-center space-x-2 text-xs">
+          <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+          <span className="text-green-400 font-medium">{driversOnline} online</span>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-4 py-20">
-        
-        {/* Real-time Status Bar */}
-        <div className="fixed top-4 right-4 z-50 bg-black/80 backdrop-blur-sm rounded-2xl p-4 border border-green-500/30">
-          <div className="flex items-center space-x-4 text-sm">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-green-400 font-bold">{driversOnline} drivers online</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
-              <span className="text-yellow-400 font-bold">{liveBookings} live bookings</span>
-            </div>
-          </div>
-        </div>
-
         {/* Main Content Grid: Notifications & Actions */}
         <div className="grid grid-cols-1 gap-8 items-center max-w-2xl mx-auto">
           
