@@ -5,9 +5,21 @@ import { NextAuthProvider } from './providers/NextAuthProvider'
 import { ThemeProvider } from './providers/ThemeProvider'
 import { Toaster } from 'react-hot-toast'
 import ErrorBoundary from './components/ErrorBoundary'
-import SmartCTAManager from './components/ui/SmartCTAManager'
-import FloatingActionButton from './components/ui/FloatingActionButton'
-import Footer from './components/ui/Footer'
+import dynamic from 'next/dynamic'
+
+const SmartCTAManager = dynamic(() => import('./components/ui/SmartCTAManager'), {
+  ssr: false,
+  loading: () => <div className="h-16" />
+})
+
+const FloatingActionButton = dynamic(() => import('./components/ui/FloatingActionButton'), {
+  ssr: true,
+  loading: () => <div className="h-16" />
+})
+
+const Footer = dynamic(() => import('./components/ui/Footer'), {
+  ssr: true
+})
 
 const inter = Inter({ subsets: ['latin'] })
 
