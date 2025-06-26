@@ -17,6 +17,7 @@ interface ChatOption {
   text: string
   action: string
   icon?: any
+  data?: string
 }
 
 export function WhatsAppWidget() {
@@ -60,14 +61,18 @@ export function WhatsAppWidget() {
   const initializeChat = () => {
     const welcomeMessage: ChatMessage = {
       id: 'welcome-1',
+<<<<<<< Updated upstream
       text: '👋 Hello! I\'m your GQ Cars virtual assistant. Would you like to book a secure ride with our SIA licensed drivers today?',
+=======
+      text: 'Hi! How can I help you today?',
+>>>>>>> Stashed changes
       isBot: true,
       timestamp: new Date(),
       options: [
-        { id: 'book-now', text: '🚗 Book Now', action: 'book', icon: Car },
-        { id: 'schedule', text: '📅 Schedule Ride', action: 'schedule', icon: Calendar },
-        { id: 'services', text: '🛡️ View Services', action: 'services', icon: Shield },
-        { id: 'call', text: '📞 Call Directly', action: 'call', icon: Phone }
+        { id: 'book-now', text: '🚗 Book a Ride', action: 'book', icon: Car },
+        { id: 'view-services', text: '🛡️ Our Services', action: 'services', icon: Shield },
+        { id: 'get-quote', text: '💷 Get Quote', action: 'get-quote', icon: Calendar },
+        { id: 'call-now', text: '📞 Call Now', action: 'call', icon: Phone }
       ]
     }
     setMessages([welcomeMessage])
@@ -138,6 +143,9 @@ export function WhatsAppWidget() {
         case 'contact-human':
           handleContactHuman()
           break
+        case 'navigate':
+          handleSpecialAction('navigate', option.data)
+          break
         default:
           handleDefault()
       }
@@ -162,11 +170,13 @@ export function WhatsAppWidget() {
   }
 
   const handleServices = () => {
-    addMessage('Here are our professional security transport services:', true, [
-      { id: 'executive-protection', text: '🛡️ Executive Protection', action: 'more-info' },
-      { id: 'airport-transfers', text: '✈️ Airport Transfers', action: 'airport' },
-      { id: 'wedding-security', text: '💒 Wedding Security', action: 'more-info' },
-      { id: 'corporate-transport', text: '🏢 Corporate Transport', action: 'more-info' }
+    addMessage('Here are our professional services. Click any to learn more:', true, [
+      { id: 'nav-executive', text: '👑 Executive Protection', action: 'navigate', data: '/services/executive' },
+      { id: 'nav-premium', text: '⭐ Premium Transport', action: 'navigate', data: '/services/premium' },
+      { id: 'nav-standard', text: '🚗 Standard Service', action: 'navigate', data: '/services/standard' },
+      { id: 'nav-xl', text: '👥 XL Group Transport', action: 'navigate', data: '/services/xl' },
+      { id: 'nav-airport', text: '✈️ Airport Transfers', action: 'navigate', data: '/services/airport' },
+      { id: 'nav-corporate', text: '🏢 Corporate Transport', action: 'navigate', data: '/services/corporate' }
     ])
   }
 
@@ -277,21 +287,39 @@ Thank you!`)
     ])
   }
 
-  const handleSpecialAction = (action: string) => {
+  const handleSpecialAction = (action: string, data?: string) => {
     switch (action) {
+      case 'navigate':
+        // Navigate to specific page
+        window.location.href = data || '/'
+        break
       case 'close-and-scroll':
-        handleMinimize()
-        // Scroll to quote widget
+        setIsOpen(false)
+        // Scroll to quote section
         setTimeout(() => {
-          const quoteWidget = document.querySelector('[data-quote-widget]')
-          if (quoteWidget) {
-            quoteWidget.scrollIntoView({ behavior: 'smooth' })
-          }
+          const quoteSection = document.querySelector('[data-section="quote"]')
+          quoteSection?.scrollIntoView({ behavior: 'smooth' })
+        }, 500)
+        break
+      case 'scroll-to-services':
+        setIsOpen(false)
+        setTimeout(() => {
+          const servicesSection = document.querySelector('[data-section="services"]')
+          servicesSection?.scrollIntoView({ behavior: 'smooth' })
+        }, 500)
+        break
+      case 'scroll-to-booking':
+        setIsOpen(false)
+        setTimeout(() => {
+          const bookingSection = document.querySelector('[data-section="booking"]')
+          bookingSection?.scrollIntoView({ behavior: 'smooth' })
         }, 500)
         break
       case 'open-whatsapp':
         const whatsappMessage = encodeURIComponent(`Hello GQ Cars! I'm interested in your professional security transport services.`)
         window.open(`https://wa.me/447407655203?text=${whatsappMessage}`, '_blank')
+        break
+      default:
         break
     }
   }
@@ -306,7 +334,7 @@ Thank you!`)
         <div className="fixed bottom-6 right-6 z-50">
           <button
             onClick={handleOpen}
-            className="bg-yellow-500 hover:bg-yellow-400 text-black p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative group"
+            className="bg-green-500 hover:bg-green-400 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative group"
           >
             <MessageCircle className="w-6 h-6" />
             {/* Notification Badge */}
@@ -315,11 +343,11 @@ Thank you!`)
                 1
               </div>
             )}
-            {/* Floating Message - Better positioning */}
+            {/* Floating Message */}
             {!isMinimized && (
-              <div className="absolute bottom-full right-0 mb-4 bg-yellow-500 text-black px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
-                💬 Quick booking help available!
-                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-yellow-500"></div>
+              <div className="absolute bottom-full right-0 mb-4 bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                💬 Need help? Chat with us!
+                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-green-500"></div>
               </div>
             )}
           </button>
@@ -328,61 +356,51 @@ Thank you!`)
 
       {/* Chat Widget */}
       {isOpen && (
+<<<<<<< Updated upstream
         <div className="fixed bottom-6 right-6 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+=======
+        <div className="fixed bottom-6 right-6 z-50 w-[90vw] max-w-md sm:w-[28rem] sm:h-[34rem] h-[70vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+>>>>>>> Stashed changes
           {/* Header */}
-          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center p-1">
-                <GQCarsLogo className="w-8 h-8" />
+              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                <MessageCircle className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-sm">GQ Security</h3>
-                <p className="text-xs opacity-90">Typically replies instantly</p>
+                <h3 className="font-semibold">GQ Cars Support</h3>
+                <p className="text-xs opacity-90">Usually responds instantly</p>
               </div>
             </div>
-            <button
-              onClick={handleMinimize}
-              className="text-black hover:bg-black/10 p-2 rounded-full transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <button 
+                onClick={handleMinimize}
+                className="text-white/80 hover:text-white p-1 rounded-full hover:bg-white/20 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
             {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
-              >
-                <div className="max-w-xs">
-                  <div
-                    className={`p-3 rounded-2xl ${
-                      message.isBot
-                        ? 'bg-white text-gray-800 shadow-sm'
-                        : 'bg-green-500 text-white'
-                    }`}
-                  >
-                    <p className="text-sm leading-relaxed whitespace-pre-line">{message.text}</p>
-                  </div>
+              <div key={message.id} className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}>
+                <div className={`max-w-[80%] ${message.isBot ? 'bg-white' : 'bg-green-500 text-white'} p-3 rounded-2xl shadow-sm`}>
+                  <p className="text-sm">{message.text}</p>
                   
-                  {/* Options Buttons */}
+                  {/* Options */}
                   {message.options && (
-                    <div className="mt-2 space-y-2">
+                    <div className="mt-3 space-y-2">
                       {message.options.map((option) => (
                         <button
                           key={option.id}
-                          onClick={() => {
-                            if (option.action.startsWith('close-') || option.action.startsWith('open-')) {
-                              handleSpecialAction(option.action)
-                            } else {
-                              handleOptionClick(option)
-                            }
-                          }}
-                          className="w-full bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-bold py-2 px-3 rounded-lg transition-colors flex items-center justify-between group"
+                          onClick={() => handleOptionClick(option)}
+                          className="w-full text-left bg-gray-100 hover:bg-gray-200 text-gray-800 p-2 rounded-lg text-sm transition-colors flex items-center space-x-2"
                         >
+                          {option.icon && <option.icon className="w-4 h-4" />}
                           <span>{option.text}</span>
-                          <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
                       ))}
                     </div>
@@ -411,17 +429,17 @@ Thank you!`)
 
           {/* Quick Actions Footer */}
           <div className="bg-white border-t border-gray-200 p-3">
-            <div className="flex space-x-2">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleOptionClick({ id: 'quick-call', text: '📞 Call Now', action: 'call' })}
-                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
+                className="bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
               >
                 <Phone className="w-3 h-3" />
                 <span>Call</span>
               </button>
               <button
                 onClick={() => handleOptionClick({ id: 'quick-book', text: '🚗 Book', action: 'book' })}
-                className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1"
+                className="bg-green-500 hover:bg-green-400 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
               >
                 <Car className="w-3 h-3" />
                 <span>Book</span>
