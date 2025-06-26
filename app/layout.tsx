@@ -3,23 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { NextAuthProvider } from './providers/NextAuthProvider'
 import { ThemeProvider } from './providers/ThemeProvider'
-import { Toaster } from 'react-hot-toast'
 import ErrorBoundary from './components/ErrorBoundary'
-import dynamic from 'next/dynamic'
-
-const SmartCTAManager = dynamic(() => import('./components/ui/SmartCTAManager'), {
-  ssr: false,
-  loading: () => <div className="h-16" />
-})
-
-const FloatingActionButton = dynamic(() => import('./components/ui/FloatingActionButton'), {
-  ssr: true,
-  loading: () => <div className="h-16" />
-})
-
-const Footer = dynamic(() => import('./components/ui/Footer'), {
-  ssr: true
-})
+import ClientLayout from './components/ClientLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -60,13 +45,7 @@ export default function RootLayout({
         <NextAuthProvider>
           <ThemeProvider>
             <ErrorBoundary>
-              <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {children}
-              </main>
-              <SmartCTAManager />
-              <FloatingActionButton />
-              <Footer />
-              <Toaster position="bottom-right" />
+              <ClientLayout>{children}</ClientLayout>
             </ErrorBoundary>
           </ThemeProvider>
         </NextAuthProvider>
