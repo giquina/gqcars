@@ -1,29 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git init:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git branch:*)",
-      "Bash(git remote add:*)",
       "Bash(git push:*)",
-      "Bash(git config:*)",
-      "Bash(git remote:*)",
-      "Bash(npm run build:*)",
-      "Bash(sudo chown:*)",
-      "Bash(./fix-env.sh:*)",
-      "Bash(npm install)",
-      "Bash(npm run dev:*)",
-      "Bash(npm run db:push:*)",
-      "Bash(./fix-env.bat)",
-      "Bash(npm uninstall:*)",
-      "Bash(npm install:*)",
-      "Bash(rm:*)",
-      "Bash(npx prisma generate:*)",
-      "Bash(npx prisma:*)",
-      "Bash(lsof:*)",
-      "Bash(pkill:*)",
-      "Bash(sudo netstat:*)"
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n✨ Add new components and utilities\n\n- Add ErrorBoundary for better error handling\n- Add SecurityAssessmentWrapper component\n- Add Footer component\n- Add utility functions\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Add development infrastructure\n\n- Add GitHub workflows\n- Add VS Code settings\n- Add Docker configuration\n- Add documentation\n- Add testing setup\n- Add development scripts\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git rm:*)",
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔥 Remove deprecated files and directories\n\n- Remove old agent files\n- Remove old decisions directory\n- Remove old GQSecurity directory\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Update Claude settings\n\n- Update allowed Bash commands\n- Add new patterns for Git operations\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": []
   }
