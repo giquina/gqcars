@@ -281,100 +281,49 @@ export default function SmartCTAManager() {
   }
 
   return (
-    <div className="fixed top-1/2 right-6 transform -translate-y-1/2 z-40 max-w-xs">
-      <div className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg rounded-2xl border border-gray-700/50 shadow-2xl">
-        {/* Smart Header */}
-        <div className="p-4 border-b border-gray-700/50">
-          <div className="flex items-center justify-between mb-2">
+    <div className="fixed bottom-6 right-6 z-40 max-w-xs">
+      <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xl">
+        {/* Minimal Header */}
+        <div className="p-3 border-b border-white/10">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Sparkles className="w-5 h-5 text-yellow-400 animate-pulse" />
-              <span className="text-white font-semibold text-sm">Smart Actions</span>
+              <Sparkles className="w-4 h-4 text-yellow-400" />
+              <span className="text-white font-medium text-sm">Quick Actions</span>
             </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-green-400 text-xs">Live</span>
-            </div>
-          </div>
-          
-          <p className="text-gray-300 text-xs">{getTimeBasedMessage()}</p>
-          
-          <div className="mt-2">
-            <div className={`inline-flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-semibold ${getUrgencyIndicator().color}`}>
-              <AlertCircle className="w-3 h-3" />
-              <span>{getUrgencyIndicator().text}</span>
-            </div>
+            <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
           </div>
         </div>
 
-        {/* Smart CTAs */}
-        <div className="p-3 space-y-2">
-          {smartCTAs.map((cta) => (
+        {/* Compact CTAs */}
+        <div className="p-2 space-y-1">
+          {smartCTAs.slice(0, 3).map((cta) => (
             <button
               key={cta.id}
               onClick={() => handleCTAClick(cta)}
               className={`
-                w-full p-3 rounded-xl transition-all duration-200 transform hover:scale-105 
+                w-full p-2.5 rounded-lg transition-all duration-200 
                 ${getVariantStyles(cta.variant)}
-                ${cta.urgency ? 'ring-2 ring-red-500/50' : ''}
-                group relative overflow-hidden
+                hover:bg-white/10 group relative overflow-hidden
               `}
             >
-              {/* Background Animation for Urgent CTAs */}
-              {cta.urgency && (
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent animate-pulse"></div>
-              )}
-              
-              <div className="relative z-10 flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-white/20 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="p-1.5 bg-white/10 rounded">
                     {cta.icon}
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-sm">{cta.text}</div>
-                    {cta.personalizedText && (
-                      <div className="text-xs opacity-90">{cta.personalizedText}</div>
-                    )}
-                    {cta.estimatedTime && (
-                      <div className="text-xs opacity-75 flex items-center space-x-1">
-                        <Clock className="w-3 h-3" />
-                        <span>{cta.estimatedTime}</span>
-                      </div>
-                    )}
+                    <div className="font-medium text-sm text-white">{cta.text}</div>
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-2">
-                  {cta.discount && (
-                    <div className="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold">
-                      {cta.discount}
-                    </div>
-                  )}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+                {cta.discount && (
+                  <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
+                    {cta.discount}
+                  </span>
+                )}
               </div>
             </button>
           ))}
-        </div>
-
-        {/* Context Info */}
-        <div className="p-3 border-t border-gray-700/50 bg-gray-800/50">
-          <div className="flex items-center justify-between text-xs text-gray-400">
-            <div className="flex items-center space-x-2">
-              <Target className="w-3 h-3" />
-              <span>Personalized for you</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Navigation className="w-3 h-3" />
-              <span>{userContext.timeOfDay}</span>
-            </div>
-          </div>
-          
-          <div className="mt-2 text-center">
-            <div className="inline-flex items-center space-x-2 bg-blue-500/20 border border-blue-500/30 px-3 py-1 rounded-full">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <span className="text-blue-400 font-semibold text-xs">AI-Powered Suggestions</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

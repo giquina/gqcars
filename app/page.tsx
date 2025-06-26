@@ -13,6 +13,8 @@ import FloatingActionButton from './components/ui/FloatingActionButton';
 import InteractiveFeaturesShowcase from './components/ui/InteractiveFeaturesShowcase';
 import QuickActionPlatform from './components/ui/QuickActionPlatform';
 import LocationBasedQuotes from './components/ui/LocationBasedQuotes';
+import WhatsAppWidget from './components/ui/WhatsAppWidget';
+import FloatingWhatsAppButton from './components/ui/FloatingWhatsAppButton';
 import Footer from './components/ui/Footer'
 
 export default function HomePage() {
@@ -36,6 +38,13 @@ export default function HomePage() {
       <AIAssistantWidget />
       <QuickActionPlatform />
       <AIBadge />
+      <WhatsAppWidget />
+      <FloatingWhatsAppButton 
+        position="bottom-left"
+        message="Hello GQ Cars! I need a quote for security transport services."
+        showNotification={true}
+        notificationCount={2}
+      />
       <Footer />
     </main>
   );

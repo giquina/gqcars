@@ -27,6 +27,41 @@ npm run lint        # ESLint
 - Node.js >=18.0.0
 - TypeScript
 - Git
+- Docker & Docker Compose
+- Kubernetes (optional)
+- Terraform (optional)
+
+## Development Environment Setup
+
+### Local Development
+```bash
+# Install dependencies
+npm install
+
+# Start development servers
+npm run dev:web     # Web application
+npm run dev:mobile  # Mobile application
+
+# Run tests
+npm run test:web
+npm run test:mobile
+
+# Build applications
+npm run build:web
+npm run build:mobile
+```
+
+### Infrastructure Setup
+```bash
+# Start local infrastructure
+docker-compose up -d
+
+# Deploy to staging
+./tools/scripts/deploy/staging.sh
+
+# Deploy to production
+./tools/scripts/deploy/production.sh
+```
 
 ## Multi-Agent System Architecture
 
@@ -51,19 +86,123 @@ npm run lint        # ESLint
 4. Maintain agent activity logs in .agents/ directory
 
 ## Project Structure
+
+### Repository Organization
 ```
-gqcars-frontend/
-├── .agents/              # Agent activity logs
-├── .decisions/           # Architecture decisions
-├── app/                 # Next.js app directory
-│   ├── components/     # Reusable components
-│   ├── globals.css     # Global styles
-│   ├── layout.tsx      # Root layout
-│   └── page.tsx        # Homepage
-├── docs/               # Documentation
-├── public/             # Static assets
-└── project-plan.md     # Project roadmap
+gqcars/
+├── apps/                          # Application code
+│   ├── web/                      # Next.js web application
+│   │   ├── src/
+│   │   │   ├── features/         # Feature-based components
+│   │   │   │   ├── auth/        # Authentication features
+│   │   │   │   ├── booking/     # Booking system
+│   │   │   │   └── security/    # Security features
+│   │   │   ├── common/          # Shared UI components
+│   │   │   │   ├── buttons/
+│   │   │   │   ├── forms/
+│   │   │   │   └── layout/
+│   │   │   └── layouts/         # Page layouts
+│   │   └── public/              # Static assets
+│   │
+│   └── mobile/                  # React Native mobile app
+│       ├── src/
+│       │   ├── features/        # Mobile features
+│       │   └── navigation/      # App navigation
+│       └── assets/              # Mobile assets
+│
+├── packages/                    # Shared packages
+│   ├── ui-library/             # Common UI components
+│   │   ├── components/
+│   │   └── styles/
+│   ├── api-client/             # API integration
+│   │   ├── endpoints/
+│   │   └── types/
+│   └── types/                  # Shared TypeScript types
+│
+├── infrastructure/             # Infrastructure config
+│   ├── docker/                # Container configurations
+│   ├── kubernetes/            # K8s manifests
+│   └── terraform/             # Infrastructure as code
+│
+├── tools/                     # Development tools
+│   ├── scripts/               # Development scripts
+│   │   ├── setup/            # Setup scripts
+│   │   └── deploy/           # Deployment scripts
+│   └── testing/               # Test utilities
+│
+├── docs/                      # Documentation
+│   ├── architecture/          # System design docs
+│   ├── api/                   # API documentation
+│   ├── guides/               # Developer guides
+│   └── reports/              # Business reports
+│
+└── config/                    # Configuration
+    ├── development/          # Dev environment
+    ├── staging/             # Staging environment
+    └── production/          # Production configs
 ```
+
+### Feature Organization Guidelines
+
+1. **Feature-based Structure**
+   - Each feature should be self-contained
+   - Include components, hooks, and utils
+   - Maintain feature-specific tests
+
+2. **Shared Components**
+   - Place reusable UI in packages/ui-library
+   - Document component props and usage
+   - Include Storybook stories
+
+3. **API Integration**
+   - Centralize API calls in api-client
+   - Use TypeScript for type safety
+   - Maintain API documentation
+
+4. **Configuration Management**
+   - Environment-specific configs in config/
+   - Use .env files for secrets
+   - Document all config options
+
+5. **Documentation Standards**
+   - Architecture decisions in docs/architecture
+   - API documentation in docs/api
+   - Maintain README.md in each directory
+
+### File Naming Conventions
+
+1. **Components**
+   - PascalCase: `BookingForm.tsx`
+   - Include .tsx extension
+
+2. **Utilities**
+   - camelCase: `formatDate.ts`
+   - Descriptive names
+
+3. **Constants**
+   - UPPER_CASE
+   - Group related constants
+
+4. **Styles**
+   - Follow component naming
+   - Use .module.css suffix
+
+### Code Organization Rules
+
+1. **Feature Modules**
+   - One feature per directory
+   - Include index.ts exports
+   - Maintain feature-level tests
+
+2. **Shared Code**
+   - Place in appropriate package
+   - Document dependencies
+   - Include usage examples
+
+3. **Testing**
+   - Co-locate tests with code
+   - Follow *.test.ts pattern
+   - Include E2E tests in separate directory
 
 ## Technology Stack
 
