@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { Sparkles, Zap, Eye, Globe, Mic, Camera, Clock, MapPin, Shield, Star, Phone, Calendar, MessageCircle } from 'lucide-react'
-import LiveNotifications from './LiveNotifications'
+import LiveActivityDashboard from './LiveActivityDashboard'
 
 export function InteractiveHero({ children }) {
   const [isListening, setIsListening] = useState(false)
@@ -79,14 +79,20 @@ export function InteractiveHero({ children }) {
         </div>
       </div>
 
-      {/* Live Notifications - New Refined Component */}
-      <LiveNotifications />
+      {/* Live Activity Dashboard - Original Design */}
+      <LiveActivityDashboard />
 
-      {/* Minimal Status Indicator - Simplified and less bulky */}
-      <div className="fixed top-4 right-4 z-30 bg-black/60 backdrop-blur-sm rounded-full px-3 py-2 border border-green-500/20">
-        <div className="flex items-center space-x-2 text-xs">
-          <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-          <span className="text-green-400 font-medium">{driversOnline} online</span>
+      {/* Real-time Status Bar - Original Design */}
+      <div className="fixed top-4 right-4 z-50 bg-black/80 backdrop-blur-sm rounded-2xl p-4 border border-green-500/30">
+        <div className="flex items-center space-x-4 text-sm">
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span className="text-green-400 font-bold">{driversOnline} drivers online</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+            <span className="text-yellow-400 font-bold">{liveBookings} live bookings</span>
+          </div>
         </div>
       </div>
 
