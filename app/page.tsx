@@ -4,17 +4,15 @@ import QuoteWidget from './components/ui/QuoteWidget';
 import { InteractiveHero } from './components/ui/InteractiveHero';
 import SecurityAssessmentWrapper from './components/SecurityAssessmentWrapper'
 import InteractiveTestimonials from './components/ui/InteractiveTestimonials';
-import WhatsAppWidget from './components/ui/WhatsAppWidget';
+import EnhancedChatWidget from './components/ui/EnhancedChatWidget';
 import AIAssistantWidget from './components/ui/AIAssistantWidget';
 import AIBadge from './components/ui/AIBadge';
 import MobileAppBanner from './components/ui/MobileAppBanner';
 import { CallToActionPanel } from './components/ui/CallToActionPanel';
 import FloatingActionButton from './components/ui/FloatingActionButton';
-import LiveNotifications from './components/ui/LiveNotifications';
 import InteractiveFeaturesShowcase from './components/ui/InteractiveFeaturesShowcase';
 import QuickActionPlatform from './components/ui/QuickActionPlatform';
 import LocationBasedQuotes from './components/ui/LocationBasedQuotes';
-import LiveActivityDashboard from './components/ui/LiveActivityDashboard';
 import Footer from './components/ui/Footer'
 
 export default function HomePage() {
@@ -32,13 +30,11 @@ export default function HomePage() {
       <InteractiveFeaturesShowcase />
       <InteractiveTestimonials />
       <LocationBasedQuotes />
-      <LiveActivityDashboard />
       <MobileAppBanner />
       <CallToActionPanel />
-      <WhatsAppWidget />
+      <EnhancedChatWidget />
       <AIAssistantWidget />
       <QuickActionPlatform />
-      <LiveNotifications />
       <AIBadge />
       <Footer />
     </main>
