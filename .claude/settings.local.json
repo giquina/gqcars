@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Fix merge conflicts and improve components\n\n- Resolve stash conflicts in WhatsApp widget\n- Update notifications system\n- Clean up settings\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(__NEW_LINE__ git commit -m \"$(cat <<''EOF''\n🔧 Fix merge conflicts and improve components\n\n- Resolve stash conflicts in WhatsApp widget\n- Update notifications system\n- Clean up settings\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }
