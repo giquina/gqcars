@@ -20,14 +20,14 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
       case 'GQ Executive':
         return {
           price: '£10.50/mile',
-          features: ['Premium luxury vehicles', 'SIA licensed CPO drivers', 'Business amenities', 'Priority service'],
+          features: ['Luxury cars with premium comfort', 'Professional trained drivers', 'Wi-Fi and charging ports', 'VIP priority service'],
           color: 'purple',
           gradient: 'from-purple-600 to-purple-800'
         }
       case 'GQ XL':
         return {
           price: '£7.20/mile',
-          features: ['Large group vehicles', 'SIA security drivers', '5-8 passengers', 'Extra luggage space'],
+          features: ['Spacious vehicles for groups', 'Experienced safe drivers', 'Fits 5-8 people comfortably', 'Extra room for luggage'],
           color: 'orange',
           gradient: 'from-orange-600 to-orange-800'
         }
@@ -35,7 +35,7 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
       default:
         return {
           price: '£6.50/mile',
-          features: ['Professional taxi service', 'SIA security drivers', 'GPS tracking', 'Secure transport'],
+          features: ['Clean, comfortable cars', 'Friendly professional drivers', 'Live GPS tracking for safety', 'Reliable safe transport'],
           color: 'blue',
           gradient: 'from-blue-600 to-blue-800'
         }
@@ -59,15 +59,15 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
         <div className="mb-8">
           <div className="inline-flex items-center justify-center space-x-3 bg-green-600/20 border border-green-500/50 px-6 py-3 rounded-full mb-6">
             <CheckCircle className="w-8 h-8 text-green-400 animate-pulse" />
-            <span className="text-green-400 font-bold text-lg">Assessment Complete!</span>
+            <span className="text-green-400 font-bold text-lg">Perfect Match Found!</span>
             <Sparkles className="w-8 h-8 text-green-400 animate-pulse" />
           </div>
           
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-4">
-            Your Perfect Security Match
+            Your Ideal Transport Service
           </h1>
           <p className="text-gray-300 text-base sm:text-lg px-4 leading-relaxed">
-            Based on your answers, we've identified the <span className="text-purple-400 font-semibold">ideal security transport service</span> for your specific needs
+            Based on what you told us, we've found the <span className="text-purple-400 font-semibold">perfect ride service</span> that fits exactly what you need
           </p>
         </div>
 
@@ -95,7 +95,7 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
                 <p className={`text-3xl sm:text-4xl font-bold text-${serviceDetails.color}-400`}>
                   {serviceDetails.price}
                 </p>
-                <p className="text-gray-400 text-sm mt-1">Professional security transport included</p>
+                <p className="text-gray-400 text-sm mt-1">Safe, reliable rides included</p>
               </div>
             </div>
 
@@ -120,11 +120,11 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
           <div className="relative z-10">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <Sparkles className="w-5 h-5 text-red-400" />
-              <span className="text-red-400 font-bold text-sm sm:text-base">🔥 SPECIAL ASSESSMENT BONUS 🔥</span>
+              <span className="text-red-400 font-bold text-sm sm:text-base">🔥 WELCOME BONUS 🔥</span>
               <Sparkles className="w-5 h-5 text-red-400" />
             </div>
             <p className="text-white font-bold text-lg sm:text-xl mb-1">50% OFF Your First Ride!</p>
-            <p className="text-gray-200 text-sm">Exclusive discount for completing the security assessment</p>
+            <p className="text-gray-200 text-sm">Thank you for telling us about your travel needs</p>
           </div>
         </div>
 
@@ -155,8 +155,8 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
             className="group bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 hover:border-yellow-500/50 rounded-xl p-4 transition-all transform hover:scale-105"
           >
             <Calculator className="w-8 h-8 text-yellow-500 mx-auto mb-2 group-hover:animate-bounce" />
-            <h4 className="font-bold text-white text-sm">Get Detailed Quote</h4>
-            <p className="text-gray-400 text-xs mt-1">Custom pricing for your needs</p>
+            <h4 className="font-bold text-white text-sm">Get Price Estimate</h4>
+            <p className="text-gray-400 text-xs mt-1">See exactly what your trip will cost</p>
           </a>
 
           <a
@@ -164,8 +164,8 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
             className="group bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 hover:border-blue-500/50 rounded-xl p-4 transition-all transform hover:scale-105"
           >
             <Calendar className="w-8 h-8 text-blue-500 mx-auto mb-2 group-hover:animate-bounce" />
-            <h4 className="font-bold text-white text-sm">Schedule Future Trip</h4>
-            <p className="text-gray-400 text-xs mt-1">Plan your security transport</p>
+            <h4 className="font-bold text-white text-sm">Book for Later</h4>
+            <p className="text-gray-400 text-xs mt-1">Schedule your ride in advance</p>
           </a>
 
           <button
@@ -173,30 +173,30 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
             className="group bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 hover:border-purple-500/50 rounded-xl p-4 transition-all transform hover:scale-105"
           >
             <Shield className="w-8 h-8 text-purple-500 mx-auto mb-2 group-hover:animate-bounce" />
-            <h4 className="font-bold text-white text-sm">Retake Assessment</h4>
-            <p className="text-gray-400 text-xs mt-1">Try different scenarios</p>
+            <h4 className="font-bold text-white text-sm">Try Again</h4>
+            <p className="text-gray-400 text-xs mt-1">Answer the questions differently</p>
           </button>
         </div>
 
         {/* Trust Indicators */}
         <div className="bg-gradient-to-r from-gray-900/80 to-black/80 border border-gray-700/50 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-white mb-4">Why Choose {recommendation.service}?</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Why Our Customers Love {recommendation.service}</h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
             <div>
               <div className="text-yellow-500 font-bold text-2xl mb-1">100%</div>
-              <div className="text-gray-300 text-xs">SIA Licensed</div>
+              <div className="text-gray-300 text-xs">Licensed Drivers</div>
             </div>
             <div>
               <div className="text-yellow-500 font-bold text-2xl mb-1">24/7</div>
-              <div className="text-gray-300 text-xs">Availability</div>
+              <div className="text-gray-300 text-xs">Always Available</div>
             </div>
             <div>
               <div className="text-yellow-500 font-bold text-2xl mb-1">4.9★</div>
-              <div className="text-gray-300 text-xs">Client Rating</div>
+              <div className="text-gray-300 text-xs">Happy Customers</div>
             </div>
             <div>
               <div className="text-yellow-500 font-bold text-2xl mb-1">10+</div>
-              <div className="text-gray-300 text-xs">Years Experience</div>
+              <div className="text-gray-300 text-xs">Years Serving You</div>
             </div>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function SecurityAssessmentResults({ recommendation }: ResultsPro
         <div className="mt-6 text-center">
           <div className="inline-flex items-center space-x-2 bg-blue-600/20 border border-blue-500/50 px-4 py-2 rounded-full">
             <Shield className="w-4 h-4 text-blue-400" />
-            <span className="text-blue-300 text-sm font-semibold">🛡️ Your security and privacy are our top priority</span>
+            <span className="text-blue-300 text-sm font-semibold">🛡️ Your safety and privacy come first</span>
           </div>
         </div>
       </div>
