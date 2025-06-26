@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/ui/Header';
 import QuoteWidget from './components/ui/QuoteWidget';
-import { InteractiveHero } from './components/ui/InteractiveHero';
+import { CleanHero } from './components/ui/CleanHero';
 import SecurityAssessmentWrapper from './components/SecurityAssessmentWrapper'
 import InteractiveTestimonials from './components/ui/InteractiveTestimonials';
 import EnhancedChatWidget from './components/ui/EnhancedChatWidget';
@@ -19,12 +19,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-gray-900 text-white">
       <Header />
-      <InteractiveHero>
-        <div className="space-y-6 text-center">
-          <h1 className="text-5xl font-bold mb-4">GQ Cars Security Transport</h1>
-          <p className="text-xl text-gray-300">Professional SIA Licensed Security Drivers</p>
-        </div>
-      </InteractiveHero>
+      <CleanHero />
       <SecurityAssessmentWrapper />
       <QuoteWidget />
       <InteractiveFeaturesShowcase />
