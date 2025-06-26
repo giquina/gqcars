@@ -61,7 +61,7 @@ export default function ServicePage({ title, description, heroImage, category, I
       </div>
 
       {/* Testimonials & Case Studies */}
-      <TestimonialsAndCaseStudies filterCategory={category} />
+      <TestimonialsAndCaseStudies />
     </div>
   )
 } 

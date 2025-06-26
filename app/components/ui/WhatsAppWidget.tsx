@@ -19,7 +19,7 @@ interface ChatOption {
   icon?: any
 }
 
-export function WhatsAppWidget() {
+export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)

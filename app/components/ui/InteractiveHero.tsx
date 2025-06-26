@@ -4,11 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Sparkles, Zap, Eye, Globe, Mic, Camera, Clock, MapPin, Shield, Star, Phone, Calendar, MessageCircle } from 'lucide-react'
 import LiveNotifications from './LiveNotifications'
 
-export function InteractiveHero({ children }) {
+export default function InteractiveHero({ children }: { children: React.ReactNode }) {
   const [isListening, setIsListening] = useState(false)
   const [liveBookings, setLiveBookings] = useState(47)
   const [driversOnline, setDriversOnline] = useState(23)
-  const [activeQuote, setActiveQuote] = useState(null)
+  const [activeQuote, setActiveQuote] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const heroRef = useRef<HTMLDivElement>(null)
 

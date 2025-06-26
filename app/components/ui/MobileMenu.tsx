@@ -74,7 +74,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         >
                           <div className="flex items-center gap-3">
                             <service.icon className="w-5 h-5 text-yellow-500" />
-                            <span className="font-semibold text-white">{service.name}</span>
+                            <span className="font-semibold text-white">{service.label}</span>
                           </div>
                           <p className="pl-8 text-xs text-gray-400">{service.description}</p>
                         </a>

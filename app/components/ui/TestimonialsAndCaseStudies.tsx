@@ -57,7 +57,7 @@ const caseStudies = [
   }
 ]
 
-export function TestimonialsAndCaseStudies() {
+export default function TestimonialsAndCaseStudies() {
   const [activeTab, setActiveTab] = useState<'testimonials' | 'cases'>('testimonials')
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })])
 

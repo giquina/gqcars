@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Shield, Briefcase, Car, Sparkles, ArrowRight } from 'lucide-react'
-import { SecurityAssessment } from './SecurityAssessment' // The full assessment component
+import SecurityAssessment from './SecurityAssessment' // The full assessment component
 
 const services = [
   {
@@ -40,11 +40,23 @@ const services = [
   },
 ]
 
-export function HomePageAssessment() {
+export default function HomePageAssessment() {
   const [isAssessmentVisible, setIsAssessmentVisible] = useState(false)
 
   if (isAssessmentVisible) {
-    return <SecurityAssessment />
+    return <SecurityAssessment questions={[{
+      id: 1,
+      text: 'What is the primary purpose of your trip?',
+      options: services.map(s => ({
+        id: s.name.toLowerCase().replace(/ /g, '-'),
+        text: s.name,
+        subtext: s.description,
+        icon: s.icon
+      }))
+    }]} onComplete={(answers) => {
+      console.log('Assessment completed:', answers)
+      setIsAssessmentVisible(false)
+    }} />
   }
 
   return (
