@@ -23,7 +23,7 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
     customerName: 'James M.',
     service: 'GQ Executive',
     location: 'Canary Wharf to Heathrow',
-    timestamp: new Date(Date.now() - 2 * 60 * 1000), // 2 minutes ago
+    timestamp: new Date(Date.now() - 2 * 60 * 1000),
     serviceType: 'executive',
     icon: '👑',
     price: '£145',
@@ -36,7 +36,7 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
     customerName: 'Sarah L.',
     service: 'GQ Premium',
     location: 'Mayfair to City Airport',
-    timestamp: new Date(Date.now() - 5 * 60 * 1000), // 5 minutes ago
+    timestamp: new Date(Date.now() - 5 * 60 * 1000),
     serviceType: 'premium',
     icon: '⭐',
     price: '£89',
@@ -49,7 +49,7 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
     customerName: 'Michael R.',
     service: 'GQ Standard',
     location: 'Chelsea to Gatwick',
-    timestamp: new Date(Date.now() - 8 * 60 * 1000), // 8 minutes ago
+    timestamp: new Date(Date.now() - 8 * 60 * 1000),
     serviceType: 'standard',
     icon: '🚗',
     price: '£165',
@@ -62,7 +62,7 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
     customerName: 'Emma K.',
     service: 'GQ XL Group',
     location: 'Westminster to Stansted',
-    timestamp: new Date(Date.now() - 12 * 60 * 1000), // 12 minutes ago
+    timestamp: new Date(Date.now() - 12 * 60 * 1000),
     serviceType: 'xl',
     icon: '👥',
     price: '£195',
@@ -75,7 +75,7 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
     customerName: 'David T.',
     service: 'GQ Executive',
     location: 'Kensington to Luton',
-    timestamp: new Date(Date.now() - 15 * 60 * 1000), // 15 minutes ago
+    timestamp: new Date(Date.now() - 15 * 60 * 1000),
     serviceType: 'executive',
     icon: '👑',
     price: '£175',
@@ -88,7 +88,7 @@ const SAMPLE_BOOKINGS: CustomerBooking[] = [
     customerName: 'Lisa P.',
     service: 'GQ Premium',
     location: 'Shoreditch to Heathrow',
-    timestamp: new Date(Date.now() - 20 * 60 * 1000), // 20 minutes ago
+    timestamp: new Date(Date.now() - 20 * 60 * 1000),
     serviceType: 'premium',
     icon: '⭐',
     price: '£125',
@@ -104,7 +104,6 @@ export default function LiveNotifications() {
 
   useEffect(() => {
     setNotifications(SAMPLE_BOOKINGS)
-    // Update current time every minute for realistic timestamps
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 60000)
@@ -153,7 +152,6 @@ export default function LiveNotifications() {
 
   return (
     <section className="w-full max-w-md mx-auto my-6">
-      {/* Header */}
       <div className="flex items-center justify-between mb-4 px-2">
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -167,7 +165,6 @@ export default function LiveNotifications() {
           <span>Live</span>
         </div>
       </div>
-      {/* Notifications List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <ul className="divide-y divide-gray-100">
           {notifications.slice().reverse().map((n) => (
@@ -176,13 +173,11 @@ export default function LiveNotifications() {
               className="group cursor-pointer transition-all duration-200 hover:bg-gray-50 hover:shadow-sm"
             >
               <div className="flex items-start p-4 space-x-3">
-                {/* Customer Avatar */}
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
                     {getCustomerInitials(n.customerName)}
                   </div>
                 </div>
-                {/* Content */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -226,7 +221,6 @@ export default function LiveNotifications() {
                     </div>
                   </div>
                 </div>
-                {/* Service Icon */}
                 <div className="flex-shrink-0">
                   <span className="text-2xl">{n.icon}</span>
                 </div>
@@ -234,7 +228,6 @@ export default function LiveNotifications() {
             </li>
           ))}
         </ul>
-        {/* Footer */}
         <div className="bg-gray-50 px-4 py-3 border-t border-gray-100">
           <div className="flex items-center justify-between text-xs text-gray-500">
             <div className="flex items-center space-x-2">

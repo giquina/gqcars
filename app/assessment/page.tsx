@@ -1,6 +1,6 @@
 'use client'
 
-import SecurityAssessment from '@/app/components/ui/SecurityAssessment'
+import { SecurityAssessment } from '@/app/components/ui/SecurityAssessment'
 import { useRouter } from 'next/navigation'
 import { Shield, Car, PartyPopper, Briefcase, Users } from 'lucide-react'
 

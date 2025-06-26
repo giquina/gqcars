@@ -1,4 +1,4 @@
-import TestimonialsAndCaseStudies from "@/app/components/ui/TestimonialsAndCaseStudies";
+import { TestimonialsAndCaseStudies } from '@/app/components/ui/TestimonialsAndCaseStudies'
 import QuoteWidget from "@/app/components/ui/QuoteWidget";
 import { LucideIcon } from "lucide-react";
 
@@ -61,7 +61,7 @@ export default function ServicePage({ title, description, heroImage, category, I
       </div>
 
       {/* Testimonials & Case Studies */}
-      <TestimonialsAndCaseStudies filterCategory={category} />
+      <TestimonialsAndCaseStudies />
     </div>
   )
 } 

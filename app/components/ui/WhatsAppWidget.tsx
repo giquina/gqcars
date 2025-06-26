@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { MessageCircle, X, Phone, Calendar, Car, MapPin, Clock, Shield, Star, ChevronRight } from 'lucide-react'
-import GQCarsLogo from './GQCarsLogo'
+import { useState, useEffect, useRef } from 'react'
+import { MessageCircle, X, Minimize2, Car, Shield, Calendar, Phone, Send, Clock, MapPin, Star, CheckCircle } from 'lucide-react'
 
 interface ChatMessage {
   id: string
@@ -28,22 +27,24 @@ export default function WhatsAppWidget() {
   const [isTyping, setIsTyping] = useState(false)
   const [userName, setUserName] = useState('')
   const [currentFlow, setCurrentFlow] = useState('welcome')
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  // Show widget after 30 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true)
-      // Auto-open after showing for 3 seconds
       setTimeout(() => {
         if (!isOpen && !isMinimized) {
           setIsOpen(true)
           initializeChat()
         }
       }, 3000)
-    }, 30000) // 30 seconds
-
+    }, 30000)
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   const handleMinimize = () => {
     setIsOpen(false)
@@ -94,10 +95,7 @@ export default function WhatsAppWidget() {
   }
 
   const handleOptionClick = (option: ChatOption) => {
-    // Add user's choice to chat
     addMessage(option.text, false)
-
-    // Simulate typing and respond based on action
     simulateTyping(() => {
       switch (option.action) {
         case 'book':
@@ -219,7 +217,7 @@ For immediate assistance with urgent security transport needs, I'm connecting yo
 📍 Live GPS tracking provided
 
 Contact us now for immediate dispatch:`, true, [
-      { id: 'urgent-call', text: '� CALL NOW', action: 'call' },
+      { id: 'urgent-call', text: '📞 CALL NOW', action: 'call' },
       { id: 'urgent-whatsapp', text: '💬 Urgent WhatsApp', action: 'contact-human' }
     ])
   }
@@ -256,159 +254,107 @@ Which airport do you need?`, true, [
   }
 
   const handleContactHuman = () => {
-    const whatsappMessage = encodeURIComponent(`Hello GQ Cars! 
-
-I'm interested in your professional security transport services. I was chatting with your virtual assistant and would like to speak with a team member about:
-
-• Booking a ride with SIA licensed drivers
-• Getting a personalized quote
-• Learning more about your services
-
-Thank you!`)
-    
-    addMessage(`Perfect! I'm connecting you with our professional booking team on WhatsApp. They'll help you with everything you need!`, true, [
-      { id: 'open-whatsapp', text: '💬 Continue on WhatsApp', action: 'open-whatsapp' }
-    ])
-
+    const whatsappMessage = encodeURIComponent(`Hello GQ Cars! I'd like to speak with someone about booking a secure ride. Can you help me?`)
+    addMessage('Perfect! I\'m connecting you to our WhatsApp support team. They\'ll respond within 5 minutes.', true)
     setTimeout(() => {
       window.open(`https://wa.me/447407655203?text=${whatsappMessage}`, '_blank')
     }, 2000)
   }
 
   const handleDefault = () => {
-    addMessage('I\'m here to help you with GQ Cars\' professional security transport services. Would you like to:', true, [
-      { id: 'book-ride', text: '🚗 Book a Ride', action: 'book' },
-      { id: 'get-info', text: 'ℹ️ Get Information', action: 'services' },
-      { id: 'speak-human', text: '👤 Speak to Human', action: 'contact-human' }
+    addMessage('I\'m here to help! Would you like to book a ride, get a quote, or learn more about our services?', true, [
+      { id: 'book-now', text: '🚗 Book a Ride', action: 'book' },
+      { id: 'get-quote', text: '💷 Get Quote', action: 'get-quote' },
+      { id: 'call-now', text: '📞 Call Now', action: 'call' }
     ])
   }
 
   const handleSpecialAction = (action: string, data?: string) => {
-    switch (action) {
-      case 'navigate':
-        // Navigate to specific page
-        window.location.href = data || '/'
-        break
-      case 'close-and-scroll':
-        setIsOpen(false)
-        // Scroll to quote section
-        setTimeout(() => {
-          const quoteSection = document.querySelector('[data-section="quote"]')
-          quoteSection?.scrollIntoView({ behavior: 'smooth' })
-        }, 500)
-        break
-      case 'scroll-to-services':
-        setIsOpen(false)
-        setTimeout(() => {
-          const servicesSection = document.querySelector('[data-section="services"]')
-          servicesSection?.scrollIntoView({ behavior: 'smooth' })
-        }, 500)
-        break
-      case 'scroll-to-booking':
-        setIsOpen(false)
-        setTimeout(() => {
-          const bookingSection = document.querySelector('[data-section="booking"]')
-          bookingSection?.scrollIntoView({ behavior: 'smooth' })
-        }, 500)
-        break
-      case 'open-whatsapp':
-        const whatsappMessage = encodeURIComponent(`Hello GQ Cars! I'm interested in your professional security transport services.`)
-        window.open(`https://wa.me/447407655203?text=${whatsappMessage}`, '_blank')
-        break
-      default:
-        break
+    if (action === 'navigate' && data) {
+      addMessage(`I'll take you to our ${data} page!`, true)
+      setTimeout(() => {
+        window.location.href = data
+      }, 1500)
     }
   }
 
-  // Don't show widget if not visible yet
   if (!isVisible) return null
 
   return (
     <>
-      {/* Floating WhatsApp Button */}
-      {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-50">
-          <button
-            onClick={handleOpen}
-            className="bg-green-500 hover:bg-green-400 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 relative group"
-          >
-            <MessageCircle className="w-6 h-6" />
-            {/* Notification Badge */}
-            {!isMinimized && (
-              <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
-                1
-              </div>
-            )}
-            {/* Floating Message */}
-            {!isMinimized && (
-              <div className="absolute bottom-full right-0 mb-4 bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-bold whitespace-nowrap shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
-                💬 Need help? Chat with us!
-                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-8 border-transparent border-t-green-500"></div>
-              </div>
-            )}
-          </button>
-        </div>
+      {isMinimized && (
+        <button
+          onClick={handleOpen}
+          className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        >
+          <MessageCircle className="w-6 h-6" />
+        </button>
       )}
 
-      {/* Chat Widget */}
       {isOpen && (
         <div className="fixed bottom-6 right-6 z-50 w-[90vw] max-w-md sm:w-[28rem] sm:h-[34rem] h-[70vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
-          {/* Header */}
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <MessageCircle className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-semibold">GQ Cars Support</h3>
-                <p className="text-xs opacity-90">Usually responds instantly</p>
+                <h3 className="font-bold">GQ Cars Support</h3>
+                <p className="text-xs opacity-90">Usually responds in 5 minutes</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <button 
+              <button
                 onClick={handleMinimize}
-                className="text-white/80 hover:text-white p-1 rounded-full hover:bg-white/20 transition-colors"
+                className="p-1 hover:bg-white/20 rounded transition-colors"
               >
-                <X className="w-5 h-5" />
+                <Minimize2 className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleMinimize}
+                className="p-1 hover:bg-white/20 rounded transition-colors"
+              >
+                <X className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
             {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}>
-                <div className={`max-w-[80%] ${message.isBot ? 'bg-white' : 'bg-green-500 text-white'} p-3 rounded-2xl shadow-sm`}>
-                  <p className="text-sm">{message.text}</p>
-                  
-                  {/* Options */}
+              <div
+                key={message.id}
+                className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+              >
+                <div
+                  className={`max-w-[80%] p-3 rounded-2xl ${
+                    message.isBot
+                      ? 'bg-white border border-gray-200'
+                      : 'bg-green-500 text-white'
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                   {message.options && (
                     <div className="mt-3 space-y-2">
                       {message.options.map((option) => (
                         <button
                           key={option.id}
                           onClick={() => handleOptionClick(option)}
-                          className="w-full text-left bg-gray-100 hover:bg-gray-200 text-gray-800 p-2 rounded-lg text-sm transition-colors flex items-center space-x-2"
+                          className="w-full text-left p-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors"
                         >
-                          {option.icon && <option.icon className="w-4 h-4" />}
-                          <span>{option.text}</span>
+                          {option.text}
                         </button>
                       ))}
                     </div>
                   )}
-                  
-                  <p className="text-xs text-gray-500 mt-1">
+                  <div className={`text-xs mt-2 ${message.isBot ? 'text-gray-500' : 'text-green-100'}`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                  </p>
+                  </div>
                 </div>
               </div>
             ))}
-
-            {/* Typing Indicator */}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-white p-3 rounded-2xl shadow-sm">
+                <div className="bg-white border border-gray-200 p-3 rounded-2xl">
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -417,26 +363,7 @@ Thank you!`)
                 </div>
               </div>
             )}
-          </div>
-
-          {/* Quick Actions Footer */}
-          <div className="bg-white border-t border-gray-200 p-3">
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => handleOptionClick({ id: 'quick-call', text: '📞 Call Now', action: 'call' })}
-                className="bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
-              >
-                <Phone className="w-3 h-3" />
-                <span>Call</span>
-              </button>
-              <button
-                onClick={() => handleOptionClick({ id: 'quick-book', text: '🚗 Book', action: 'book' })}
-                className="bg-green-500 hover:bg-green-400 text-white text-xs font-bold py-2 px-3 rounded-lg flex items-center justify-center space-x-1 transition-colors"
-              >
-                <Car className="w-3 h-3" />
-                <span>Book</span>
-              </button>
-            </div>
+            <div ref={messagesEndRef} />
           </div>
         </div>
       )}
