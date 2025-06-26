@@ -60,7 +60,7 @@ export default function WhatsAppWidget() {
   const initializeChat = () => {
     const welcomeMessage: ChatMessage = {
       id: 'welcome-1',
-      text: '👋 Hello! I\'m your GQ Cars virtual assistant. Would you like to book a secure ride with our SIA licensed drivers today?',
+      text: 'Hi! Need a ride or quote?',
       isBot: true,
       timestamp: new Date(),
       options: [
@@ -328,7 +328,7 @@ Thank you!`)
 
       {/* Chat Widget */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden">
+        <div className="fixed bottom-4 right-4 z-50 w-[90vw] max-w-md sm:w-[28rem] sm:h-[34rem] h-[70vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden transition-all duration-300">
           {/* Header */}
           <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-4 flex items-center justify-between">
             <div className="flex items-center space-x-3">
