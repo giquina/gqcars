@@ -157,7 +157,7 @@ export default function LiveNotifications() {
   if (!isVisible || notifications.length === 0) return null
 
   return (
-    <div className="fixed top-4 left-4 z-40 max-w-sm">
+    <div className="fixed top-4 left-4 z-[250] max-w-sm">
       <AnimatePresence mode="wait">
         {!isExpanded ? (
           // Compact Mode - Single Notification

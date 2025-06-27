@@ -224,39 +224,28 @@ export default function QuoteWidget() {
   return (
     <div 
       data-quote-widget 
-      className="bg-gradient-to-br from-gray-900 via-blue-900 to-black p-4 sm:p-6 lg:p-8 rounded-2xl border border-yellow-500/30 relative overflow-hidden shadow-2xl"
+      className="relative"
     >
-      {/* Enhanced Animated Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-4 right-4 w-6 h-6 sm:w-8 sm:h-8 border border-yellow-500 rotate-45 animate-spin-slow"></div>
-        <div className="absolute bottom-6 left-6 w-4 h-4 sm:w-6 sm:h-6 border border-blue-500 animate-bounce"></div>
-        <div className="absolute top-1/2 left-8 w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 rounded-full animate-ping"></div>
-        <div className="absolute top-8 right-12 w-2 h-2 sm:w-3 sm:h-3 bg-purple-500 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-12 right-8 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full animate-bounce"></div>
+      {/* Simplified Background - removed heavy effects */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-4 right-4 w-4 h-4 border border-yellow-500/50 rotate-45 animate-spin-slow"></div>
+        <div className="absolute bottom-6 left-6 w-3 h-3 border border-blue-500/50 animate-bounce"></div>
+        <div className="absolute top-1/2 left-8 w-2 h-2 bg-yellow-500/50 rounded-full animate-ping"></div>
       </div>
 
       <div className="relative z-10">
-        {/* Enhanced Header - Mobile Optimized */}
-        <div className="text-center mb-4 sm:mb-6">
-          <div className="flex items-center justify-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
-            <Calculator className="w-5 h-5 sm:w-7 sm:h-7 text-yellow-500 animate-bounce" />
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-              Get Instant Quote
-            </h2>
-            <Sparkles className="w-5 h-5 sm:w-7 sm:h-7 text-yellow-500 animate-pulse" />
-          </div>
-          <p className="text-gray-300 text-xs sm:text-sm lg:text-base mb-2">Enter your journey details for real-time pricing</p>
-          
+        {/* Simplified Header - Mobile Optimized */}
+        <div className="text-center mb-6">
           {/* SIA Licensed Guarantee - Mobile Responsive */}
-          <div className="bg-blue-600/20 border border-blue-500/50 px-2 sm:px-4 py-2 rounded-lg sm:rounded-xl mb-2 sm:mb-3">
-            <div className="flex items-center justify-center space-x-1 sm:space-x-2">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
-              <span className="text-blue-300 font-semibold text-xs sm:text-sm">🛡️ ALL JOURNEYS with SIA Licensed Security Drivers</span>
+          <div className="bg-blue-600/20 border border-blue-500/50 px-4 py-3 rounded-xl mb-4">
+            <div className="flex items-center justify-center space-x-2">
+              <Shield className="w-5 h-5 text-blue-400" />
+              <span className="text-blue-300 font-semibold text-sm">🛡️ ALL JOURNEYS with SIA Licensed Security Drivers</span>
             </div>
           </div>
           
           {/* Enhanced 50% OFF Banner - Mobile Responsive */}
-          <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold mx-auto w-fit animate-pulse shadow-lg">
+          <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold mx-auto w-fit animate-pulse shadow-lg">
             🔥 50% OFF FIRST RIDE - LIMITED TIME 🔥
           </div>
         </div>
@@ -440,8 +429,6 @@ export default function QuoteWidget() {
               </button>
             </div>
           </div>
-
-
 
           {/* Enhanced Service Type Selector - 3 Options No Scroll */}
           <div>
