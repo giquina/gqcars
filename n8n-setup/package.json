@@ -1,0 +1,46 @@
+{
+  "name": "claude-mcp-automation-system",
+  "version": "1.0.0",
+  "description": "Complete MCP automation system for Claude-controlled workflows",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start-all-services.js",
+    "install-mcp": "npm install -g @modelcontextprotocol/server-github @modelcontextprotocol/server-notion @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-sqlite @modelcontextprotocol/server-fetch",
+    "setup-mcp": "node setup-mcp-config.js",
+    "test-integrations": "node test-all-integrations.js",
+    "start-bridges": "concurrently \"node cursor-mcp-bridge.js\" \"node vectara-mcp-bridge.js\" \"node google-workspace-mcp.js\" \"node vercel-mcp-bridge.js\" \"node n8n-mcp-bridge.js\"",
+    "health-check": "node health-check-all.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.6.0",
+    "googleapis": "^129.0.0",
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.3.0",
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "ws": "^8.14.0",
+    "node-fetch": "^3.3.0",
+    "fs-extra": "^11.1.0",
+    "chalk": "^5.3.0",
+    "inquirer": "^9.2.0",
+    "pm2": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "keywords": [
+    "claude",
+    "mcp",
+    "automation",
+    "ai",
+    "workflow",
+    "cursor",
+    "vercel",
+    "vectara",
+    "google-workspace",
+    "n8n"
+  ],
+  "author": "Claude MCP System",
+  "license": "MIT"
+}

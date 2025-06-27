@@ -1,0 +1,160 @@
+{
+  "name": "AI Comparison Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "options": {},
+        "requestBody": {
+          "model": "gpt-3.5-turbo",
+          "messages": [
+            {
+              "role": "user",
+              "content": "={{ $node['Manual Trigger'].json['question'] || 'What is artificial intelligence?' }}"
+            }
+          ],
+          "max_tokens": 500,
+          "temperature": 0.7
+        }
+      },
+      "id": "openai-chat",
+      "name": "OpenAI ChatGPT",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [460, 200],
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-credentials",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {},
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "anthropic-version", 
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 500,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $node['Manual Trigger'].json['question'] || 'What is artificial intelligence?' }}\"\n    }\n  ]\n}"
+      },
+      "id": "claude-api",
+      "name": "Claude API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "claude-credentials",
+          "name": "Claude API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Compare responses from ChatGPT and Claude\nconst chatgptResponse = $input.first().json.choices[0].message.content;\nconst claudeResponse = $input.last().json.content[0].text;\n\nconst comparison = {\n  question: $node['Manual Trigger'].json['question'] || 'What is artificial intelligence?',\n  timestamp: new Date().toISOString(),\n  responses: {\n    chatgpt: {\n      text: chatgptResponse,\n      length: chatgptResponse.length,\n      words: chatgptResponse.split(' ').length\n    },\n    claude: {\n      text: claudeResponse,\n      length: claudeResponse.length,\n      words: claudeResponse.split(' ').length\n    }\n  },\n  analysis: {\n    similarity: calculateSimilarity(chatgptResponse, claudeResponse),\n    chatgpt_tone: analyzeTone(chatgptResponse),\n    claude_tone: analyzeTone(claudeResponse)\n  }\n};\n\n// Simple similarity calculation (Jaccard similarity)\nfunction calculateSimilarity(text1, text2) {\n  const words1 = new Set(text1.toLowerCase().split(/\\W+/));\n  const words2 = new Set(text2.toLowerCase().split(/\\W+/));\n  \n  const intersection = new Set([...words1].filter(x => words2.has(x)));\n  const union = new Set([...words1, ...words2]);\n  \n  return (intersection.size / union.size * 100).toFixed(2) + '%';\n}\n\n// Basic tone analysis\nfunction analyzeTone(text) {\n  const lowerText = text.toLowerCase();\n  if (lowerText.includes('exciting') || lowerText.includes('amazing') || lowerText.includes('wonderful')) {\n    return 'positive';\n  } else if (lowerText.includes('concerning') || lowerText.includes('dangerous') || lowerText.includes('problematic')) {\n    return 'cautious';\n  } else {\n    return 'neutral';\n  }\n}\n\nreturn comparison;"
+      },
+      "id": "compare-responses",
+      "name": "Compare Responses",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "content": "=# AI Response Comparison Report\n\n**Question:** {{ $json.question }}\n\n**Generated at:** {{ $json.timestamp }}\n\n## ChatGPT Response\n{{ $json.responses.chatgpt.text }}\n\n*Length: {{ $json.responses.chatgpt.length }} characters, {{ $json.responses.chatgpt.words }} words*\n*Tone: {{ $json.analysis.chatgpt_tone }}*\n\n---\n\n## Claude Response\n{{ $json.responses.claude.text }}\n\n*Length: {{ $json.responses.claude.length }} characters, {{ $json.responses.claude.words }} words*\n*Tone: {{ $json.analysis.claude_tone }}*\n\n---\n\n## Analysis\n- **Similarity:** {{ $json.analysis.similarity }}\n- **ChatGPT Tone:** {{ $json.analysis.chatgpt_tone }}\n- **Claude Tone:** {{ $json.analysis.claude_tone }}\n\n---\n\n*This comparison was generated automatically by n8n workflow.*",
+        "options": {}
+      },
+      "id": "format-report",
+      "name": "Format Report",
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI ChatGPT",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Claude API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI ChatGPT": {
+      "main": [
+        [
+          {
+            "node": "Compare Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude API": {
+      "main": [
+        [
+          {
+            "node": "Compare Responses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare Responses": {
+      "main": [
+        [
+          {
+            "node": "Format Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["ai", "comparison", "chatgpt", "claude"],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-07T12:00:00.000Z",
+  "versionId": "1"
+}

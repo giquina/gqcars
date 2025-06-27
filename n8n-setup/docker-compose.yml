@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      # Basic Configuration
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      
+      # Database Configuration (using PostgreSQL for production)
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=n8n
+      - DB_POSTGRESDB_PASSWORD=n8n_password
+      
+      # Security & Performance
+      - N8N_SECURE_COOKIE=false
+      - N8N_METRICS=true
+      - EXECUTIONS_PROCESS=main
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=168  # 7 days
+      
+      # Workflow settings
+      - WORKFLOWS_DEFAULT_NAME=My Workflow
+      - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
+      
+      # Log level
+      - N8N_LOG_LEVEL=info
+      
+      # Generic OAuth App credentials (for better integrations)
+      - N8N_HIRING_BANNER_ENABLED=false
+      
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows:/home/node/.n8n/workflows
+      - ./credentials:/home/node/.n8n/credentials
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - n8n-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: n8n-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=n8n
+      - POSTGRES_USER=n8n
+      - POSTGRES_PASSWORD=n8n_password
+      - POSTGRES_NON_ROOT_USER=n8n
+      - POSTGRES_NON_ROOT_PASSWORD=n8n_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -h localhost -U n8n -d n8n']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - n8n-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: n8n-redis
+    restart: unless-stopped
+    command: redis-server --requirepass redis_password
+    volumes:
+      - redis_data:/data
+    networks:
+      - n8n-network
+
+  # Optional: Traefik for reverse proxy (uncomment if needed)
+  # traefik:
+  #   image: traefik:v2.9
+  #   container_name: n8n-traefik
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "8080:8080"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - ./traefik:/etc/traefik
+  #   networks:
+  #     - n8n-network
+
+volumes:
+  n8n_data:
+  postgres_data:
+  redis_data:
+
+networks:
+  n8n-network:
+    driver: bridge

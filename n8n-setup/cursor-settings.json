@@ -1,0 +1,53 @@
+# Cursor IDE Configuration for AI Development
+# Place this in your Cursor settings
+
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  
+  // AI Assistant Configuration
+  "cursor.ai.enabled": true,
+  "cursor.ai.model": "claude-3-sonnet-20240229",
+  "cursor.ai.apiKey": "YOUR_ANTHROPIC_API_KEY_HERE",
+  
+  // Auto-suggestions
+  "cursor.autoSuggest.enabled": true,
+  "cursor.autoSuggest.delay": 300,
+  
+  // Code completion
+  "cursor.completion.enabled": true,
+  "cursor.completion.model": "claude-3-sonnet-20240229",
+  
+  // Chat settings
+  "cursor.chat.enabled": true,
+  "cursor.chat.defaultModel": "claude-3-sonnet-20240229",
+  
+  // File associations for AI workflows
+  "files.associations": {
+    "*.n8n": "json",
+    "*.workflow": "json",
+    "docker-compose*.yml": "yaml"
+  },
+  
+  // n8n integration
+  "cursor.integrations.n8n": {
+    "enabled": true,
+    "webhookUrl": "http://localhost:5678/webhook",
+    "apiUrl": "http://localhost:5678/rest"
+  },
+  
+  // Terminal settings
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.fontSize": 14,
+  
+  // Theme and appearance
+  "workbench.colorTheme": "Default Dark+",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.5,
+  
+  // Git settings
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false
+}

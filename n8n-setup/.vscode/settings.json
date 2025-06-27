@@ -1,0 +1,30 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "files.associations": {
+    "*.n8n": "json",
+    "docker-compose*.yml": "yaml",
+    "*.env": "properties"
+  },
+  "editor.suggestSelection": "first",
+  "editor.tabCompletion": "on",
+  "editor.wordWrap": "on",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "workbench.colorTheme": "Default Dark+",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.5,
+  "editor.minimap.enabled": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.preferences.quoteStyle": "single"
+}

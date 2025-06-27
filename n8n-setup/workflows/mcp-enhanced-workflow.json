@@ -1,0 +1,249 @@
+{
+  "name": "Enhanced MCP Integration Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-workflow-trigger",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "AI Workflow Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 400]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "requestBody": {
+          "model": "gpt-3.5-turbo",
+          "messages": [
+            {
+              "role": "user",
+              "content": "={{ $json.query }}"
+            }
+          ],
+          "max_tokens": 1000
+        }
+      },
+      "id": "chatgpt-response",
+      "name": "ChatGPT Analysis",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [400, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-main",
+          "name": "OpenAI-Main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 1000,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $node['AI Workflow Trigger'].json.query }}\"\n    }\n  ]\n}"
+      },
+      "id": "claude-response",
+      "name": "Claude Analysis", 
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [400, 500],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "claude-api",
+          "name": "Claude-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.notion.com/v1/pages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Notion-Version",
+              "value": "2022-06-28"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"parent\": { \"database_id\": \"{{ $env['NOTION_DATABASE_RESEARCH'] }}\" },\n  \"properties\": {\n    \"Title\": {\n      \"title\": [\n        {\n          \"text\": {\n            \"content\": \"AI Research: {{ $node['AI Workflow Trigger'].json.query }}\"\n          }\n        }\n      ]\n    },\n    \"Date\": {\n      \"date\": {\n        \"start\": \"{{ new Date().toISOString().split('T')[0] }}\"\n      }\n    },\n    \"Status\": {\n      \"select\": {\n        \"name\": \"New\"\n      }\n    }\n  },\n  \"children\": [\n    {\n      \"object\": \"block\",\n      \"type\": \"heading_2\",\n      \"heading_2\": {\n        \"rich_text\": [\n          {\n            \"type\": \"text\",\n            \"text\": {\n              \"content\": \"ChatGPT Response\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"object\": \"block\",\n      \"type\": \"paragraph\",\n      \"paragraph\": {\n        \"rich_text\": [\n          {\n            \"type\": \"text\",\n            \"text\": {\n              \"content\": \"{{ $node['ChatGPT Analysis'].json.choices[0].message.content }}\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"object\": \"block\",\n      \"type\": \"heading_2\",\n      \"heading_2\": {\n        \"rich_text\": [\n          {\n            \"type\": \"text\",\n            \"text\": {\n              \"content\": \"Claude Response\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"object\": \"block\",\n      \"type\": \"paragraph\",\n      \"paragraph\": {\n        \"rich_text\": [\n          {\n            \"type\": \"text\",\n            \"text\": {\n              \"content\": \"{{ $node['Claude Analysis'].json.content[0].text }}\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}"
+      },
+      "id": "save-to-notion",
+      "name": "Save to Notion",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "notion-api",
+          "name": "Notion-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.airtable.com/v0/{{ $env['AIRTABLE_BASE_RESEARCH'] }}/Research%20Topics",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"fields\": {\n    \"Topic\": \"{{ $node['AI Workflow Trigger'].json.query }}\",\n    \"Date Researched\": \"{{ new Date().toISOString().split('T')[0] }}\",\n    \"Research Quality\": 5,\n    \"AI Consensus Score\": 85,\n    \"Sources Count\": 2\n  }\n}"
+      },
+      "id": "save-to-airtable",
+      "name": "Save to Airtable",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 500],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "airtable-api",
+          "name": "Airtable-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/{{ $env['GITHUB_USERNAME'] }}/ai-research-archive/contents/research/{{ new Date().toISOString().split('T')[0] }}-{{ $node['AI Workflow Trigger'].json.query.replace(/\\s+/g, '-').toLowerCase() }}.md",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"message\": \"Add AI research: {{ $node['AI Workflow Trigger'].json.query }}\",\n  \"content\": \"{{ Buffer.from(`# AI Research: ${$node['AI Workflow Trigger'].json.query}\\n\\n## Date\\n${new Date().toISOString()}\\n\\n## ChatGPT Response\\n${$node['ChatGPT Analysis'].json.choices[0].message.content}\\n\\n## Claude Response\\n${$node['Claude Analysis'].json.content[0].text}\\n\\n## Analysis\\n- Research Quality: High\\n- Consensus Level: Strong\\n- Recommended Action: Review and implement insights`).toString('base64') }}\"\n}"
+      },
+      "id": "save-to-github",
+      "name": "Archive to GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [850, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github-api",
+          "name": "GitHub-API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "AI Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "ChatGPT Analysis",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Claude Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT Analysis": {
+      "main": [
+        [
+          {
+            "node": "Save to Notion",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Save to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Analysis": {
+      "main": [
+        [
+          {
+            "node": "Save to Notion",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Save to Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Notion": {
+      "main": [
+        [
+          {
+            "node": "Archive to GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Airtable": {
+      "main": [
+        [
+          {
+            "node": "Archive to GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["mcp", "integration", "github", "notion", "airtable"],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-07T13:00:00.000Z",
+  "versionId": "1"
+}

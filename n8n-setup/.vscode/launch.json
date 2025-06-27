@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "AI Development Environment",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/test-ai-integration.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "development",
+        "N8N_URL": "http://localhost:5678"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack AI Debug",
+      "configurations": ["AI Development Environment"]
+    }
+  ]
+}

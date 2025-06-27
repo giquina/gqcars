@@ -1,0 +1,277 @@
+{
+  "name": "Mobile Command to Cinema Mode",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cinema-mode",
+        "options": {}
+      },
+      "id": "cinema-webhook",
+      "name": "Cinema Mode Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 🎬 CINEMA MODE COMMAND PROCESSOR\n\nconst intent = $json.intent;\nconst command = intent.command;\nconst type = intent.type;\n\n// Send real-time update\nfunction sendCinemaUpdate(updateType, data) {\n  // This would send WebSocket updates to the cinema controller\n  console.log(`Cinema Update: ${updateType}`, data);\n}\n\n// Start cinema workflow\nsendCinemaUpdate('workflow_started', {\n  workflow: 'Cinema Mode Automation',\n  command: command,\n  type: type\n});\n\n// Determine workflow path based on command type\nlet workflowData = {\n  originalCommand: command,\n  type: type,\n  timestamp: new Date().toISOString(),\n  cinemaMode: true,\n  steps: []\n};\n\n// Parse specific actions based on command\nif (type === 'invoice') {\n  workflowData.steps = [\n    'create_google_doc',\n    'populate_invoice_template', \n    'update_google_sheets',\n    'send_email_notification',\n    'commit_to_github'\n  ];\n  workflowData.invoiceData = {\n    company: command.includes('GQ Cars') ? 'GQ Cars Ltd' : 'Unknown Company',\n    template: 'invoice_template_v2'\n  };\n} else if (type === 'code') {\n  workflowData.steps = [\n    'analyze_requirements',\n    'generate_code_claude',\n    'create_files_cursor',\n    'git_commit_push',\n    'update_documentation'\n  ];\n} else if (type === 'document') {\n  workflowData.steps = [\n    'create_google_doc',\n    'ai_content_generation',\n    'format_document',\n    'share_with_team',\n    'update_drive_folder'\n  ];\n} else if (type === 'research') {\n  workflowData.steps = [\n    'query_multiple_ais',\n    'compile_research',\n    'create_report_doc',\n    'update_knowledge_base',\n    'send_summary_email'\n  ];\n}\n\nsendCinemaUpdate('workflow_parsed', {\n  steps: workflowData.steps,\n  estimatedTime: workflowData.steps.length * 10 // seconds\n});\n\nreturn workflowData;"
+      },
+      "id": "command-processor",
+      "name": "Process Cinema Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "invoice_condition",
+              "leftValue": "={{ $json.type }}",
+              "rightValue": "invoice",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "workflow-router",
+      "name": "Route to Workflow",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [600, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 🧾 INVOICE CREATION CINEMA MODE\n\nconst data = $json;\nconst invoiceData = data.invoiceData;\n\n// Cinema update\nconsole.log('🎬 Cinema: Starting invoice creation...');\n\n// Generate invoice data\nconst invoice = {\n  number: `INV-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`,\n  date: new Date().toLocaleDateString(),\n  company: invoiceData.company,\n  items: [\n    {\n      description: 'AI Development Services',\n      quantity: 1,\n      rate: 150.00,\n      amount: 150.00\n    },\n    {\n      description: 'Automation Setup',\n      quantity: 1, \n      rate: 200.00,\n      amount: 200.00\n    }\n  ],\n  subtotal: 350.00,\n  tax: 35.00,\n  total: 385.00\n};\n\n// Cinema visual update\nconsole.log('🎬 Cinema: Invoice data generated');\n\nreturn {\n  ...data,\n  invoice: invoice,\n  nextStep: 'create_google_doc'\n};"
+      },
+      "id": "invoice-generator",
+      "name": "Generate Invoice Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 2000,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate code for: {{ $node['Process Cinema Command'].json.originalCommand }}. Make it production-ready with comments and proper structure. This is for cinema mode so include console.log statements for visual progress tracking.\"\n    }\n  ]\n}"
+      },
+      "id": "claude-code-gen",
+      "name": "Claude Code Generation", 
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [800, 500],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "claude-api",
+          "name": "Claude-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://docs.googleapis.com/v1/documents",
+        "authentication": "predefinedCredentialType", 
+        "nodeCredentialType": "googleApi",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"title\": \"{{ $json.invoice ? 'Invoice ' + $json.invoice.number + ' - ' + $json.invoice.company : 'AI Generated Document' }}\"\n}"
+      },
+      "id": "create-google-doc",
+      "name": "Create Google Doc",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1000, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 🎬 CINEMA MODE FILE CREATOR\n// This simulates creating files in Cursor with visual feedback\n\nconst data = $json;\nconst content = data.content || data.code || 'AI Generated Content';\nconst filename = data.filename || `ai-generated-${Date.now()}.txt`;\n\n// Cinema update - simulate file creation\nconsole.log(`🎬 Cinema: Creating file ${filename}`);\nconsole.log(`🎬 Cinema: Writing ${content.length} characters`);\n\n// Simulate progressive file writing for cinema effect\nconst lines = content.split('\\n');\nlet progressData = {\n  filename: filename,\n  totalLines: lines.length,\n  content: content,\n  cinemaSteps: []\n};\n\n// Break content into visual chunks for cinema mode\nfor (let i = 0; i < lines.length; i += 5) {\n  const chunk = lines.slice(i, i + 5).join('\\n');\n  progressData.cinemaSteps.push({\n    step: Math.floor(i / 5) + 1,\n    lines: `${i + 1}-${Math.min(i + 5, lines.length)}`,\n    content: chunk,\n    progress: Math.round(((i + 5) / lines.length) * 100)\n  });\n}\n\nconsole.log(`🎬 Cinema: File creation planned - ${progressData.cinemaSteps.length} visual steps`);\n\nreturn {\n  ...data,\n  fileData: progressData,\n  nextStep: 'visual_file_creation'\n};"
+      },
+      "id": "cinema-file-creator",
+      "name": "Cinema File Creator",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1000, 500]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/repos/{{ $env['GITHUB_USERNAME'] }}/ai-cinema-mode/contents/{{ $json.fileData.filename }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"message\": \"🎬 Cinema Mode: {{ $node['Process Cinema Command'].json.originalCommand }}\",\n  \"content\": \"{{ Buffer.from($json.fileData.content).toString('base64') }}\"\n}"
+      },
+      "id": "github-commit",
+      "name": "Commit to GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1200, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github-api", 
+          "name": "GitHub-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 🎬 CINEMA MODE COMPLETION\n\nconst data = $json;\n\n// Final cinema update\nconsole.log('🎬 Cinema: Workflow completed successfully!');\nconsole.log('🎬 Cinema: All files created and committed');\nconsole.log('🎬 Cinema: Sending completion notification');\n\nconst completionData = {\n  success: true,\n  command: $node['Process Cinema Command'].json.originalCommand,\n  type: $node['Process Cinema Command'].json.type,\n  filesCreated: data.fileData ? [data.fileData.filename] : [],\n  documentsCreated: data.documentId ? [data.documentId] : [],\n  completedAt: new Date().toISOString(),\n  cinemaMode: true,\n  summary: `Successfully executed: ${$node['Process Cinema Command'].json.originalCommand}`\n};\n\n// Prepare mobile notification\nconst mobileNotification = {\n  title: '🎬 Cinema Mode Complete!',\n  message: `Command \"${completionData.command}\" executed successfully`,\n  actions: completionData.filesCreated.concat(completionData.documentsCreated),\n  timestamp: completionData.completedAt\n};\n\nreturn {\n  completion: completionData,\n  notification: mobileNotification\n};"
+      },
+      "id": "cinema-completion",
+      "name": "Cinema Mode Complete",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1400, 400]
+    }
+  ],
+  "connections": {
+    "Cinema Mode Trigger": {
+      "main": [
+        [
+          {
+            "node": "Process Cinema Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Cinema Command": {
+      "main": [
+        [
+          {
+            "node": "Route to Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Workflow": {
+      "main": [
+        [
+          {
+            "node": "Generate Invoice Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Claude Code Generation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Invoice Data": {
+      "main": [
+        [
+          {
+            "node": "Create Google Doc",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Code Generation": {
+      "main": [
+        [
+          {
+            "node": "Cinema File Creator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Google Doc": {
+      "main": [
+        [
+          {
+            "node": "Commit to GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cinema File Creator": {
+      "main": [
+        [
+          {
+            "node": "Commit to GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit to GitHub": {
+      "main": [
+        [
+          {
+            "node": "Cinema Mode Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["cinema", "mobile", "automation", "visual"],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-07T14:00:00.000Z",
+  "versionId": "1"
+}

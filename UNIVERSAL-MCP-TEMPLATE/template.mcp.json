@@ -1,0 +1,58 @@
+{
+  "name": "PROJECT_NAME_PLACEHOLDER",
+  "version": "1.0.0",
+  "description": "PROJECT_DESCRIPTION_PLACEHOLDER",
+  "mcp": {
+    "enabled": true,
+    "server": "desktop-commander",
+    "sync_targets": [
+      "cursor",
+      "github",
+      "vercel"
+    ],
+    "auto_sync": true,
+    "watch_patterns": [
+      "src/**/*",
+      "app/**/*",
+      "components/**/*",
+      "lib/**/*",
+      "pages/**/*",
+      "styles/**/*",
+      "public/**/*",
+      "*.js",
+      "*.ts",
+      "*.tsx",
+      "*.jsx",
+      "*.json",
+      "*.md"
+    ]
+  },
+  "project": {
+    "type": "PROJECT_TYPE_PLACEHOLDER",
+    "framework": "FRAMEWORK_PLACEHOLDER",
+    "language": "LANGUAGE_PLACEHOLDER",
+    "database": "DATABASE_PLACEHOLDER",
+    "authentication": "AUTH_PLACEHOLDER",
+    "deployment": "DEPLOYMENT_PLACEHOLDER",
+    "features": []
+  },
+  "claude_context": {
+    "primary_brand_color": "BRAND_COLOR_PLACEHOLDER",
+    "project_type": "PROJECT_TYPE_PLACEHOLDER",
+    "last_updated": "TIMESTAMP_PLACEHOLDER",
+    "major_components": [],
+    "special_notes": ""
+  },
+  "sync_endpoints": {
+    "cursor_bridge": "http://localhost:3001/cursor-sync",
+    "desktop_claude": "mcp://desktop-commander",
+    "github_repo": "GITHUB_REPO_PLACEHOLDER",
+    "deployment_url": "DEPLOYMENT_URL_PLACEHOLDER"
+  },
+  "automation": {
+    "auto_commit": true,
+    "auto_deploy": false,
+    "notification_channels": ["cursor", "desktop"],
+    "backup_enabled": true
+  }
+}

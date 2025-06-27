@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "ms-vscode.vscode-typescript-next",
+    "ms-python.python",
+    "bradlc.vscode-tailwindcss", 
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode.docker",
+    "github.copilot",
+    "ms-vscode.powershell"
+  ]
+}

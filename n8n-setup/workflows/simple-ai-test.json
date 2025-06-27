@@ -1,0 +1,86 @@
+{
+  "name": "Simple AI Test Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b1f3a0e0-4b2c-4f1e-8a5d-1234567890ab",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "options": {},
+        "requestBody": {
+          "model": "gpt-3.5-turbo",
+          "messages": [
+            {
+              "role": "user",
+              "content": "Hello! This is a test from n8n. Please respond with a friendly greeting and confirm the integration is working."
+            }
+          ],
+          "max_tokens": 100,
+          "temperature": 0.7
+        }
+      },
+      "id": "c2f4b1e1-5c3d-4f2e-9b6e-2345678901bc",
+      "name": "OpenAI Test",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [460, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-main",
+          "name": "OpenAI-Main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "=🤖 **AI Integration Test Results**\n\n**Test Status:** ✅ Success!\n\n**AI Response:**\n{{ $json.choices[0].message.content }}\n\n**Timestamp:** {{ new Date().toISOString() }}\n\n**Model Used:** {{ $json.model }}\n\n---\n\n*This test confirms your n8n → OpenAI integration is working perfectly!*",
+        "options": {}
+      },
+      "id": "d3f5c2e2-6d4e-4f3f-ac7f-3456789012cd",
+      "name": "Format Results",
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [680, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Test",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Test": {
+      "main": [
+        [
+          {
+            "node": "Format Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["test", "ai", "openai"],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-07T12:00:00.000Z",
+  "versionId": "1"
+}

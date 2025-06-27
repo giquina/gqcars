@@ -1,0 +1,164 @@
+{
+  "name": "AI Code Analyzer",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-code-analysis",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Code Change Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 400],
+      "webhookId": "ai-code-analysis"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "bodyContentType": "json",
+        "body": "={\n  \"model\": \"claude-3-sonnet-20240229\",\n  \"max_tokens\": 1000,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze this code file and provide insights:\\n\\nFile: {{ $json.filename }}\\nContent:\\n{{ $json.content }}\\n\\nPlease provide:\\n1. Code quality assessment\\n2. Potential improvements\\n3. Security considerations\\n4. Performance suggestions\"\n    }\n  ]\n}"
+      },
+      "id": "claude-code-analysis",
+      "name": "Claude Code Review",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [400, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "claude-api",
+          "name": "Claude-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "requestBody": {
+          "model": "gpt-3.5-turbo",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are a code review assistant. Provide constructive feedback on code quality, style, and best practices."
+            },
+            {
+              "role": "user",
+              "content": "=Review this code:\\n\\nFile: {{ $node['Code Change Webhook'].json.filename }}\\nContent:\\n{{ $node['Code Change Webhook'].json.content }}\\n\\nProvide feedback on:\\n1. Code structure\\n2. Best practices\\n3. Readability\\n4. Maintainability"
+            }
+          ],
+          "max_tokens": 1000,
+          "temperature": 0.3
+        }
+      },
+      "id": "chatgpt-code-review",
+      "name": "ChatGPT Code Review",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [400, 500],
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-main",
+          "name": "OpenAI-Main"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Combine AI code reviews and generate comprehensive report\n\nconst filename = $node['Code Change Webhook'].json.filename;\nconst content = $node['Code Change Webhook'].json.content;\nconst timestamp = $node['Code Change Webhook'].json.timestamp;\n\nconst claudeReview = $input.first().json.content[0].text;\nconst chatgptReview = $input.last().json.choices[0].message.content;\n\n// Analyze file type and complexity\nconst fileExtension = filename.split('.').pop();\nconst lineCount = content.split('\\n').length;\nconst characterCount = content.length;\n\n// Extract key insights from reviews\nfunction extractIssues(review) {\n  const issues = [];\n  const lines = review.toLowerCase().split('\\n');\n  \n  lines.forEach(line => {\n    if (line.includes('issue') || line.includes('problem') || line.includes('concern')) {\n      issues.push(line.trim());\n    }\n  });\n  \n  return issues;\n}\n\nfunction extractSuggestions(review) {\n  const suggestions = [];\n  const lines = review.toLowerCase().split('\\n');\n  \n  lines.forEach(line => {\n    if (line.includes('suggest') || line.includes('recommend') || line.includes('consider')) {\n      suggestions.push(line.trim());\n    }\n  });\n  \n  return suggestions;\n}\n\n// Generate severity score (1-10)\nfunction calculateSeverity(claudeReview, chatgptReview) {\n  const criticalWords = ['critical', 'severe', 'dangerous', 'security', 'vulnerable'];\n  const warningWords = ['warning', 'caution', 'improve', 'refactor', 'optimize'];\n  \n  const combinedReview = (claudeReview + ' ' + chatgptReview).toLowerCase();\n  \n  let score = 1;\n  \n  criticalWords.forEach(word => {\n    if (combinedReview.includes(word)) score += 2;\n  });\n  \n  warningWords.forEach(word => {\n    if (combinedReview.includes(word)) score += 1;\n  });\n  \n  return Math.min(score, 10);\n}\n\nconst report = {\n  metadata: {\n    filename: filename,\n    timestamp: timestamp,\n    fileType: fileExtension,\n    metrics: {\n      lines: lineCount,\n      characters: characterCount,\n      complexity: lineCount > 100 ? 'high' : lineCount > 50 ? 'medium' : 'low'\n    }\n  },\n  analysis: {\n    claude: {\n      fullReview: claudeReview,\n      issues: extractIssues(claudeReview),\n      suggestions: extractSuggestions(claudeReview)\n    },\n    chatgpt: {\n      fullReview: chatgptReview,\n      issues: extractIssues(chatgptReview),\n      suggestions: extractSuggestions(chatgptReview)\n    }\n  },\n  summary: {\n    severityScore: calculateSeverity(claudeReview, chatgptReview),\n    totalIssues: extractIssues(claudeReview).length + extractIssues(chatgptReview).length,\n    totalSuggestions: extractSuggestions(claudeReview).length + extractSuggestions(chatgptReview).length,\n    consensus: claudeReview.length > 0 && chatgptReview.length > 0 ? 'Both AIs provided feedback' : 'Partial feedback',\n    recommendation: calculateSeverity(claudeReview, chatgptReview) > 7 ? 'Immediate attention required' : \n                   calculateSeverity(claudeReview, chatgptReview) > 4 ? 'Review and improve' : 'Code looks good'\n  }\n};\n\nreturn report;"
+      },
+      "id": "combine-reviews",
+      "name": "Generate Code Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 400]
+    },
+    {
+      "parameters": {
+        "content": "=# 📋 AI Code Review Report\n\n**File:** `{{ $json.metadata.filename }}`  \n**Analyzed:** {{ $json.metadata.timestamp }}  \n**Type:** {{ $json.metadata.fileType }}  \n**Lines:** {{ $json.metadata.metrics.lines }} | **Complexity:** {{ $json.metadata.metrics.complexity }}\n\n---\n\n## 🎯 Executive Summary\n\n**Severity Score:** {{ $json.summary.severityScore }}/10  \n**Issues Found:** {{ $json.summary.totalIssues }}  \n**Suggestions:** {{ $json.summary.totalSuggestions }}  \n**Recommendation:** {{ $json.summary.recommendation }}\n\n---\n\n## 🧠 Claude Analysis\n\n{{ $json.analysis.claude.fullReview }}\n\n### Key Issues:\n{{ $json.analysis.claude.issues.length > 0 ? $json.analysis.claude.issues.join('\\n- ') : 'No specific issues identified' }}\n\n### Suggestions:\n{{ $json.analysis.claude.suggestions.length > 0 ? $json.analysis.claude.suggestions.join('\\n- ') : 'No specific suggestions provided' }}\n\n---\n\n## 🤖 ChatGPT Analysis\n\n{{ $json.analysis.chatgpt.fullReview }}\n\n### Key Issues:\n{{ $json.analysis.chatgpt.issues.length > 0 ? $json.analysis.chatgpt.issues.join('\\n- ') : 'No specific issues identified' }}\n\n### Suggestions:\n{{ $json.analysis.chatgpt.suggestions.length > 0 ? $json.analysis.chatgpt.suggestions.join('\\n- ') : 'No specific suggestions provided' }}\n\n---\n\n## 🏆 Action Items\n\n{{ $json.summary.severityScore > 7 ? '🚨 **High Priority:**\\n- Address critical issues immediately\\n- Review security concerns\\n- Test thoroughly before deployment' : $json.summary.severityScore > 4 ? '⚠️ **Medium Priority:**\\n- Implement suggested improvements\\n- Refactor for better maintainability\\n- Consider performance optimizations' : '✅ **Low Priority:**\\n- Code quality is good\\n- Minor improvements can be made\\n- Continue with current approach' }}\n\n---\n\n*Generated by AI Code Review System • Claude + ChatGPT Analysis*",
+        "options": {}
+      },
+      "id": "format-code-report",
+      "name": "Format Code Report",
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [850, 400]
+    }
+  ],
+  "connections": {
+    "Code Change Webhook": {
+      "main": [
+        [
+          {
+            "node": "Claude Code Review",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "ChatGPT Code Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Code Review": {
+      "main": [
+        [
+          {
+            "node": "Generate Code Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ChatGPT Code Review": {
+      "main": [
+        [
+          {
+            "node": "Generate Code Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Code Report": {
+      "main": [
+        [
+          {
+            "node": "Format Code Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["code-review", "ai", "automation", "development"],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-07T12:45:00.000Z",
+  "versionId": "1"
+}

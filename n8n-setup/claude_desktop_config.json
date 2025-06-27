@@ -1,0 +1,80 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_GITHUB_TOKEN_HERE"
+      }
+    },
+    "notion": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-notion"],
+      "env": {
+        "NOTION_API_KEY": "YOUR_NOTION_TOKEN_HERE"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\Student\\Desktop",
+        "C:\\Users\\Student\\Documents",
+        "C:\\Users\\Student\\Downloads"
+      ]
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sqlite",
+        "--db-path",
+        "./ai-data.db"
+      ]
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    },
+    "cursor-integration": {
+      "command": "node",
+      "args": ["./cursor-mcp-bridge.js"],
+      "env": {
+        "CURSOR_PATH": "C:\\Users\\Student\\AppData\\Local\\Programs\\cursor\\Cursor.exe"
+      }
+    },
+    "google-workspace": {
+      "command": "node", 
+      "args": ["./google-workspace-mcp.js"],
+      "env": {
+        "GOOGLE_CREDENTIALS_PATH": "./credentials/google-service-account.json",
+        "GOOGLE_APPS_SCRIPT_ID": "YOUR_APPS_SCRIPT_ID_HERE"
+      }
+    },
+    "vectara-search": {
+      "command": "node",
+      "args": ["./vectara-mcp-bridge.js"], 
+      "env": {
+        "VECTARA_API_KEY": "YOUR_VECTARA_API_KEY_HERE",
+        "VECTARA_CUSTOMER_ID": "YOUR_VECTARA_CUSTOMER_ID_HERE",
+        "VECTARA_CORPUS_ID": "YOUR_VECTARA_CORPUS_ID_HERE"
+      }
+    },
+    "vercel-deployment": {
+      "command": "node",
+      "args": ["./vercel-mcp-bridge.js"],
+      "env": {
+        "VERCEL_TOKEN": "YOUR_VERCEL_TOKEN_HERE"
+      }
+    },
+    "n8n-webhook": {
+      "command": "node",
+      "args": ["./n8n-mcp-bridge.js"],
+      "env": {
+        "N8N_API_KEY": "YOUR_N8N_API_KEY_HERE",
+        "N8N_BASE_URL": "http://localhost:5678"
+      }
+    }
+  }
+}
