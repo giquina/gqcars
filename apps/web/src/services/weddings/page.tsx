@@ -29,6 +29,7 @@ export default function WeddingsPage() {
       Icon={Heart}
       category="Weddings"
       features={weddingFeatures}
+      serviceKey="weddings"
     />
   );
 }

@@ -29,6 +29,7 @@ export default function CloseProtectionPage() {
       Icon={Shield}
       category="Protection"
       features={protectionFeatures}
+      serviceKey="close-protection"
     />
   );
 }

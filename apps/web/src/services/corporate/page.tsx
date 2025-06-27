@@ -29,6 +29,7 @@ export default function CorporatePage() {
       Icon={Briefcase}
       category="Corporate"
       features={corporateFeatures}
+      serviceKey="corporate"
     />
   );
 }

@@ -29,6 +29,7 @@ export default function ShoppingPage() {
       Icon={ShoppingBag}
       category="Shopping"
       features={shoppingFeatures}
+      serviceKey="shopping"
     />
   );
 } 

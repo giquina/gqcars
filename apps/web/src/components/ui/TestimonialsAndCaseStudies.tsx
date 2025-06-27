@@ -6,31 +6,63 @@ import { Star, Shield, Building2, Clock, MapPin, Car, User, Crown, ShoppingBag, 
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 
-const testimonials = [
+interface Testimonial {
+  name: string;
+  title: string;
+  image: string;
+  quote: string;
+  rating: number;
+  location?: string;
+  verified?: boolean;
+}
+
+interface CaseStudy {
+  title: string;
+  client: string;
+  challenge: string;
+  solution: string;
+  result: string;
+  icon: any;
+  duration?: string;
+  team?: string;
+}
+
+interface TestimonialsAndCaseStudiesProps {
+  testimonials?: Testimonial[];
+  caseStudies?: CaseStudy[];
+  serviceName?: string;
+}
+
+// Default testimonials (fallback)
+const defaultTestimonials = [
   {
     name: 'James Richardson',
     title: 'CEO, Financial Group',
     image: '👨‍💼',
     quote: 'GQ Cars has been our exclusive transport provider for 3 years. Their SIA licensed drivers provide the security and professionalism our executives require.',
-    category: 'Corporate'
+    rating: 5,
+    verified: true
   },
   {
     name: 'Sarah Mitchell',
     title: 'International Consultant',
     image: '👩‍💼',
     quote: 'Fly into Heathrow monthly and GQ Cars is my go-to. Their drivers are always professional, vehicles immaculate, and the security training shows.',
-    category: 'Airport'
+    rating: 5,
+    verified: true
   },
   {
     name: 'David & Emma Thompson',
     title: 'Wedding Clients',
     image: '💑',
     quote: 'Our wedding day security transport was flawless. The SIA trained drivers were professional and kept everything smooth.',
-    category: 'Events'
+    rating: 5,
+    verified: true
   }
 ]
 
-const caseStudies = [
+// Default case studies (fallback)
+const defaultCaseStudies = [
   {
     title: 'High-Profile Airport Transfer',
     client: 'International Artist',
@@ -57,7 +89,11 @@ const caseStudies = [
   }
 ]
 
-export function TestimonialsAndCaseStudies() {
+export function TestimonialsAndCaseStudies({ 
+  testimonials = defaultTestimonials, 
+  caseStudies = defaultCaseStudies,
+  serviceName = "Our Services"
+}: TestimonialsAndCaseStudiesProps) {
   const [activeTab, setActiveTab] = useState<'testimonials' | 'cases'>('testimonials')
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })])
 
@@ -78,8 +114,9 @@ export function TestimonialsAndCaseStudies() {
             Trusted by London's Elite
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            See why CEOs, celebrities, and high-net-worth families choose our
-            <span className="text-yellow-500"> SIA licensed security drivers</span>.
+            See why discerning clients choose our
+            <span className="text-yellow-500"> {serviceName} </span>
+            with SIA licensed security drivers.
           </p>
         </div>
 
@@ -116,7 +153,7 @@ export function TestimonialsAndCaseStudies() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {testimonials.map((testimonial, index) => (
                   <motion.div
-                    key={testimonial.name}
+                    key={`${testimonial.name}-${index}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -128,12 +165,22 @@ export function TestimonialsAndCaseStudies() {
                       <div>
                         <h3 className="font-semibold text-white">{testimonial.name}</h3>
                         <p className="text-sm text-gray-400">{testimonial.title}</p>
+                        {testimonial.location && (
+                          <p className="text-xs text-gray-500">{testimonial.location}</p>
+                        )}
                       </div>
+                      {testimonial.verified && (
+                        <div className="ml-auto">
+                          <div className="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded-full">
+                            Verified
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <p className="text-gray-300 mb-4 italic">"{testimonial.quote}"</p>
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
+                        <Star key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-500 fill-current' : 'text-gray-600'}`} />
                       ))}
                     </div>
                   </motion.div>
@@ -143,7 +190,7 @@ export function TestimonialsAndCaseStudies() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {caseStudies.map((study, index) => (
                   <motion.div
-                    key={study.title}
+                    key={`${study.title}-${index}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -165,6 +212,16 @@ export function TestimonialsAndCaseStudies() {
                       <p className="text-gray-400">
                         <span className="text-green-400 font-semibold">Result:</span> {study.result}
                       </p>
+                      {study.duration && (
+                        <p className="text-gray-400">
+                          <span className="text-yellow-400 font-semibold">Duration:</span> {study.duration}
+                        </p>
+                      )}
+                      {study.team && (
+                        <p className="text-gray-400">
+                          <span className="text-purple-400 font-semibold">Team:</span> {study.team}
+                        </p>
+                      )}
                     </div>
                   </motion.div>
                 ))}

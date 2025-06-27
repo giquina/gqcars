@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { Clock, Shield, Phone, Car, CheckCircle, ArrowLeft, Star, Zap } from 'lucide-react'
+import { TestimonialsAndCaseStudies } from '../../components/ui/TestimonialsAndCaseStudies'
+import { serviceTestimonials } from '../../app/lib/service-testimonials'
 
 export default function ProfessionalSupportPage() {
   return (
@@ -156,6 +158,13 @@ export default function ProfessionalSupportPage() {
           </div>
         </div>
       </div>
+
+      {/* Testimonials & Case Studies */}
+      <TestimonialsAndCaseStudies 
+        testimonials={serviceTestimonials['professional-support']?.testimonials}
+        caseStudies={serviceTestimonials['professional-support']?.caseStudies}
+        serviceName="24/7 Professional Support"
+      />
     </div>
   )
 }

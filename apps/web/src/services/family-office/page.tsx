@@ -29,6 +29,7 @@ export default function FamilyOfficePage() {
       Icon={Users}
       category="Family Office"
       features={familyOfficeFeatures}
+      serviceKey="family-office"
     />
   );
 }

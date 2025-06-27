@@ -1,5 +1,7 @@
 import { Car, Clock, Phone, MapPin, Star, Shield, CreditCard } from 'lucide-react'
 import GQCarsLogo from '@/app/components/ui/GQCarsLogo'
+import { TestimonialsAndCaseStudies } from '../../components/ui/TestimonialsAndCaseStudies'
+import { serviceTestimonials } from '../../app/lib/service-testimonials'
 
 export default function TaxiService() {
   return (
@@ -129,6 +131,13 @@ export default function TaxiService() {
           </div>
         </div>
       </div>
+
+      {/* Testimonials & Case Studies */}
+      <TestimonialsAndCaseStudies 
+        testimonials={serviceTestimonials.taxi?.testimonials}
+        caseStudies={serviceTestimonials.taxi?.caseStudies}
+        serviceName="Professional Taxi Service"
+      />
     </div>
   )
 }

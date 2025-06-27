@@ -13,6 +13,7 @@ export default function VIPServicesPage() {
       Icon={Crown}
       category="VIP Events"
       features={vipFeatures}
+      serviceKey="vip"
     />
   );
 }

@@ -29,6 +29,7 @@ export default function LifestylePage() {
       Icon={Zap}
       category="Lifestyle"
       features={lifestyleFeatures}
+      serviceKey="lifestyle"
     />
   );
 } 

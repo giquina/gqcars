@@ -29,6 +29,7 @@ export default function PrivateHirePage() {
       Icon={Car}
       category="Private Hire"
       features={privateHireFeatures}
+      serviceKey="private-hire"
     />
   );
 }

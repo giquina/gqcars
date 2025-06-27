@@ -1,6 +1,7 @@
 import { TestimonialsAndCaseStudies } from '@/app/components/ui/TestimonialsAndCaseStudies'
 import QuoteWidget from "@/app/components/ui/QuoteWidget";
 import { LucideIcon } from "lucide-react";
+import { serviceTestimonials } from '@/app/lib/service-testimonials';
 
 interface ServicePageProps {
   title: string;
@@ -12,9 +13,10 @@ interface ServicePageProps {
     title: string;
     description: string;
   }[];
+  serviceKey?: string;
 }
 
-export default function ServicePage({ title, description, heroImage, category, Icon, features }: ServicePageProps) {
+export default function ServicePage({ title, description, heroImage, category, Icon, features, serviceKey }: ServicePageProps) {
   return (
     <div>
       {/* Hero Section */}
@@ -61,7 +63,11 @@ export default function ServicePage({ title, description, heroImage, category, I
       </div>
 
       {/* Testimonials & Case Studies */}
-      <TestimonialsAndCaseStudies />
+      <TestimonialsAndCaseStudies 
+        testimonials={serviceKey && serviceTestimonials[serviceKey] ? serviceTestimonials[serviceKey].testimonials : undefined}
+        caseStudies={serviceKey && serviceTestimonials[serviceKey] ? serviceTestimonials[serviceKey].caseStudies : undefined}
+        serviceName={title}
+      />
     </div>
   )
 } 

@@ -29,6 +29,7 @@ export default function DiplomaticPage() {
       Icon={Shield}
       category="Diplomatic"
       features={diplomaticFeatures}
+      serviceKey="diplomatic"
     />
   );
 } 

@@ -29,6 +29,7 @@ export default function AirportPage() {
       Icon={Plane}
       category="Airport"
       features={airportFeatures}
+      serviceKey="airport"
     />
   );
 }
