@@ -16,7 +16,24 @@
       "Bash(curl:*)",
       "Bash(npx kill-port:*)",
       "Bash(cat:*)",
-      "Bash(ss:*)"
+      "Bash(ss:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(true)",
+      "Bash(npm install:*)",
+      "Bash(pnpm install:*)",
+      "Bash(npm run:*)",
+      "Bash(sudo fuser:*)",
+      "Bash(./START-WEBSITE.bat)",
+      "Bash(sh:*)",
+      "Bash(cp:*)",
+      "Bash(chmod:*)",
+      "Bash(DEBUG=*)",
+      "Bash(docker run:*)",
+      "Bash(sudo apt-get:*)",
+      "Bash(sudo apt-get install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npx prisma migrate dev:*)"
     ],
     "deny": []
   }

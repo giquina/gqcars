@@ -2,27 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ['framer-motion'],
-  images: {
-    domains: ['gqcars.co.uk'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  },
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-    reactRemoveProperties: true,
-  },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /framer-motion/,
-      sideEffects: false
-    });
-    return config;
-  }
-};
+  images: {
+    domains: ['images.unsplash.com', 'via.placeholder.com'],
+  },
+  eslint: {
+    dirs: ['src'],
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -16,7 +16,7 @@ model User {
   phone     String?
   name      String
   password  String
-  role      UserRole @default(CUSTOMER)
+  role      String @default("CUSTOMER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -81,7 +81,7 @@ model Driver {
   licenseNumber   String      @unique
   siaLicense      String      @unique
   expiryDate      DateTime
-  status          DriverStatus @default(AVAILABLE)
+  status          String @default("AVAILABLE")
   
   // Vehicle information
   vehicle         Vehicle?
@@ -109,7 +109,7 @@ model Vehicle {
   year            Int
   color           String
   licensePlate    String @unique
-  vehicleType     VehicleType
+  vehicleType     String
   
   // Insurance and documents
   insuranceExpiry DateTime
@@ -138,8 +138,8 @@ model Booking {
   driver            Driver?       @relation(fields: [driverId], references: [id])
   
   // Service details
-  serviceType       ServiceType
-  vehicleType       VehicleType
+  serviceType       String
+  vehicleType       String
   
   // Journey details
   pickupAddress     String
@@ -160,15 +160,15 @@ model Booking {
   currency          String        @default("GBP")
   
   // Status
-  status            BookingStatus @default(PENDING)
+  status            String @default("PENDING")
   
   // Payment
   paymentId         String?
-  paymentStatus     PaymentStatus @default(PENDING)
+  paymentStatus     String @default("PENDING")
   
   // Special requirements
   specialRequirements String?
-  securityLevel     SecurityLevel @default(STANDARD)
+  securityLevel     String @default("STANDARD")
   
   // Tracking
   trackingUpdates   TrackingUpdate[]
@@ -213,7 +213,7 @@ model Payment {
   stripePaymentId String        @unique
   amount          Float
   currency        String        @default("GBP")
-  status          PaymentStatus
+  status          String
   
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
@@ -221,61 +221,11 @@ model Payment {
   @@map("payments")
 }
 
-// Enums
-enum UserRole {
-  CUSTOMER
-  DRIVER
-  ADMIN
-  CORPORATE_ADMIN
-}
-
-enum DriverStatus {
-  AVAILABLE
-  BUSY
-  OFFLINE
-  SUSPENDED
-}
-
-enum VehicleType {
-  STANDARD
-  EXECUTIVE
-  SUV
-  VAN
-  LUXURY
-}
-
-enum ServiceType {
-  TAXI
-  PRIVATE_HIRE
-  AIRPORT_TRANSFER
-  CORPORATE
-  SECURITY
-  WEDDING
-}
-
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  DRIVER_ASSIGNED
-  EN_ROUTE_TO_PICKUP
-  ARRIVED_AT_PICKUP
-  IN_PROGRESS
-  COMPLETED
-  CANCELLED
-  NO_SHOW
-}
-
-enum PaymentStatus {
-  PENDING
-  PROCESSING
-  COMPLETED
-  FAILED
-  REFUNDED
-}
-
-enum SecurityLevel {
-  STANDARD
-  ENHANCED
-  EXECUTIVE
-  VIP
-}
+// Constants (previously enums)
+// UserRole: CUSTOMER, DRIVER, ADMIN, CORPORATE_ADMIN
+// DriverStatus: AVAILABLE, BUSY, OFFLINE, SUSPENDED
+// VehicleType: STANDARD, EXECUTIVE, SUV, VAN, LUXURY
+// ServiceType: TAXI, PRIVATE_HIRE, AIRPORT_TRANSFER, CORPORATE, SECURITY, WEDDING
+// BookingStatus: PENDING, CONFIRMED, DRIVER_ASSIGNED, EN_ROUTE_TO_PICKUP, ARRIVED_AT_PICKUP, IN_PROGRESS, COMPLETED, CANCELLED, NO_SHOW
+// PaymentStatus: PENDING, PROCESSING, COMPLETED, FAILED, REFUNDED
+// SecurityLevel: STANDARD, ENHANCED, EXECUTIVE, VIP

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gqcars-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gqcars-web
+  template:
+    metadata:
+      labels:
+        app: gqcars-web
+    spec:
+      containers:
+      - name: web
+        image: gqcars-web:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: gqcars-secrets
+              key: database-url
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
