@@ -208,12 +208,18 @@ export default function EnhancedChatWidget() {
       { id: 'nav-executive', text: '👑 Executive Protection', action: 'navigate', data: '/services/executive' },
       { id: 'nav-premium', text: '⭐ Premium Transport', action: 'navigate', data: '/services/premium' },
       { id: 'nav-standard', text: '🚗 Standard Service', action: 'navigate', data: '/services/standard' },
-      { id: 'nav-xl', text: '👥 XL Group Transport', action: 'navigate', data: '/services/xl' }
+      { id: 'nav-xl', text: '👥 XL Group Transport', action: 'navigate', data: '/services/xl' },
+      { id: 'smart-booking', text: '🤖 Smart Booking Assistant', action: 'smart-assist' },
+      { id: 'instant-quote', text: '⚡ Instant Quote Calculator', action: 'quote-calc' }
     ])
   }
 
   const handleCall = () => {
-    addMessage('Connecting you to our 24/7 support line. Our SIA licensed team is standing by!', true)
+    addMessage('Connecting you to our 24/7 support line. Our SIA licensed team is standing by!', true, [
+      { id: 'call-emergency', text: '🚨 Emergency Line', action: 'call-emergency' },
+      { id: 'call-booking', text: '📞 Booking Support', action: 'call-booking' },
+      { id: 'callback', text: '📲 Request Callback', action: 'request-callback' }
+    ])
     setTimeout(() => {
       window.open('tel:07407655203', '_self')
     }, 1000)
@@ -222,7 +228,9 @@ export default function EnhancedChatWidget() {
   const handleGetQuote = () => {
     addMessage('I\'ll help you get an instant quote! Please use our quote widget or connect with our team:', true, [
       { id: 'use-widget', text: '📱 Use Quote Widget', action: 'close-and-scroll' },
-      { id: 'personal-quote', text: '👤 Personal Quote', action: 'contact-human' }
+      { id: 'personal-quote', text: '👤 Personal Quote', action: 'contact-human' },
+      { id: 'smart-quote', text: '🤖 AI-Powered Quote', action: 'ai-quote' },
+      { id: 'compare-services', text: '⚖️ Compare Services', action: 'compare' }
     ])
   }
 
@@ -252,7 +260,7 @@ export default function EnhancedChatWidget() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-tr from-gq-gold to-yellow-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
+          className="fixed bottom-6 right-6 z-52 w-14 h-14 bg-gradient-to-tr from-gq-gold to-yellow-600 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform"
         >
           <span className="absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75 animate-ping"></span>
           <RadioTower className="w-7 h-7" />
@@ -263,7 +271,7 @@ export default function EnhancedChatWidget() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-          className="fixed bottom-6 right-6 z-50 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pointer-events-none">
+          className="fixed bottom-6 right-6 z-52 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pointer-events-none">
         >
           {/* Activity Feed */}
           <div className="w-80 pointer-events-auto">

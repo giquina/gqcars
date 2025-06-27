@@ -15,6 +15,7 @@ import QuickActionPlatform from './components/ui/QuickActionPlatform';
 import LocationBasedQuotes from './components/ui/LocationBasedQuotes';
 import WhatsAppWidget from './components/ui/WhatsAppWidget';
 import FloatingWhatsAppButton from './components/ui/FloatingWhatsAppButton';
+import LiveNotifications from './components/ui/LiveNotifications';
 import Footer from './components/ui/Footer'
 
 export default function HomePage() {
@@ -45,6 +46,7 @@ export default function HomePage() {
         showNotification={true}
         notificationCount={2}
       />
+      <LiveNotifications />
       <Footer />
     </main>
   );

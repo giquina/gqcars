@@ -58,7 +58,7 @@ export default function FloatingWhatsAppButton({
   if (!isVisible) return null
 
   return (
-    <div className={`fixed ${getPositionClasses()} z-50`}>
+    <div className={`fixed ${getPositionClasses()} z-55`}>
       <AnimatePresence>
         {showTooltip && (
           <motion.div

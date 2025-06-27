@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users, Calendar, Search } from 'lucide-react'
+import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users, Calendar, Search, AlertCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 // Types for location suggestions
 interface LocationSuggestion {
@@ -19,6 +20,13 @@ interface QuoteResult {
   savings: string
   estimatedTime: number
   serviceName: string
+}
+
+// Types for Google Maps API response
+interface RouteData {
+  distance: number
+  duration: number
+  status: string
 }
 
 // Enhanced location suggestions with autocomplete
@@ -82,6 +90,9 @@ export default function QuoteWidget() {
   const [showQuote, setShowQuote] = useState(false)
   const [quote, setQuote] = useState<QuoteResult | null>(null)
   const [isCalculating, setIsCalculating] = useState(false)
+  const [errors, setErrors] = useState<{pickup?: string, dropoff?: string, general?: string}>({})
+  const [isMapLoading, setIsMapLoading] = useState(false)
+  const [mapError, setMapError] = useState<string | null>(null)
   
   // Autocomplete states
   const [pickupSuggestions, setPickupSuggestions] = useState<LocationSuggestion[]>([])
@@ -133,6 +144,23 @@ export default function QuoteWidget() {
     }
   ]
 
+  // Real-time validation
+  const validateInput = (field: string, value: string) => {
+    setErrors(prev => ({ ...prev, [field]: undefined }))
+    
+    if (!value.trim()) {
+      setErrors(prev => ({ ...prev, [field]: `${field === 'pickup' ? 'Pickup' : 'Drop-off'} location is required` }))
+      return false
+    }
+    
+    if (value.length < 3) {
+      setErrors(prev => ({ ...prev, [field]: 'Please enter at least 3 characters' }))
+      return false
+    }
+    
+    return true
+  }
+
   // Enhanced search function with better matching
   const searchLocations = (query: string) => {
     if (!query || query.length < 2) return []
@@ -145,17 +173,19 @@ export default function QuoteWidget() {
     }).slice(0, 8) // Limit to 8 suggestions
   }
 
-  // Handle pickup input changes with autocomplete
+  // Handle pickup input changes with autocomplete and validation
   const handlePickupChange = (value: string) => {
     setPickup(value)
+    validateInput('pickup', value)
     const suggestions = searchLocations(value)
     setPickupSuggestions(suggestions)
     setShowPickupSuggestions(suggestions.length > 0 && pickupFocused)
   }
 
-  // Handle dropoff input changes with autocomplete
+  // Handle dropoff input changes with autocomplete and validation
   const handleDropoffChange = (value: string) => {
     setDropoff(value)
+    validateInput('dropoff', value)
     const suggestions = searchLocations(value)
     setDropoffSuggestions(suggestions)
     setShowDropoffSuggestions(suggestions.length > 0 && dropoffFocused)
@@ -191,34 +221,92 @@ export default function QuoteWidget() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // Enhanced calculateQuote with error handling and API integration
   const calculateQuote = async () => {
+    // Reset errors
+    setErrors({})
+    
+    // Validate inputs
+    const pickupValid = validateInput('pickup', pickup)
+    const dropoffValid = validateInput('dropoff', dropoff)
+    
+    if (!pickupValid || !dropoffValid) {
+      setErrors(prev => ({ ...prev, general: 'Please correct the errors above' }))
+      return
+    }
+
     if (pickup && dropoff) {
       setIsCalculating(true)
+      setMapError(null)
       
-      // Simulate API call delay for realism
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      const basePrice = serviceTypes.find(s => s.id === serviceType)?.price || 7.00
-      const estimatedDistance = Math.random() * 15 + 5 // Mock distance 5-20 miles
-      const totalPrice = basePrice * estimatedDistance
-      const discountPrice = totalPrice * 0.5 // 50% off first ride
-      
-      setQuote({
-        distance: estimatedDistance.toFixed(1),
-        originalPrice: totalPrice.toFixed(2),
-        discountPrice: discountPrice.toFixed(2),
-        savings: (totalPrice - discountPrice).toFixed(2),
-        estimatedTime: Math.round(estimatedDistance * 2.5), // Mock time estimate
-        serviceName: serviceTypes.find(s => s.id === serviceType)?.name || 'GQ Standard'
-      })
-      setShowQuote(true)
-      setIsCalculating(false)
+      try {
+        // Try to use Google Maps API for real route calculation
+        setIsMapLoading(true)
+        
+        const response = await fetch('/api/maps/route', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            origin: pickup,
+            destination: dropoff,
+          }),
+        })
+
+        let routeData: RouteData | null = null
+        if (response.ok) {
+          routeData = await response.json()
+        } else {
+          // Fallback to mock data if API fails
+          setMapError('Using estimated distances - Google Maps unavailable')
+        }
+
+        // Simulate processing time for better UX
+        await new Promise(resolve => setTimeout(resolve, 1500))
+        
+        const basePrice = serviceTypes.find(s => s.id === serviceType)?.price || 7.00
+        
+        // Use real data if available, otherwise mock
+        const estimatedDistance = routeData?.distance || (Math.random() * 15 + 5)
+        const estimatedDuration = routeData?.duration || Math.round(estimatedDistance * 2.5)
+        
+        const totalPrice = basePrice * estimatedDistance
+        const discountPrice = totalPrice * 0.5 // 50% off first ride
+        
+        setQuote({
+          distance: estimatedDistance.toFixed(1),
+          originalPrice: totalPrice.toFixed(2),
+          discountPrice: discountPrice.toFixed(2),
+          savings: (totalPrice - discountPrice).toFixed(2),
+          estimatedTime: estimatedDuration,
+          serviceName: serviceTypes.find(s => s.id === serviceType)?.name || 'GQ Standard'
+        })
+        setShowQuote(true)
+        
+      } catch (error) {
+        console.error('Quote calculation error:', error)
+        setErrors({ general: 'Unable to calculate quote. Please try again or call us directly.' })
+      } finally {
+        setIsCalculating(false)
+        setIsMapLoading(false)
+      }
     }
   }
 
   const handleBookNow = () => {
-    // In a real app, this would redirect to booking page or open booking modal
-    window.location.href = `tel:07407655203`
+    // Enhanced booking with quote data
+    const bookingData = {
+      pickup,
+      dropoff,
+      serviceType,
+      quote: quote ? `${quote.serviceName} - £${quote.discountPrice} (${quote.distance} miles)` : 'Quote pending'
+    }
+    
+    const message = `Hello GQ Cars! I'd like to book:\n📍 From: ${pickup}\n📍 To: ${dropoff}\n🚗 Service: ${bookingData.quote}\n⏰ Time: ${bookingType === 'now' ? 'ASAP' : `${selectedDate} at ${selectedTime}`}`
+    
+    const encodedMessage = encodeURIComponent(message)
+    window.open(`https://wa.me/447407655203?text=${encodedMessage}`, '_blank')
   }
 
   return (
@@ -441,8 +529,6 @@ export default function QuoteWidget() {
             </div>
           </div>
 
-
-
           {/* Enhanced Service Type Selector - 3 Options No Scroll */}
           <div>
             <label className="block text-yellow-500 font-semibold mb-3 text-sm">
@@ -594,25 +680,60 @@ export default function QuoteWidget() {
             </div>
           )}
 
-          {/* Enhanced Calculate Button */}
-          <button
+          {/* Error Display */}
+          {Object.keys(errors).length > 0 && (
+            <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-4">
+              <div className="flex items-center space-x-2 mb-2">
+                <AlertCircle className="w-5 h-5 text-red-400" />
+                <span className="text-red-400 font-semibold">Please fix the following:</span>
+              </div>
+              <div className="space-y-1 text-sm text-red-300">
+                {errors.pickup && <div>• {errors.pickup}</div>}
+                {errors.dropoff && <div>• {errors.dropoff}</div>}
+                {errors.general && <div>• {errors.general}</div>}
+              </div>
+            </div>
+          )}
+
+          {/* Map Integration Status */}
+          {mapError && (
+            <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-xl p-3">
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-4 h-4 text-yellow-400" />
+                <span className="text-yellow-300 text-sm">{mapError}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Enhanced Calculate Button with Loading States */}
+          <motion.button
             onClick={calculateQuote}
-            disabled={!pickup || !dropoff || isCalculating || (bookingType === 'schedule' && (!selectedDate || !selectedTime))}
-            className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 disabled:from-gray-600 disabled:to-gray-700 text-black font-bold py-4 px-6 rounded-xl transition-all transform hover:scale-105 disabled:hover:scale-100 flex items-center justify-center space-x-2 shadow-lg text-sm sm:text-base"
+            disabled={isCalculating || !pickup.trim() || !dropoff.trim()}
+            whileHover={{ scale: pickup.trim() && dropoff.trim() ? 1.05 : 1 }}
+            whileTap={{ scale: pickup.trim() && dropoff.trim() ? 0.95 : 1 }}
+            className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center space-x-3 ${
+              isCalculating 
+                ? 'bg-gray-600 cursor-not-allowed' 
+                : !pickup.trim() || !dropoff.trim()
+                ? 'bg-gray-700 cursor-not-allowed opacity-50'
+                : 'bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black shadow-lg hover:shadow-xl'
+            }`}
           >
             {isCalculating ? (
               <>
-                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                <span>Calculating...</span>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-white">
+                  {isMapLoading ? 'Getting real-time data...' : 'Calculating quote...'}
+                </span>
               </>
             ) : (
               <>
-                <Car className="w-5 h-5" />
-                <span>{bookingType === 'now' ? 'BOOK NOW' : 'SCHEDULE RIDE'}</span>
+                <Calculator className="w-5 h-5" />
+                <span>Calculate Quote</span>
                 <ArrowRight className="w-5 h-5" />
               </>
             )}
-          </button>
+          </motion.button>
         </div>
 
         {/* Enhanced Quote Results */}
