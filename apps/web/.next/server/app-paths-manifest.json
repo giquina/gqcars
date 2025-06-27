@@ -1,0 +1,8 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/ai/chat/route": "app/api/ai/chat/route.js",
+  "/api/ai/security/route": "app/api/ai/security/route.js",
+  "/assessment/page": "app/assessment/page.js",
+  "/assessment/results/page": "app/assessment/results/page.js",
+  "/page": "app/page.js"
+}

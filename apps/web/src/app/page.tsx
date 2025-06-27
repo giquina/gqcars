@@ -1,21 +1,21 @@
 import React from 'react';
-import Header from './components/ui/Header';
-import QuoteWidget from './components/ui/QuoteWidget';
-import { InteractiveHero } from './components/ui/InteractiveHero';
-import SecurityAssessmentWrapper from './components/SecurityAssessmentWrapper'
-import InteractiveTestimonials from './components/ui/InteractiveTestimonials';
-import EnhancedChatWidget from './components/ui/EnhancedChatWidget';
-import AIAssistantWidget from './components/ui/AIAssistantWidget';
-import AIBadge from './components/ui/AIBadge';
-import MobileAppBanner from './components/ui/MobileAppBanner';
-import { CallToActionPanel } from './components/ui/CallToActionPanel';
-import FloatingActionButton from './components/ui/FloatingActionButton';
-import InteractiveFeaturesShowcase from './components/ui/InteractiveFeaturesShowcase';
-import QuickActionPlatform from './components/ui/QuickActionPlatform';
-import LocationBasedQuotes from './components/ui/LocationBasedQuotes';
-import WhatsAppWidget from './components/ui/WhatsAppWidget';
-import FloatingWhatsAppButton from './components/ui/FloatingWhatsAppButton';
-import Footer from './components/ui/Footer'
+import Header from '@/components/ui/Header';
+import QuoteWidget from '@/components/ui/QuoteWidget';
+import { InteractiveHero } from '@/components/ui/InteractiveHero';
+import SecurityAssessmentWrapper from '@/components/SecurityAssessmentWrapper'
+import InteractiveTestimonials from '@/components/ui/InteractiveTestimonials';
+import EnhancedChatWidget from '@/components/ui/EnhancedChatWidget';
+import AIAssistantWidget from '@/components/ui/AIAssistantWidget';
+import AIBadge from '@/components/ui/AIBadge';
+import MobileAppBanner from '@/components/ui/MobileAppBanner';
+import { CallToActionPanel } from '@/components/ui/CallToActionPanel';
+import FloatingActionButton from '@/components/ui/FloatingActionButton';
+import InteractiveFeaturesShowcase from '@/components/ui/InteractiveFeaturesShowcase';
+import QuickActionPlatform from '@/components/ui/QuickActionPlatform';
+import LocationBasedQuotes from '@/components/ui/LocationBasedQuotes';
+import WhatsAppWidget from '@/components/ui/WhatsAppWidget';
+import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton';
+import Footer from '@/components/ui/Footer'
 
 export default function HomePage() {
   return (

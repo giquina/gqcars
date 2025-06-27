@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import SecurityAssessmentResults from '../../components/ui/SecurityAssessmentResults'
+import SecurityAssessmentResults from '@/components/ui/SecurityAssessmentResults'
 import { Crown, Users, Car, Shield } from 'lucide-react'
 
 // Comprehensive logic to determine the best recommendation based on all 5 questions

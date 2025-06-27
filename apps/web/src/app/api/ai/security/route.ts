@@ -31,14 +31,23 @@ export async function POST(req: Request) {
           securityLevel: driver.siaLicense ? ['ENHANCED', 'EXECUTIVE'] : ['STANDARD'],
           status: 'available'
         })),
-        currentDemand: 'medium',
+        currentDemand: 'medium' as const,
         pricing: {
+          baseRates: {
+            TAXI: 6.5,
+            PRIVATE_HIRE: 8.5,
+            AIRPORT_TRANSFER: 10,
+            CORPORATE: 12,
+            SECURITY: 15,
+            WEDDING: 20
+          },
           securityPremium: {
             STANDARD: 1,
             ENHANCED: 1.5,
             EXECUTIVE: 2,
             VIP: 3
-          }
+          },
+          demandMultiplier: 1
         }
       }
     }

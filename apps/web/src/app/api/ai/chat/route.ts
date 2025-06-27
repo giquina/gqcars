@@ -57,7 +57,7 @@ export async function POST(req: Request) {
           communicationPreferences: {
             language: 'en',
             notifications: true,
-            contactMethod: 'chat'
+            contactMethod: 'chat' as const
           }
         },
         bookingHistory: user.bookings.map(booking => ({
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
           services: ['TAXI', 'PRIVATE_HIRE'],
           estimatedArrival: 15 // Would be calculated based on location
         })),
-        currentDemand: activeBookings > 10 ? 'high' : activeBookings > 5 ? 'medium' : 'low',
+        currentDemand: (activeBookings > 10 ? 'high' : activeBookings > 5 ? 'medium' : 'low') as 'low' | 'medium' | 'high' | 'surge',
         pricing: {
           baseRates: {
             TAXI: 6.5,
@@ -102,7 +102,7 @@ export async function POST(req: Request) {
     const response = await claude.chat(message, context)
 
     // Process any actions from Claude's response
-    if (response.actions?.length > 0) {
+    if (response.actions && response.actions.length > 0) {
       for (const action of response.actions) {
         switch (action.type) {
           case 'quote':
