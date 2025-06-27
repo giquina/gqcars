@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
-import { Star, Heart, MessageCircle, Share2, User, Verified, ThumbsUp } from 'lucide-react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { Star, Heart, MessageCircle, Share2, User, Verified, ThumbsUp, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface Testimonial {
   id: number
@@ -22,6 +22,13 @@ export default function InteractiveTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [expandedId, setExpandedId] = useState<number | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [dragStart, setDragStart] = useState<number>(0)
+  const [dragEnd, setDragEnd] = useState<number>(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const mockTestimonials: Testimonial[] = [
@@ -80,9 +87,41 @@ export default function InteractiveTestimonials() {
         service: 'Airport Transfer',
         date: '5 days ago',
         liked: false
+      },
+      {
+        id: 5,
+        name: 'Lisa Rodriguez',
+        role: 'Event Coordinator',
+        content: 'Outstanding service for our corporate event. Multiple vehicles, all perfectly coordinated, professional drivers. They made our logistics seamless and stress-free.',
+        rating: 5,
+        avatar: '👩‍💻',
+        likes: 28,
+        comments: 9,
+        verified: true,
+        service: 'Corporate Event',
+        date: '1 week ago',
+        liked: false
       }
     ]
     setTestimonials(mockTestimonials)
+  }, [])
+
+  // Intersection Observer for entrance animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
   }, [])
 
   const handleLike = (id: number) => {
@@ -101,27 +140,104 @@ export default function InteractiveTestimonials() {
     setExpandedId(expandedId === id ? null : id)
   }
 
-  const nextTestimonial = () => {
+  const nextTestimonial = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
+  }, [testimonials.length])
 
-  const prevTestimonial = () => {
+  const prevTestimonial = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }, [testimonials.length])
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 5000)
   }
 
-  // Auto-rotate testimonials
+  // Enhanced auto-rotate with pause on hover
   useEffect(() => {
+    if (!isAutoPlaying || testimonials.length === 0) return
+    
     const interval = setInterval(nextTestimonial, 5000)
     return () => clearInterval(interval)
-  }, [testimonials.length])
+  }, [isAutoPlaying, nextTestimonial, testimonials.length])
+
+  // Touch/Drag handlers for mobile swipe support
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setDragStart(e.touches[0].clientX)
+    setIsDragging(true)
+    setIsAutoPlaying(false)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return
+    setDragEnd(e.touches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+    
+    const dragDistance = dragStart - dragEnd
+    const threshold = 50
+
+    if (Math.abs(dragDistance) > threshold) {
+      if (dragDistance > 0) {
+        nextTestimonial()
+      } else {
+        prevTestimonial()
+      }
+    }
+
+    setTimeout(() => setIsAutoPlaying(true), 3000)
+  }
+
+  // Mouse drag handlers for desktop
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setDragStart(e.clientX)
+    setIsDragging(true)
+    setIsAutoPlaying(false)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    setDragEnd(e.clientX)
+  }
+
+  const handleMouseUp = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+    
+    const dragDistance = dragStart - dragEnd
+    const threshold = 100
+
+    if (Math.abs(dragDistance) > threshold) {
+      if (dragDistance > 0) {
+        nextTestimonial()
+      } else {
+        prevTestimonial()
+      }
+    }
+
+    setTimeout(() => setIsAutoPlaying(true), 3000)
+  }
 
   if (testimonials.length === 0) return null
 
   const currentTestimonial = testimonials[currentIndex]
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 border border-slate-700/50">
-      <div className="text-center mb-8">
+    <div 
+      ref={containerRef}
+      className={`bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 border border-slate-700/50 transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+      }`}
+      onMouseEnter={() => setIsAutoPlaying(false)}
+      onMouseLeave={() => setIsAutoPlaying(true)}
+    >
+      <div className={`text-center mb-8 transition-all duration-700 delay-200 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}>
         <h3 className="text-3xl font-bold text-white mb-2 flex items-center justify-center space-x-2">
           <MessageCircle className="w-8 h-8 text-blue-500" />
           <span>Client Stories</span>
@@ -129,11 +245,25 @@ export default function InteractiveTestimonials() {
         <p className="text-gray-300">Real experiences from our valued clients</p>
       </div>
 
-      {/* Featured Testimonial */}
-      <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-6 mb-6">
-        <div className="flex items-start space-x-4">
+      {/* Enhanced Featured Testimonial with Touch Support */}
+      <div 
+        ref={carouselRef}
+        className={`relative bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-6 mb-6 cursor-grab active:cursor-grabbing overflow-hidden transition-all duration-700 delay-400 ${
+          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+        }`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+      >
+        <div className={`flex items-start space-x-4 transition-transform duration-500 ease-out ${
+          isDragging ? 'scale-[0.98]' : 'scale-100'
+        }`}>
           <div className="flex-shrink-0">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-2xl">
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-2xl transition-transform duration-300 hover:scale-110">
               {currentTestimonial.avatar}
             </div>
           </div>
@@ -142,7 +272,7 @@ export default function InteractiveTestimonials() {
             <div className="flex items-center space-x-2 mb-2">
               <h4 className="text-white font-bold">{currentTestimonial.name}</h4>
               {currentTestimonial.verified && (
-                <Verified className="w-4 h-4 text-blue-400" />
+                <Verified className="w-4 h-4 text-blue-400 animate-pulse" />
               )}
               <span className="text-gray-400 text-sm">• {currentTestimonial.role}</span>
             </div>
@@ -152,16 +282,20 @@ export default function InteractiveTestimonials() {
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-4 h-4 ${
-                      i < currentTestimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-600'
+                    className={`w-4 h-4 transition-all duration-300 delay-${i * 100} ${
+                      i < currentTestimonial.rating 
+                        ? 'text-yellow-400 fill-current transform hover:scale-125' 
+                        : 'text-gray-600'
                     }`}
                   />
                 ))}
               </div>
-              <span className="text-blue-400 text-sm font-semibold">{currentTestimonial.service}</span>
+              <span className="text-blue-400 text-sm font-semibold px-2 py-1 bg-blue-500/10 rounded-full">
+                {currentTestimonial.service}
+              </span>
             </div>
             
-            <p className="text-gray-300 leading-relaxed mb-4">
+            <p className="text-gray-300 leading-relaxed mb-4 transition-all duration-300">
               {expandedId === currentTestimonial.id 
                 ? currentTestimonial.content 
                 : `${currentTestimonial.content.substring(0, 120)}...`
@@ -172,13 +306,15 @@ export default function InteractiveTestimonials() {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => handleLike(currentTestimonial.id)}
-                  className={`flex items-center space-x-2 transition-all ${
+                  className={`flex items-center space-x-2 transition-all duration-300 hover:scale-110 ${
                     currentTestimonial.liked 
                       ? 'text-red-400' 
                       : 'text-gray-400 hover:text-red-400'
                   }`}
                 >
-                  <Heart className={`w-4 h-4 ${currentTestimonial.liked ? 'fill-current' : ''}`} />
+                  <Heart className={`w-4 h-4 transition-transform duration-300 ${
+                    currentTestimonial.liked ? 'fill-current scale-125' : 'hover:scale-110'
+                  }`} />
                   <span className="text-sm">{currentTestimonial.likes}</span>
                 </button>
                 
@@ -187,7 +323,7 @@ export default function InteractiveTestimonials() {
                   <span className="text-sm">{currentTestimonial.comments}</span>
                 </div>
                 
-                <button className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-colors">
+                <button className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
                   <Share2 className="w-4 h-4" />
                   <span className="text-sm">Share</span>
                 </button>
@@ -197,7 +333,7 @@ export default function InteractiveTestimonials() {
                 <span className="text-gray-500 text-xs">{currentTestimonial.date}</span>
                 <button
                   onClick={() => handleExpand(currentTestimonial.id)}
-                  className="text-blue-400 hover:text-blue-300 text-sm font-semibold transition-colors"
+                  className="text-blue-400 hover:text-blue-300 text-sm font-semibold transition-all duration-300 hover:scale-105"
                 >
                   {expandedId === currentTestimonial.id ? 'Show Less' : 'Read More'}
                 </button>
@@ -205,24 +341,33 @@ export default function InteractiveTestimonials() {
             </div>
           </div>
         </div>
+
+        {/* Swipe indicator for mobile */}
+        <div className="absolute bottom-2 right-4 text-gray-500 text-xs md:hidden">
+          Swipe for more
+        </div>
       </div>
 
-      {/* Navigation */}
-      <div className="flex items-center justify-between mb-6">
+      {/* Enhanced Navigation with Better Touch Targets */}
+      <div className={`flex items-center justify-between mb-6 transition-all duration-700 delay-600 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}>
         <button
           onClick={prevTestimonial}
-          className="bg-slate-700 hover:bg-slate-600 text-white p-2 rounded-full transition-colors"
+          className="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg mobile-touch-target"
         >
-          ←
+          <ChevronLeft className="w-5 h-5" />
         </button>
         
         <div className="flex space-x-2">
           {testimonials.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-blue-500' : 'bg-gray-600'
+              onClick={() => goToSlide(index)}
+              className={`transition-all duration-300 mobile-touch-target ${
+                index === currentIndex 
+                  ? 'w-8 h-3 bg-blue-500 rounded-full' 
+                  : 'w-3 h-3 bg-gray-600 rounded-full hover:bg-gray-500 hover:scale-125'
               }`}
             />
           ))}
@@ -230,22 +375,25 @@ export default function InteractiveTestimonials() {
         
         <button
           onClick={nextTestimonial}
-          className="bg-slate-700 hover:bg-slate-600 text-white p-2 rounded-full transition-colors"
+          className="bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg mobile-touch-target"
         >
-          →
+          <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Testimonial Grid */}
+      {/* Enhanced Testimonial Grid with Staggered Animations */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {testimonials.filter(t => t.id !== currentTestimonial.id).slice(0, 3).map((testimonial) => (
+        {testimonials.filter(t => t.id !== currentTestimonial.id).slice(0, 3).map((testimonial, index) => (
           <div
             key={testimonial.id}
-            className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 rounded-xl p-4 hover:border-blue-500/30 transition-all cursor-pointer transform hover:scale-105"
-            onClick={() => setCurrentIndex(testimonials.findIndex(t => t.id === testimonial.id))}
+            className={`bg-gradient-to-r from-gray-800/50 to-gray-900/50 border border-gray-700/50 rounded-xl p-4 hover:border-blue-500/30 transition-all duration-500 cursor-pointer transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/10 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+            }`}
+            style={{ transitionDelay: `${800 + index * 100}ms` }}
+            onClick={() => goToSlide(testimonials.findIndex(t => t.id === testimonial.id))}
           >
             <div className="flex items-center space-x-3 mb-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110">
                 {testimonial.avatar}
               </div>
               <div>
@@ -261,7 +409,7 @@ export default function InteractiveTestimonials() {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-3 h-3 ${
+                  className={`w-3 h-3 transition-all duration-200 ${
                     i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-600'
                   }`}
                 />
@@ -273,7 +421,9 @@ export default function InteractiveTestimonials() {
             </p>
             
             <div className="flex items-center justify-between mt-3">
-              <span className="text-blue-400 text-xs font-semibold">{testimonial.service}</span>
+              <span className="text-blue-400 text-xs font-semibold px-2 py-1 bg-blue-500/10 rounded-full">
+                {testimonial.service}
+              </span>
               <div className="flex items-center space-x-2">
                 <ThumbsUp className="w-3 h-3 text-gray-400" />
                 <span className="text-gray-400 text-xs">{testimonial.likes}</span>
@@ -281,6 +431,16 @@ export default function InteractiveTestimonials() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Auto-play indicator */}
+      <div className="flex items-center justify-center mt-4">
+        <div className="flex items-center space-x-2 text-gray-500 text-xs">
+          <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+            isAutoPlaying ? 'bg-green-400 animate-pulse' : 'bg-gray-600'
+          }`} />
+          <span>{isAutoPlaying ? 'Auto-playing' : 'Paused'}</span>
+        </div>
       </div>
     </div>
   )
