@@ -344,7 +344,8 @@ export default function WhatsAppWidget() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-tr from-green-500 to-green-600 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-all duration-300 group"
+          className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-tr from-green-500 to-green-600 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-all duration-300 group"
+          style={{ zIndex: 200 }}
         >
           <div className="relative">
             <MessageCircle className="w-8 h-8" />
@@ -362,7 +363,8 @@ export default function WhatsAppWidget() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.9 }}
           transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-          className="fixed bottom-6 right-6 z-50 w-96 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
+          className="fixed bottom-6 right-6 w-96 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
+          style={{ zIndex: 200 }}
         >
           {/* Header */}
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex items-center justify-between">

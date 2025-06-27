@@ -204,11 +204,11 @@ export default function EnhancedChatWidget() {
   }
 
   const handleServices = () => {
-    addMessage('Here are our professional services. Click any to learn more:', true, [
-      { id: 'nav-executive', text: '👑 Executive Protection', action: 'navigate', data: '/services/executive' },
-      { id: 'nav-premium', text: '⭐ Premium Transport', action: 'navigate', data: '/services/premium' },
-      { id: 'nav-standard', text: '🚗 Standard Service', action: 'navigate', data: '/services/standard' },
-      { id: 'nav-xl', text: '👥 XL Group Transport', action: 'navigate', data: '/services/xl' }
+              addMessage('Here are our professional services. Click any to learn more:', true, [
+            { id: 'nav-executive', text: '👑 Close Protection', action: 'navigate', data: '/services/close-protection' },
+            { id: 'nav-premium', text: '⭐ VIP Transport', action: 'navigate', data: '/services/vip' },
+            { id: 'nav-standard', text: '🚗 Taxi Service', action: 'navigate', data: '/services/taxi' },
+            { id: 'nav-xl', text: '👥 Corporate Transport', action: 'navigate', data: '/services/corporate' }
     ])
   }
 
