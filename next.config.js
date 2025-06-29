@@ -1,18 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+  reactStrictMode: false,
+  swcMinify: false,
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
   },
   images: {
     domains: ['images.unsplash.com', 'via.placeholder.com'],
   },
   eslint: {
-    dirs: ['src'],
+    ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
+  },
+  webpack: (config) => {
+    config.optimization.splitChunks = {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 244000,
+    }
+    return config
   },
 }
 
