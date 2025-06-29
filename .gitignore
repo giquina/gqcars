@@ -33,3 +33,6 @@ yarn-error.log*
 next-env.d.tsnode_modules/
 apps/*/node_modules/
 packages/*/node_modules/
+apps/web/.next/
+apps/web/node_modules/
+*.log
