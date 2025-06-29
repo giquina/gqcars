@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: ./apps/web
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://gqcars:development@db:5432/gqcars
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=development-secret-key
+    depends_on:
+      - db
+      - redis
+    command: npm run dev
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: gqcars
+      POSTGRES_PASSWORD: development
+      POSTGRES_DB: gqcars
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

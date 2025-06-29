@@ -1,0 +1,226 @@
+// Production database schema for PostgreSQL
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  password  String
+  phone     String?
+  role      UserRole  @default(USER)
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  service         String
+  serviceType     ServiceType
+  date            DateTime
+  time            String
+  pickupLocation  String
+  dropoffLocation String?
+  passengers      Int           @default(1)
+  specialRequests String?
+  status          BookingStatus @default(PENDING)
+  estimatedPrice  Decimal?      @db.Decimal(10, 2)
+  finalPrice      Decimal?      @db.Decimal(10, 2)
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentIntentId String?       @unique
+  
+  // Customer information
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  
+  // Internal tracking
+  driverAssigned  String?
+  vehicleAssigned String?
+  notes           String?
+  
+  // Relationships
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("bookings")
+}
+
+model Quote {
+  id              String      @id @default(cuid())
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  service         String
+  serviceType     ServiceType
+  pickupLocation  String
+  dropoffLocation String?
+  date            DateTime?
+  time            String?
+  passengers      Int         @default(1)
+  duration        String?     // For hourly services
+  specialRequests String?
+  estimatedPrice  Decimal?    @db.Decimal(10, 2)
+  status          QuoteStatus @default(PENDING)
+  validUntil      DateTime?
+  notes           String?
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@map("quotes")
+}
+
+model ContactMessage {
+  id            String            @id @default(cuid())
+  name          String
+  email         String
+  phone         String?
+  subject       String
+  message       String
+  type          ContactType       @default(GENERAL)
+  status        ContactStatus     @default(NEW)
+  respondedAt   DateTime?
+  respondedBy   String?
+  
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@map("contact_messages")
+}
+
+model Driver {
+  id              String        @id @default(cuid())
+  name            String
+  email           String        @unique
+  phone           String
+  licenseNumber   String        @unique
+  siaLicense      String?       @unique
+  status          DriverStatus  @default(ACTIVE)
+  rating          Decimal?      @db.Decimal(3, 2)
+  totalTrips      Int           @default(0)
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("drivers")
+}
+
+model Vehicle {
+  id              String         @id @default(cuid())
+  make            String
+  model           String
+  year            Int
+  color           String
+  licensePlate    String         @unique
+  vehicleType     VehicleType
+  capacity        Int
+  status          VehicleStatus  @default(ACTIVE)
+  features        String[]       // Array of features like "GPS", "WiFi", etc.
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@map("vehicles")
+}
+
+// Enums
+enum UserRole {
+  USER
+  ADMIN
+  DRIVER
+  OPERATOR
+}
+
+enum ServiceType {
+  AIRPORT_TRANSFER
+  CORPORATE_TRANSPORT
+  VIP_CHAUFFEUR
+  CLOSE_PROTECTION
+  DIPLOMATIC_SECURITY
+  FAMILY_OFFICE
+  LIFESTYLE_MANAGEMENT
+  WEDDING_TRANSPORT
+  PRIVATE_HIRE
+  HOURLY_HIRE
+  EVENT_SECURITY
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum QuoteStatus {
+  PENDING
+  SENT
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+enum ContactType {
+  GENERAL
+  BOOKING_INQUIRY
+  QUOTE_REQUEST
+  COMPLAINT
+  COMPLIMENT
+  SUPPORT
+}
+
+enum ContactStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum DriverStatus {
+  ACTIVE
+  INACTIVE
+  ON_BREAK
+  SUSPENDED
+}
+
+enum VehicleStatus {
+  ACTIVE
+  MAINTENANCE
+  OUT_OF_SERVICE
+  RETIRED
+}
+
+enum VehicleType {
+  SEDAN
+  SUV
+  LUXURY_SEDAN
+  LUXURY_SUV
+  VAN
+  MINIBUS
+  LIMOUSINE
+}

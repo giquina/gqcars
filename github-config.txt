@@ -1,0 +1,13 @@
+# Add your GitHub Personal Access Token here
+# Claude will read this file to automatically handle Git operations
+
+[github]
+token = YOUR_GITHUB_TOKEN_HERE
+username = giquina
+repo = gqcars
+repo_url = https://github.com/giquina/gqcars.git
+
+# Instructions:
+# 1. Replace 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 with your actual token
+# 2. Save this file
+# 3. Claude can read this to automatically push code
