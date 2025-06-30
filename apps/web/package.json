@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "next dev -p 3000 -H 0.0.0.0",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
-    "test": "jest"
+    "test": "jest",
+    "perf:analyze": "npm run build:analyze",
+    "perf:lighthouse": "npx lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html --chrome-flags='--headless'",
+    "perf:check": "npm run build && npm run start & sleep 5 && npm run perf:lighthouse && pkill -f 'next start'"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.55.0",

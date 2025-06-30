@@ -20,6 +20,8 @@ import MobileAppBanner from '@/components/ui/MobileAppBanner'
 import { CallToActionPanel } from '@/components/ui/CallToActionPanel'
 import AppDownloadBanner from '@/components/ui/AppDownloadBanner'
 import PWAInstallBanner from '@/components/ui/PWAInstallBanner'
+import LazyLoadWrapper from '@/components/ui/LazyLoadWrapper'
+import PerformanceMonitor from '@/components/ui/PerformanceMonitor'
 import SpinToWin from '@/components/ui/SpinToWin'
 import ReferralPopup from '@/components/ui/ReferralPopup'
 import FloatingActionButton from '@/components/ui/FloatingActionButton'
@@ -53,6 +55,9 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-gray-900 text-white">
+      {/* Performance Monitoring */}
+      <PerformanceMonitor />
+      
       <Header />
 
       {/* Live Notifications - Always Visible, Top-Left, Highest Z-Index */}
@@ -66,19 +71,29 @@ export default function HomePage() {
       </InteractiveHero>
 
       {/* Interactive Features Section */}
-      <InteractiveFeaturesShowcase />
+      <LazyLoadWrapper>
+        <InteractiveFeaturesShowcase />
+      </LazyLoadWrapper>
 
       {/* All Services Section */}
-      <ServicesOverview />
+      <LazyLoadWrapper>
+        <ServicesOverview />
+      </LazyLoadWrapper>
 
       {/* Trust Badges Section */}
-      <TrustBadges variant="horizontal" className="bg-gray-800" />
+      <LazyLoadWrapper>
+        <TrustBadges variant="horizontal" className="bg-gray-800" />
+      </LazyLoadWrapper>
 
       {/* Security Assessment Section */}
-      <HomePageAssessment />
+      <LazyLoadWrapper>
+        <HomePageAssessment />
+      </LazyLoadWrapper>
 
       {/* Testimonials Section */}
-      <TestimonialsSection />
+      <LazyLoadWrapper>
+        <TestimonialsSection />
+      </LazyLoadWrapper>
 
       {/* Quick Quote Button - Mobile Only */}
       <QuickQuoteButton />
