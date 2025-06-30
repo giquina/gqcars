@@ -45,6 +45,32 @@ The website uses the **Bold Dynamic** design system, chosen for its high-energy,
 - Hover scaling effects on typography and CTAs
 - Pulsing badges and gradient animations
 
+## 🚨 **COMPONENT LOADING ISSUES - PERMANENT SOLUTION (Dec 2024)**
+
+### **Issue**: Website hangs when loading too many components simultaneously
+### **Root Cause**: Component overload + TypeScript errors + Import issues  
+### **Solution**: Gradual component loading strategy
+
+```bash
+# 🔧 RECOVERY PROTOCOL (When website hangs)
+# 1. Kill processes
+pkill -f "next dev" && lsof -ti:3000 | xargs kill -9 2>/dev/null
+
+# 2. Clear cache  
+rm -rf .next
+
+# 3. Start with minimal page, add components gradually
+# 4. Test each addition: curl -s http://localhost:3000 > /dev/null && echo "✅ Working"
+```
+
+### **Prevention Rules**:
+1. **Never load >3 heavy components at once**
+2. **Always verify component exports** (named vs default)
+3. **Test after each component addition**
+4. **Keep backup files** (page-minimal.tsx, page-working.tsx)
+
+**📋 See**: `/apps/web/COMPONENT_LOADING_STRATEGY.md` for detailed guide
+
 ## Common Development Commands
 
 ### 🚀 **Quick Start (UPDATED - WORKING SOLUTION)**
