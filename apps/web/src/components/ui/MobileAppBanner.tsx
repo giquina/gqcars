@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Smartphone, X, Download, Star, Clock, Users, Zap, Gift } from 'lucide-react'
+import QRCodeDownload from './QRCodeDownload'
 
 export default function MobileAppBanner() {
   const [isVisible, setIsVisible] = useState(false)
@@ -172,6 +173,11 @@ export default function MobileAppBanner() {
             <Download className="w-4 h-4 relative z-10" />
             <span className="relative z-10">CLAIM MY 50% DISCOUNT</span>
           </button>
+
+          {/* QR Code Download Option */}
+          <div className="mt-3 flex justify-center">
+            <QRCodeDownload />
+          </div>
           
           {/* Trust & Urgency Footer */}
           <div className="mt-3 space-y-1">

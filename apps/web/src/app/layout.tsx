@@ -1,4 +1,5 @@
 import { Providers } from '@/components/providers'
+import SEOSchema from '@/components/SEOSchema'
 import '@/styles/globals.css'
 
 export const metadata = {
@@ -26,6 +27,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <SEOSchema />
+      </head>
       <body className="font-sans">
         <Providers>
           {children}

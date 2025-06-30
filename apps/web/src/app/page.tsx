@@ -9,6 +9,12 @@ import ServicesOverview from '@/components/ui/ServicesOverview'
 import TrustBadges from '@/components/ui/TrustBadges'
 import TestimonialsSection from '@/components/ui/TestimonialsSection'
 import MobileAppBanner from '@/components/ui/MobileAppBanner'
+import GameifiedBooking from '@/components/ui/GameifiedBooking'
+import { SecurityAssessment } from '@/components/ui/SecurityAssessment'
+import QuoteWidget from '@/components/ui/QuoteWidget'
+import SpinToWin from '@/components/ui/SpinToWin'
+import EnhancedChatWidget from '@/components/ui/EnhancedChatWidget'
+import ExitIntentPopup from '@/components/ui/ExitIntentPopup'
 import { useState } from 'react'
 
 export default function HomePage() {
@@ -41,6 +47,28 @@ export default function HomePage() {
 
       {/* Mobile App Banner */}
       <MobileAppBanner />
+
+      {/* Gamified Booking Section */}
+      <GameifiedBooking />
+
+      {/* Security Assessment Section */}
+      <SecurityAssessment />
+
+      {/* Quote Widget Section */}
+      <QuoteWidget />
+
+      {/* Spin to Win Modal */}
+      {showSpinToWin && (
+        <SpinToWin 
+          onClose={() => setShowSpinToWin(false)}
+        />
+      )}
+
+      {/* Enhanced Chat Widget with AI */}
+      <EnhancedChatWidget />
+
+      {/* Exit Intent Popup */}
+      <ExitIntentPopup />
 
       {/* WhatsApp Widget - Always Highest Z-Index */}
       <div className="fixed bottom-6 right-6 z-[200]">
