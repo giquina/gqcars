@@ -19,6 +19,7 @@ import AIBadge from '@/components/ui/AIBadge'
 import MobileAppBanner from '@/components/ui/MobileAppBanner'
 import { CallToActionPanel } from '@/components/ui/CallToActionPanel'
 import AppDownloadBanner from '@/components/ui/AppDownloadBanner'
+import PWAInstallBanner from '@/components/ui/PWAInstallBanner'
 import SpinToWin from '@/components/ui/SpinToWin'
 import ReferralPopup from '@/components/ui/ReferralPopup'
 import FloatingActionButton from '@/components/ui/FloatingActionButton'
@@ -91,6 +92,9 @@ export default function HomePage() {
 
       {/* App Download Banner */}
       <AppDownloadBanner />
+      
+      {/* PWA Install Banner */}
+      <PWAInstallBanner />
 
       {/* Gamification Modals */}
       <SpinToWin 

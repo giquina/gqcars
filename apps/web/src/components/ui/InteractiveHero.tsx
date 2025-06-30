@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react'
 import { Zap, Shield, Car, Phone, ArrowRight, Star, Sparkles, Target, Clock, MapPin, Calendar, Smartphone, CheckCircle } from 'lucide-react'
-// import { motion } from 'framer-motion' // Temporarily commented out for testing"
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+import TwoStepBookingFlow from './TwoStepBookingFlow'
 
 interface InteractiveHeroProps {
   children?: React.ReactNode
@@ -13,6 +14,14 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
   const [activeBookings, setActiveBookings] = useState(47)
   const [driversOnline, setDriversOnline] = useState(23)
   const [responseTime, setResponseTime] = useState(2.3)
+  const [showBookingFlow, setShowBookingFlow] = useState(false)
+
+  const handleBookingSubmit = (bookingData: any) => {
+    console.log('Booking submitted:', bookingData)
+    // TODO: Integrate with backend API
+    // For now, just show success message
+    alert(`🎉 Booking submitted successfully! We'll contact you shortly at ${bookingData.phone}`)
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -126,15 +135,51 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
           </p>
         </div>
 
-        {/* Large Animated Booking Form */}
-        <div className="bg-black/80 backdrop-blur-lg rounded-2xl p-8 border-2 border-yellow-500/50 max-w-4xl mx-auto mb-12 shadow-2xl animate-fade-in">
+        {/* Enhanced CTA for 2-Step Booking Flow */}
+        <motion.div 
+          className="bg-black/80 backdrop-blur-lg rounded-2xl p-8 border-2 border-yellow-500/50 max-w-4xl mx-auto mb-12 shadow-2xl animate-fade-in"
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="text-center mb-6">
-            <h3 className="text-2xl md:text-3xl font-black text-yellow-400 mb-2">🚀 INSTANT BOOKING FORM</h3>
-            <p className="text-white/80">Get your secure ride in under 60 seconds</p>
+            <h3 className="text-2xl md:text-3xl font-black text-yellow-400 mb-2">🚀 INSTANT BOOKING SYSTEM</h3>
+            <p className="text-white/80">Book your secure ride in 2 simple steps - No hassle, Just results!</p>
           </div>
           
-          <HeroBookingForm />
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Quick Features */}
+            <div className="text-center bg-gradient-to-b from-yellow-500/20 to-orange-500/20 rounded-xl p-4 border border-yellow-500/30">
+              <Clock className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
+              <h4 className="font-black text-white text-sm">⚡ 60-Second Booking</h4>
+              <p className="text-gray-300 text-xs">Fastest booking in London</p>
+            </div>
+            <div className="text-center bg-gradient-to-b from-yellow-500/20 to-orange-500/20 rounded-xl p-4 border border-yellow-500/30">
+              <Shield className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
+              <h4 className="font-black text-white text-sm">🛡️ SIA Licensed</h4>
+              <p className="text-gray-300 text-xs">Professional security drivers</p>
+            </div>
+            <div className="text-center bg-gradient-to-b from-yellow-500/20 to-orange-500/20 rounded-xl p-4 border border-yellow-500/30">
+              <Star className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
+              <h4 className="font-black text-white text-sm">⭐ 4.9/5 Rating</h4>
+              <p className="text-gray-300 text-xs">1000+ happy customers</p>
+            </div>
+          </div>
+          
+          <button
+            onClick={() => setShowBookingFlow(true)}
+            className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-black py-6 px-8 rounded-xl transition-all duration-300 text-xl shadow-2xl hover:scale-105 flex items-center justify-center space-x-3"
+          >
+            <Car className="w-8 h-8" />
+            <span>🚀 START 2-STEP BOOKING NOW</span>
+            <ArrowRight className="w-8 h-8" />
+          </button>
+          
+          <div className="text-center mt-4">
+            <p className="text-gray-400 text-sm">
+              Or call us directly: <span className="text-yellow-400 font-bold">07407 655 203</span>
+            </p>
+          </div>
+        </motion.div>
 
         {/* How It Works Section */}
         <div className="mb-12 animate-fade-in">
@@ -242,121 +287,17 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
 
       {/* Animated bottom glow */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-yellow-500/20 via-transparent to-transparent animate-pulse"></div>
+      
+      {/* 2-Step Booking Flow Modal */}
+      <TwoStepBookingFlow
+        isOpen={showBookingFlow}
+        onClose={() => setShowBookingFlow(false)}
+        onSubmit={handleBookingSubmit}
+      />
     </div>
   )
 }
 
-// Hero Booking Form Component
-function HeroBookingForm() {
-  const [formData, setFormData] = useState({
-    pickup: '',
-    destination: '',
-    date: '',
-    time: '',
-    service: 'private-hire'
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission - could integrate with existing booking system
-    console.log('Booking form submitted:', formData)
-    // Redirect to full booking page or show success message
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="relative">
-          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
-          <input
-            type="text"
-            name="pickup"
-            value={formData.pickup}
-            onChange={handleChange}
-            placeholder="Pickup Location"
-            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white placeholder-gray-400 focus:border-yellow-500 focus:outline-none transition-colors"
-            required
-          />
-        </div>
-        
-        <div className="relative">
-          <Target className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
-          <input
-            type="text"
-            name="destination"
-            value={formData.destination}
-            onChange={handleChange}
-            placeholder="Destination"
-            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white placeholder-gray-400 focus:border-yellow-500 focus:outline-none transition-colors"
-            required
-          />
-        </div>
-        
-        <div className="relative">
-          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white focus:border-yellow-500 focus:outline-none transition-colors"
-            required
-          />
-        </div>
-        
-        <div className="relative">
-          <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
-          <input
-            type="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white focus:border-yellow-500 focus:outline-none transition-colors"
-            required
-          />
-        </div>
-      </div>
-      
-      <div className="relative">
-        <Shield className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
-        <select
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white focus:border-yellow-500 focus:outline-none transition-colors"
-        >
-          <option value="private-hire">Private Hire</option>
-          <option value="close-protection">Close Protection</option>
-          <option value="corporate">Corporate Transport</option>
-          <option value="vip">VIP Service</option>
-          <option value="airport">Airport Transfer</option>
-        </select>
-      </div>
-      
-      <button
-        type="submit"
-        className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-black py-4 px-8 rounded-xl transition-all duration-300 text-lg shadow-2xl hover:scale-105"
-      >
-        <span className="flex items-center justify-center">
-          <Car className="w-6 h-6 mr-3" />
-          🚀 BOOK SECURE RIDE NOW
-          <ArrowRight className="w-6 h-6 ml-3" />
-        </span>
-      </button>
-      
-      <div className="text-center">
-        <p className="text-gray-400 text-sm">
-          Or call us directly: <span className="text-yellow-400 font-bold">07407 655 203</span>
-        </p>
-      </div>
-    </form>
-  )
-}
 
 // Live Rides Ticker Component
 function LiveRidesTicker() {
