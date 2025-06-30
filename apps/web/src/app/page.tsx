@@ -1,6 +1,6 @@
 "use client";
 import Header from '@/components/ui/Header'
-import { InteractiveHero } from '@/components/ui/InteractiveHero'
+import InteractiveHero from '@/components/ui/InteractiveHero'
 import { HomePageAssessment } from '@/components/ui/HomePageAssessment'
 import TestimonialsSection from '@/components/ui/TestimonialsSection'
 import InteractiveFeaturesShowcase from '@/components/ui/InteractiveFeaturesShowcase'
@@ -18,14 +18,38 @@ import AIAssistantWidget from '@/components/ui/AIAssistantWidget'
 import AIBadge from '@/components/ui/AIBadge'
 import MobileAppBanner from '@/components/ui/MobileAppBanner'
 import { CallToActionPanel } from '@/components/ui/CallToActionPanel'
+import AppDownloadBanner from '@/components/ui/AppDownloadBanner'
+import SpinToWin from '@/components/ui/SpinToWin'
+import ReferralPopup from '@/components/ui/ReferralPopup'
 import FloatingActionButton from '@/components/ui/FloatingActionButton'
 import QuickActionPlatform from '@/components/ui/QuickActionPlatform'
 import LocationBasedQuotes from '@/components/ui/LocationBasedQuotes'
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton'
 import TrustBadges from '@/components/ui/TrustBadges'
+import QuickQuoteButton from '@/components/ui/QuickQuoteButton'
 import { ChevronDown } from 'lucide-react'
+import { useState } from 'react'
 
 export default function HomePage() {
+  const [showSpinToWin, setShowSpinToWin] = useState(false);
+  const [showReferralPopup, setShowReferralPopup] = useState(false);
+
+  // Trigger Spin to Win after successful booking (simulate)
+  const handleBookingSuccess = () => {
+    setShowSpinToWin(true);
+  };
+
+  // Handle prize won from spin to win
+  const handlePrizeWon = (prize: any) => {
+    console.log('Prize won:', prize);
+    // You can add analytics or save to backend here
+  };
+
+  // Trigger referral popup on certain actions
+  const handleShowReferral = () => {
+    setShowReferralPopup(true);
+  };
+
   return (
     <main className="min-h-screen bg-gray-900 text-white">
       <Header />
@@ -37,45 +61,10 @@ export default function HomePage() {
       
       {/* Interactive Hero Section */}
       <InteractiveHero>
-        <div className="text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600">
-            GQ Cars Security Transport
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Professional SIA Licensed Security Drivers for London's Elite
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book">
-              <button className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 px-8 rounded-lg transition-colors text-lg">
-                Book Now
-              </button>
-            </Link>
-            <Link href="/assessment">
-              <button className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black font-bold py-4 px-8 rounded-lg transition-colors text-lg">
-                Take Security Assessment
-              </button>
-            </Link>
-          </div>
-        </div>
+        {/* Hero content is now integrated within the component */}
       </InteractiveHero>
 
-      {/* Integrated Get Instant Quote Section */}
-      <section className="relative z-20 flex justify-center py-12 bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-black">
-        <div className="w-full max-w-3xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center mb-4 gap-3">
-              <Calculator className="w-7 h-7 text-yellow-400 animate-bounce" />
-              <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                🔥 BOOKING IS EASY! GET INSTANT QUOTE
-              </h2>
-              <Calculator className="w-7 h-7 text-yellow-400 animate-bounce" />
-            </div>
-          </div>
-          <QuoteWidget />
-        </div>
-      </section>
-
-      {/* Services Overview Section */}
+      {/* Interactive Features Section */}
       <InteractiveFeaturesShowcase />
 
       {/* All Services Section */}
@@ -90,12 +79,46 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <TestimonialsSection />
 
+      {/* Quick Quote Button - Mobile Only */}
+      <QuickQuoteButton />
+
       {/* WhatsApp Widget - Always Highest Z-Index */}
       <div className="fixed bottom-6 right-6 z-[200]">
       <WhatsAppWidget />
       </div>
 
       <Footer />
+
+      {/* App Download Banner */}
+      <AppDownloadBanner />
+
+      {/* Gamification Modals */}
+      <SpinToWin 
+        isOpen={showSpinToWin}
+        onClose={() => setShowSpinToWin(false)}
+        onWin={handlePrizeWon}
+      />
+
+      <ReferralPopup 
+        isOpen={showReferralPopup}
+        onClose={() => setShowReferralPopup(false)}
+      />
+
+      {/* Test Buttons - Remove in production */}
+      <div className="fixed top-20 right-4 z-50 space-y-2">
+        <button 
+          onClick={() => setShowSpinToWin(true)}
+          className="bg-purple-600 text-white px-3 py-2 rounded text-sm hover:bg-purple-700"
+        >
+          Test Spin
+        </button>
+        <button 
+          onClick={() => setShowReferralPopup(true)}
+          className="bg-green-600 text-white px-3 py-2 rounded text-sm hover:bg-green-700"
+        >
+          Test Referral
+        </button>
+      </div>
     </main>
   );
 }

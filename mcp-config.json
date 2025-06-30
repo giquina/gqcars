@@ -1,0 +1,102 @@
+{
+  "version": "1.0.0",
+  "name": "GQ Cars MCP Lab",
+  "description": "AI-powered automation ecosystem for GQ Cars LTD with Model Context Protocol servers",
+  "project": "gqcars-main-production",
+  "control_tower": {
+    "url": "http://localhost:4000",
+    "port": 4000
+  },
+  "services": {
+    "supabase-mcp": {
+      "port": 4050,
+      "url": "http://localhost:4050",
+      "description": "Supabase database operations, authentication, storage",
+      "status": "ready",
+      "path": "./mcp-lab/mcp-servers/integration/supabase-mcp",
+      "env": {
+        "SUPABASE_URL": "https://xqaroqpjgidhmkzpluyv.supabase.co",
+        "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxYXJvcXBqZ2lkaG1renBsdXl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1Nzg0MzAsImV4cCI6MjA1MTE1NDQzMH0.KnqKEGHHdOCNfV4pEW2yIxbE9gVBSyG8zGC4PfFCCgE"
+      },
+      "endpoints": {
+        "health": "/health",
+        "insert": "/insert",
+        "select": "/select",
+        "update": "/update",
+        "delete": "/delete",
+        "auth_signup": "/auth/signup",
+        "auth_signin": "/auth/signin",
+        "storage_upload": "/storage/upload",
+        "storage_url": "/storage/url",
+        "rpc": "/rpc",
+        "realtime_setup": "/realtime/setup"
+      }
+    },
+    "github-mcp": {
+      "port": 4044,
+      "url": "http://localhost:4044",
+      "description": "GitHub API integration for repository and issue management",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/dev/github-mcp"
+    },
+    "test-mcp": {
+      "port": 4045,
+      "url": "http://localhost:4045",
+      "description": "Test runner for Jest, Playwright, Vitest",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/dev/test-mcp"
+    },
+    "playwright-mcp": {
+      "port": 4046,
+      "url": "http://localhost:4046",
+      "description": "Browser automation with Playwright",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/dev/playwright-mcp"
+    },
+    "deployment-mcp": {
+      "port": 4047,
+      "url": "http://localhost:4047",
+      "description": "Automated deployment to Vercel, Netlify, Firebase",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/dev/deployment-mcp"
+    },
+    "n8n-mcp": {
+      "port": 4051,
+      "url": "http://localhost:4051",
+      "description": "n8n workflow automation integration",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/integration/n8n-mcp"
+    },
+    "docker-mcp": {
+      "port": 4052,
+      "url": "http://localhost:4052",
+      "description": "Docker container management",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/integration/docker-mcp"
+    },
+    "ai-copilot-mcp": {
+      "port": 4060,
+      "url": "http://localhost:4060",
+      "description": "Natural language interface to control all MCP services",
+      "status": "available",
+      "path": "./mcp-lab/mcp-servers/devops/ai-copilot-mcp"
+    }
+  },
+  "database": {
+    "type": "supabase",
+    "url": "https://xqaroqpjgidhmkzpluyv.supabase.co",
+    "tables": {
+      "profiles": "User profiles and settings",
+      "bookings": "Customer bookings and rides",
+      "assessments": "Security risk assessments",
+      "vehicles": "Fleet management",
+      "drivers": "Driver information and certifications"
+    }
+  },
+  "usage": {
+    "start_supabase_mcp": "cd mcp-lab/mcp-servers/integration/supabase-mcp && npm start",
+    "health_check": "curl http://localhost:4050/health",
+    "insert_data": "POST http://localhost:4050/insert",
+    "query_data": "POST http://localhost:4050/select"
+  }
+}

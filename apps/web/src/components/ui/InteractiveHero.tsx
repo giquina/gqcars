@@ -1,10 +1,12 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
-import { Zap, Shield, Car, Phone, ArrowRight, Star, Sparkles, Target } from 'lucide-react'
+import { Zap, Shield, Car, Phone, ArrowRight, Star, Sparkles, Target, Clock, MapPin, Calendar, Smartphone, CheckCircle } from 'lucide-react'
+// import { motion } from 'framer-motion' // Temporarily commented out for testing"
+import Link from 'next/link'
 
 interface InteractiveHeroProps {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export function InteractiveHero({ children }: InteractiveHeroProps) {
@@ -117,27 +119,98 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
           </span>
         </h1>
 
-        {/* Dynamic Subtitle */}
-        <p className="text-xl md:text-3xl text-white mb-12 font-bold text-center max-w-4xl mx-auto">
-          ⚡ INSTANT BOOKINGS • 🛡️ SIA LICENSED • 🚗 LUXURY VEHICLES
-        </p>
+        {/* Animated Tagline */}
+        <div className="mb-8 animate-fade-in">
+          <p className="text-2xl md:text-4xl text-white font-black text-center max-w-5xl mx-auto leading-tight">
+            <span className="inline-block animate-pulse">📚</span> Book Your Secure Ride Instantly – SIA Licensed Drivers, 24/7 <span className="inline-block animate-pulse">🚗</span>
+          </p>
+        </div>
 
-        {/* Action-Packed CTAs */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-          <button className="group bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-black py-6 px-10 rounded-xl transition-all duration-300 transform hover:scale-110 shadow-2xl">
-            <span className="flex items-center justify-center text-lg">
-              <Car className="w-6 h-6 mr-3" />
-              BOOK NOW - GET 50% OFF
-              <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
-            </span>
-          </button>
+        {/* Large Animated Booking Form */}
+        <div className="bg-black/80 backdrop-blur-lg rounded-2xl p-8 border-2 border-yellow-500/50 max-w-4xl mx-auto mb-12 shadow-2xl animate-fade-in">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl md:text-3xl font-black text-yellow-400 mb-2">🚀 INSTANT BOOKING FORM</h3>
+            <p className="text-white/80">Get your secure ride in under 60 seconds</p>
+          </div>
           
-          <button className="group bg-black/50 border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold py-6 px-10 rounded-xl transition-all duration-300 backdrop-blur-lg">
-            <span className="flex items-center justify-center text-lg">
-              <Phone className="w-6 h-6 mr-3" />
-              CALL: 07407 655 203
-            </span>
-          </button>
+          <HeroBookingForm />
+        </div>
+
+        {/* How It Works Section */}
+        <div className="mb-12 animate-fade-in">
+          <h3 className="text-3xl md:text-4xl font-black text-white mb-8 text-center">
+            <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">How It Works</span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Step 1 */}
+            <div className="text-center bg-gradient-to-b from-yellow-500/20 to-orange-500/20 rounded-2xl p-6 border border-yellow-500/30 hover:scale-105 transition-transform duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                <Smartphone className="w-8 h-8 text-black" />
+              </div>
+              <h4 className="text-xl font-black text-white mb-2">1. BOOK</h4>
+              <p className="text-gray-300">Fill out our quick form above or call us directly</p>
+            </div>
+            
+            {/* Step 2 */}
+            <div className="text-center bg-gradient-to-b from-yellow-500/20 to-orange-500/20 rounded-2xl p-6 border border-yellow-500/30 hover:scale-105 transition-transform duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce" style={{animationDelay: '0.2s'}}>
+                <Target className="w-8 h-8 text-black" />
+              </div>
+              <h4 className="text-xl font-black text-white mb-2">2. TRACK</h4>
+              <p className="text-gray-300">Real-time tracking and live updates on your driver</p>
+            </div>
+            
+            {/* Step 3 */}
+            <div className="text-center bg-gradient-to-b from-yellow-500/20 to-orange-500/20 rounded-2xl p-6 border border-yellow-500/30 hover:scale-105 transition-transform duration-300">
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce" style={{animationDelay: '0.4s'}}>
+                <CheckCircle className="w-8 h-8 text-black" />
+              </div>
+              <h4 className="text-xl font-black text-white mb-2">3. ARRIVE</h4>
+              <p className="text-gray-300">Safe, secure arrival with our certified drivers</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Download App Section */}
+        <div className="mb-12 animate-fade-in">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl md:text-3xl font-black text-white mb-2">
+              📱 <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Download Our App</span>
+            </h3>
+            <p className="text-gray-300">Book faster, track in real-time, and get exclusive deals</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#"
+              className="group bg-black border-2 border-white/20 hover:border-yellow-500 rounded-xl p-4 flex items-center space-x-3 transition-all duration-300 hover:scale-105"
+            >
+              <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center">
+                <span className="text-black font-bold text-sm">📱</span>
+              </div>
+              <div className="text-left">
+                <p className="text-xs text-gray-400">Download on the</p>
+                <p className="text-white font-bold">App Store</p>
+              </div>
+            </a>
+            
+            <a
+              href="#"
+              className="group bg-black border-2 border-white/20 hover:border-yellow-500 rounded-xl p-4 flex items-center space-x-3 transition-all duration-300 hover:scale-105"
+            >
+              <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center">
+                <span className="text-black font-bold text-sm">🤖</span>
+              </div>
+              <div className="text-left">
+                <p className="text-xs text-gray-400">Get it on</p>
+                <p className="text-white font-bold">Google Play</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        {/* Live Rides Ticker */}
+        <div className="mb-8 animate-fade-in">
+          <LiveRidesTicker />
         </div>
 
         {/* Bold Social Proof */}
@@ -159,9 +232,11 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
         </div>
 
         {/* Children Content */}
-        <div className="mt-16">
-          {children}
-        </div>
+        {children && (
+          <div className="mt-16">
+            {children}
+          </div>
+        )}
 
       </div>
 
@@ -170,3 +245,169 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
     </div>
   )
 }
+
+// Hero Booking Form Component
+function HeroBookingForm() {
+  const [formData, setFormData] = useState({
+    pickup: '',
+    destination: '',
+    date: '',
+    time: '',
+    service: 'private-hire'
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission - could integrate with existing booking system
+    console.log('Booking form submitted:', formData)
+    // Redirect to full booking page or show success message
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="relative">
+          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
+          <input
+            type="text"
+            name="pickup"
+            value={formData.pickup}
+            onChange={handleChange}
+            placeholder="Pickup Location"
+            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white placeholder-gray-400 focus:border-yellow-500 focus:outline-none transition-colors"
+            required
+          />
+        </div>
+        
+        <div className="relative">
+          <Target className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
+          <input
+            type="text"
+            name="destination"
+            value={formData.destination}
+            onChange={handleChange}
+            placeholder="Destination"
+            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white placeholder-gray-400 focus:border-yellow-500 focus:outline-none transition-colors"
+            required
+          />
+        </div>
+        
+        <div className="relative">
+          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white focus:border-yellow-500 focus:outline-none transition-colors"
+            required
+          />
+        </div>
+        
+        <div className="relative">
+          <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
+          <input
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white focus:border-yellow-500 focus:outline-none transition-colors"
+            required
+          />
+        </div>
+      </div>
+      
+      <div className="relative">
+        <Shield className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-yellow-400" />
+        <select
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+          className="w-full pl-10 pr-4 py-4 bg-gray-900/50 border border-yellow-500/30 rounded-xl text-white focus:border-yellow-500 focus:outline-none transition-colors"
+        >
+          <option value="private-hire">Private Hire</option>
+          <option value="close-protection">Close Protection</option>
+          <option value="corporate">Corporate Transport</option>
+          <option value="vip">VIP Service</option>
+          <option value="airport">Airport Transfer</option>
+        </select>
+      </div>
+      
+      <button
+        type="submit"
+        className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-black font-black py-4 px-8 rounded-xl transition-all duration-300 text-lg shadow-2xl hover:scale-105"
+      >
+        <span className="flex items-center justify-center">
+          <Car className="w-6 h-6 mr-3" />
+          🚀 BOOK SECURE RIDE NOW
+          <ArrowRight className="w-6 h-6 ml-3" />
+        </span>
+      </button>
+      
+      <div className="text-center">
+        <p className="text-gray-400 text-sm">
+          Or call us directly: <span className="text-yellow-400 font-bold">07407 655 203</span>
+        </p>
+      </div>
+    </form>
+  )
+}
+
+// Live Rides Ticker Component
+function LiveRidesTicker() {
+  const [currentRide, setCurrentRide] = useState(0)
+  
+  const liveRides = [
+    "🚗 Driver #247 picking up client in Mayfair",
+    "🛡️ Security detail en route to corporate event",
+    "✈️ Airport transfer departing from Canary Wharf", 
+    "🏆 VIP client arriving at private club",
+    "🎭 Wedding transport active in Westminster",
+    "🏢 Executive pickup scheduled for City of London",
+    "🌟 Close protection team deployed in Knightsbridge"
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRide(prev => (prev + 1) % liveRides.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 border border-green-500/30 rounded-2xl p-6 max-w-3xl mx-auto">
+      <div className="flex items-center justify-center mb-4">
+        <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse mr-3"></div>
+        <h3 className="text-xl font-black text-white">
+          🔴 <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">LIVE RIDES</span>
+        </h3>
+        <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse ml-3"></div>
+      </div>
+      
+      <div
+        key={currentRide}
+        className="text-center animate-fade-in"
+      >
+        <p className="text-white font-bold text-lg">{liveRides[currentRide]}</p>
+      </div>
+      
+      <div className="flex justify-center mt-4 space-x-2">
+        {liveRides.map((_, index) => (
+          <div
+            key={index}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              index === currentRide ? 'bg-green-400' : 'bg-gray-600'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default InteractiveHero

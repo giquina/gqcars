@@ -1,14 +1,22 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import '../globals.css'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import { Providers } from '@/components/providers'
+import '@/styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+export const metadata = {
+  title: 'GQ Cars LTD - AI-Powered Security Taxi Service | SIA Licensed Drivers',
+  description: 'Revolutionary AI-powered security taxi service with SIA Licensed Close Protection Officers. Professional drivers, 24/7 availability, advanced booking technology.',
+  keywords: 'security taxi, SIA licensed drivers, close protection, London taxi, AI-powered transport, professional drivers',
+  author: 'GQ Cars LTD',
+  robots: 'index, follow',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+}
 
-export const metadata: Metadata = {
-  title: 'GQ Cars - Professional Transport & Security Services',
-  description: 'Need a ride or personal security? GQ Cars provides safe, reliable transport and professional security services. Available 24/7 across London.',
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -17,13 +25,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <main>
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans">
+        <Providers>
           {children}
-        </main>
-        <Footer />
+        </Providers>
       </body>
     </html>
   )

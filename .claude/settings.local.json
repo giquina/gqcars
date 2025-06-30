@@ -90,7 +90,14 @@
       "Bash(PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npx playwright@1.53.0 --version)",
       "Bash(npx playwright install:*)",
       "Bash(git rm:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(git branch:*)",
+      "Bash(git pull:*)",
+      "Bash(npx:*)",
+      "Bash(sed:*)",
+      "Bash(echo:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)"
     ],
     "deny": []
   }
