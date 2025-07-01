@@ -48,7 +48,7 @@ export const useGoogleAnalytics = () => {
 
   const trackPageView = (url: string) => {
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, {
+      window.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '', {
         page_path: url,
       })
     }

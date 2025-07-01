@@ -9,7 +9,15 @@ interface SmartPlatformModalProps {
   onClose: () => void
 }
 
-const CredentialCard = ({ logo, title, description, features, accentColor }) => (
+interface CredentialCardProps {
+  logo: React.ReactNode;
+  title: string;
+  description: string;
+  features: string[];
+  accentColor: string;
+}
+
+const CredentialCard = ({ logo, title, description, features, accentColor }: CredentialCardProps) => (
   <div className={`bg-gray-900/50 p-6 rounded-2xl h-full border-t-4 border-${accentColor}`}>
     <div className="text-center mb-6">
       {logo}

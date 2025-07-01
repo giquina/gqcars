@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 import { useEffect } from 'react'
-import va from '@vercel/analytics'
+// import va from '@vercel/analytics'
 
 export function Analytics() {
   const pathname = usePathname()
@@ -14,9 +14,10 @@ export function Analytics() {
       ? `${pathname}?${searchParams}`
       : pathname
 
-    va.track('pageview', {
-      path: url,
-    })
+    // va.track('pageview', {
+    //   path: url,
+    // })
+    console.log('Page view:', url)
   }, [pathname, searchParams])
 
   return (

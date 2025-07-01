@@ -65,7 +65,7 @@ const PerformanceMonitor = () => {
         try {
           const fidObserver = new PerformanceObserver((list) => {
             for (const entry of list.getEntries()) {
-              metrics.FID = entry.processingStart - entry.startTime;
+              metrics.FID = (entry as any).processingStart - entry.startTime;
               sendMetrics('FID', metrics.FID);
             }
           });
@@ -79,8 +79,8 @@ const PerformanceMonitor = () => {
           let clsValue = 0;
           const clsObserver = new PerformanceObserver((list) => {
             for (const entry of list.getEntries()) {
-              if (!entry.hadRecentInput) {
-                clsValue += entry.value;
+              if (!(entry as any).hadRecentInput) {
+                clsValue += (entry as any).value;
               }
             }
             metrics.CLS = clsValue;

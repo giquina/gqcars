@@ -11,10 +11,19 @@
     · scrollRestoration
 
  ✓ Starting...
+ ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
    Disabled SWC as replacement for Babel because of custom Babel configuration ".babelrc" https://nextjs.org/docs/messages/swc-disabled
    `compiler` options in `next.config.js` will be ignored while using Babel https://nextjs.org/docs/messages/ignored-compiler-options
- ✓ Ready in 10.4s
- ⚠ Attempted to load @next/swc-linux-x64-gnu, but it was not installed
- ⚠ Attempted to load @next/swc-linux-x64-musl, but it was not installed
- ⨯ Failed to load SWC binary for linux/x64, see more info here: https://nextjs.org/docs/messages/failed-loading-swc
-[?25h
+ ✓ Ready in 13.3s
+ ○ Compiling / ...
+   Using external babel configuration from /mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/.babelrc
+ ⚠ It looks like there is a custom Babel configuration that can be removed.
+ ✓ Compiled / in 21.7s (1096 modules)
+ GET / 200 in 22376ms
+ GET / 200 in 109ms
+ GET / 200 in 116ms
+ GET / 200 in 102ms
+ GET / 200 in 274ms
+ GET / 200 in 172ms
+ GET / 200 in 456ms
+ GET / 200 in 176ms

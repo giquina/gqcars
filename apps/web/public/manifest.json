@@ -1,21 +1,45 @@
 {
-  "name": "GQ Cars Security Transport",
+  "name": "GQ Cars - Premium Security Transport",
   "short_name": "GQ Cars",
-  "description": "AI-Powered Security Taxi Service with Professional SIA Licensed Drivers",
+  "description": "Professional SIA Licensed Close Protection and Premium Transport Services in London",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1f2937",
-  "theme_color": "#eab308",
+  "background_color": "#0f172a",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "categories": ["travel", "business", "lifestyle"],
+  "lang": "en-GB",
+  "dir": "ltr",
+  "scope": "/",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
     },
     {
-      "src": "/icon-512.png", 
+      "src": "/icon-512.svg", 
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Now",
+      "short_name": "Book",
+      "description": "Book a premium security transport",
+      "url": "/book",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Security Assessment",
+      "short_name": "Security",
+      "description": "Get a security risk assessment",
+      "url": "/security-assessment",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
 }

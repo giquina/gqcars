@@ -28,7 +28,7 @@ export default function BoldServiceTemplate({
   pricing,
   color = 'red'
 }: ServicePageProps) {
-  const colorVariants = {
+  const colorVariants: Record<string, string> = {
     red: 'from-red-500 via-red-600 to-red-700',
     blue: 'from-blue-500 via-blue-600 to-blue-700',
     green: 'from-green-500 via-green-600 to-green-700',

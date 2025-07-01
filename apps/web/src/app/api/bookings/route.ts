@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
-import { generateBookingReference } from '@/lib/utils'
-import { bookingSchema } from '@/lib/validations/booking'
 
 export async function POST(req: Request) {
   try {
@@ -13,25 +11,21 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    const json = await req.json()
-    const body = bookingSchema.parse(json)
+    const body = await req.json()
 
     const booking = await prisma.booking.create({
       data: {
-        bookingReference: generateBookingReference(),
+        service: body.service || 'private-hire',
         userId: session.user.id,
-        serviceType: body.serviceType,
-        vehicleType: body.vehicleType,
-        pickupAddress: body.pickupAddress,
-        pickupLat: body.pickupLat,
-        pickupLng: body.pickupLng,
-        destinationAddress: body.destinationAddress,
-        destinationLat: body.destinationLat,
-        destinationLng: body.destinationLng,
-        scheduledDateTime: body.scheduledDateTime,
-        estimatedPrice: body.estimatedPrice,
-        specialRequirements: body.specialRequirements,
-        securityLevel: body.securityLevel,
+        serviceType: body.serviceType || 'STANDARD',
+        pickupLocation: body.pickupLocation || body.pickupAddress || '',
+        destination: body.destination || body.destinationAddress || '',
+        date: new Date(body.date || Date.now()),
+        time: body.time || '12:00',
+        securityLevel: body.securityLevel || 'MEDIUM',
+        totalCost: body.totalCost || 0,
+        notes: body.notes,
+        status: 'pending'
       },
     })
 
@@ -64,7 +58,7 @@ export async function GET(req: Request) {
     const [bookings, total] = await Promise.all([
       prisma.booking.findMany({
         where,
-        orderBy: { scheduledDateTime: 'desc' },
+        orderBy: { createdAt: 'desc' },
         take: limit,
         skip,
       }),
