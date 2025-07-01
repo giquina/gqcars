@@ -19,6 +19,7 @@ const QuoteWidget = lazy(() => import('@/components/ui/QuoteWidget'))
 const EnhancedChatWidget = lazy(() => import('@/components/ui/EnhancedChatWidget'))
 const SpinToWin = lazy(() => import('@/components/ui/SpinToWin'))
 const ExitIntentPopup = lazy(() => import('@/components/ui/ExitIntentPopup'))
+const TrustSection = lazy(() => import('@/components/ui/TrustSection'))
 
 // Import SecurityAssessment normally since it's destructured
 import { SecurityAssessment } from '@/components/ui/SecurityAssessment'
@@ -121,6 +122,11 @@ export default function OptimizedHomePage() {
 
       <SectionLoader>
         <EnhancedLiveActivityWidget />
+      </SectionLoader>
+
+      {/* Trust Section - Professional metrics display */}
+      <SectionLoader>
+        <TrustSection />
       </SectionLoader>
 
       {/* Footer - Load last */}

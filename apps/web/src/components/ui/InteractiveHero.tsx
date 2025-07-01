@@ -11,9 +11,6 @@ interface InteractiveHeroProps {
 }
 
 export function InteractiveHero({ children }: InteractiveHeroProps) {
-  const [activeBookings, setActiveBookings] = useState(47)
-  const [driversOnline, setDriversOnline] = useState(23)
-  const [responseTime, setResponseTime] = useState(2.3)
   const [showBookingFlow, setShowBookingFlow] = useState(false)
 
   const handleBookingSubmit = (bookingData: any) => {
@@ -22,15 +19,6 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
     // For now, just show success message
     alert(`🎉 Booking submitted successfully! We'll contact you shortly at ${bookingData.phone}`)
   }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveBookings(prev => prev + Math.floor(Math.random() * 3))
-      setDriversOnline(prev => Math.max(15, prev + Math.floor(Math.random() * 5) - 2))
-      setResponseTime(prev => Math.max(1.8, Math.min(3.2, prev + (Math.random() - 0.5) * 0.2)))
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-black overflow-hidden">
@@ -86,27 +74,7 @@ export function InteractiveHero({ children }: InteractiveHeroProps) {
       {/* Glowing overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 via-transparent to-blue-500/10"></div>
 
-      {/* Live Activity Feed */}
-      <div className="fixed top-6 left-6 z-50 bg-black/80 backdrop-blur-lg rounded-xl p-4 border border-yellow-500/30">
-        <div className="flex items-center space-x-2 text-xs text-green-400 mb-2">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="font-bold">LIVE ACTIVITY</span>
-        </div>
-        <div className="space-y-1 text-xs text-gray-300">
-          <div className="flex items-center">
-            <Car className="w-3 h-3 mr-1 text-blue-400" />
-            <span className="font-mono">{activeBookings}</span> active bookings
-          </div>
-          <div className="flex items-center">
-            <Shield className="w-3 h-3 mr-1 text-green-400" />
-            <span className="font-mono">{driversOnline}</span> drivers online
-          </div>
-          <div className="flex items-center">
-            <Target className="w-3 h-3 mr-1 text-yellow-400" />
-            Avg response: <span className="font-mono">{responseTime.toFixed(1)}</span>min
-          </div>
-        </div>
-      </div>
+
 
       {/* Main Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center">
