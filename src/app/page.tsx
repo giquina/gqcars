@@ -59,19 +59,37 @@ export default function HomePage() {
         </div>
       </InteractiveHero>
 
-      {/* Integrated Get Instant Quote Section */}
-      <section className="relative z-20 flex justify-center py-12 bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-black">
-        <div className="w-full max-w-3xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center mb-4 gap-3">
-              <Calculator className="w-7 h-7 text-yellow-400 animate-bounce" />
-              <h2 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+      {/* Full Viewport Google-Style Booking Section */}
+      <section className="min-h-screen flex flex-col bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-black relative">
+        {/* Main Heading - Positioned in upper third */}
+        <div className="flex-1 flex flex-col pt-16 pb-8">
+          <div className="text-center mb-16 md:mb-20 lg:mb-24">
+            <div className="flex items-center justify-center mb-6 gap-3">
+              <Calculator className="w-8 h-8 md:w-10 md:h-10 text-yellow-400 animate-bounce" />
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 🔥 BOOKING IS EASY! GET INSTANT QUOTE
               </h2>
-              <Calculator className="w-7 h-7 text-yellow-400 animate-bounce" />
+              <Calculator className="w-8 h-8 md:w-10 md:h-10 text-yellow-400 animate-bounce" />
+            </div>
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 font-medium max-w-4xl mx-auto px-4">
+              Enter your journey details for real-time pricing with our SIA licensed security drivers
+            </p>
+          </div>
+
+          {/* Booking Form - Center-center positioning */}
+          <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div className="w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl">
+              <QuoteWidget />
             </div>
           </div>
-          <QuoteWidget />
+
+          {/* Scroll indicator */}
+          <div className="text-center mt-8 pb-8">
+            <div className="inline-flex flex-col items-center space-y-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+              <span className="text-sm font-medium">More Services</span>
+              <ChevronDown className="w-6 h-6 animate-bounce" />
+            </div>
+          </div>
         </div>
       </section>
 

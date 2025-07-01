@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { MapPin, Car, Clock, Star, Calculator, ArrowRight, Navigation, Sparkles, Phone, Shield, Crown, Users, Calendar, Search } from 'lucide-react'
-import { BoldCard, BoldButton } from './BoldDynamicComponents'
+import { BoldButton } from './BoldDynamicComponents'
 
 // Types for location suggestions
 interface LocationSuggestion {
@@ -223,40 +223,31 @@ export default function QuoteWidget() {
   }
 
   return (
-    <BoldCard glowing className="relative overflow-hidden">
-      <div className="relative z-10">
-        {/* Enhanced Header - Mobile Optimized */}
-        <div className="text-center mb-6">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Calculator className="w-6 h-6 text-yellow-400 animate-bounce" />
-            <h2 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-              ⚡ GET INSTANT QUOTE
-            </h2>
-            <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse" />
-          </div>
-          <p className="text-gray-300 font-semibold mb-4">🔥 Enter your journey details for real-time pricing</p>
-          
-          {/* SIA Licensed Guarantee */}
-          <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 px-4 py-3 rounded-xl mb-4">
-            <div className="flex items-center justify-center space-x-2">
-              <Shield className="w-5 h-5 text-blue-400" />
-              <span className="text-white font-black text-sm">🛡️ ALL JOURNEYS WITH SIA LICENSED SECURITY DRIVERS</span>
-            </div>
-          </div>
-          
-          {/* Enhanced 50% OFF Banner */}
-          <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-black mx-auto w-fit animate-pulse shadow-2xl border-2 border-yellow-300">
-            🔥 50% OFF FIRST RIDE - LIMITED TIME 🔥
-          </div>
+    <div className="w-full space-y-8 md:space-y-12">
+      {/* SIA Licensed Guarantee - Enhanced for full viewport */}
+      <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 px-6 py-4 md:py-6 rounded-2xl backdrop-blur-sm">
+        <div className="flex items-center justify-center space-x-3">
+          <Shield className="w-6 h-6 md:w-8 md:h-8 text-blue-400" />
+          <span className="text-white font-black text-lg md:text-xl lg:text-2xl">🛡️ ALL JOURNEYS WITH SIA LICENSED SECURITY DRIVERS</span>
         </div>
+      </div>
+      
+      {/* Enhanced 50% OFF Banner */}
+      <div className="flex justify-center">
+        <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-8 py-4 md:px-12 md:py-6 rounded-full text-lg md:text-xl lg:text-2xl font-black animate-pulse shadow-2xl border-4 border-yellow-300">
+          🔥 50% OFF FIRST RIDE - LIMITED TIME 🔥
+        </div>
+      </div>
 
-        {/* Enhanced Quote Form - Mobile Optimized */}
-        <div className="space-y-3 sm:space-y-4">
-          {/* Enhanced Pickup Location with Autocomplete - Mobile Responsive */}
+      {/* Main Form Container */}
+      <div className="bg-black/40 backdrop-blur-md border border-gray-600/50 rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl">
+        {/* Desktop: Side by side inputs, Mobile: Stacked */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-8">
+          {/* Enhanced Pickup Location with Autocomplete */}
           <div className="relative" ref={pickupRef}>
-            <label className="block text-yellow-500 font-semibold mb-2 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+            <label className="block text-yellow-500 font-bold mb-3 text-base md:text-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-4 h-4 md:w-5 md:h-5 bg-green-500 rounded-full"></div>
                 <span>Pickup Location</span>
               </div>
             </label>
@@ -274,54 +265,46 @@ export default function QuoteWidget() {
                   }
                 }}
                 placeholder="Start typing address, postcode, or landmark..."
-                className="w-full bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-xl px-3 sm:px-4 py-3 sm:py-4 pl-10 sm:pl-12 text-white placeholder-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all text-sm sm:text-base"
+                className="w-full bg-gray-800/60 border-2 border-gray-600 rounded-2xl px-6 py-4 md:py-5 pl-14 md:pl-16 text-white placeholder-gray-400 focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/20 transition-all text-base md:text-lg font-medium"
               />
-              <div className="absolute left-3 sm:left-4 top-3 sm:top-4 text-green-400">
-                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"></div>
+              <div className="absolute left-4 md:left-5 top-4 md:top-5 text-green-400">
+                <div className="w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-white rounded-full"></div>
                 </div>
               </div>
-              <button className="absolute right-2 sm:right-3 top-2.5 sm:top-3 text-gray-400 hover:text-yellow-500 transition-colors">
-                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              <button className="absolute right-4 top-4 md:top-5 text-gray-400 hover:text-yellow-500 transition-colors">
+                <Search className="w-5 h-5 md:w-6 md:h-6" />
               </button>
             </div>
             
             {/* Pickup Autocomplete Suggestions */}
             {showPickupSuggestions && pickupSuggestions.length > 0 && (
-              <div className="absolute top-full left-0 right-0 z-50 bg-gray-800 border border-gray-600 rounded-xl mt-1 shadow-2xl max-h-64 overflow-y-auto">
+              <div className="absolute top-full left-0 right-0 z-50 bg-gray-800/95 backdrop-blur-md border border-gray-600 rounded-2xl mt-2 shadow-2xl max-h-80 overflow-y-auto">
                 {pickupSuggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => selectPickupSuggestion(suggestion)}
-                    className="w-full text-left px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 transition-colors flex items-center space-x-3"
+                    className="w-full text-left px-6 py-4 hover:bg-gray-700/70 border-b border-gray-700 last:border-b-0 transition-colors flex items-center space-x-4"
                   >
-                    <span className="text-lg">{getLocationIcon(suggestion.type)}</span>
+                    <span className="text-2xl">{getLocationIcon(suggestion.type)}</span>
                     <div className="flex-1">
-                      <div className="text-white font-medium text-sm">{suggestion.name}</div>
-                      <div className="text-gray-400 text-xs">{suggestion.fullAddress}</div>
+                      <div className="text-white font-semibold text-base">{suggestion.name}</div>
+                      <div className="text-gray-400 text-sm">{suggestion.fullAddress}</div>
                     </div>
-                    <div className="text-xs text-gray-500 capitalize bg-gray-700 px-2 py-1 rounded">
+                    <div className="text-xs text-gray-500 capitalize bg-gray-700 px-3 py-1 rounded-full">
                       {suggestion.type}
                     </div>
                   </button>
                 ))}
               </div>
             )}
-            
-            <div className="mt-1 text-xs text-gray-400 flex flex-wrap gap-1">
-              <span>📍 Current location</span>
-              <span>•</span>
-              <span>🔍 Search landmarks</span>
-              <span>•</span>
-              <span>📮 Enter postcode</span>
-            </div>
           </div>
 
-          {/* Enhanced Dropoff Location with Autocomplete - Mobile Responsive */}
+          {/* Enhanced Dropoff Location with Autocomplete */}
           <div className="relative" ref={dropoffRef}>
-            <label className="block text-yellow-500 font-semibold mb-2 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-sm"></div>
+            <label className="block text-yellow-500 font-bold mb-3 text-base md:text-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-4 h-4 md:w-5 md:h-5 bg-red-500 rounded-sm"></div>
                 <span>Drop-off Location</span>
               </div>
             </label>
@@ -339,201 +322,174 @@ export default function QuoteWidget() {
                   }
                 }}
                 placeholder="Start typing destination address, postcode, or landmark..."
-                className="w-full bg-gray-800/50 border border-gray-600 rounded-lg sm:rounded-xl px-3 sm:px-4 py-3 sm:py-4 pl-10 sm:pl-12 text-white placeholder-gray-400 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all text-sm sm:text-base"
+                className="w-full bg-gray-800/60 border-2 border-gray-600 rounded-2xl px-6 py-4 md:py-5 pl-14 md:pl-16 text-white placeholder-gray-400 focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/20 transition-all text-base md:text-lg font-medium"
               />
-              <div className="absolute left-3 sm:left-4 top-3 sm:top-4 text-red-400">
-                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-sm"></div>
+              <div className="absolute left-4 md:left-5 top-4 md:top-5 text-red-400">
+                <div className="w-5 h-5 md:w-6 md:h-6 bg-red-500 rounded-sm"></div>
               </div>
-              <button className="absolute right-2 sm:right-3 top-2.5 sm:top-3 text-gray-400 hover:text-yellow-500 transition-colors">
-                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              <button className="absolute right-4 top-4 md:top-5 text-gray-400 hover:text-yellow-500 transition-colors">
+                <Search className="w-5 h-5 md:w-6 md:h-6" />
               </button>
             </div>
             
             {/* Dropoff Autocomplete Suggestions */}
             {showDropoffSuggestions && dropoffSuggestions.length > 0 && (
-              <div className="absolute top-full left-0 right-0 z-50 bg-gray-800 border border-gray-600 rounded-xl mt-1 shadow-2xl max-h-64 overflow-y-auto">
+              <div className="absolute top-full left-0 right-0 z-50 bg-gray-800/95 backdrop-blur-md border border-gray-600 rounded-2xl mt-2 shadow-2xl max-h-80 overflow-y-auto">
                 {dropoffSuggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => selectDropoffSuggestion(suggestion)}
-                    className="w-full text-left px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-b-0 transition-colors flex items-center space-x-3"
+                    className="w-full text-left px-6 py-4 hover:bg-gray-700/70 border-b border-gray-700 last:border-b-0 transition-colors flex items-center space-x-4"
                   >
-                    <span className="text-lg">{getLocationIcon(suggestion.type)}</span>
+                    <span className="text-2xl">{getLocationIcon(suggestion.type)}</span>
                     <div className="flex-1">
-                      <div className="text-white font-medium text-sm">{suggestion.name}</div>
-                      <div className="text-gray-400 text-xs">{suggestion.fullAddress}</div>
+                      <div className="text-white font-semibold text-base">{suggestion.name}</div>
+                      <div className="text-gray-400 text-sm">{suggestion.fullAddress}</div>
                     </div>
-                    <div className="text-xs text-gray-500 capitalize bg-gray-700 px-2 py-1 rounded">
+                    <div className="text-xs text-gray-500 capitalize bg-gray-700 px-3 py-1 rounded-full">
                       {suggestion.type}
                     </div>
                   </button>
                 ))}
               </div>
             )}
-            
-            <div className="mt-1 text-xs text-gray-400 flex flex-wrap gap-1">
-              <span>🏠 Home</span>
-              <span>•</span>
-              <span>💼 Work</span>
-              <span>•</span>
-              <span>✈️ Airport</span>
-              <span>•</span>
-              <span>🏨 Hotels</span>
-            </div>
           </div>
+        </div>
 
-          {/* Quick Location Shortcuts - Enhanced */}
-          <div className="bg-gray-800/30 p-3 sm:p-4 rounded-xl border border-gray-600">
-            <div className="text-sm text-gray-300 mb-3 font-medium">🎯 Popular Destinations:</div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <button 
-                onClick={() => {
-                  setDropoff('Heathrow Airport, Hounslow TW6 1EW')
-                  setShowDropoffSuggestions(false)
-                }}
-                className="text-xs bg-blue-600/20 hover:bg-blue-600/30 p-2 rounded-lg text-blue-300 hover:text-white transition-colors text-center border border-blue-500/30"
-              >
-                ✈️ Heathrow
-              </button>
-              <button 
-                onClick={() => {
-                  setDropoff('Gatwick Airport, Horley RH6 0NP')
-                  setShowDropoffSuggestions(false)
-                }}
-                className="text-xs bg-blue-600/20 hover:bg-blue-600/30 p-2 rounded-lg text-blue-300 hover:text-white transition-colors text-center border border-blue-500/30"
-              >
-                ✈️ Gatwick
-              </button>
-              <button 
-                onClick={() => {
-                  setDropoff('City of London, London EC2V 6DN')
-                  setShowDropoffSuggestions(false)
-                }}
-                className="text-xs bg-green-600/20 hover:bg-green-600/30 p-2 rounded-lg text-green-300 hover:text-white transition-colors text-center border border-green-500/30"
-              >
-                🏙️ City Centre
-              </button>
-              <button 
-                onClick={() => {
-                  setDropoff('Canary Wharf, London E14 5AB')
-                  setShowDropoffSuggestions(false)
-                }}
-                className="text-xs bg-purple-600/20 hover:bg-purple-600/30 p-2 rounded-lg text-purple-300 hover:text-white transition-colors text-center border border-purple-500/30"
-              >
-                🏢 Canary Wharf
-              </button>
-            </div>
-            <div className="mt-2 text-center">
-              <button className="text-xs text-gray-400 hover:text-yellow-500 transition-colors">
-                + More destinations
-              </button>
-            </div>
+        {/* Quick Location Shortcuts - Horizontal layout on larger screens */}
+        <div className="bg-gray-800/40 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-gray-600/50 mb-8">
+          <div className="text-base md:text-lg text-gray-300 mb-4 font-semibold text-center">🎯 Popular Destinations:</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <button 
+              onClick={() => {
+                setDropoff('Heathrow Airport, Hounslow TW6 1EW')
+                setShowDropoffSuggestions(false)
+              }}
+              className="bg-blue-600/30 hover:bg-blue-600/50 p-4 md:p-6 rounded-xl text-blue-300 hover:text-white transition-all text-center border border-blue-500/30 hover:border-blue-400 transform hover:scale-105"
+            >
+              <div className="text-2xl md:text-3xl mb-2">✈️</div>
+              <div className="font-bold text-sm md:text-base">Heathrow</div>
+            </button>
+            <button 
+              onClick={() => {
+                setDropoff('Gatwick Airport, Horley RH6 0NP')
+                setShowDropoffSuggestions(false)
+              }}
+              className="bg-blue-600/30 hover:bg-blue-600/50 p-4 md:p-6 rounded-xl text-blue-300 hover:text-white transition-all text-center border border-blue-500/30 hover:border-blue-400 transform hover:scale-105"
+            >
+              <div className="text-2xl md:text-3xl mb-2">✈️</div>
+              <div className="font-bold text-sm md:text-base">Gatwick</div>
+            </button>
+            <button 
+              onClick={() => {
+                setDropoff('City of London, London EC2V 6DN')
+                setShowDropoffSuggestions(false)
+              }}
+              className="bg-green-600/30 hover:bg-green-600/50 p-4 md:p-6 rounded-xl text-green-300 hover:text-white transition-all text-center border border-green-500/30 hover:border-green-400 transform hover:scale-105"
+            >
+              <div className="text-2xl md:text-3xl mb-2">🏙️</div>
+              <div className="font-bold text-sm md:text-base">City Centre</div>
+            </button>
+            <button 
+              onClick={() => {
+                setDropoff('Canary Wharf, London E14 5AB')
+                setShowDropoffSuggestions(false)
+              }}
+              className="bg-purple-600/30 hover:bg-purple-600/50 p-4 md:p-6 rounded-xl text-purple-300 hover:text-white transition-all text-center border border-purple-500/30 hover:border-purple-400 transform hover:scale-105"
+            >
+              <div className="text-2xl md:text-3xl mb-2">🏢</div>
+              <div className="font-bold text-sm md:text-base">Canary Wharf</div>
+            </button>
           </div>
+        </div>
 
-
-
-          {/* Enhanced Service Type Selector - 3 Options No Scroll */}
-          <div>
-            <label className="block text-yellow-500 font-semibold mb-3 text-sm">
-              <Car className="w-4 h-4 inline mr-2" />
-              Choose Your Service (All include SIA Licensed Security Drivers)
-            </label>
-            <div className="space-y-3">
-              {serviceTypes.map((service) => {
-                const IconComponent = service.icon
-                return (
-                  <button
-                    key={service.id}
-                    onClick={() => setServiceType(service.id)}
-                    className={`w-full p-4 rounded-xl border-2 transition-all text-left hover:scale-[1.01] relative ${
-                      serviceType === service.id
-                        ? `border-${service.color}-500 bg-${service.color}-500/20 shadow-lg ring-2 ring-${service.color}-500/50`
-                        : 'border-gray-600 bg-gray-800/30 hover:border-gray-500 hover:bg-gray-700/30'
-                    }`}
-                  >
-                    {service.popular && (
-                      <div className="absolute -top-2 right-4 bg-yellow-500 text-black px-3 py-1 rounded-full text-xs font-bold">
-                        MOST POPULAR
-                      </div>
-                    )}
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start space-x-3 flex-1">
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                          serviceType === service.id ? `bg-${service.color}-500` : 'bg-gray-600'
-                        }`}>
-                          <IconComponent className="w-6 h-6 text-white" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-white font-bold text-lg">{service.name}</span>
-                            <div className="text-right">
-                              <div className="text-white font-bold text-lg">£{service.price}</div>
-                              <div className="text-gray-400 text-xs">per mile</div>
-                            </div>
-                          </div>
-                          <div className="text-gray-300 text-sm mb-2">{service.description}</div>
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-400">{service.capacity}</span>
-                            <span className="text-gray-400">{service.waitTime}</span>
-                          </div>
-                          {serviceType === service.id && (
-                            <div className="mt-3 pt-3 border-t border-gray-600">
-                              <div className="text-sm text-gray-300">
-                                ✓ {service.features.join(' • ')}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+        {/* Service Type Selector - Enhanced for larger screens */}
+        <div className="mb-8">
+          <label className="block text-yellow-500 font-bold mb-6 text-lg md:text-xl">
+            <Car className="w-5 h-5 md:w-6 md:h-6 inline mr-3" />
+            Choose Your Service (All include SIA Licensed Security Drivers)
+          </label>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+            {serviceTypes.map((service) => {
+              const IconComponent = service.icon
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => setServiceType(service.id)}
+                  className={`p-6 md:p-8 rounded-2xl border-3 transition-all text-left hover:scale-[1.02] relative ${
+                    serviceType === service.id
+                      ? `border-${service.color}-500 bg-${service.color}-500/20 shadow-2xl ring-4 ring-${service.color}-500/50`
+                      : 'border-gray-600 bg-gray-800/40 hover:border-gray-500 hover:bg-gray-700/40'
+                  }`}
+                >
+                  {service.popular && (
+                    <div className="absolute -top-3 right-6 bg-yellow-500 text-black px-4 py-2 rounded-full text-sm font-black">
+                      MOST POPULAR
                     </div>
-                  </button>
-                )
-              })}
-            </div>
-            <div className="mt-3 text-xs text-gray-400 text-center">
-              🛡️ All services include SIA Licensed Security Drivers as standard
-            </div>
+                  )}
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center ${
+                      serviceType === service.id ? `bg-${service.color}-500` : 'bg-gray-600'
+                    }`}>
+                      <IconComponent className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-white font-bold text-xl md:text-2xl">{service.name}</div>
+                      <div className="text-gray-300 text-base md:text-lg">{service.description}</div>
+                      <div className="text-yellow-400 font-bold text-2xl md:text-3xl">£{service.price}</div>
+                      <div className="text-gray-400 text-sm">per mile</div>
+                    </div>
+                    <div className="text-gray-400 text-sm">
+                      {service.capacity} • {service.waitTime}
+                    </div>
+                  </div>
+                </button>
+              )
+            })}
           </div>
+        </div>
 
+        {/* Booking Type and Calculate Button */}
+        <div className="space-y-6">
           {/* Booking Type Selector */}
           <div>
-            <label className="block text-yellow-500 font-semibold mb-3 text-sm">
-              <Clock className="w-4 h-4 inline mr-2" />
+            <label className="block text-yellow-500 font-bold mb-4 text-lg md:text-xl">
+              <Clock className="w-5 h-5 md:w-6 md:h-6 inline mr-3" />
               When do you need the ride?
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
               <button
                 onClick={() => setBookingType('now')}
-                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                className={`p-6 md:p-8 rounded-2xl border-3 transition-all text-center ${
                   bookingType === 'now'
-                    ? 'border-green-500 bg-green-500/20 text-green-400'
-                    : 'border-gray-600 bg-gray-800/30 text-gray-300 hover:border-gray-500'
+                    ? 'border-green-500 bg-green-500/20 text-green-400 ring-4 ring-green-500/30'
+                    : 'border-gray-600 bg-gray-800/40 text-gray-300 hover:border-gray-500'
                 }`}
               >
-                <Clock className="w-5 h-5 mx-auto mb-1" />
-                <span className="text-sm font-bold">Book Now</span>
-                <p className="text-xs opacity-75">Available in 1-20 min</p>
+                <Clock className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-3" />
+                <span className="text-lg md:text-xl font-bold block">Book Now</span>
+                <p className="text-sm md:text-base opacity-75 mt-2">Available in 1-20 min</p>
               </button>
               <button
                 onClick={() => setBookingType('schedule')}
-                className={`p-3 rounded-xl border-2 transition-all text-center ${
+                className={`p-6 md:p-8 rounded-2xl border-3 transition-all text-center ${
                   bookingType === 'schedule'
-                    ? 'border-blue-500 bg-blue-500/20 text-blue-400'
-                    : 'border-gray-600 bg-gray-800/30 text-gray-300 hover:border-gray-500'
+                    ? 'border-blue-500 bg-blue-500/20 text-blue-400 ring-4 ring-blue-500/30'
+                    : 'border-gray-600 bg-gray-800/40 text-gray-300 hover:border-gray-500'
                 }`}
               >
-                <Calendar className="w-5 h-5 mx-auto mb-1" />
-                <span className="text-sm font-bold">Schedule</span>
-                <p className="text-xs opacity-75">Choose date & time</p>
+                <Calendar className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-3" />
+                <span className="text-lg md:text-xl font-bold block">Schedule</span>
+                <p className="text-sm md:text-base opacity-75 mt-2">Choose date & time</p>
               </button>
             </div>
           </div>
 
           {/* Date and Time Selection (only show when scheduling) */}
           {bookingType === 'schedule' && (
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-yellow-500 font-semibold mb-2 text-sm">
+                <label className="block text-yellow-500 font-bold mb-3 text-base md:text-lg">
                   Select Date
                 </label>
                 <input
@@ -541,17 +497,17 @@ export default function QuoteWidget() {
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
                   min={new Date().toISOString().split('T')[0]}
-                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                  className="w-full p-4 md:p-5 bg-gray-800/60 border-2 border-gray-600 rounded-2xl text-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/20 transition-all text-base md:text-lg"
                 />
               </div>
               <div>
-                <label className="block text-yellow-500 font-semibold mb-2 text-sm">
+                <label className="block text-yellow-500 font-bold mb-3 text-base md:text-lg">
                   Select Time
                 </label>
                 <select
                   value={selectedTime}
                   onChange={(e) => setSelectedTime(e.target.value)}
-                  className="w-full p-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                  className="w-full p-4 md:p-5 bg-gray-800/60 border-2 border-gray-600 rounded-2xl text-white focus:border-yellow-500 focus:ring-4 focus:ring-yellow-500/20 transition-all text-base md:text-lg"
                 >
                   <option value="">Choose time</option>
                   <option value="00:00">12:00 AM</option>
@@ -589,18 +545,18 @@ export default function QuoteWidget() {
             size="lg"
             onClick={calculateQuote}
             disabled={!pickup || !dropoff || isCalculating || (bookingType === 'schedule' && (!selectedDate || !selectedTime))}
-            className="w-full"
+            className="w-full py-6 md:py-8 text-xl md:text-2xl font-black rounded-2xl"
           >
             {isCalculating ? (
               <>
-                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-6 h-6 md:w-8 md:h-8 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
                 <span>⚡ CALCULATING...</span>
               </>
             ) : (
               <>
-                <Car className="w-5 h-5" />
+                <Car className="w-6 h-6 md:w-8 md:h-8" />
                 <span>🔥 {bookingType === 'now' ? 'BOOK NOW' : 'SCHEDULE RIDE'}</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-6 h-6 md:w-8 md:h-8" />
               </>
             )}
           </BoldButton>
@@ -608,76 +564,76 @@ export default function QuoteWidget() {
 
         {/* Enhanced Quote Results */}
         {showQuote && quote && (
-          <div className="mt-6">
-            <BoldCard glowing className="animate-slideUp">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-black text-white mb-3 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent flex items-center justify-center space-x-2">
-                  <Sparkles className="w-6 h-6 text-yellow-400" />
+          <div className="mt-12">
+            <div className="bg-black/60 backdrop-blur-md border border-gray-600/50 rounded-3xl p-8 md:p-12 shadow-2xl animate-slideUp">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent flex items-center justify-center space-x-3">
+                  <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-yellow-400" />
                   <span>🎉 YOUR QUOTE IS READY!</span>
-                  <Sparkles className="w-6 h-6 text-yellow-400" />
+                  <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-yellow-400" />
                 </h3>
-                <p className="text-gray-300 font-semibold">🛡️ Service: {quote.serviceName}</p>
+                <p className="text-gray-300 font-bold text-lg md:text-xl">🛡️ Service: {quote.serviceName}</p>
               </div>
             
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="text-center bg-black/30 p-3 rounded-xl">
-                <div className="text-2xl font-bold text-green-400">{quote.distance} mi</div>
-                <div className="text-gray-300 text-sm">Distance</div>
-              </div>
-              <div className="text-center bg-black/30 p-3 rounded-xl">
-                <div className="text-2xl font-bold text-blue-400">{quote.estimatedTime} min</div>
-                <div className="text-gray-300 text-sm">Est. Time</div>
-              </div>
-            </div>
-
-            <div className="bg-black/40 p-4 rounded-xl mb-6 border border-gray-600">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-gray-300">Original Price:</span>
-                <span className="text-gray-400 line-through text-lg">£{quote.originalPrice}</span>
-              </div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-green-400 font-semibold">🔥 50% OFF First Ride:</span>
-                <span className="text-green-400 font-bold">-£{quote.savings}</span>
-              </div>
-              <div className="border-t border-gray-600 pt-3 mt-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-white font-bold text-lg">Your Price:</span>
-                  <span className="text-yellow-500 font-bold text-3xl">£{quote.discountPrice}</span>
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="text-center bg-black/40 p-6 md:p-8 rounded-2xl">
+                  <div className="text-3xl md:text-4xl font-bold text-green-400">{quote.distance} mi</div>
+                  <div className="text-gray-300 text-base md:text-lg">Distance</div>
+                </div>
+                <div className="text-center bg-black/40 p-6 md:p-8 rounded-2xl">
+                  <div className="text-3xl md:text-4xl font-bold text-blue-400">{quote.estimatedTime} min</div>
+                  <div className="text-gray-300 text-base md:text-lg">Est. Time</div>
                 </div>
               </div>
-            </div>
 
-              <div className="space-y-4">
+              <div className="bg-black/60 p-6 md:p-8 rounded-2xl mb-8 border border-gray-600">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-gray-300 text-lg">Original Price:</span>
+                  <span className="text-gray-400 line-through text-2xl">£{quote.originalPrice}</span>
+                </div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-green-400 font-bold text-lg">🔥 50% OFF First Ride:</span>
+                  <span className="text-green-400 font-bold text-xl">-£{quote.savings}</span>
+                </div>
+                <div className="border-t border-gray-600 pt-4 mt-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-white font-bold text-2xl">Your Price:</span>
+                    <span className="text-yellow-500 font-bold text-4xl md:text-5xl">£{quote.discountPrice}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
                 <BoldButton 
                   variant="primary"
                   size="lg"
                   onClick={handleBookNow}
-                  className="w-full"
+                  className="w-full py-6 md:py-8 text-xl md:text-2xl font-black rounded-2xl"
                 >
-                  <Phone className="w-5 h-5" />
+                  <Phone className="w-6 h-6 md:w-8 md:h-8" />
                   <span>📞 CALL NOW & SAVE £{quote.savings}!</span>
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-6 h-6 md:w-8 md:h-8" />
                 </BoldButton>
                 
-                <div className="grid grid-cols-2 gap-3">
-                  <BoldButton variant="secondary" size="md" className="w-full">
+                <div className="grid grid-cols-2 gap-4">
+                  <BoldButton variant="secondary" size="md" className="w-full py-4 text-lg rounded-xl">
                     <span>📧 EMAIL QUOTE</span>
                   </BoldButton>
-                  <BoldButton variant="secondary" size="md" className="w-full">
+                  <BoldButton variant="secondary" size="md" className="w-full py-4 text-lg rounded-xl">
                     <span>📱 WHATSAPP</span>
                   </BoldButton>
                 </div>
               </div>
 
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-300 font-semibold">
+              <div className="mt-8 text-center">
+                <p className="text-base md:text-lg text-gray-300 font-bold">
                   💳 Secure payment • 🛡️ Fully insured • ⭐ SIA licensed drivers
                 </p>
               </div>
-            </BoldCard>
+            </div>
           </div>
         )}
       </div>
-    </BoldCard>
+    </div>
   )
 }
