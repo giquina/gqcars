@@ -14,17 +14,71 @@
  ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
    Disabled SWC as replacement for Babel because of custom Babel configuration ".babelrc" https://nextjs.org/docs/messages/swc-disabled
    `compiler` options in `next.config.js` will be ignored while using Babel https://nextjs.org/docs/messages/ignored-compiler-options
- ✓ Ready in 13.3s
+ ✓ Ready in 14.5s
  ○ Compiling / ...
    Using external babel configuration from /mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/.babelrc
  ⚠ It looks like there is a custom Babel configuration that can be removed.
- ✓ Compiled / in 21.7s (1096 modules)
- GET / 200 in 22376ms
- GET / 200 in 109ms
- GET / 200 in 116ms
- GET / 200 in 102ms
- GET / 200 in 274ms
- GET / 200 in 172ms
- GET / 200 in 456ms
- GET / 200 in 176ms
- GET / 200 in 831ms
+ ✓ Compiled / in 51.9s (1116 modules)
+ HEAD / 200 in 54861ms
+ ⨯ Internal error: Error: Unsupported Server Component type: Null
+    at e (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268733)
+    at e (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268629)
+    at eF (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268784)
+    at eq (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:274748)
+    at eJ (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:275365)
+    at Timeout._onTimeout (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:265152)
+    at listOnTimeout (node:internal/timers:581:17)
+    at process.processTimers (node:internal/timers:519:7)
+digest: "314964893"
+ ⨯ Internal error: Error: Unsupported Server Component type: Null
+    at e (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268733)
+    at e (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268629)
+    at eF (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268784)
+    at eq (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:274748)
+    at eJ (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:275365)
+    at Timeout._onTimeout (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:265152)
+    at listOnTimeout (node:internal/timers:581:17)
+    at process.processTimers (node:internal/timers:519:7)
+digest: "314964893"
+ ⨯ Internal error: Error: Unsupported Server Component type: Null
+    at e (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268733)
+    at e (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268629)
+    at eF (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:268784)
+    at eq (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:274748)
+    at eJ (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:275365)
+    at Timeout._onTimeout (/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/node_modules/next/dist/compiled/next-server/app-page.runtime.dev.js:35:265152)
+    at listOnTimeout (node:internal/timers:581:17)
+    at process.processTimers (node:internal/timers:519:7)
+digest: "314964893"
+ GET / 200 in 449ms
+ ⨯ Error: Unsupported Server Component type: Null
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "4121517478"
+ ⨯ Error: Unsupported Server Component type: Null
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "504557418"
+ ⨯ Error: Unsupported Server Component type: Null
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "504557418"
+ GET / 200 in 1071ms
+ ⨯ Error: Unsupported Server Component type: Null
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "504557418"
+ ⨯ Error: Unsupported Server Component type: Null
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "4121517478"
+ ⨯ Error: Unsupported Server Component type: Null
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+    at stringify (<anonymous>)
+digest: "504557418"
