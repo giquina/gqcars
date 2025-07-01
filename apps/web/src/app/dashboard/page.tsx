@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/components/providers/SupabaseProvider'
 import { db } from '@/lib/supabase'
@@ -42,20 +42,7 @@ export default function DashboardPage() {
   const [assessments, setAssessments] = useState<Assessment[]>([])
   const [assessmentsLoading, setAssessmentsLoading] = useState(true)
 
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/auth/login')
-    }
-  }, [user, loading, router])
-
-  useEffect(() => {
-    if (user) {
-      fetchBookings()
-      fetchAssessments()
-    }
-  }, [user])
-
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     if (!user) return
     
     try {
@@ -68,9 +55,9 @@ export default function DashboardPage() {
     } finally {
       setBookingsLoading(false)
     }
-  }
+  }, [user])
 
-  const fetchAssessments = async () => {
+  const fetchAssessments = useCallback(async () => {
     if (!user) return
     
     try {
@@ -83,7 +70,20 @@ export default function DashboardPage() {
     } finally {
       setAssessmentsLoading(false)
     }
-  }
+  }, [user])
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/auth/login')
+    }
+  }, [user, loading, router])
+
+  useEffect(() => {
+    if (user) {
+      fetchBookings()
+      fetchAssessments()
+    }
+  }, [user, fetchBookings, fetchAssessments])
 
   const handleSignOut = async () => {
     await signOut()

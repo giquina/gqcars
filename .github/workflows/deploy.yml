@@ -17,7 +17,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
         cache: 'npm'
         
     - name: Install dependencies
@@ -38,7 +38,10 @@ jobs:
     - name: Export static files
       run: |
         cd apps/web
-        npm run export || npm run build
+        npm run build
+        mkdir -p out
+        cp -r .next/static out/ || echo 'No static files to copy'
+        cp -r public/* out/ || echo 'No public files to copy'
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4

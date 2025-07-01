@@ -7,8 +7,14 @@ interface AIMessage {
 
 interface SecurityAssessment {
   overallRisk: string
+  factors?: {
+    time: number
+    location: number
+    route: number
+  }
   recommendations: {
     securityLevel: SecurityLevel
+    additionalMeasures?: string[]
   }
 }
 
@@ -72,23 +78,9 @@ class ClaudeAI {
   ): AIResponse {
     const response: AIResponse = {
       message: {
-        id: data.id,
-        role: 'assistant',
-        content: data.content,
-        timestamp: new Date(),
-        metadata: {
-          context: data.context,
-          intent: data.intent,
-          confidence: data.confidence,
-          entities: data.entities
-        }
+        content: data.content || 'No response content'
       },
-      actions: this.extractActions(data.content, context),
-      context: {
-        intent: data.intent,
-        entities: data.entities,
-        nextSteps: data.next_steps
-      }
+      actions: this.extractActions(data.content || '', context)
     }
 
     return response
@@ -139,7 +131,7 @@ class ClaudeAI {
   private detectServiceType(content: string): ServiceType {
     const content_lower = content.toLowerCase()
     if (content_lower.includes('executive') || content_lower.includes('luxury')) {
-      return 'EXECUTIVE'
+      return 'SECURITY'
     }
     if (content_lower.includes('airport')) {
       return 'AIRPORT_TRANSFER'
@@ -175,17 +167,14 @@ class ClaudeAI {
 
   private extractLocations(content: string): { pickup?: string; dropoff?: string } {
     // Basic location extraction - would be enhanced with NLP
-    const locations = {
-      pickup: undefined,
-      dropoff: undefined
-    }
+    const locations: { pickup?: string; dropoff?: string } = {}
 
     // Example pattern matching
     const fromMatch = content.match(/from\s+([^,]+?)(?=\s+to|$)/i)
     const toMatch = content.match(/to\s+([^,.]+)/i)
 
-    if (fromMatch) locations.pickup = fromMatch[1].trim()
-    if (toMatch) locations.dropoff = toMatch[1].trim()
+    if (fromMatch) locations.pickup = fromMatch[1]?.trim()
+    if (toMatch) locations.dropoff = toMatch[1]?.trim()
 
     return locations
   }
@@ -230,10 +219,8 @@ class ClaudeAI {
   async chat(message: string, context: AIContext): Promise<AIResponse> {
     const messages: AIMessage[] = [
       {
-        id: Date.now().toString(),
         role: 'user',
-        content: message,
-        timestamp: new Date()
+        content: message
       }
     ]
 
@@ -273,9 +260,11 @@ class ClaudeAI {
     // Update assessment based on Claude's response
     if (response.actions?.find(a => a.type === 'security')) {
       const securityAction = response.actions.find(a => a.type === 'security')
-      assessment.overallRisk = this.calculateRiskLevel(securityAction!.payload)
-      assessment.recommendations.securityLevel = securityAction!.payload.level
-      assessment.recommendations.additionalMeasures = securityAction!.payload.concerns
+      if (securityAction) {
+        assessment.overallRisk = this.calculateRiskLevel(securityAction.payload)
+        assessment.recommendations.securityLevel = securityAction.payload.level
+        assessment.recommendations.additionalMeasures = securityAction.payload.concerns
+      }
     }
 
     return assessment
@@ -287,20 +276,20 @@ class ClaudeAI {
 
     // Peak hours
     if ((hour >= 7 && hour <= 9) || (hour >= 16 && hour <= 18)) {
-      return 'high'
+      return 'HIGH'
     }
 
     // Weekend nights
     if ((day === 5 || day === 6) && hour >= 20) {
-      return 'surge'
+      return 'SURGE'
     }
 
     // Normal business hours
     if (hour >= 9 && hour <= 17) {
-      return 'medium'
+      return 'MEDIUM'
     }
 
-    return 'low'
+    return 'LOW'
   }
 
   private calculateRiskLevel(payload: any): 'low' | 'medium' | 'high' {

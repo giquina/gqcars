@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Calculator, Shield, Car, Users, Clock } from 'lucide-react'
 
 interface QuoteCalculatorProps {
@@ -14,7 +14,7 @@ export default function QuoteCalculator({ onCalculate }: QuoteCalculatorProps) {
   const [hours, setHours] = useState(4)
   const [total, setTotal] = useState(0)
 
-  const calculateTotal = () => {
+  const calculateTotal = useCallback(() => {
     const baseRates = {
       'close-protection': 75, // Per hour per officer
       'private-hire': 95,    // Per hour per vehicle
@@ -30,11 +30,11 @@ export default function QuoteCalculator({ onCalculate }: QuoteCalculatorProps) {
     const newTotal = officerCost + vehicleCost
     setTotal(newTotal)
     onCalculate?.(newTotal)
-  }
+  }, [service, officers, vehicles, hours, onCalculate])
 
   useEffect(() => {
     calculateTotal()
-  }, [service, officers, vehicles, hours])
+  }, [calculateTotal])
 
   return (
     <div className="bg-gq-black/50 p-6 border border-gray-700">
