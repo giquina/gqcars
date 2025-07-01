@@ -42,3 +42,5 @@ jobs:
       run: |
         cd apps/web
         npm run build
+      env:
+        BUILD_STATIC: false
