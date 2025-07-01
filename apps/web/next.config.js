@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: false,
   poweredByHeader: false,
-  output: process.env.NODE_ENV === 'production' && process.env.BUILD_STATIC ? 'export' : undefined,
+  output: process.env.NODE_ENV === 'production' && process.env.BUILD_STATIC === 'true' ? 'export' : undefined,
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   typescript: {
