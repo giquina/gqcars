@@ -1,0 +1,67 @@
+name: Codespaces Setup Validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, develop ]
+    paths: 
+      - '.devcontainer/**'
+      - 'apps/web/**'
+      - 'setup-codespaces.sh'
+
+jobs:
+  validate-codespaces-setup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: apps/web/package-lock.json
+        
+    - name: Validate devcontainer.json
+      run: |
+        # Check if devcontainer.json is valid JSON
+        cat .devcontainer/devcontainer.json | jq empty
+        echo "✅ devcontainer.json is valid JSON"
+        
+    - name: Test setup script
+      run: |
+        chmod +x setup-codespaces.sh
+        # Test script syntax
+        bash -n setup-codespaces.sh
+        echo "✅ setup-codespaces.sh syntax is valid"
+        
+    - name: Install dependencies
+      working-directory: apps/web
+      run: |
+        cp .env.codespaces .env.local
+        npm ci
+        
+    - name: Generate Prisma client
+      working-directory: apps/web
+      run: |
+        npx prisma generate
+        
+    - name: Type check
+      working-directory: apps/web
+      run: |
+        npx tsc --noEmit --skipLibCheck
+        
+    - name: Build application
+      working-directory: apps/web
+      run: |
+        npm run build
+        
+    - name: Test production start
+      working-directory: apps/web
+      run: |
+        timeout 30s npm run start &
+        sleep 10
+        curl -f http://localhost:3000 || exit 1
+        echo "✅ Application starts successfully"

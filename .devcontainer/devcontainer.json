@@ -1,0 +1,79 @@
+{
+  "name": "GQ Cars LTD - Next.js Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "forwardPorts": [3000, 3001, 5432, 5678],
+
+  "portsAttributes": {
+    "3000": {
+      "label": "GQ Cars Website",
+      "onAutoForward": "openBrowser"
+    },
+    "3001": {
+      "label": "Development Server"
+    },
+    "5432": {
+      "label": "PostgreSQL Database"
+    },
+    "5678": {
+      "label": "n8n Automation"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-json",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "ms-playwright.playwright",
+        "github.copilot",
+        "github.copilot-chat",
+        "prisma.prisma",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true
+        },
+        "typescript.preferences.allowIncompleteTypes": true,
+        "typescript.suggest.autoImports": true
+      }
+    }
+  },
+
+  "postCreateCommand": "npm install -g @vercel/cli && cd apps/web && npm install && npx prisma generate",
+
+  "postStartCommand": "echo '🚀 GQ Cars Development Environment Ready!' && echo 'Run: cd apps/web && npm run dev to start the development server'",
+
+  "remoteUser": "node",
+
+  "mounts": [
+    "source=gqcars-node-modules,target=${containerWorkspaceFolder}/apps/web/node_modules,type=volume",
+    "source=gqcars-root-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+
+  "containerEnv": {
+    "NODE_ENV": "development",
+    "NEXTAUTH_URL": "https://${localEnv:CODESPACE_NAME}-3000.${localEnv:GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}",
+    "APP_URL": "https://${localEnv:CODESPACE_NAME}-3000.${localEnv:GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}",
+    "DATABASE_URL": "file:../prisma/dev.db",
+    "NEXTAUTH_SECRET": "codespaces-development-secret-key-change-in-production",
+    "APP_NAME": "GQ Cars LTD",
+    "COMPANY_PHONE": "07407655203"
+  },
+
+  "workspaceFolder": "/workspaces/gqcars-main-production",
+
+  "updateContentCommand": "cd apps/web && npm install"
+}
