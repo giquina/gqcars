@@ -1,15 +1,13 @@
-name: Deploy to GitHub Pages (DISABLED)
+name: Deploy to GitHub Pages (Static Export)
 
-# Disabled: This Next.js app uses API routes and database features
-# that are not compatible with static GitHub Pages deployment.
-# Use Vercel for full-stack deployment instead.
+# This workflow builds a static export version for GitHub Pages
+# Note: Static version has limited functionality (no API routes/database)
+# For full features, use Vercel deployment
 
 on:
-  workflow_dispatch: # Only run manually
-  # push:
-  #   branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Can also run manually
 
 jobs:
   build-and-deploy:
@@ -30,23 +28,28 @@ jobs:
         cd apps/web
         npm ci
         
-    - name: Generate Prisma Client
+    - name: Create static environment file
       run: |
         cd apps/web
-        npx prisma generate
+        cat > .env.local << EOF
+        # Static build environment for GitHub Pages
+        NODE_ENV=production
+        BUILD_STATIC=true
+        NEXTAUTH_URL=https://giquina.github.io/gqcars
+        NEXTAUTH_SECRET=github-pages-static-secret
+        DATABASE_URL=file:../prisma/dev.db
+        # Note: API routes will not work in static export
+        EOF
         
-    - name: Build Next.js application
+    - name: Generate Prisma Client (for types only)
       run: |
         cd apps/web
-        npm run build
+        npx prisma generate || echo "Prisma generation failed, continuing..."
         
-    - name: Export static files
+    - name: Build static export
       run: |
         cd apps/web
-        npm run build
-        mkdir -p out
-        cp -r .next/static out/ || echo 'No static files to copy'
-        cp -r public/* out/ || echo 'No public files to copy'
+        BUILD_STATIC=true npm run build
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
@@ -54,3 +57,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./apps/web/out
+        cname: # Optional: Add custom domain here if you have one
