@@ -6,14 +6,10 @@
   "framework": "nextjs",
   "regions": ["lhr1"],
   "env": {
-    "NODE_ENV": "production"
-  },
-  "build": {
-    "env": {
-      "DATABASE_URL": "@database_url",
-      "NEXTAUTH_SECRET": "@nextauth_secret",
-      "NEXTAUTH_URL": "@nextauth_url"
-    }
+    "NODE_ENV": "production",
+    "DATABASE_URL": "file:../prisma/dev.db",
+    "NEXTAUTH_SECRET": "production-secret-change-this-in-real-deployment",
+    "NEXTAUTH_URL": "https://gqcars.vercel.app"
   },
   "functions": {
     "apps/web/src/app/api/**/*": {
