@@ -1,0 +1,532 @@
+{
+  "mcpServers": {
+    "// === EXISTING WORKING MCP SERVERS === //": {},
+    
+    "notion": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "mcp/notion"],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}",
+        "NOTION_DATABASE_ID": "${NOTION_DATABASE_ID}"
+      }
+    },
+    
+    "exa": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "mcp/exa"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      }
+    },
+    
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    
+    "docker": {
+      "command": "uvx",
+      "args": ["docker-mcp"],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    
+    "docker-compose": {
+      "command": "uvx",
+      "args": ["docker-compose-mcp"],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock"
+      }
+    },
+    
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {
+        "PLAYWRIGHT_HEADLESS": "false",
+        "PLAYWRIGHT_BROWSER": "chromium",
+        "PLAYWRIGHT_TIMEOUT": "30000",
+        "PLAYWRIGHT_VIEWPORT_WIDTH": "1920",
+        "PLAYWRIGHT_VIEWPORT_HEIGHT": "1080"
+      }
+    },
+
+    "// === ESSENTIAL DEVELOPMENT MCPs === //": {},
+
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/mnt/c/Users/Student"],
+      "env": {
+        "MCP_FILESYSTEM_ALLOWED_DIRS": "/mnt/c/Users/Student/Documents,/mnt/c/Users/Student/Desktop,/mnt/c/Users/Student/Downloads"
+      }
+    },
+
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp-server"],
+      "env": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}",
+        "CONTEXT7_WORKSPACE_ID": "${CONTEXT7_WORKSPACE_ID}"
+      }
+    },
+
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_BANK_SIZE": "1000",
+        "MEMORY_PERSISTENCE": "true"
+      }
+    },
+
+    "git": {
+      "command": "node",
+      "args": ["/mnt/c/Users/Student/AppData/Roaming/npm/node_modules/@cyanheads/git-mcp-server/build/index.js"],
+      "env": {
+        "GIT_AUTHOR_NAME": "${GIT_AUTHOR_NAME}",
+        "GIT_AUTHOR_EMAIL": "${GIT_AUTHOR_EMAIL}"
+      }
+    },
+
+    "npm": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-npm"],
+      "env": {
+        "NPM_REGISTRY": "https://registry.npmjs.org"
+      }
+    },
+
+    "// === DATABASE MCPs === //": {},
+
+    "postgresql": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "${POSTGRES_CONNECTION_STRING}",
+        "POSTGRES_HOST": "${POSTGRES_HOST:-localhost}",
+        "POSTGRES_PORT": "${POSTGRES_PORT:-5432}",
+        "POSTGRES_DB": "${POSTGRES_DB}",
+        "POSTGRES_USER": "${POSTGRES_USER}",
+        "POSTGRES_PASSWORD": "${POSTGRES_PASSWORD}"
+      }
+    },
+
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite"],
+      "env": {
+        "SQLITE_DATABASE_PATH": "${SQLITE_DATABASE_PATH:-./dev.db}",
+        "SQLITE_ALLOWED_OPERATIONS": "read,write,create,update,delete"
+      }
+    },
+
+    "// === GOOGLE WORKSPACE MCPs === //": {},
+
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@google-cloud/mcp-server-drive"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_DRIVE_API_KEY": "${GOOGLE_DRIVE_API_KEY}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      }
+    },
+
+    "google-sheets": {
+      "command": "npx",
+      "args": ["-y", "@google-cloud/mcp-server-sheets"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_SHEETS_API_KEY": "${GOOGLE_SHEETS_API_KEY}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      }
+    },
+
+    "google-docs": {
+      "command": "npx",
+      "args": ["-y", "@google-cloud/mcp-server-docs"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_DOCS_API_KEY": "${GOOGLE_DOCS_API_KEY}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      }
+    },
+
+    "google-calendar": {
+      "command": "npx",
+      "args": ["-y", "@google-cloud/mcp-server-calendar"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_CALENDAR_API_KEY": "${GOOGLE_CALENDAR_API_KEY}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      }
+    },
+
+    "gmail": {
+      "command": "npx",
+      "args": ["-y", "@google-cloud/mcp-server-gmail"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GMAIL_API_KEY": "${GMAIL_API_KEY}",
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      }
+    },
+
+    "// === COMMUNICATION & PRODUCTIVITY MCPs === //": {},
+
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@slack/mcp-server"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_SIGNING_SECRET": "${SLACK_SIGNING_SECRET}",
+        "SLACK_APP_TOKEN": "${SLACK_APP_TOKEN}"
+      }
+    },
+
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": {
+        "LINEAR_API_KEY": "${LINEAR_API_KEY}",
+        "LINEAR_TEAM_ID": "${LINEAR_TEAM_ID}"
+      }
+    },
+
+    "trello": {
+      "command": "npx",
+      "args": ["-y", "@trello/mcp-server"],
+      "env": {
+        "TRELLO_API_KEY": "${TRELLO_API_KEY}",
+        "TRELLO_TOKEN": "${TRELLO_TOKEN}"
+      }
+    },
+
+    "email": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-email"],
+      "env": {
+        "SMTP_HOST": "${SMTP_HOST}",
+        "SMTP_PORT": "${SMTP_PORT:-587}",
+        "SMTP_USER": "${SMTP_USER}",
+        "SMTP_PASS": "${SMTP_PASS}",
+        "IMAP_HOST": "${IMAP_HOST}",
+        "IMAP_PORT": "${IMAP_PORT:-993}",
+        "IMAP_USER": "${IMAP_USER}",
+        "IMAP_PASS": "${IMAP_PASS}"
+      }
+    },
+
+    "// === UTILITY MCPs === //": {},
+
+    "time": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"],
+      "env": {
+        "TIMEZONE": "${TIMEZONE:-UTC}",
+        "DATE_FORMAT": "${DATE_FORMAT:-ISO8601}"
+      }
+    },
+
+    "pdf": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-pdf"],
+      "env": {
+        "PDF_MAX_SIZE": "${PDF_MAX_SIZE:-10MB}",
+        "PDF_ALLOWED_DIRS": "/mnt/c/Users/Student/Documents,/mnt/c/Users/Student/Desktop,/mnt/c/Users/Student/Downloads"
+      }
+    },
+
+    "image-processing": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-image"],
+      "env": {
+        "IMAGE_MAX_SIZE": "${IMAGE_MAX_SIZE:-5MB}",
+        "IMAGE_ALLOWED_FORMATS": "jpg,jpeg,png,gif,bmp,webp",
+        "IMAGE_ALLOWED_DIRS": "/mnt/c/Users/Student/Documents,/mnt/c/Users/Student/Desktop,/mnt/c/Users/Student/Downloads"
+      }
+    },
+
+    "translation": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-translate"],
+      "env": {
+        "TRANSLATE_API_KEY": "${TRANSLATE_API_KEY}",
+        "TRANSLATE_SERVICE": "${TRANSLATE_SERVICE:-google}",
+        "DEFAULT_SOURCE_LANG": "${DEFAULT_SOURCE_LANG:-auto}",
+        "DEFAULT_TARGET_LANG": "${DEFAULT_TARGET_LANG:-en}"
+      }
+    },
+
+    "weather": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-weather"],
+      "env": {
+        "WEATHER_API_KEY": "${WEATHER_API_KEY}",
+        "WEATHER_SERVICE": "${WEATHER_SERVICE:-openweathermap}",
+        "DEFAULT_LOCATION": "${DEFAULT_LOCATION:-London,UK}"
+      }
+    },
+
+    "// === ADVANCED DEVELOPMENT MCPs === //": {},
+
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}",
+        "SUPABASE_SERVICE_KEY": "${SUPABASE_SERVICE_KEY}"
+      }
+    },
+
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-server"],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}",
+        "VERCEL_TEAM_ID": "${VERCEL_TEAM_ID}"
+      }
+    },
+
+    "stripe": {
+      "command": "npx",
+      "args": ["-y", "@stripe/mcp-server"],
+      "env": {
+        "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}",
+        "STRIPE_WEBHOOK_SECRET": "${STRIPE_WEBHOOK_SECRET}"
+      }
+    },
+
+    "firebase": {
+      "command": "npx",
+      "args": ["-y", "@firebase/mcp-server"],
+      "env": {
+        "FIREBASE_PROJECT_ID": "${FIREBASE_PROJECT_ID}",
+        "FIREBASE_PRIVATE_KEY": "${FIREBASE_PRIVATE_KEY}",
+        "FIREBASE_CLIENT_EMAIL": "${FIREBASE_CLIENT_EMAIL}"
+      }
+    },
+
+    "// === SPECIALIZED MCPs === //": {},
+
+    "aws": {
+      "command": "npx",
+      "args": ["-y", "@aws/mcp-server"],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_DEFAULT_REGION": "${AWS_DEFAULT_REGION:-us-east-1}"
+      }
+    },
+
+    "kubernetes": {
+      "command": "npx",
+      "args": ["-y", "@kubernetes/mcp-server"],
+      "env": {
+        "KUBECONFIG": "${KUBECONFIG:-~/.kube/config}",
+        "KUBERNETES_NAMESPACE": "${KUBERNETES_NAMESPACE:-default}"
+      }
+    },
+
+    "monitoring": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-monitoring"],
+      "env": {
+        "MONITORING_ENDPOINT": "${MONITORING_ENDPOINT}",
+        "MONITORING_API_KEY": "${MONITORING_API_KEY}",
+        "ALERT_WEBHOOK": "${ALERT_WEBHOOK}"
+      }
+    },
+
+    "analytics": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-analytics"],
+      "env": {
+        "ANALYTICS_API_KEY": "${ANALYTICS_API_KEY}",
+        "ANALYTICS_PROPERTY_ID": "${ANALYTICS_PROPERTY_ID}",
+        "ANALYTICS_SERVICE": "${ANALYTICS_SERVICE:-google}"
+      }
+    },
+
+    "// === SECURITY & COMPLIANCE MCPs === //": {},
+
+    "security-scan": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-security"],
+      "env": {
+        "SECURITY_SCAN_ENABLED": "true",
+        "SECURITY_REPORT_WEBHOOK": "${SECURITY_REPORT_WEBHOOK}",
+        "SECURITY_SCAN_DIRS": "/mnt/c/Users/Student/Documents,/mnt/c/Users/Student/Desktop"
+      }
+    },
+
+    "secrets-manager": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-secrets"],
+      "env": {
+        "SECRETS_VAULT_URL": "${SECRETS_VAULT_URL}",
+        "SECRETS_VAULT_TOKEN": "${SECRETS_VAULT_TOKEN}",
+        "SECRETS_ENCRYPTION_KEY": "${SECRETS_ENCRYPTION_KEY}"
+      }
+    },
+
+    "// === TESTING & AUTOMATION MCPs === //": {},
+
+    "testing": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-testing"],
+      "env": {
+        "TEST_FRAMEWORK": "${TEST_FRAMEWORK:-jest}",
+        "TEST_COVERAGE_THRESHOLD": "${TEST_COVERAGE_THRESHOLD:-80}",
+        "TEST_RESULTS_WEBHOOK": "${TEST_RESULTS_WEBHOOK}"
+      }
+    },
+
+    "ci-cd": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-cicd"],
+      "env": {
+        "CI_PROVIDER": "${CI_PROVIDER:-github}",
+        "CI_TOKEN": "${CI_TOKEN}",
+        "CD_WEBHOOK": "${CD_WEBHOOK}"
+      }
+    },
+
+    "// === ENHANCED EXISTING MCPs === //": {},
+
+    "enhanced-github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github-enhanced"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "GITHUB_ORGANIZATION": "${GITHUB_ORGANIZATION}",
+        "GITHUB_WEBHOOK_SECRET": "${GITHUB_WEBHOOK_SECRET}",
+        "GITHUB_APP_ID": "${GITHUB_APP_ID}",
+        "GITHUB_PRIVATE_KEY": "${GITHUB_PRIVATE_KEY}"
+      }
+    },
+
+    "enhanced-docker": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-docker-enhanced"],
+      "env": {
+        "DOCKER_HOST": "unix:///var/run/docker.sock",
+        "DOCKER_REGISTRY": "${DOCKER_REGISTRY}",
+        "DOCKER_REGISTRY_USERNAME": "${DOCKER_REGISTRY_USERNAME}",
+        "DOCKER_REGISTRY_PASSWORD": "${DOCKER_REGISTRY_PASSWORD}"
+      }
+    },
+
+    "// === REAL-TIME & STREAMING MCPs === //": {},
+
+    "websocket": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-websocket"],
+      "env": {
+        "WEBSOCKET_PORT": "${WEBSOCKET_PORT:-8080}",
+        "WEBSOCKET_SECURE": "${WEBSOCKET_SECURE:-true}",
+        "WEBSOCKET_ORIGINS": "${WEBSOCKET_ORIGINS:-*}"
+      }
+    },
+
+    "streaming": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-streaming"],
+      "env": {
+        "STREAMING_BUFFER_SIZE": "${STREAMING_BUFFER_SIZE:-1024}",
+        "STREAMING_TIMEOUT": "${STREAMING_TIMEOUT:-30000}"
+      }
+    },
+
+    "// === GQ CARS SPECIFIC MCPs === //": {},
+
+    "nextjs": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-nextjs"],
+      "env": {
+        "NEXTJS_PROJECT_DIR": "/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web",
+        "NEXTJS_PORT": "3000",
+        "NEXTJS_BUILD_COMMAND": "npm run build",
+        "NEXTJS_DEV_COMMAND": "npm run dev"
+      }
+    },
+
+    "tailwindcss": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-tailwind"],
+      "env": {
+        "TAILWIND_CONFIG_PATH": "/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/tailwind.config.js",
+        "TAILWIND_CSS_PATH": "/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/src/styles/globals.css",
+        "TAILWIND_WATCH": "true"
+      }
+    },
+
+    "prisma": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-prisma"],
+      "env": {
+        "PRISMA_SCHEMA_PATH": "/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/apps/web/prisma/schema.prisma",
+        "DATABASE_URL": "file:../prisma/dev.db",
+        "PRISMA_AUTO_MIGRATE": "true",
+        "PRISMA_GENERATE_CLIENT": "true"
+      }
+    },
+
+    "stripe-payments": {
+      "command": "npx",
+      "args": ["-y", "@stripe/mcp-server-enhanced"],
+      "env": {
+        "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}",
+        "STRIPE_WEBHOOK_SECRET": "${STRIPE_WEBHOOK_SECRET}",
+        "STRIPE_WEBHOOK_ENDPOINT": "/api/webhooks/stripe",
+        "STRIPE_SUCCESS_URL": "http://localhost:3000/booking/success",
+        "STRIPE_CANCEL_URL": "http://localhost:3000/booking/cancel"
+      }
+    },
+
+    "// === CURSOR IDE INTEGRATION === //": {},
+
+    "cursor-integration": {
+      "command": "node",
+      "args": ["/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production/mcp-sync-bridge.js"],
+      "env": {
+        "CURSOR_WORKSPACE": "/mnt/c/Users/Student/Documents/Development_Projects/gqcars-main-production",
+        "SYNC_INTERVAL": "${SYNC_INTERVAL:-1000}",
+        "SYNC_ENABLED": "true"
+      }
+    }
+  },
+
+  "// === CONFIGURATION METADATA === //": {},
+  "version": "2.0",
+  "description": "Comprehensive MCP configuration for Claude Code in Cursor IDE",
+  "created": "2024-12-28",
+  "author": "Claude Code Assistant",
+  "environment": "Windows WSL2 + Cursor IDE",
+  "total_servers": 45,
+  "categories": [
+    "existing-working",
+    "essential-development", 
+    "database",
+    "google-workspace",
+    "communication-productivity",
+    "utility",
+    "advanced-development",
+    "specialized",
+    "security-compliance",
+    "testing-automation",
+    "enhanced-existing",
+    "real-time-streaming",
+    "cursor-integration"
+  ]
+}
