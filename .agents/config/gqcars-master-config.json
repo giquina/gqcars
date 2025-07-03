@@ -1,0 +1,214 @@
+{
+  "project": "GQ Cars Transport Business",
+  "version": "2.0.0",
+  "created": "2025-07-03",
+  "agents": {
+    "database-architect": {
+      "id": "db-arch-001",
+      "priority": 1,
+      "status": "working",
+      "specialty": "Prisma schema, migrations, relationships",
+      "schedule": "continuous",
+      "dependencies": [],
+      "tasks": [
+        "Complete User model with SIA licensing fields",
+        "Build Booking model with vehicle types and pricing",
+        "Create Payment model with Stripe integration fields",
+        "Add Admin model with role-based permissions",
+        "Set up database relationships and constraints",
+        "Create seed data for vehicles and pricing",
+        "Write migration files for production deployment"
+      ],
+      "files": [
+        "prisma/schema.prisma",
+        "prisma/migrations/",
+        "src/lib/prisma.ts",
+        "src/types/prisma.ts"
+      ],
+      "tools": [
+        "prisma",
+        "sqlite",
+        "typescript"
+      ],
+      "outputPath": "agents/database/",
+      "contextWindow": 32000,
+      "currentTask": "Complete User model with SIA licensing fields",
+      "startTime": "2025-07-03T07:03:41.758Z"
+    },
+    "api-builder": {
+      "id": "api-build-001",
+      "priority": 2,
+      "status": "waiting",
+      "specialty": "REST APIs, route handlers, business logic",
+      "schedule": "after:database-architect",
+      "dependencies": [
+        "database-architect"
+      ],
+      "tasks": [
+        "Build /api/bookings CRUD endpoints",
+        "Create /api/users authentication system",
+        "Implement /api/payments Stripe integration",
+        "Build /api/admin management endpoints",
+        "Add /api/vehicles and pricing endpoints",
+        "Create /api/notifications email system",
+        "Add input validation and error handling",
+        "Write API documentation"
+      ],
+      "files": [
+        "src/app/api/",
+        "src/lib/api.ts",
+        "src/lib/validations/",
+        "src/types/api.ts"
+      ],
+      "tools": [
+        "nextjs",
+        "stripe",
+        "nextauth",
+        "sendgrid"
+      ],
+      "outputPath": "agents/api/",
+      "contextWindow": 32000
+    },
+    "frontend-developer": {
+      "id": "fe-dev-001",
+      "priority": 3,
+      "status": "waiting",
+      "specialty": "React components, forms, dashboards",
+      "schedule": "after:api-builder",
+      "dependencies": [
+        "api-builder"
+      ],
+      "tasks": [
+        "Complete booking form with multi-step flow",
+        "Build customer dashboard with booking history",
+        "Create admin dashboard with booking management",
+        "Add payment forms with Stripe integration",
+        "Build user profile and authentication forms",
+        "Create vehicle selection and pricing components",
+        "Add responsive design and mobile optimization",
+        "Implement real-time notifications"
+      ],
+      "files": [
+        "src/components/",
+        "src/features/",
+        "src/app/dashboard/",
+        "src/app/admin/"
+      ],
+      "tools": [
+        "react",
+        "tailwind",
+        "framer-motion",
+        "react-hook-form"
+      ],
+      "outputPath": "agents/frontend/",
+      "contextWindow": 32000
+    },
+    "integration-specialist": {
+      "id": "int-spec-001",
+      "priority": 4,
+      "status": "waiting",
+      "specialty": "Third-party integrations, APIs, webhooks",
+      "schedule": "parallel:frontend-developer",
+      "dependencies": [
+        "api-builder"
+      ],
+      "tasks": [
+        "Complete Stripe payment processing integration",
+        "Set up SendGrid email notifications",
+        "Add Google Maps route calculation",
+        "Implement Supabase real-time subscriptions",
+        "Create webhook handlers for payments",
+        "Add SMS notifications via Twilio",
+        "Integrate with calendar systems",
+        "Set up analytics and tracking"
+      ],
+      "files": [
+        "src/lib/stripe.ts",
+        "src/lib/email.ts",
+        "src/lib/supabase.ts",
+        "src/app/api/webhooks/"
+      ],
+      "tools": [
+        "stripe",
+        "sendgrid",
+        "supabase",
+        "google-maps"
+      ],
+      "outputPath": "agents/integration/",
+      "contextWindow": 32000
+    },
+    "testing-agent": {
+      "id": "test-001",
+      "priority": 5,
+      "status": "waiting",
+      "specialty": "Testing, QA, automation",
+      "schedule": "continuous",
+      "dependencies": [
+        "frontend-developer"
+      ],
+      "tasks": [
+        "Write unit tests for all components",
+        "Create integration tests for API endpoints",
+        "Add E2E tests for booking flow",
+        "Test payment processing scenarios",
+        "Create admin dashboard tests",
+        "Add mobile responsiveness tests",
+        "Set up automated testing pipeline",
+        "Create performance benchmarks"
+      ],
+      "files": [
+        "src/__tests__/",
+        "tests/",
+        "playwright.config.ts",
+        "jest.config.js"
+      ],
+      "tools": [
+        "jest",
+        "playwright",
+        "react-testing-library"
+      ],
+      "outputPath": "agents/testing/",
+      "contextWindow": 32000
+    },
+    "documentation-writer": {
+      "id": "doc-001",
+      "priority": 6,
+      "status": "waiting",
+      "specialty": "Documentation, guides, deployment",
+      "schedule": "continuous",
+      "dependencies": [
+        "api-builder"
+      ],
+      "tasks": [
+        "Write comprehensive API documentation",
+        "Create component documentation with Storybook",
+        "Build deployment guides for Vercel/Railway",
+        "Write user guides for admin dashboard",
+        "Create business process documentation",
+        "Add troubleshooting guides",
+        "Build developer onboarding guide",
+        "Create marketing copy and content"
+      ],
+      "files": [
+        "docs/",
+        "README.md",
+        "DEPLOYMENT.md",
+        "API.md"
+      ],
+      "tools": [
+        "markdown",
+        "storybook",
+        "swagger"
+      ],
+      "outputPath": "agents/docs/",
+      "contextWindow": 32000
+    }
+  },
+  "globalSettings": {
+    "maxConcurrentAgents": 3,
+    "codeQualityChecks": true,
+    "autoCommit": false,
+    "requireReview": true,
+    "logLevel": "detailed"
+  }
+}

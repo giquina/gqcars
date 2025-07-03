@@ -1,30 +1,18 @@
 {
   "../node_modules/@supabase/auth-js/dist/module/lib/helpers.js -> @supabase/node-fetch": {
-    "id": 14914,
+    "id": "../node_modules/@supabase/auth-js/dist/module/lib/helpers.js -> @supabase/node-fetch",
     "files": []
   },
   "../node_modules/@supabase/functions-js/dist/module/helper.js -> @supabase/node-fetch": {
-    "id": 14914,
+    "id": "../node_modules/@supabase/functions-js/dist/module/helper.js -> @supabase/node-fetch",
     "files": []
   },
   "../node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js -> @supabase/node-fetch": {
-    "id": 14914,
+    "id": "../node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js -> @supabase/node-fetch",
     "files": []
   },
   "../node_modules/@supabase/storage-js/dist/module/lib/helpers.js -> @supabase/node-fetch": {
-    "id": 14914,
+    "id": "../node_modules/@supabase/storage-js/dist/module/lib/helpers.js -> @supabase/node-fetch",
     "files": []
-  },
-  "../node_modules/next/dist/client/index.js -> ../pages/_app": {
-    "id": 49945,
-    "files": [
-      "static/chunks/945.2fd715702884f44c.js"
-    ]
-  },
-  "../node_modules/next/dist/client/index.js -> ../pages/_error": {
-    "id": 41535,
-    "files": [
-      "static/chunks/535.1477564fefe18b2b.js"
-    ]
   }
 }

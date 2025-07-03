@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "notion": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "notionhq/notion-mcp-server"
+      ],
+      "env": {
+        "NOTION_API_KEY": "ntn_F20499864643jqMFipY5LNc3nG0FcKkoIUOJviWq8pt13z"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-playwright"
+      ]
+    },
+    "docker": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-docker"
+      ]
+    }
+  }
+}
