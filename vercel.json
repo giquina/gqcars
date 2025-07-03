@@ -1,19 +1,27 @@
 {
   "version": 2,
-  "buildCommand": "cd apps/web && npm run build",
-  "outputDirectory": "apps/web/.next",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "regions": ["lhr1"],
+  "builds": [
+    {
+      "src": "apps/web/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "apps/web/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "apps/web/$1"
+    }
+  ],
   "env": {
-    "NODE_ENV": "production",
-    "DATABASE_URL": "file:../prisma/dev.db",
-    "NEXTAUTH_SECRET": "production-secret-change-this-in-real-deployment",
-    "NEXTAUTH_URL": "https://gqcars.vercel.app"
+    "NODE_ENV": "production"
   },
-  "functions": {
-    "apps/web/src/app/api/**/*": {
-      "runtime": "nodejs18.x"
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
     }
   }
 }
