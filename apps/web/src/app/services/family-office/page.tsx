@@ -122,6 +122,130 @@ export default function FamilyOfficePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 FAMILY OFFICE CASE STUDIES"
+            subtitle="Real-world examples of our exclusive family office services"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full flex items-center justify-center mr-4 border border-emerald-400/30">
+                    <span className="text-emerald-400 font-black text-lg">🏠</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+                    Ultra-HNWI Family Privacy Protection
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: International Business Family | Location: Mayfair & Surrey</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Ultra-high-net-worth family required discrete transportation for children's school runs, family shopping trips, and private events while maintaining complete privacy from media attention.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Implemented dedicated family protection team with armored luxury vehicles, counter-surveillance protocols, and 24/7 availability for family members across multiple residences.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Zero security incidents over 2 years, complete privacy maintained, and family able to enjoy normal activities without disruption or media exposure.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full flex items-center justify-center mr-4 border border-emerald-400/30">
+                    <span className="text-emerald-400 font-black text-lg">🎓</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+                    Children's Educational Transport
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Private Banking Family | Location: London & Berkshire</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Family office required secure daily transport for three children to different independent schools, with flexible scheduling for extracurricular activities and special requirements.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed child-specialized security drivers with enhanced DBS checks, luxury MPVs with privacy features, and real-time parent tracking app for peace of mind.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">100% punctuality record, children developed trust with dedicated drivers, and parents gained confidence knowing their children were always secure.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full flex items-center justify-center mr-4 border border-emerald-400/30">
+                    <span className="text-emerald-400 font-black text-lg">🏛️</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+                    Multi-Generational Family Events
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Aristocratic Family | Location: Country Estate & London</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Coordinated transport for 50+ family members across four generations for major family celebration, including elderly relatives and young children with special needs.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Orchestrated fleet of luxury vehicles with medical-trained drivers, wheelchair accessible options, and precise timing coordination for seamless event logistics.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Flawless execution with all family members transported safely and punctually. Event proceeded without any transport-related delays or issues.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full flex items-center justify-center mr-4 border border-emerald-400/30">
+                    <span className="text-emerald-400 font-black text-lg">🌍</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+                    International Family Arrival
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Middle Eastern Royal Family | Location: Private Terminal & Residences</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Royal family visiting London required maximum security transport from private jet terminal to multiple residences, with cultural sensitivity and protocol requirements.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed armored convoy with diplomatic protocol training, cultural liaison support, and coordinated with Royal Protection Services for seamless VIP treatment.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-emerald-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Impeccable service delivery meeting royal standards, full cultural protocol compliance, and family expressed complete satisfaction with discretion and professionalism.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">

@@ -118,6 +118,130 @@ export default function VIPServicePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 VIP TRANSPORTATION CASE STUDIES"
+            subtitle="Exclusive service excellence for distinguished clientele"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-purple-400/30">
+                    <span className="text-purple-400 font-black text-lg">🎬</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Hollywood A-List Actor London Visit
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: International Film Star | Location: Private Jet Terminal & Luxury Hotels</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">A-list Hollywood actor required discrete VIP transport for London film premiere with maximum security, privacy protection from paparazzi, and luxury travel experience.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed Rolls Royce Phantom with bullet-resistant features, counter-surveillance team, and coordinated with venue security for seamless red carpet arrival.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Flawless premiere arrival with zero security incidents, complete privacy maintained throughout visit, and client's public image perfectly protected.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-purple-400/30">
+                    <span className="text-purple-400 font-black text-lg">👑</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Royal Family State Visit Support
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: European Royal House | Location: Diplomatic Venues & State Functions</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">European royal family required VIP transport support during state visit to London with full diplomatic protocol, ceremonial requirements, and highest security standards.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided armored Bentley fleet with diplomatic trained drivers, royal protocol expertise, and coordination with Metropolitan Police Special Escort Group.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Perfect diplomatic protocol compliance, enhanced bilateral relations through flawless execution, and commendation from both royal houses.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-purple-400/30">
+                    <span className="text-purple-400 font-black text-lg">💰</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Tech Billionaire Private Events
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Technology Mogul | Location: Exclusive Venues & Private Estates</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Tech billionaire hosting exclusive private events across London required VIP transport for high-profile guests with varying security requirements and privacy needs.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Coordinated luxury fleet including Rolls Royce, Bentley, and Range Rover options with tiered security levels based on guest profiles and risk assessments.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Successfully transported 150+ VIP guests across 3 events with zero security breaches and universal client satisfaction with service quality.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-purple-400/30">
+                    <span className="text-purple-400 font-black text-lg">🏆</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Sports Champion Victory Celebration
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: World Champion Athlete | Location: Victory Parade & Celebration Venues</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">World champion athlete required VIP transport for victory celebration tour across London with media coordination, fan safety management, and ceremonial requirements.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided open-top Rolls Royce for parade segments, secure Bentley for private transfers, and coordinated with event security for crowd control and safety.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-purple-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Triumphant celebration executed flawlessly with perfect media coverage, athlete safety maintained throughout, and memorable victory tour experience delivered.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">

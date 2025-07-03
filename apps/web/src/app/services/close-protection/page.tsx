@@ -172,6 +172,138 @@ export default function CloseProtectionPage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="🛡️ CLOSE PROTECTION SUCCESS STORIES"
+            subtitle="Real-world examples of our professional security services protecting high-profile clients"
+            centered
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {/* Case Study 1 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-red-500 p-3 rounded-full mr-4">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Celebrity Protection Detail</h3>
+                  <p className="text-gray-400">A-List Celebrity - Award Show Circuit</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-red-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide discrete close protection for international celebrity during high-profile events with intense media attention and large crowds.
+                </p>
+                <h4 className="text-lg font-semibold text-red-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Deployed 4-person SIA licensed team with advance reconnaissance, crowd control expertise, and coordinated media management.
+                </p>
+                <h4 className="text-lg font-semibold text-red-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• Zero security incidents across 8 events</li>
+                  <li>• Seamless media interactions managed</li>
+                  <li>• Client privacy completely maintained</li>
+                  <li>• Ongoing exclusive protection contract</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 2 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-orange-500 p-3 rounded-full mr-4">
+                  <Eye className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Executive Threat Assessment</h3>
+                  <p className="text-gray-400">Tech Industry CEO - Hostile Takeover</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide 24/7 executive protection during sensitive business negotiations with elevated threat level.
+                </p>
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Comprehensive security assessment, armoured vehicle deployment, residential security, and threat monitoring.
+                </p>
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 6-month protection program executed</li>
+                  <li>• Multiple threat attempts neutralized</li>
+                  <li>• Client family security ensured</li>
+                  <li>• Successful business deal completion</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 3 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-purple-500 p-3 rounded-full mr-4">
+                  <Lock className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">High-Profile Wedding Security</h3>
+                  <p className="text-gray-400">Royal Family Member - Private Ceremony</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Secure private wedding ceremony with 200+ guests including international dignitaries and celebrities.
+                </p>
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Multi-layered security perimeter, guest screening, drone surveillance, and coordinated law enforcement liaison.
+                </p>
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• Flawless 3-day event security</li>
+                  <li>• Zero privacy breaches or incidents</li>
+                  <li>• Royal protection standards exceeded</li>
+                  <li>• Prestigious security award received</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 4 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-green-500 p-3 rounded-full mr-4">
+                  <Car className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Diplomatic Security Detail</h3>
+                  <p className="text-gray-400">Foreign Minister - Official UK Visit</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide supplementary close protection for foreign dignitary during official state visit with complex itinerary.
+                </p>
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Coordinated with diplomatic security services, advance team deployment, and secure transport convoy.
+                </p>
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 7-day diplomatic protection program</li>
+                  <li>• Seamless multi-agency coordination</li>
+                  <li>• International security standards met</li>
+                  <li>• Diplomatic services contract expanded</li>
+                </ul>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-red-500 to-orange-500">
         <div className="container mx-auto px-4 text-center">

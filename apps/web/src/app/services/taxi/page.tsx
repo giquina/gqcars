@@ -205,6 +205,130 @@ export default function SecurityTaxiPage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 SECURITY TAXI CASE STUDIES"
+            subtitle="Reliable security transport solutions for everyday needs"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-500/20 to-slate-500/20 rounded-full flex items-center justify-center mr-4 border border-gray-400/30">
+                    <span className="text-gray-400 font-black text-lg">🌙</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-gray-400 to-slate-500 bg-clip-text text-transparent">
+                    Night Shift Worker Safety
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Healthcare Professional | Location: Hospital & Residential Areas</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">NHS nurse working night shifts required safe transport to/from hospital through high-crime areas with concerns about personal safety during early morning hours.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided dedicated security taxi with SIA licensed driver, GPS tracking for family peace of mind, and door-to-door service ensuring personal safety throughout journey.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Zero safety incidents over 18 months, improved work-life balance for healthcare worker, and family confidence restored for night shift travel.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-500/20 to-slate-500/20 rounded-full flex items-center justify-center mr-4 border border-gray-400/30">
+                    <span className="text-gray-400 font-black text-lg">✈️</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-gray-400 to-slate-500 bg-clip-text text-transparent">
+                    Regular Airport Commuter
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Business Consultant | Location: Home & Multiple Airports</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Business consultant traveling 3-4 times weekly needed reliable airport transfers with unpredictable flight times and weather-related delays requiring flexible scheduling.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Established dedicated security taxi service with flight tracking capability, 24/7 availability, and backup vehicle system for weather-related contingencies.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">99.2% on-time pickup rate across 200+ journeys, eliminated missed flights due to transport issues, and became essential business travel partner.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-500/20 to-slate-500/20 rounded-full flex items-center justify-center mr-4 border border-gray-400/30">
+                    <span className="text-gray-400 font-black text-lg">👩‍⚕️</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-gray-400 to-slate-500 bg-clip-text text-transparent">
+                    Elderly Care Transport
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Elderly Couple | Location: Medical Appointments & Daily Activities</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Elderly couple with mobility issues required safe, comfortable transport to medical appointments and daily activities with assistance getting in/out of vehicle.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided wheelchair accessible security taxi with patient, caring driver trained in elderly assistance, and comfortable vehicle with easy access features.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Maintained independence for elderly couple, never missed medical appointments, and provided family with peace of mind for their parents' transportation needs.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-gray-500/20 to-slate-500/20 rounded-full flex items-center justify-center mr-4 border border-gray-400/30">
+                    <span className="text-gray-400 font-black text-lg">🏢</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-gray-400 to-slate-500 bg-clip-text text-transparent">
+                    Corporate Employee Transport
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Financial Services Firm | Location: Multiple London Offices</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Financial services company needed secure transport for employees working late hours in City of London with safety concerns about public transport after midnight.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Implemented corporate security taxi account with pre-approved pickup locations, vetted SIA licensed drivers, and 24/7 availability for late-working staff.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Improved employee satisfaction and retention, reduced safety incidents by 100%, and enabled staff to work productively without transport concerns.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gqcars.co.uk/sitemap.xml

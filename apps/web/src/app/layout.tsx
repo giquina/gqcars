@@ -1,6 +1,5 @@
 import { Providers } from '@/components/providers'
 import SEOSchema from '@/components/SEOSchema'
-import { StaticModeNotice } from '@/lib/static-mode'
 import '@/styles/globals.css'
 
 export const metadata = {
@@ -33,7 +32,6 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <Providers>
-          <StaticModeNotice />
           {children}
         </Providers>
       </body>

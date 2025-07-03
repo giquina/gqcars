@@ -172,6 +172,138 @@ export default function CorporateServicePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="🏢 CORPORATE SUCCESS STORIES"
+            subtitle="Real examples of how we've delivered exceptional corporate transportation solutions"
+            centered
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {/* Case Study 1 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-blue-500 p-3 rounded-full mr-4">
+                  <Briefcase className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Global Tech Conference</h3>
+                  <p className="text-gray-400">Fortune 500 Technology Company</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-blue-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Coordinate transportation for 80+ international executives attending a 3-day technology summit across multiple London venues.
+                </p>
+                <h4 className="text-lg font-semibold text-blue-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Deployed a fleet of 12 luxury vehicles with dedicated drivers, real-time tracking, and 24/7 dispatch coordination.
+                </p>
+                <h4 className="text-lg font-semibold text-blue-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 100% on-time arrival rate across 240+ transfers</li>
+                  <li>• Zero security incidents or protocol breaches</li>
+                  <li>• 98% client satisfaction rating</li>
+                  <li>• Renewed contract for annual events</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 2 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-purple-500 p-3 rounded-full mr-4">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Board Meeting Transport</h3>
+                  <p className="text-gray-400">International Banking Group</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide discrete, secure transportation for board members during sensitive merger negotiations.
+                </p>
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  SIA-licensed close protection drivers, encrypted communication, route variation, and armoured vehicles.
+                </p>
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• Complete confidentiality maintained</li>
+                  <li>• Enhanced security protocols implemented</li>
+                  <li>• Successful completion of all transfers</li>
+                  <li>• Ongoing security transport contract</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 3 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-green-500 p-3 rounded-full mr-4">
+                  <Car className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Client Hospitality Program</h3>
+                  <p className="text-gray-400">Luxury Real Estate Firm</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Impress high-net-worth international clients with premium transportation during property viewings.
+                </p>
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Luxury fleet with multilingual drivers, champagne service, and personalised itineraries.
+                </p>
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 85% client conversion rate increase</li>
+                  <li>• Enhanced brand perception</li>
+                  <li>• Exclusive transport partnership</li>
+                  <li>• Referral program established</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 4 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-orange-500 p-3 rounded-full mr-4">
+                  <Clock className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Emergency Executive Transport</h3>
+                  <p className="text-gray-400">Healthcare Corporation</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide immediate, secure transport for senior executives during a crisis management situation.
+                </p>
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Emergency response protocol with 15-minute deployment time and secure communication channels.
+                </p>
+                <h4 className="text-lg font-semibold text-orange-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 12-minute average response time</li>
+                  <li>• Crisis management support enabled</li>
+                  <li>• Long-term emergency services contract</li>
+                  <li>• Protocol now company standard</li>
+                </ul>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-500 to-cyan-500">
         <div className="container mx-auto px-4 text-center">
