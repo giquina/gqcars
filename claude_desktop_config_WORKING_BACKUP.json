@@ -1,0 +1,74 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\Student\\Documents\\Development_Projects\\gqcars-main-production"],
+      "description": "File system operations for your GQ Cars project"
+    },
+    "memory": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "Persistent memory across Claude sessions"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "env": {
+        "UPSTASH_REDIS_REST_URL": "your-upstash-redis-url",
+        "UPSTASH_REDIS_REST_TOKEN": "your-upstash-redis-token"
+      },
+      "description": "Real-time documentation and context management"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "your-github-token"
+      },
+      "description": "GitHub repository integration"
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_SEARCH_API_KEY": "your-brave-search-api-key"
+      },
+      "description": "Web search capabilities via Brave Search"
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://localhost:5432/gqcars"
+      },
+      "description": "PostgreSQL database operations"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Enhanced reasoning and sequential thought processes"
+    },
+    "everything": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "description": "Windows Everything search integration"
+    },
+    "google-maps": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-google-maps"],
+      "env": {
+        "GOOGLE_MAPS_API_KEY": "your-google-maps-api-key"
+      },
+      "description": "Google Maps integration for location services"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "puppeteer-mcp-server"],
+      "env": {
+        "PUPPETEER_HEADLESS": "true",
+        "PUPPETEER_BROWSER": "chromium"
+      },
+      "description": "Browser automation and web scraping"
+    }
+  }
+}
