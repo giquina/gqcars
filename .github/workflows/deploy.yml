@@ -1,60 +1,36 @@
-name: Deploy to GitHub Pages (Static Export)
-
-# This workflow builds a static export version for GitHub Pages
-# Note: Static version has limited functionality (no API routes/database)
-# For full features, use Vercel deployment
+name: Deploy to Vercel
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # Can also run manually
+  pull_request:
+    branches: [ main ]
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: |
-        cd apps/web
-        npm ci
-        
-    - name: Create static environment file
-      run: |
-        cd apps/web
-        cat > .env.local << EOF
-        # Static build environment for GitHub Pages
-        NODE_ENV=production
-        BUILD_STATIC=true
-        NEXTAUTH_URL=https://giquina.github.io/gqcars
-        NEXTAUTH_SECRET=github-pages-static-secret
-        DATABASE_URL=file:../prisma/dev.db
-        # Note: API routes will not work in static export
-        EOF
-        
-    - name: Generate Prisma Client (for types only)
-      run: |
-        cd apps/web
-        npx prisma generate || echo "Prisma generation failed, continuing..."
-        
-    - name: Build static export
-      run: |
-        cd apps/web
-        BUILD_STATIC=true npm run build
-        
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      if: github.ref == 'refs/heads/main'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./apps/web/out
-        cname: # Optional: Add custom domain here if you have one
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'apps/web/package-lock.json'
+      
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

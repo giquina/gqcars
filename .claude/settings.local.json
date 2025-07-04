@@ -99,7 +99,8 @@
       "Bash(git init:*)",
       "Bash(git remote add:*)",
       "Bash(claude doctor)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(vercel:*)"
     ],
     "deny": []
   },
