@@ -1,11 +1,34 @@
-# GQ Cars - Premium Security Transport Services
+# 🚗 GQ Cars LTD - Premium Security Transport Platform
+
+**🌐 Live Production Website:** https://web-8wyt5fr24-giquinas-projects.vercel.app
 
 > AI-powered security taxi service with SIA Licensed Close Protection Officers
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/gqcars-main-production)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/giquina/gqcars)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4)](https://tailwindcss.com/)
+[![GitHub Codespaces](https://img.shields.io/badge/Codespaces-Ready-brightgreen)](https://github.com/features/codespaces)
+
+## 🎯 **Project Status: PRODUCTION READY ✅**
+
+- **✅ Website Live & Functional** - All 45+ components operational
+- **✅ 12 Service Pages Complete** - Comprehensive service portfolio  
+- **✅ AI Integration Active** - Claude chat and security assessment
+- **✅ Mobile Optimized** - Responsive design for all devices
+- **✅ SEO Optimized** - Search engine ready with sitemap
+- **✅ Vercel Deployed** - Production environment with SSL
+- **✅ Codespaces Ready** - One-click cloud development setup
+
+## 🚀 **Quick Start with GitHub Codespaces** ⏱️ *2 minutes*
+
+### **Instant Development**
+1. **Create Codespace**: Click **"Code"** → **"Codespaces"** → **"Create codespace"**
+2. **Auto Setup**: Wait 2-3 minutes for automated environment setup
+3. **Start Coding**: Run `cd apps/web && npm run dev`
+4. **View Website**: Opens automatically at http://localhost:3000
+
+**📖 Full Guide:** [CODESPACES-QUICKSTART.md](./CODESPACES-QUICKSTART.md) | **📋 Detailed Plan:** [GITHUB-CODESPACES-PLAN.md](./GITHUB-CODESPACES-PLAN.md)
 
 ## 🚗 About GQ Cars
 
