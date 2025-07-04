@@ -23,6 +23,7 @@ import QuickActionPlatform from '@/components/ui/QuickActionPlatform'
 import LocationBasedQuotes from '@/components/ui/LocationBasedQuotes'
 import FloatingWhatsAppButton from '@/components/ui/FloatingWhatsAppButton'
 import TrustBadges from '@/components/ui/TrustBadges'
+import SocialProofHub from '@/components/ui/SocialProofHub'
 import { ChevronDown } from 'lucide-react'
 
 export default function HomePage() {
@@ -33,6 +34,11 @@ export default function HomePage() {
       {/* Live Notifications - Always Visible, Top-Left, Highest Z-Index */}
       <div className="fixed top-6 left-6 z-[100]">
         <LiveNotifications />
+      </div>
+
+      {/* Social Proof Hub - Top-Right, High Z-Index */}
+      <div className="fixed top-6 right-6 z-[99]">
+        <SocialProofHub />
       </div>
       
       {/* Interactive Hero Section */}
