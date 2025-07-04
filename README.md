@@ -1,59 +1,205 @@
-# GQ Cars - Professional Transport & Security Services
+# GQ Cars - Premium Security Transport Services
 
-A modern, user-friendly website for GQ Cars providing professional transport and security services across London.
+> AI-powered security taxi service with SIA Licensed Close Protection Officers
 
-## 🚗 Services
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/gqcars-main-production)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4)](https://tailwindcss.com/)
 
-- **Airport Transfers** - Reliable rides to/from any airport
-- **VIP Transport** - Luxury vehicles for special occasions  
-- **Personal Security** - Professional protection officers
-- **Corporate Travel** - Business transportation solutions
-- **Taxi Service** - Quick, safe rides anywhere in London
-- **Wedding & Events** - Special occasion transport
+## 🚗 About GQ Cars
+
+GQ Cars LTD provides premium security transport services with SIA Licensed Close Protection Officers. Our AI-powered platform offers real-time booking, security assessments, and live tracking for VIP clients, corporate accounts, and security-conscious travelers.
+
+### ✨ Key Features
+
+- **🛡️ SIA Licensed Close Protection Officers**
+- **🤖 AI-Powered Security Assessment**
+- **📱 Real-time Booking & Tracking**
+- **💳 Secure Payment Processing (Stripe)**
+- **🗺️ Google Maps Integration**
+- **📞 24/7 WhatsApp Support**
+- **🔄 Live Notifications System**
+- **📊 Advanced Analytics Dashboard**
+
+## 🏗️ Architecture
+
+This is a modern Next.js 14 monorepo built with:
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript with strict mode
+- **Styling**: Tailwind CSS with custom design system
+- **Database**: Prisma ORM with SQLite
+- **Authentication**: NextAuth + Supabase
+- **Payments**: Stripe integration
+- **Maps**: Google Maps API
+- **AI**: Anthropic Claude integration
+- **Analytics**: Google Analytics 4
 
 ## 🚀 Quick Start
 
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Git
+
+### Installation
+
 ```bash
+# Clone the repository
+git clone https://github.com/your-username/gqcars-main-production.git
+cd gqcars-main-production
+
+# Install dependencies
+cd apps/web
 npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your API keys
+
+# Initialize database
+npx prisma generate
+npx prisma db push
+
+# Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the website.
+Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
-## 🛠️ Tech Stack
+## 📁 Project Structure
 
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **Bold Dynamic Design** - High-energy, animated interface
+```
+gqcars-main-production/
+├── apps/
+│   └── web/                    # Main Next.js application
+│       ├── src/
+│       │   ├── app/           # Next.js App Router
+│       │   ├── components/    # UI components
+│       │   ├── lib/          # Utilities & integrations
+│       │   └── types/        # TypeScript definitions
+│       ├── prisma/           # Database schema
+│       └── public/           # Static assets
+├── vercel.json               # Vercel deployment config
+├── .gitignore               # Git ignore rules
+└── README.md                # This file
+```
 
-## 📱 Features
+## 🛠️ Development
 
-- ✅ Responsive mobile design with hamburger menu
-- ✅ User-friendly language (no technical jargon)
-- ✅ Working service pages for all offerings
-- ✅ Call-to-action booking system
-- ✅ Professional footer with all links
-- ✅ Fast performance optimization
-- ✅ SIA/TFL certified branding
+### Available Scripts
 
-## 🌐 Deployment
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+
+# Quality Assurance
+npm run lint         # Run ESLint
+npm run typecheck    # TypeScript type checking
+npm run test         # Run Jest tests
+
+# Database
+npx prisma generate  # Generate Prisma client
+npx prisma db push   # Apply schema changes
+npx prisma studio    # Open database GUI
+```
+
+### Environment Variables
+
+Required environment variables for `.env.local`:
+
+```bash
+# Database
+DATABASE_URL=file:../prisma/dev.db
+
+# Authentication
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-here
+
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-key
+
+# Stripe
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+
+# Google Maps
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your-maps-key
+
+# AI Integration
+CLAUDE_API_KEY=your-anthropic-key
+```
+
+## 🎨 Design System
+
+The application uses a **Bold Dynamic** design theme featuring:
+
+- **Colors**: Blue-purple gradients with black backgrounds
+- **Typography**: Bold fonts with gradient text effects
+- **Animations**: Ping circles, bouncing particles, lightning bolts
+- **Layout**: Mobile-first responsive design
+- **Components**: 44+ custom UI components
+
+## 🚢 Deployment
 
 ### Vercel (Recommended)
-1. Visit [vercel.com](https://vercel.com)
-2. Connect your GitHub repository
-3. Deploy automatically
 
-### GitHub Pages
-Static export available via `npm run build`
+1. **Connect Repository**: Link your GitHub repository to Vercel
+2. **Configure Build**: Vercel will automatically detect Next.js settings
+3. **Set Environment Variables**: Add your production environment variables
+4. **Deploy**: Push to main branch triggers automatic deployment
 
-## 📞 Contact
+### Manual Deployment
 
-- **Phone**: 0800 123 4567
-- **WhatsApp**: 07123 456789
-- **Email**: book@gqcars.co.uk
+```bash
+# Build the application
+cd apps/web
+npm run build
+
+# Start production server
+npm run start
+```
+
+## 🔒 Security
+
+- **Input Validation**: Zod schemas for all forms
+- **Authentication**: Secure session management with NextAuth
+- **Payment Security**: PCI-compliant Stripe integration
+- **CSP Headers**: Content Security Policy implementation
+- **SIA Compliance**: Security industry standards
+
+## 📊 Performance
+
+- **Lighthouse Score**: 95+ across all metrics
+- **Bundle Size**: Optimized with dynamic imports
+- **Caching**: Redis for session storage
+- **CDN**: Vercel Edge Network
+- **Images**: Next.js Image optimization
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+- **Website**: [gqsecurity.co.uk](https://gqsecurity.co.uk)
+- **Email**: support@gqsecurity.co.uk
+- **WhatsApp**: +44 7XXX XXXXXX
+- **Documentation**: [docs.gqsecurity.co.uk](https://docs.gqsecurity.co.uk)
+
+## 📄 License
+
+This project is proprietary software. All rights reserved.
 
 ---
 
-**GQ Cars Ltd** - Professional Transport & Security Services
-SIA Licensed • TFL Approved • Fully Insured
+**GQ Cars LTD** - Premium Security Transport Services
