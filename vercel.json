@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "gqcars-main-production",
+  "name": "gqcars",
   "builds": [
     {
       "src": "apps/web/package.json",

@@ -71,8 +71,8 @@ This is a modern Next.js 14 monorepo built with:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/gqcars-main-production.git
-cd gqcars-main-production
+git clone https://github.com/giquina/gqcars.git
+cd gqcars
 
 # Install dependencies
 cd apps/web
@@ -95,7 +95,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the application.
 ## 📁 Project Structure
 
 ```
-gqcars-main-production/
+gqcars/
 ├── apps/
 │   └── web/                    # Main Next.js application
 │       ├── src/
@@ -105,6 +105,9 @@ gqcars-main-production/
 │       │   └── types/        # TypeScript definitions
 │       ├── prisma/           # Database schema
 │       └── public/           # Static assets
+├── packages/                   # Shared packages (future)
+├── .devcontainer/             # Codespaces configuration
+├── .github/                   # GitHub workflows
 ├── vercel.json               # Vercel deployment config
 ├── .gitignore               # Git ignore rules
 └── README.md                # This file

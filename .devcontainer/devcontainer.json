@@ -51,7 +51,7 @@
   "postCreateCommand": "bash .devcontainer/setup-codespaces.sh",
   "postStartCommand": "cd apps/web && npm install",
   "remoteUser": "codespace",
-  "workspaceFolder": "/workspaces/gqcars-main-production",
+  "workspaceFolder": "/workspaces/gqcars",
   "mounts": [
     "source=gqcars-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
     "source=gqcars-web-node-modules,target=${containerWorkspaceFolder}/apps/web/node_modules,type=volume"
