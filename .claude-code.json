@@ -1,0 +1,44 @@
+{
+    "name": "gqcars",
+    "version": "1.0.0",
+    "description": "GQ Cars LTD - Premium Security Transport Platform",
+    "type": "next-js-app",
+    "main": "apps/web",
+    "integration": {
+        "ide": "cursor",
+        "autoConnect": true,
+        "features": [
+            "mcp-support",
+            "real-time-sync",
+            "auto-save",
+            "code-completion",
+            "error-detection"
+        ]
+    },
+    "mcp": {
+        "enabled": true,
+        "servers": [
+            {
+                "name": "supabase-mcp",
+                "path": "./mcp-lab/mcp-servers/integration/supabase-mcp"
+            }
+        ]
+    },
+    "workspace": {
+        "root": ".",
+        "apps": ["apps/web"],
+        "packages": ["packages"],
+        "scripts": {
+            "dev": "cd apps/web && npm run dev",
+            "build": "cd apps/web && npm run build",
+            "start": "cd apps/web && npm run start",
+            "lint": "cd apps/web && npm run lint"
+        }
+    },
+    "preferences": {
+        "autoFormat": true,
+        "autoImport": true,
+        "typeChecking": true,
+        "linting": true
+    }
+}

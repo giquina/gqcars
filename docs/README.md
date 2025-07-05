@@ -8,6 +8,9 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4)](https://tailwindcss.com/)
+[![Claude Code Integration](https://img.shields.io/badge/Claude%20Code-Integrated-blue)](https://claude.ai/code)
+[![MCP Enabled](https://img.shields.io/badge/MCP-Enabled-green)](https://modelcontextprotocol.io)
+[![Cursor Compatible](https://img.shields.io/badge/Cursor-Compatible-purple)](https://cursor.sh)
 [![GitHub Codespaces](https://img.shields.io/badge/Codespaces-Ready-brightgreen)](https://github.com/features/codespaces)
 
 ## 🎯 **Project Status: PRODUCTION READY ✅**
@@ -15,10 +18,47 @@
 - **✅ Website Live & Functional** - All 45+ components operational
 - **✅ 12 Service Pages Complete** - Comprehensive service portfolio  
 - **✅ AI Integration Active** - Claude chat and security assessment
+- **✅ Claude Code Integrated** - Full MCP support with 10+ servers
 - **✅ Mobile Optimized** - Responsive design for all devices
 - **✅ SEO Optimized** - Search engine ready with sitemap
 - **✅ Vercel Deployed** - Production environment with SSL
 - **✅ Codespaces Ready** - One-click cloud development setup
+
+## 🤖 **Claude Code Integration**
+
+**Professional AI-assisted development environment with full MCP support.**
+
+### **Quick Start with Claude Code**
+```bash
+# Start Claude Code integration
+./start-all.sh
+
+# Check system status
+./ide status
+
+# Open in Cursor with Claude assistance
+cursor .
+```
+
+### **Enabled MCP Servers** (10 servers configured)
+- `filesystem` - File system access and manipulation
+- `memory` - Persistent knowledge graphs
+- `sequential-thinking` - Advanced reasoning workflows
+- `everything` - Testing and debugging utilities
+- `github` - GitHub repository integration
+- `git` - Local git repository management
+- `sqlite` - Database query and management
+- `brave-search` - Web search capabilities
+- `puppeteer` - Browser automation
+- `fetch` - HTTP request handling
+
+### **Professional Tools**
+- **IDE Server**: http://localhost:8080
+- **Command Interface**: `./ide <command>`
+- **Automated Setup**: `./ide setup`
+- **Health Monitoring**: `./ide health`
+
+**📋 Complete Guide**: [`docs/SETUP-COMPLETE.md`](./SETUP-COMPLETE.md)
 
 ## 🚀 **Quick Start with GitHub Codespaces** ⏱️ *2 minutes*
 

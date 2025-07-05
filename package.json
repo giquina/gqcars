@@ -1,0 +1,54 @@
+{
+  "name": "gqcars",
+  "version": "1.0.0",
+  "description": "GQ Cars LTD - Professional Security Transport Platform",
+  "main": "index.js",
+  "scripts": {
+    "mcp-servers": "node scripts/mcp-server-manager.js start",
+    "ide-server": "node scripts/claude-code-ide-server.js",
+    "dev-all": "concurrently \"npm run mcp-servers\" \"npm run ide-server\" \"cd apps/web && npm run dev\"",
+    "start-ide": "npm run mcp-servers && npm run ide-server",
+    "stop-ide": "node scripts/mcp-server-manager.js stop && pkill -f claude-code-ide-server",
+    "ide-status": "node scripts/ide-command-interface.js status",
+    "ide-health": "node scripts/ide-command-interface.js health",
+    "ide-setup": "node scripts/ide-command-interface.js setup",
+    "clean": "rm -rf temp/* .mcp-status .claude-ide-status .cursor-* .ide-integration-status",
+    "install-mcp": "npm install -g @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-memory @modelcontextprotocol/server-sequential-thinking @modelcontextprotocol/server-everything @modelcontextprotocol/server-github @modelcontextprotocol/server-git @modelcontextprotocol/server-sqlite @modelcontextprotocol/server-brave-search @modelcontextprotocol/server-puppeteer @modelcontextprotocol/server-fetch"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  },
+  "_ide_integration": {
+    "cursor": true,
+    "claude_code": true,
+    "mcp_servers": [
+      "filesystem",
+      "memory",
+      "sequential-thinking", 
+      "everything",
+      "github",
+      "git",
+      "sqlite",
+      "brave-search",
+      "puppeteer",
+      "fetch"
+    ],
+    "ide_server_port": 8080,
+    "auto_start": true,
+    "timestamp": "2025-07-05T12:00:00.000Z"
+  },
+  "keywords": ["transport", "security", "booking", "nextjs", "typescript", "mcp", "claude-code"],
+  "author": "GQ Cars LTD",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/gqcars.git"
+  }
+}

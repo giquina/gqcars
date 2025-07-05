@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# GQ Cars IDE Command Interface
+# Professional wrapper for Claude Code integration
+
+# Get the script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if the interface script exists
+INTERFACE_SCRIPT="$SCRIPT_DIR/scripts/ide-command-interface.js"
+
+if [ ! -f "$INTERFACE_SCRIPT" ]; then
+    echo "❌ IDE interface script not found at: $INTERFACE_SCRIPT"
+    echo "   Please ensure the setup is complete"
+    exit 1
+fi
+
+# Check if Node.js is available
+if ! command -v node &> /dev/null; then
+    echo "❌ Node.js is not installed or not in PATH"
+    echo "   Please install Node.js to use this tool"
+    exit 1
+fi
+
+# Change to project directory
+cd "$SCRIPT_DIR"
+
+# Run the interface with all arguments
+exec node "$INTERFACE_SCRIPT" "$@"

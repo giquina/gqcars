@@ -100,15 +100,20 @@
       "Bash(git remote add:*)",
       "Bash(claude doctor)",
       "Bash(npm uninstall:*)",
-      "Bash(vercel:*)"
+      "Bash(vercel:*)",
+      "Bash(powershell:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(python3:*)",
+      "Bash([ ! -f \"docs/README.md\" ])"
     ],
     "deny": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "filesystem",
     "memory",
     "sequential-thinking",
-    "github",
-    "everything"
+    "everything",
+    "github"
   ]
 }

@@ -1,0 +1,20 @@
+{
+    "ide": "cursor",
+    "claude_code_server": "http://localhost:8080",
+    "status": "active",
+    "features": ["mcp-support", "real-time", "debugging", "file-management"],
+    "project": "gqcars",
+    "last_setup": "2025-07-05T12:18:00.000Z",
+    "integration_level": "full",
+    "mcp_enabled": true,
+    "server_responding": true,
+    "cursor_extensions": [
+        "claude-code",
+        "ms-vscode.vscode-typescript-next"
+    ],
+    "setup_complete": true,
+    "cursor_running": false,
+    "diagnostic_complete": true,
+    "primary_issue": "cursor_not_running",
+    "solution": "start_cursor_ide"
+}
