@@ -122,6 +122,130 @@ export default function LifestyleServicePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 LIFESTYLE CASE STUDIES"
+            subtitle="Elevating personal experiences through luxury transportation"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">💎</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Luxury Shopping Experience
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Fashion Influencer | Location: Bond Street & Harrods</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">High-profile fashion influencer needed discrete luxury transport for shopping appointments across London's premium retail districts while maintaining privacy from paparazzi.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided Rolls Royce with tinted windows, counter-surveillance trained driver, and flexible scheduling for spontaneous shopping decisions and private fitting appointments.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Successfully maintained complete privacy during shopping trips, client able to enjoy luxury retail experiences without disruption, and became our regular lifestyle client.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">🥂</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Elite Social Event Circuit
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Socialite & Philanthropist | Location: Mayfair & Knightsbridge</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Prominent socialite required reliable luxury transport for multiple charity galas, private dining events, and art gallery openings across London with perfect timing coordination.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Assigned dedicated lifestyle concierge driver with Bentley, pre-event route planning, and seamless coordination with event organizers for VIP arrivals and departures.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Flawless punctuality for 15+ events, enhanced client's reputation for elegance, and driver became trusted part of her social event team.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">🌟</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Personal Chauffeur Service
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Tech Executive | Location: Central London & Home Counties</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Busy tech executive needed personal chauffeur for daily lifestyle activities including gym visits, personal appointments, and recreational activities while maintaining work-life balance.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided dedicated personal chauffeur with luxury SUV, flexible daily scheduling, and mobile office capability for productivity during travel between lifestyle activities.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Gained 10+ hours weekly for personal activities, improved work-life balance, and seamless integration of transportation into daily lifestyle routine.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">🎭</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Cultural Events & Fine Dining
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Art Collector Couple | Location: West End & Michelin Restaurants</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Art collector couple required elegant transport for cultural events, theater premieres, and fine dining experiences while coordinating with complex London evening schedules.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed chauffeur-driven Mercedes S-Class with theater district expertise, restaurant timing coordination, and cultural venue familiarity for seamless evening experiences.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Perfect timing for all cultural events, enhanced enjoyment of London's cultural scene, and established ongoing relationship for lifestyle transportation needs.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">

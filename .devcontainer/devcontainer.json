@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "GQ Cars LTD - Next.js Development Environment",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
@@ -76,4 +77,64 @@
   "workspaceFolder": "/workspaces/gqcars-main-production",
 
   "updateContentCommand": "cd apps/web && npm install"
+=======
+{
+  "name": "GQ Cars LTD - Next.js Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vscode.vscode-json",
+        "Prisma.prisma",
+        "ms-playwright.playwright",
+        "ms-vscode.vscode-eslint",
+        "ms-vscode.vscode-html-language-features",
+        "ms-vscode.vscode-css-language-features",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        "typescript.preferences.quoteStyle": "double",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "emmet.includeLanguages": {
+          "typescript": "html",
+          "typescriptreact": "html"
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "forwardPorts": [3000, 3001, 5432],
+  "portsAttributes": {
+    "3000": {
+      "label": "GQ Cars Website",
+      "onAutoForward": "openBrowser"
+    },
+    "3001": {
+      "label": "Storybook",
+      "onAutoForward": "silent"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup-codespaces.sh",
+  "postStartCommand": "cd apps/web && npm install",
+  "remoteUser": "codespace",
+  "workspaceFolder": "/workspaces/gqcars",
+  "mounts": [
+    "source=gqcars-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=gqcars-web-node-modules,target=${containerWorkspaceFolder}/apps/web/node_modules,type=volume"
+  ]
+>>>>>>> feature/final-completion
 }

@@ -133,6 +133,130 @@ export default function PrivateHirePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 PRIVATE HIRE CASE STUDIES"
+            subtitle="Professional transportation solutions for every need"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-slate-500/20 to-gray-500/20 rounded-full flex items-center justify-center mr-4 border border-slate-400/30">
+                    <span className="text-slate-400 font-black text-lg">✈️</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-slate-400 to-gray-500 bg-clip-text text-transparent">
+                    International Executive Airport Transfer
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Multinational Consulting Firm | Location: Heathrow & City Offices</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Consulting firm required reliable airport transfers for international executives with unpredictable flight schedules and multiple pickup locations across London offices.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Implemented 24/7 executive car service with flight tracking, multiple vehicle standby, and professional drivers trained in executive protocols and punctuality standards.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">99.8% on-time performance over 12 months, zero missed flights, and established as preferred transport partner for all executive travel needs.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-slate-500/20 to-gray-500/20 rounded-full flex items-center justify-center mr-4 border border-slate-400/30">
+                    <span className="text-slate-400 font-black text-lg">🏃</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-slate-400 to-gray-500 bg-clip-text text-transparent">
+                    Multi-Stop Business Tour
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Property Investment Group | Location: Central London & Home Counties</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Property investment team needed efficient transport for viewing 12 commercial properties across London and surrounding areas within a single day with tight scheduling.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided luxury executive vehicle with local area expertise, optimized route planning, and flexible timing adjustments for extended property viewings and meetings.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Completed all 12 property viewings on schedule, saved 4 hours through optimal routing, and client made successful investment decisions with clear minds.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-slate-500/20 to-gray-500/20 rounded-full flex items-center justify-center mr-4 border border-slate-400/30">
+                    <span className="text-slate-400 font-black text-lg">👥</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-slate-400 to-gray-500 bg-clip-text text-transparent">
+                    Group Corporate Transfer
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Technology Startup | Location: Co-working Spaces & Conference Centers</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Tech startup required transport for 8-person team to investor presentations across London, with professional image requirements and confidential discussion needs.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed luxury 8-seater vehicle with privacy partitions, Wi-Fi connectivity, and professional driver trained in confidentiality protocols for sensitive business discussions.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Team arrived relaxed and prepared for each presentation, maintained confidentiality throughout transport, and successfully secured Series A funding round.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-slate-500/20 to-gray-500/20 rounded-full flex items-center justify-center mr-4 border border-slate-400/30">
+                    <span className="text-slate-400 font-black text-lg">🕐</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-slate-400 to-gray-500 bg-clip-text text-transparent">
+                    Flexible Hourly Service
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Management Consultant | Location: Client Offices Across London</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Independent consultant needed flexible hourly transport for client meetings with unpredictable timings, waiting periods, and last-minute schedule changes throughout the day.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided dedicated hourly hire service with patient professional driver, mobile office setup in vehicle, and flexible scheduling accommodating client meeting overruns.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Maximized billable time by eliminating travel stress, improved client relationships through punctuality, and became essential tool for business development.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">

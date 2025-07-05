@@ -1,6 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 import SecurityAssessmentResults from '@/components/ui/SecurityAssessmentResults'
 import { Crown, Users, Car, Shield } from 'lucide-react'
 
@@ -123,7 +124,7 @@ function getRecommendation(answers: URLSearchParams) {
   }
 }
 
-export default function ResultsPage() {
+function ResultsPageContent() {
   const searchParams = useSearchParams()
   const recommendation = getRecommendation(searchParams || new URLSearchParams())
 
@@ -131,5 +132,20 @@ export default function ResultsPage() {
     <main className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-black flex items-center justify-center py-20 px-4">
       <SecurityAssessmentResults recommendation={recommendation} />
     </main>
+  )
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-gradient-to-br from-purple-900 via-gray-900 to-black flex items-center justify-center py-20 px-4">
+        <div className="text-center text-white">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p>Loading your assessment results...</p>
+        </div>
+      </main>
+    }>
+      <ResultsPageContent />
+    </Suspense>
   )
 }

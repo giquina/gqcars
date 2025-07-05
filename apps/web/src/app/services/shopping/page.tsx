@@ -148,6 +148,130 @@ export default function ShoppingSecurityPage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 SHOPPING SECURITY CASE STUDIES"
+            subtitle="Protecting luxury shopping experiences across London"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">💎</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Bond Street Jewelry District
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: International Jewelry Collector | Location: Bond Street & Hatton Garden</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Ultra-wealthy collector purchasing £2.8M worth of jewelry across multiple Bond Street boutiques required discrete security for high-value transactions and safe transport of purchases.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed armored Bentley with security-trained chauffeur, counter-surveillance team, and coordinated with boutique security for seamless high-value purchase protection.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Zero security incidents during £2.8M shopping spree, all purchases secured safely, and client able to enjoy luxury shopping experience without safety concerns.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">👗</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Harrods Exclusive Personal Shopping
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Celebrity Wife | Location: Harrods & Knightsbridge Boutiques</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Celebrity spouse required security for exclusive personal shopping sessions at Harrods with protection from paparazzi and unwanted public attention during private appointments.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided Range Rover with tinted windows, discrete security escort, and coordinated with Harrods security for private entrance/exit routes avoiding public areas.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Successfully maintained complete privacy during 6-hour shopping session, no paparazzi incidents, and client completed extensive wardrobe purchases undisturbed.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">🎨</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Art & Antiques Acquisition Tour
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Private Art Collector | Location: Mayfair Galleries & Auction Houses</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Art collector visiting 8 galleries and auction houses in single day required secure transport of acquired artworks worth £5.2M with insurance compliance and climate control.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed specialist art transport vehicle with climate control, GPS tracking, and fine art insurance coverage, plus security escort for gallery-to-gallery transfers.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">All 12 artworks transported safely with perfect condition preservation, full insurance compliance maintained, and client secured desired pieces without security concerns.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-full flex items-center justify-center mr-4 border border-rose-400/30">
+                    <span className="text-rose-400 font-black text-lg">👒</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
+                    Royal Ascot Fashion Shopping
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Society Lady | Location: Savile Row & Exclusive Milliners</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Society lady preparing for Royal Ascot required secure transport for bespoke fittings across London's finest tailors and milliners with multiple outfit purchases and fittings.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided Rolls Royce with discrete security, garment transport capability, and flexible scheduling for multiple fittings and alterations across exclusive fashion houses.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-rose-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Seamless coordination of 15 fittings over 3 days, all garments transported without damage, and client achieved perfect Royal Ascot wardrobe with complete satisfaction.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4">

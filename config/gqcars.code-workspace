@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "claude-code.enabled": true,
+        "claude-code.server.url": "http://localhost:8080",
+        "claude-code.project.name": "gqcars",
+        "claude-code.integration.mode": "active",
+        "workbench.statusBar.visible": true,
+        "workbench.statusBar.feedback.visible": false
+    },
+    "extensions": {
+        "recommendations": [
+            "claude-code.claude-code-ide"
+        ]
+    }
+}

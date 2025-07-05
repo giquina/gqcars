@@ -176,6 +176,138 @@ export default function DiplomaticServicePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="🌍 DIPLOMATIC SUCCESS STORIES"
+            subtitle="Real examples of our diplomatic transportation services supporting international relations"
+            centered
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {/* Case Study 1 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-indigo-500 p-3 rounded-full mr-4">
+                  <Globe className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">G7 Summit Transportation</h3>
+                  <p className="text-gray-400">International Summit - Multiple Delegations</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-indigo-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Coordinate transportation for 40+ diplomatic delegations during a major international summit with complex security protocols.
+                </p>
+                <h4 className="text-lg font-semibold text-indigo-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Multi-nation coordination with security services, 24/7 dispatch center, and specialized diplomatic protocols training.
+                </p>
+                <h4 className="text-lg font-semibold text-indigo-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 500+ diplomatic transfers completed flawlessly</li>
+                  <li>• Zero security incidents or delays</li>
+                  <li>• International protocol compliance 100%</li>
+                  <li>• Diplomatic services contract renewed</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 2 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-blue-500 p-3 rounded-full mr-4">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">State Visit Protocol</h3>
+                  <p className="text-gray-400">Head of State - Official UK Visit</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-blue-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide secure, protocol-compliant transportation for visiting Head of State during 5-day official visit.
+                </p>
+                <h4 className="text-lg font-semibold text-blue-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Armoured vehicle fleet, advance security sweeps, royal protocol specialists, and real-time coordination with security services.
+                </p>
+                <h4 className="text-lg font-semibold text-blue-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• Royal protocol standards exceeded</li>
+                  <li>• 100% successful official engagements</li>
+                  <li>• Media coverage managed professionally</li>
+                  <li>• Diplomatic relations strengthened</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 3 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-purple-500 p-3 rounded-full mr-4">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">UN Security Council Transport</h3>
+                  <p className="text-gray-400">Security Council Meeting - Emergency Session</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide immediate secure transport for UN Security Council members during emergency session with elevated threat level.
+                </p>
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Emergency response deployment, multi-layered security protocols, and coordination with international protection services.
+                </p>
+                <h4 className="text-lg font-semibold text-purple-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 30-minute emergency response deployment</li>
+                  <li>• All diplomats transported safely</li>
+                  <li>• Critical negotiations enabled</li>
+                  <li>• UN partnership established</li>
+                </ul>
+              </div>
+            </BoldCard>
+
+            {/* Case Study 4 */}
+            <BoldCard className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-green-500 p-3 rounded-full mr-4">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Embassy Evacuation Support</h3>
+                  <p className="text-gray-400">Embassy Crisis - Staff Evacuation</p>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Challenge</h4>
+                <p className="text-gray-300 mb-4">
+                  Provide emergency evacuation transport for embassy staff and families during security crisis.
+                </p>
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Solution</h4>
+                <p className="text-gray-300 mb-4">
+                  Crisis response team activation, secure convoy organization, and coordination with government security agencies.
+                </p>
+                <h4 className="text-lg font-semibold text-green-400 mb-3">Results</h4>
+                <ul className="text-gray-300 space-y-2">
+                  <li>• 100+ personnel evacuated safely</li>
+                  <li>• Zero casualties or incidents</li>
+                  <li>• Government commendation received</li>
+                  <li>• Crisis response protocols updated</li>
+                </ul>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-indigo-500 to-blue-500">
         <div className="container mx-auto px-4 text-center">

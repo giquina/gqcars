@@ -1,0 +1,52 @@
+{
+    "folders": [
+        {
+            "name": "GQ Cars - Root",
+            "path": "."
+        },
+        {
+            "name": "Web Application",
+            "path": "./apps/web"
+        },
+        {
+            "name": "Documentation",
+            "path": "./docs"
+        },
+        {
+            "name": "Scripts",
+            "path": "./scripts"
+        }
+    ],
+    "settings": {
+        "claude-code.enabled": true,
+        "claude-code.server.url": "http://localhost:8080",
+        "claude-code.project.name": "gqcars",
+        "claude-code.integration.mode": "active",
+        "typescript.preferences.useAliasesForRenames": false,
+        "files.associations": {
+            "*.md": "markdown",
+            "*.json": "jsonc"
+        },
+        "search.exclude": {
+            "**/node_modules": true,
+            "**/dist": true,
+            "**/.next": true,
+            "**/temp": true
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "claude-code.claude-code-ide"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Start All Services",
+                "dependsOrder": "sequence",
+                "dependsOn": ["Start MCP Servers", "Start Claude Code IDE", "Start Development Server"]
+            }
+        ]
+    }
+}

@@ -111,6 +111,130 @@ export default function WeddingsServicePage() {
         </div>
       </section>
 
+      {/* Case Studies Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <BoldSectionHeader 
+            title="📋 WEDDING TRANSPORTATION CASE STUDIES"
+            subtitle="Making dream weddings perfect with elegant transportation"
+            centered
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-pink-500/20 to-rose-500/20 rounded-full flex items-center justify-center mr-4 border border-pink-400/30">
+                    <span className="text-pink-400 font-black text-lg">👑</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                    Royal-Style Country Estate Wedding
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Aristocratic Family | Location: Private Estate & Historic Church</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Traditional aristocratic wedding requiring transport for 200+ guests between historic church and private estate with strict timing coordination and formal protocols.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Coordinated luxury fleet including Rolls Royce for bride/groom, vintage Bentleys for family, and elegant coaches for guests with ceremonial timing precision.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Flawless execution with perfect timing throughout ceremony, all guests transported elegantly, and couple's dream royal-style wedding exceeded expectations.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-pink-500/20 to-rose-500/20 rounded-full flex items-center justify-center mr-4 border border-pink-400/30">
+                    <span className="text-pink-400 font-black text-lg">🏛️</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                    London Landmark Wedding Tour
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: International Couple | Location: Westminster & Iconic London Sites</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">International couple wanted wedding photos at multiple London landmarks with tight scheduling between ceremony and reception while managing London traffic and tourist crowds.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided Rolls Royce Phantom with London expert chauffeur, optimized route planning, and coordination with landmark authorities for exclusive photo access.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Completed photo tour at 6 iconic locations on schedule, captured stunning wedding memories, and arrived at reception perfectly on time for grand entrance.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-pink-500/20 to-rose-500/20 rounded-full flex items-center justify-center mr-4 border border-pink-400/30">
+                    <span className="text-pink-400 font-black text-lg">🌟</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                    Celebrity Secret Wedding
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: Entertainment Industry Star | Location: Private Venue & Exclusive Locations</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">High-profile celebrity required completely private wedding transport with maximum security from paparazzi, discrete venue access, and luxury service for A-list guests.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Deployed armored Bentley with counter-surveillance team, alternative route planning, and coordinated with venue security for completely private celebrations.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Maintained complete secrecy throughout wedding day, zero media leaks or paparazzi incidents, and celebrity couple enjoyed perfect private celebration.</p>
+                </div>
+              </div>
+            </BoldCard>
+
+            <BoldCard animated glowing className="p-8 group hover:scale-105 transition-transform duration-300">
+              <div className="mb-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-pink-500/20 to-rose-500/20 rounded-full flex items-center justify-center mr-4 border border-pink-400/30">
+                    <span className="text-pink-400 font-black text-lg">🌍</span>
+                  </div>
+                  <h3 className="text-xl font-black text-white bg-gradient-to-r from-pink-400 to-rose-500 bg-clip-text text-transparent">
+                    Multicultural Wedding Celebration
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">Client: British-Indian Couple | Location: Multiple Venues & Cultural Sites</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">🎯 Challenge</h4>
+                  <p className="text-gray-300">Complex 3-day multicultural wedding requiring transport for traditional ceremonies across multiple venues with cultural sensitivity and diverse guest transportation needs.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">💡 Solution</h4>
+                  <p className="text-gray-300">Provided diverse luxury fleet accommodating cultural requirements, decorated vehicles for traditional ceremonies, and multilingual driver support for international guests.</p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-pink-400 mb-2">📊 Results</h4>
+                  <p className="text-gray-300">Successfully honored both cultures with appropriate transport, seamless 3-day celebration execution, and universal guest satisfaction across diverse backgrounds.</p>
+                </div>
+              </div>
+            </BoldCard>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-16 bg-gray-800">
         <div className="container mx-auto px-4">

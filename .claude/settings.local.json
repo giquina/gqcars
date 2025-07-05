@@ -98,6 +98,7 @@
       "Bash(echo:*)",
       "Bash(git init:*)",
       "Bash(git remote add:*)",
+<<<<<<< HEAD
       "Bash(npm test)",
       "Bash(python3:*)",
       "Bash(./Quick-Test-MCP-Setup.sh:*)",
@@ -131,7 +132,24 @@
       "Bash(source ~/.bashrc)",
       "Bash(./status-check.sh)",
       "Bash(./backup-daily.sh:*)"
+=======
+      "Bash(claude doctor)",
+      "Bash(npm uninstall:*)",
+      "Bash(vercel:*)",
+      "Bash(powershell:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(python3:*)",
+      "Bash([ ! -f \"docs/README.md\" ])"
+>>>>>>> feature/final-completion
     ],
     "deny": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "filesystem",
+    "memory",
+    "sequential-thinking",
+    "everything",
+    "github"
+  ]
 }
